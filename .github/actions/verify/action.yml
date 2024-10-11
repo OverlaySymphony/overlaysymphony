@@ -1,0 +1,19 @@
+runs:
+  using: "composite"
+
+  steps:
+    - name: "Typecheck"
+      shell: bash
+      run: npx nx run ${{ env.WORKSPACE }}:lint-typecheck
+
+    - name: "ESLint"
+      shell: bash
+      run: npx nx run ${{ env.WORKSPACE }}:lint-eslint
+
+    - name: "Prettier"
+      shell: bash
+      run: npx nx run ${{ env.WORKSPACE }}:lint-prettier
+
+    - name: "Depcheck"
+      shell: bash
+      run: npx nx run ${{ env.WORKSPACE }}:lint-depcheck

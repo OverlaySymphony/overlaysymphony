@@ -1,0 +1,22 @@
+# environment
+.env
+.env.*
+!.env.development
+
+# cache
+/.nx/cache
+/.nx/workspace-data
+
+# artifacts
+node_modules
+dist
+coverage
+junit.xml
+docs
+
+# misc
+.vscode
+.DS_Store
+Thumbs.db
+*.tsbuildinfo
+npm-debug.log*

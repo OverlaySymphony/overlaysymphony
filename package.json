@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "packageManager": "pnpm@9.12.1",
+  "engines": {
+    "node": "20.x"
+  },
+  "scripts": {
+    "lint": "nx run-many -t lint",
+    "clean": "nx run-many -t clean && nx reset",
+    "dev": "nx run-many -t dev",
+    "build": "nx run-many -t build",
+    "start": "nx run demo:start"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "nx": "^20.0.0"
+  }
+}

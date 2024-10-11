@@ -1,0 +1,32 @@
+{
+  "name": "@overlaysymphony/tooling",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "type": "commonjs",
+  "exports": {
+    "./eslint": "./src/eslint/eslint.js",
+    "./prettier": "./src/prettier/prettier.js",
+    "./typescript": "./src/typescript/typescript.json",
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "lint": "pnpm run \"/^lint-.*/\"",
+    "lint-typecheck": "echo",
+    "lint-eslint": "eslint --ext .js --ext .ts .",
+    "lint-prettier": "prettier --check .",
+    "lint-depcheck": "depcheck .",
+    "clean": "rm -rf node_modules/.cache"
+  },
+  "dependencies": {
+    "@bitovi/eslint-config": "^1.8.0"
+  },
+  "devDependencies": {
+    "@overlaysymphony/eslint-config": "workspace:*"
+  },
+  "peerDependencies": {
+    "depcheck": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:"
+  }
+}

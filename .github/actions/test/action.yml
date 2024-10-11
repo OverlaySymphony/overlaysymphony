@@ -1,0 +1,7 @@
+runs:
+  using: "composite"
+
+  steps:
+    - name: Test
+      shell: bash
+      run: npx nx run ${{ env.WORKSPACE }}:test
