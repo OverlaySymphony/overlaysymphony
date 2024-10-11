@@ -1,0 +1,7 @@
+{
+  "extends": "@overlaysymphony/tooling/typescript",
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  },
+  "include": ["src"]
+}

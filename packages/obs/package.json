@@ -1,0 +1,45 @@
+{
+  "name": "@overlaysymphony/obs",
+  "private": true,
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "scripts": {
+    "lint": "pnpm run \"/^lint-.*/\"",
+    "lint-typecheck": "tsc --noEmit",
+    "lint-eslint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "lint-prettier": "prettier --check .",
+    "lint-depcheck": "depcheck .",
+    "test": "vitest",
+    "dev": "vite",
+    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo dist",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@fontsource/montserrat": "^5.0.16"
+  },
+  "devDependencies": {
+    "@overlaysymphony/eslint-config": "workspace:*",
+    "@overlaysymphony/tooling": "workspace:*",
+    "@overlaysymphony/twitch": "workspace:*",
+    "@types/obs-studio": "^2.17.2",
+    "@vitest/coverage-v8": "^2.1.2",
+    "depcheck": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.2"
+  },
+  "peerDependencies": {
+    "@overlaysymphony/twitch": "workspace:*"
+  },
+  "peerDependenciesMeta": {
+    "@overlaysymphony/twitch": {
+      "optional": true
+    }
+  }
+}

@@ -1,0 +1,9 @@
+ignore-dirs:
+  - dist
+
+ignores:
+  - "@types/*"
+  - obs-studio
+
+  # used but not imported
+  - "@vitest/coverage-v8"
