@@ -1,1 +1,1 @@
-export { default } from "./poll"
+export * from "./poll.js"

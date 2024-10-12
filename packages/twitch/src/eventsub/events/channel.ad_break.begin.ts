@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ChannelAdBreakBeginType = "channel.ad_break.begin"
 type ChannelAdBreakBeginVersion = "beta"

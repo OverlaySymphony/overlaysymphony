@@ -1,4 +1,7 @@
-import { BareAuthentication, validateAuthentication } from "../authentication"
+import {
+  BareAuthentication,
+  validateAuthentication,
+} from "../authentication/index.js"
 
 declare global {
   interface Window {

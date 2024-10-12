@@ -1,1 +1,1 @@
-export { default } from "./prediction"
+export * from "./prediction.js"

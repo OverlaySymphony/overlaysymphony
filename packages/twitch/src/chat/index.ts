@@ -1,3 +1,6 @@
-export type { TwitchChatEventType, TwitchChatEvent } from "./interfaces"
+export type {
+  TwitchChatEventType,
+  TwitchChatEvent,
+} from "./interfaces/index.js"
 
-export * from "./chat"
+export * from "./chat.js"

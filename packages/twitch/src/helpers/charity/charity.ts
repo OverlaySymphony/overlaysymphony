@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Charity {
   name: string
@@ -24,10 +24,13 @@ const mapTypeToTrigger = {
   "channel.charity_campaign.stop": "stop",
 } as const
 
-export default function onCharity(
+export function onCharity(
   eventsub: TwitchEventSub,
-  onUpdate: (charity: Charity, trigger: "progress" | "start" | "stop") => void,
-  onDonate: (donation: CharityDonation, charity: Charity) => void,
+  handleCharity: (
+    charity: Charity,
+    trigger: "progress" | "start" | "stop",
+  ) => void,
+  handleDonation: (donation: CharityDonation, charity: Charity) => void,
 ): void {
   const charity: Charity = {
     name: "",
@@ -65,11 +68,11 @@ export default function onCharity(
           payload.event.target_amount.value /
           10 ** payload.event.target_amount.decimal_places
 
-        onUpdate(charity, mapTypeToTrigger[payload.type])
+        handleCharity(charity, mapTypeToTrigger[payload.type])
       }
 
       if (payload.type === "channel.charity_campaign.donate") {
-        onDonate(
+        handleDonation(
           {
             userId: payload.event.user_id,
             userLogin: payload.event.user_login,

@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ChannelChatClearUserMessagesType = "channel.chat.clear_user_messages"
 type ChannelChatClearUserMessagesVersion = "1"

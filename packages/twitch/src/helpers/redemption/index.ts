@@ -1,1 +1,1 @@
-export { default } from "./redemption"
+export * from "./redemption.js"

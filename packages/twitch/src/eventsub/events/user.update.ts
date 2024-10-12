@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type UserUpdateType = "user.update"
 type UserUpdateVersion = "1"

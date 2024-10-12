@@ -1,9 +1,9 @@
 import createQueue, { Queue } from "@overlaysymphony/core/libs/queue"
 
-import { TwitchEventSub } from "../../eventsub"
-import { TwitchNotificationMessage } from "../../eventsub/events"
+import { TwitchNotificationMessage } from "../../eventsub/events/index.js"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
-type Alert = TwitchNotificationMessage<
+export type Alert = TwitchNotificationMessage<
   | "channel.cheer"
   | "channel.follow"
   | "channel.raid"
@@ -21,20 +21,10 @@ const mapTypeToPriority = {
   "channel.raid": 5,
 }
 
-export default function createAlertQueue(
+export function onAlert(
   eventsub: TwitchEventSub,
-  onAlert: (alert: Alert) => void,
-): Queue<Alert>["dismiss"] {
-  const queue = createQueue<Alert>()
-  queue.listen((data) => {
-    // Don't spam alerts when gifted many subs
-    if (data.type === "channel.subscribe" && data.event.is_gift) {
-      return
-    }
-
-    onAlert(data)
-  })
-
+  handleAlert: (alert: Alert) => void,
+): void {
   eventsub.subscribe(
     [
       "channel.cheer",
@@ -45,9 +35,26 @@ export default function createAlertQueue(
       "channel.subscription.message",
     ],
     (payload) => {
-      queue.enqueue(mapTypeToPriority[payload.type], payload)
+      // Don't spam alerts when gifted many subs
+      if (payload.type === "channel.subscribe" && payload.event.is_gift) {
+        return
+      }
+
+      handleAlert(payload)
     },
   )
+}
+
+export default function createAlertQueue(
+  eventsub: TwitchEventSub,
+  handleAlert: (alert: Alert) => void,
+): Queue<Alert>["dismiss"] {
+  const queue = createQueue<Alert>()
+  queue.listen(handleAlert)
+
+  onAlert(eventsub, (payload) => {
+    queue.enqueue(mapTypeToPriority[payload.type], payload)
+  })
 
   return queue.dismiss
 }

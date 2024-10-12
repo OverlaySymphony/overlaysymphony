@@ -1,10 +1,10 @@
 import createDefer from "@overlaysymphony/core/libs/defer"
 import createPubSub from "@overlaysymphony/core/libs/pubsub"
 
-import { Authentication } from "../authentication"
+import { Authentication } from "../authentication/index.js"
 
-import { TwitchChatEvent, TwitchChatEventType } from "./interfaces"
-import parseCommand from "./parser"
+import { TwitchChatEvent, TwitchChatEventType } from "./interfaces/index.js"
+import parseCommand from "./parser.js"
 
 type ChatListener = (callback: (event: TwitchChatEvent) => void) => () => void
 

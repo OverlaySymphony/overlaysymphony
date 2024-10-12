@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ChannelGuestStarSettingsUpdateType = "channel.guest_star_settings.update"
 type ChannelGuestStarSettingsUpdateVersion = "beta"

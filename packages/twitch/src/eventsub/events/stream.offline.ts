@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type StreamOfflineType = "stream.offline"
 type StreamOfflineVersion = "1"

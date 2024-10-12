@@ -1,9 +1,8 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "bundler",
+    "module": "NodeNext",
     "target": "ESNext",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
 
     "declaration": true,
     "composite": true,
@@ -11,7 +10,6 @@
     "strict": true,
     "noEmit": true,
 
-    "allowImportingTsExtensions": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,

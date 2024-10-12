@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Goal {
   type: string
@@ -13,9 +13,9 @@ const mapTypeToTrigger = {
   "channel.goal.end": "end",
 } as const
 
-export default function onGoal(
+export function onGoal(
   eventsub: TwitchEventSub,
-  onUpdate: (goal: Goal, trigger: "begin" | "progress" | "end") => void,
+  handleGoal: (goal: Goal, trigger: "begin" | "progress" | "end") => void,
 ): void {
   const goal: Goal = {
     type: "",
@@ -32,7 +32,7 @@ export default function onGoal(
       goal.currentAmount = payload.event.current_amount
       goal.targetAmount = payload.event.target_amount
 
-      onUpdate(goal, mapTypeToTrigger[payload.type])
+      handleGoal(goal, mapTypeToTrigger[payload.type])
     },
   )
 }

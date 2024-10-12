@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ChannelModeratorAddType = "channel.moderator.add"
 type ChannelModeratorAddVersion = "1"

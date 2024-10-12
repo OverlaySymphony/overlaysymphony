@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ChannelUnbanType = "channel.unban"
 type ChannelUnbanVersion = "1"

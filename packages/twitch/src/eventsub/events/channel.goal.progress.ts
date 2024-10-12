@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type GoalProgressType = "channel.goal.progress"
 type GoalProgressVersion = "1"

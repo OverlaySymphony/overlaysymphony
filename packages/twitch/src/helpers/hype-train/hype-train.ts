@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface HypeTrain {
   level: number
@@ -13,9 +13,9 @@ const mapTypeToTrigger = {
   "channel.hype_train.end": "end",
 } as const
 
-export default function onHypeTrain(
+export function onHypeTrain(
   eventsub: TwitchEventSub,
-  onUpdate: (
+  handleHypeTrain: (
     hypeTrain: HypeTrain,
     trigger: "begin" | "progress" | "end",
   ) => void,
@@ -45,7 +45,7 @@ export default function onHypeTrain(
         hypeTrain.goal = payload.event.goal
       }
 
-      onUpdate(hypeTrain, mapTypeToTrigger[payload.type])
+      handleHypeTrain(hypeTrain, mapTypeToTrigger[payload.type])
     },
   )
 }

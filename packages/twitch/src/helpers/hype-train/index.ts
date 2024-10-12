@@ -1,1 +1,1 @@
-export { default } from "./hype-train"
+export * from "./hype-train.js"

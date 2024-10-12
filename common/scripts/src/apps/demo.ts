@@ -1,3 +1,3 @@
-import output from "../libs/output.ts"
+import output from "../libs/output.js"
 
 output.print(output.title("title"))

@@ -1,6 +1,6 @@
 import querystring from "@overlaysymphony/core/libs/querystring"
 
-import { TwitchUser, getUsers } from "../helix/users"
+import { TwitchUser, getUsers } from "../helix/users/index.js"
 
 export interface Authentication {
   clientId: string

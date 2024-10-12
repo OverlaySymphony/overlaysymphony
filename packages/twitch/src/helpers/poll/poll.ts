@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Poll {
   title: string
@@ -19,9 +19,9 @@ const mapTypeToTrigger = {
   "channel.poll.end": "end",
 } as const
 
-export default function onPoll(
+export function onPoll(
   eventsub: TwitchEventSub,
-  onUpdate: (poll: Poll, trigger: "begin" | "progress" | "end") => void,
+  handlePoll: (poll: Poll, trigger: "begin" | "progress" | "end") => void,
 ): void {
   const poll: Poll = {
     title: "",
@@ -57,7 +57,7 @@ export default function onPoll(
         poll.endsAt = payload.event.ends_at
       }
 
-      onUpdate(poll, mapTypeToTrigger[payload.type])
+      handlePoll(poll, mapTypeToTrigger[payload.type])
     },
   )
 }

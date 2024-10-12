@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type GoalEndType = "channel.goal.end"
 type GoalEndVersion = "1"
@@ -42,9 +42,7 @@ export type GoalEndSubscription = BaseSubscription<
   GoalEndCondition
 >
 
-export function makeGoalEndSubscription(
-  userId: string,
-): GoalEndSubscription {
+export function makeGoalEndSubscription(userId: string): GoalEndSubscription {
   return {
     type: "channel.goal.end",
     version: "1",

@@ -1,4 +1,7 @@
-import { ChatEventSource } from "."
+export interface ChatEventSource {
+  host: string
+  user?: string
+}
 
 type AllOrNothing<T> = T | Partial<Record<keyof T, undefined>>
 

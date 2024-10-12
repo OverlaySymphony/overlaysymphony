@@ -1,6 +1,6 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
-import { HypeTrainTopContribution } from "./channel.hype_train._"
+import { HypeTrainTopContribution } from "./channel.hype_train._.js"
 
 type HypeTrainEndType = "channel.hype_train.end"
 type HypeTrainEndVersion = "1"

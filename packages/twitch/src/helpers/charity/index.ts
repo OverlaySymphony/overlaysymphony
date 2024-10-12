@@ -1,1 +1,1 @@
-export { default } from "./charity"
+export * from "./charity.js"

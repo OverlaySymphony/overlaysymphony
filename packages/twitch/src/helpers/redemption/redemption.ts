@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Redemption {
   id: string
@@ -14,16 +14,16 @@ export interface Redemption {
   }
 }
 
-export default function onRedemption(
+export function onRedemption(
   eventsub: TwitchEventSub,
   id: string,
-  onRedeem: (redemption: Redemption) => void,
+  handleRedemption: (redemption: Redemption) => void,
 ): void {
   eventsub.subscribe(
     ["channel.channel_points_custom_reward_redemption.add"],
     (payload) => {
       if (payload.event.reward.id === id) {
-        onRedeem({
+        handleRedemption({
           id: payload.event.id,
           userId: payload.event.user_id,
           userLogin: payload.event.user_login,

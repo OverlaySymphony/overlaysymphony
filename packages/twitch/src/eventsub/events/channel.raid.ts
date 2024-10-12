@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ChannelRaidType = "channel.raid"
 type ChannelRaidVersion = "1"

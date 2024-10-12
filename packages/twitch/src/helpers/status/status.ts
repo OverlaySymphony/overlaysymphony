@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Status {
   online: boolean
@@ -10,9 +10,9 @@ export interface Status {
   labels: string[]
 }
 
-export default function onStatus(
+export function onStatus(
   eventsub: TwitchEventSub,
-  onUpdate: (status: Status) => void,
+  handleStatus: (status: Status) => void,
 ): void {
   const status: Status = {
     online: false,
@@ -55,7 +55,7 @@ export default function onStatus(
         status.labels = payload.event.content_classification_labels
       }
 
-      onUpdate(status)
+      handleStatus(status)
     },
   )
 }

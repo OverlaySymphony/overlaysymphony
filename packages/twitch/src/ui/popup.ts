@@ -1,6 +1,9 @@
 import querystring from "@overlaysymphony/core/libs/querystring"
 
-import { authenticateResult, initiateAuthentication } from "../authentication"
+import {
+  authenticateResult,
+  initiateAuthentication,
+} from "../authentication/index.js"
 
 const state = getState()
 

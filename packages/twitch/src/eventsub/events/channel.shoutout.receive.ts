@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ShoutoutReceiveType = "channel.shoutout.receive"
 type ShoutoutReceiveVersion = "1"

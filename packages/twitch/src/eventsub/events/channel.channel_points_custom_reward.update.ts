@@ -1,8 +1,14 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
-import { ChannelPointsCustomRewardGlobalCooldown, ChannelPointsCustomRewardImage, ChannelPointsCustomRewardMaxPerStream, ChannelPointsCustomRewardMaxPerUserPerStream } from "./channel.channel_points_custom_reward._"
+import {
+  ChannelPointsCustomRewardGlobalCooldown,
+  ChannelPointsCustomRewardImage,
+  ChannelPointsCustomRewardMaxPerStream,
+  ChannelPointsCustomRewardMaxPerUserPerStream,
+} from "./channel.channel_points_custom_reward._.js"
 
-type ChannelPointsCustomRewardUpdateType = "channel.channel_points_custom_reward.update"
+type ChannelPointsCustomRewardUpdateType =
+  "channel.channel_points_custom_reward.update"
 type ChannelPointsCustomRewardUpdateVersion = "1"
 
 /** The parameters under which an event fires when The broadcaster updates a custom channel points reward. */

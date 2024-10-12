@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type ShieldModeEndType = "channel.shield_mode.end"
 type ShieldModeEndVersion = "1"

@@ -1,4 +1,4 @@
-import { ChatEvent, ChatEventSource } from "./interfaces"
+import { ChatEvent, ChatEventSource } from "./interfaces/index.js"
 
 // Parses an IRC message and returns a JSON object with the message's
 // component parts (tags, source (nick and host), command, parameters).

@@ -1,1 +1,1 @@
-export * from "./custom-rewards"
+export * from "./custom-rewards.js"

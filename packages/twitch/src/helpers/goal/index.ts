@@ -1,1 +1,1 @@
-export { default } from "./goal"
+export * from "./goal.js"

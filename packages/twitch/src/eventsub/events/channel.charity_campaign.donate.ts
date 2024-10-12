@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
 type CharityDonationType = "channel.charity_campaign.donate"
 type CharityDonationVersion = "1"

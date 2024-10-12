@@ -6,6 +6,7 @@
   "type": "module",
   "exports": {
     "./libs/*": "./src/libs/*/index.js",
+    "./ui/*": "./src/ui/*.js",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -15,9 +16,9 @@
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
-    "dev": "vite",
+    "dev": "echo TODO",
     "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo dist",
-    "build": "vite build"
+    "build": "echo TODO"
   },
   "devDependencies": {
     "@overlaysymphony/eslint-config": "workspace:*",
@@ -27,7 +28,6 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.4.8",
     "vitest": "^2.1.2"
   }
 }

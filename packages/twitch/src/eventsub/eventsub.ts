@@ -1,11 +1,14 @@
 import createDefer from "@overlaysymphony/core/libs/defer"
 import createPubSub from "@overlaysymphony/core/libs/pubsub"
 
-import { Authentication } from "../authentication"
-import { createSubscription } from "../helix/subscriptions"
+import { Authentication } from "../authentication/index.js"
+import { createSubscription } from "../helix/subscriptions/index.js"
 
-import { TwitchNotificationMessage, TwitchSubscriptionType } from "./events"
-import { TwitchMessage } from "./messages"
+import {
+  TwitchNotificationMessage,
+  TwitchSubscriptionType,
+} from "./events/index.js"
+import { TwitchMessage } from "./messages.js"
 
 type EventSubListener = (
   callback: (event: TwitchNotificationMessage["payload"]) => void,

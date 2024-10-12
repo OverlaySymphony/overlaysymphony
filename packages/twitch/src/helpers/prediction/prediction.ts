@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub"
+import { TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Prediction {
   title: string
@@ -19,9 +19,9 @@ const mapTypeToTrigger = {
   "channel.prediction.end": "end",
 } as const
 
-export default function onPrediction(
+export function onPrediction(
   eventsub: TwitchEventSub,
-  onUpdate: (
+  handlePrediction: (
     prediction: Prediction,
     trigger: "begin" | "progress" | "lock" | "end",
   ) => void,
@@ -60,7 +60,7 @@ export default function onPrediction(
         prediction.locksAt = undefined
       }
 
-      onUpdate(prediction, mapTypeToTrigger[payload.type])
+      handlePrediction(prediction, mapTypeToTrigger[payload.type])
     },
   )
 }

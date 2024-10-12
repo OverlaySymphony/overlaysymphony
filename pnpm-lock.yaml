@@ -179,9 +179,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.5.4
-      vite:
-        specifier: ^5.4.8
-        version: 5.4.8(@types/node@20.16.11)
       vitest:
         specifier: ^2.1.2
         version: 2.1.2(@types/node@20.16.11)(jsdom@25.0.1)
@@ -219,9 +216,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.5.4
-      vite:
-        specifier: ^5.4.8
-        version: 5.4.8(@types/node@20.16.11)
       vitest:
         specifier: ^2.1.2
         version: 2.1.2(@types/node@20.16.11)(jsdom@25.0.1)
@@ -252,9 +246,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.5.4
-      vite:
-        specifier: ^5.4.8
-        version: 5.4.8(@types/node@20.16.11)
       vitest:
         specifier: ^2.1.2
         version: 2.1.2(@types/node@20.16.11)(jsdom@25.0.1)

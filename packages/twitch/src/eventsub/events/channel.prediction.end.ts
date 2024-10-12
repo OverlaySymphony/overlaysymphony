@@ -1,6 +1,6 @@
-import { BaseSubscription } from "../events-helpers"
+import { BaseSubscription } from "../events-helpers.js"
 
-import { ChannelPredictionOutcome } from "./channel.prediction._"
+import { ChannelPredictionOutcome } from "./channel.prediction._.js"
 
 type ChannelPredictionEndType = "channel.prediction.end"
 type ChannelPredictionEndVersion = "1"

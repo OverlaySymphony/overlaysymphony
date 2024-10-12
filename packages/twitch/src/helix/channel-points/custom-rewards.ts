@@ -1,5 +1,5 @@
-import { Authentication } from "../../authentication"
-import { helix } from "../helix"
+import { Authentication } from "../../authentication/index.js"
+import { helix } from "../helix.js"
 
 interface CustomReward {
   broadcaster_id: string
