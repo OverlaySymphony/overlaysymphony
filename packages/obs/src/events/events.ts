@@ -1,4 +1,4 @@
-import "obs-studio"
+/// <reference types="obs-studio" />
 
 enum ControlLevel {
   "OFFLINE" = -1,

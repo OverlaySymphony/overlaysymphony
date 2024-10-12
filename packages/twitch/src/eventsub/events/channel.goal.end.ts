@@ -42,7 +42,9 @@ export type GoalEndSubscription = BaseSubscription<
   GoalEndCondition
 >
 
-export function makeGoalEndSubscription(userId: string): GoalEndSubscription {
+export function makeGoalEndSubscription(
+  userId: string,
+): GoalEndSubscription {
   return {
     type: "channel.goal.end",
     version: "1",

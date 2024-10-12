@@ -2,8 +2,7 @@ import { BaseSubscription } from "../events-helpers.js"
 
 import { ChannelPointsCustomRewardRedemptionReward } from "./channel.channel_points_custom_reward_redemption._.js"
 
-type ChannelPointsCustomRewardRedemptionAddType =
-  "channel.channel_points_custom_reward_redemption.add"
+type ChannelPointsCustomRewardRedemptionAddType = "channel.channel_points_custom_reward_redemption.add"
 type ChannelPointsCustomRewardRedemptionAddVersion = "1"
 
 /** The parameters under which an event fires when A user redeems a custom channel points reward. */
@@ -41,12 +40,11 @@ export interface ChannelPointsCustomRewardRedemptionAddEvent {
 }
 
 /** The event notification received when A user redeems a custom channel points reward. */
-export type ChannelPointsCustomRewardRedemptionAddSubscription =
-  BaseSubscription<
-    ChannelPointsCustomRewardRedemptionAddType,
-    ChannelPointsCustomRewardRedemptionAddVersion,
-    ChannelPointsCustomRewardRedemptionAddCondition
-  >
+export type ChannelPointsCustomRewardRedemptionAddSubscription = BaseSubscription<
+  ChannelPointsCustomRewardRedemptionAddType,
+  ChannelPointsCustomRewardRedemptionAddVersion,
+  ChannelPointsCustomRewardRedemptionAddCondition
+>
 
 export function makeChannelPointsCustomRewardRedemptionAddSubscription(
   userId: string,

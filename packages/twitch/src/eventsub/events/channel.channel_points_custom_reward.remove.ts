@@ -1,14 +1,8 @@
 import { BaseSubscription } from "../events-helpers.js"
 
-import {
-  ChannelPointsCustomRewardGlobalCooldown,
-  ChannelPointsCustomRewardImage,
-  ChannelPointsCustomRewardMaxPerStream,
-  ChannelPointsCustomRewardMaxPerUserPerStream,
-} from "./channel.channel_points_custom_reward._.js"
+import { ChannelPointsCustomRewardGlobalCooldown, ChannelPointsCustomRewardImage, ChannelPointsCustomRewardMaxPerStream, ChannelPointsCustomRewardMaxPerUserPerStream } from "./channel.channel_points_custom_reward._.js"
 
-type ChannelPointsCustomRewardRemoveType =
-  "channel.channel_points_custom_reward.remove"
+type ChannelPointsCustomRewardRemoveType = "channel.channel_points_custom_reward.remove"
 type ChannelPointsCustomRewardRemoveVersion = "1"
 
 /** The parameters under which an event fires when The broadcaster removes a custom channel points reward. */

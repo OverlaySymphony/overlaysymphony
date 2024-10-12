@@ -1,0 +1,2870 @@
+[
+  {
+    "name": "ChannelAdBreakBegin",
+    "type": "channel.ad_break.begin",
+    "version": "beta",
+    "description": "A midroll commercial break starts running.",
+    "condition": {
+      "broadcaster_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "length_seconds": {
+        "type": "integer",
+        "description": "Length in seconds of the mid-roll ad break requested."
+      },
+      "timestamp": {
+        "type": "Date",
+        "description": "The time the ad break began. Note that there is potential delay between this event, when the streamer requested the ad break, and when the viewers will see ads."
+      },
+      "is_automatic": {
+        "type": "boolean",
+        "description": "Indicates if the ad was automatically scheduled via Ads Manager."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "requester_user_id": {
+        "type": "string",
+        "description": "The user ID of the user who requested the ad. For automatic ads, this will be the ID of the broadcaster."
+      },
+      "requester_user_name": {
+        "type": "string",
+        "description": "The user name of the user who requested the ad."
+      },
+      "requester_user_login": {
+        "type": "string",
+        "description": "The user login of the user who requested the ad."
+      }
+    }
+  },
+  {
+    "name": "ChannelBan",
+    "type": "channel.ban",
+    "version": "1",
+    "description": "A moderator bans a user.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who was banned."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who was banned."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who was banned."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "description": "The user ID of the issuer of the ban."
+      },
+      "moderator_user_login": {
+        "type": "string",
+        "description": "The user login of the issuer of the ban."
+      },
+      "moderator_user_name": {
+        "type": "string",
+        "description": "The user name of the issuer of the ban."
+      },
+      "reason": {
+        "type": "string",
+        "description": "The reason behind the ban."
+      },
+      "banned_at": {
+        "type": "Date",
+        "description": "The time the user was banned or put in a timeout."
+      },
+      "ends_at": {
+        "type": "Date",
+        "description": "The time the timeout ends. Is null if the user was banned instead of put in a timeout."
+      },
+      "is_permanent": {
+        "type": "boolean",
+        "description": "Indicates whether the ban is permanent (true) or a timeout (false). If true, ends_at will be null."
+      }
+    }
+  },
+  {
+    "name": "ChannelPointsCustomRewardAdd",
+    "type": "channel.channel_points_custom_reward.add",
+    "version": "1",
+    "description": "The broadcaster creates a custom channel points reward.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The reward identifier."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "is_enabled": {
+        "type": "boolean",
+        "description": "Is the reward currently enabled. If false, the reward won't show up to viewers."
+      },
+      "is_paused": {
+        "type": "boolean",
+        "description": "Is the reward currently paused. If true, viewers can't redeem."
+      },
+      "is_in_stock": {
+        "type": "boolean",
+        "description": "Is the reward currently in stock. If false, viewers can't redeem."
+      },
+      "title": {
+        "type": "string",
+        "description": "The reward title."
+      },
+      "cost": {
+        "type": "integer",
+        "description": "The reward cost."
+      },
+      "prompt": {
+        "type": "string",
+        "description": "The reward description."
+      },
+      "is_user_input_required": {
+        "type": "boolean",
+        "description": "Does the viewer need to enter information when redeeming the reward."
+      },
+      "should_redemptions_skip_request_queue": {
+        "type": "boolean",
+        "description": "Should redemptions be set to fulfilled status immediately when redeemed and skip the request queue instead of the normal unfulfilled status."
+      },
+      "max_per_stream": {
+        "type": "ChannelPointsCustomRewardMaxPerStream",
+        "description": "Whether a maximum per stream is enabled and what the maximum is."
+      },
+      "max_per_user_per_stream": {
+        "type": "ChannelPointsCustomRewardMaxPerUserPerStream",
+        "description": "Whether a maximum per user per stream is enabled and what the maximum is."
+      },
+      "background_color": {
+        "type": "string",
+        "description": "Custom background color for the reward. Format: Hex with # prefix. Example: #FA1ED2."
+      },
+      "image": {
+        "type": "ChannelPointsCustomRewardImage",
+        "description": "Set of custom images of 1x, 2x and 4x sizes for the reward. Can be null if no images have been uploaded."
+      },
+      "default_image": {
+        "type": "ChannelPointsCustomRewardImage",
+        "description": "Set of default images of 1x, 2x and 4x sizes for the reward."
+      },
+      "global_cooldown": {
+        "type": "ChannelPointsCustomRewardGlobalCooldown",
+        "description": "Whether a cooldown is enabled and what the cooldown is in seconds."
+      },
+      "cooldown_expires_at": {
+        "type": "Date",
+        "description": "The time the cooldown expires. null if the reward isn't on cooldown."
+      },
+      "redemptions_redeemed_current_stream": {
+        "type": "integer",
+        "description": "The number of redemptions redeemed during the current live stream. Counts against the max_per_stream limit. null if the broadcasters stream isn't live or max_per_stream isn't enabled."
+      }
+    }
+  },
+  {
+    "name": "ChannelPointsCustomRewardRemove",
+    "type": "channel.channel_points_custom_reward.remove",
+    "version": "1",
+    "description": "The broadcaster removes a custom channel points reward.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "reward_id": {
+        "type": "string",
+        "required": false,
+        "description": "Optional. Specify a reward ID to only receive notifications for a specific reward."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The reward identifier."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "is_enabled": {
+        "type": "boolean",
+        "description": "Is the reward currently enabled. If false, the reward won't show up to viewers."
+      },
+      "is_paused": {
+        "type": "boolean",
+        "description": "Is the reward currently paused. If true, viewers can't redeem."
+      },
+      "is_in_stock": {
+        "type": "boolean",
+        "description": "Is the reward currently in stock. If false, viewers can't redeem."
+      },
+      "title": {
+        "type": "string",
+        "description": "The reward title."
+      },
+      "cost": {
+        "type": "integer",
+        "description": "The reward cost."
+      },
+      "prompt": {
+        "type": "string",
+        "description": "The reward description."
+      },
+      "is_user_input_required": {
+        "type": "boolean",
+        "description": "Does the viewer need to enter information when redeeming the reward."
+      },
+      "should_redemptions_skip_request_queue": {
+        "type": "boolean",
+        "description": "Should redemptions be set to fulfilled status immediately when redeemed and skip the request queue instead of the normal unfulfilled status."
+      },
+      "max_per_stream": {
+        "type": "ChannelPointsCustomRewardMaxPerStream",
+        "description": "Whether a maximum per stream is enabled and what the maximum is."
+      },
+      "max_per_user_per_stream": {
+        "type": "ChannelPointsCustomRewardMaxPerUserPerStream",
+        "description": "Whether a maximum per user per stream is enabled and what the maximum is."
+      },
+      "background_color": {
+        "type": "string",
+        "description": "Custom background color for the reward. Format: Hex with # prefix. Example: #FA1ED2."
+      },
+      "image": {
+        "type": "ChannelPointsCustomRewardImage",
+        "description": "Set of custom images of 1x, 2x and 4x sizes for the reward. Can be null if no images have been uploaded."
+      },
+      "default_image": {
+        "type": "ChannelPointsCustomRewardImage",
+        "description": "Set of default images of 1x, 2x and 4x sizes for the reward."
+      },
+      "global_cooldown": {
+        "type": "ChannelPointsCustomRewardGlobalCooldown",
+        "description": "Whether a cooldown is enabled and what the cooldown is in seconds."
+      },
+      "cooldown_expires_at": {
+        "type": "Date",
+        "description": "The time the cooldown expires. null if the reward isn't on cooldown."
+      },
+      "redemptions_redeemed_current_stream": {
+        "type": "integer",
+        "description": "The number of redemptions redeemed during the current live stream. Counts against the max_per_stream limit. null if the broadcasters stream isn't live or max_per_stream isn't enabled."
+      }
+    }
+  },
+  {
+    "name": "ChannelPointsCustomRewardUpdate",
+    "type": "channel.channel_points_custom_reward.update",
+    "version": "1",
+    "description": "The broadcaster updates a custom channel points reward.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "reward_id": {
+        "type": "string",
+        "required": false,
+        "description": "Optional. Specify a reward ID to only receive notifications for a specific reward."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The reward identifier."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "is_enabled": {
+        "type": "boolean",
+        "description": "Is the reward currently enabled. If false, the reward won't show up to viewers."
+      },
+      "is_paused": {
+        "type": "boolean",
+        "description": "Is the reward currently paused. If true, viewers can't redeem."
+      },
+      "is_in_stock": {
+        "type": "boolean",
+        "description": "Is the reward currently in stock. If false, viewers can't redeem."
+      },
+      "title": {
+        "type": "string",
+        "description": "The reward title."
+      },
+      "cost": {
+        "type": "integer",
+        "description": "The reward cost."
+      },
+      "prompt": {
+        "type": "string",
+        "description": "The reward description."
+      },
+      "is_user_input_required": {
+        "type": "boolean",
+        "description": "Does the viewer need to enter information when redeeming the reward."
+      },
+      "should_redemptions_skip_request_queue": {
+        "type": "boolean",
+        "description": "Should redemptions be set to fulfilled status immediately when redeemed and skip the request queue instead of the normal unfulfilled status."
+      },
+      "max_per_stream": {
+        "type": "ChannelPointsCustomRewardMaxPerStream",
+        "description": "Whether a maximum per stream is enabled and what the maximum is."
+      },
+      "max_per_user_per_stream": {
+        "type": "ChannelPointsCustomRewardMaxPerUserPerStream",
+        "description": "Whether a maximum per user per stream is enabled and what the maximum is."
+      },
+      "background_color": {
+        "type": "string",
+        "description": "Custom background color for the reward. Format: Hex with # prefix. Example: #FA1ED2."
+      },
+      "image": {
+        "type": "ChannelPointsCustomRewardImage",
+        "description": "Set of custom images of 1x, 2x and 4x sizes for the reward. Can be null if no images have been uploaded."
+      },
+      "default_image": {
+        "type": "ChannelPointsCustomRewardImage",
+        "description": "Set of default images of 1x, 2x and 4x sizes for the reward."
+      },
+      "global_cooldown": {
+        "type": "ChannelPointsCustomRewardGlobalCooldown",
+        "description": "Whether a cooldown is enabled and what the cooldown is in seconds."
+      },
+      "cooldown_expires_at": {
+        "type": "Date",
+        "description": "The time the cooldown expires. null if the reward isn't on cooldown."
+      },
+      "redemptions_redeemed_current_stream": {
+        "type": "integer",
+        "description": "The number of redemptions redeemed during the current live stream. Counts against the max_per_stream limit. null if the broadcasters stream isn't live or max_per_stream isn't enabled."
+      }
+    }
+  },
+  {
+    "name": "ChannelPointsCustomRewardRedemptionAdd",
+    "type": "channel.channel_points_custom_reward_redemption.add",
+    "version": "1",
+    "description": "A user redeems a custom channel points reward.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "reward_id": {
+        "type": "string",
+        "required": false,
+        "description": "Optional. Specify a reward ID to only receive notifications for a specific reward."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The redemption identifier."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who redeemed the reward."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who redeemed the reward."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who redeemed the reward."
+      },
+      "user_input": {
+        "type": "string",
+        "description": "The user input provided. Empty string if not provided."
+      },
+      "status": {
+        "type": "string",
+        "description": "Defaults to unfulfilled. Possible values are unknown, unfulfilled, fulfilled, and canceled."
+      },
+      "reward": {
+        "type": "ChannelPointsCustomRewardRedemptionReward",
+        "description": "Basic information about the reward that was redeemed, at the time it was redeemed."
+      },
+      "redeemed_at": {
+        "type": "Date",
+        "description": "The time the reward was redeemed."
+      }
+    }
+  },
+  {
+    "name": "ChannelPointsCustomRewardRedemptionUpdate",
+    "type": "channel.channel_points_custom_reward_redemption.update",
+    "version": "1",
+    "description": "A moderator updates the redemption of a channel points custom reward.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "reward_id": {
+        "type": "string",
+        "required": false,
+        "description": "Optional. Specify a reward ID to only receive notifications for a specific reward."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The redemption identifier."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who redeemed the reward."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who redeemed the reward."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who redeemed the reward."
+      },
+      "user_input": {
+        "type": "string",
+        "description": "The user input provided. Empty string if not provided."
+      },
+      "status": {
+        "type": "string",
+        "description": "Will be fulfilled or canceled. Possible values are unknown, unfulfilled, fulfilled, and canceled."
+      },
+      "reward": {
+        "type": "ChannelPointsCustomRewardRedemptionReward",
+        "description": "Basic information about the reward that was redeemed, at the time it was redeemed."
+      },
+      "redeemed_at": {
+        "type": "Date",
+        "description": "The time the reward was redeemed."
+      }
+    }
+  },
+  {
+    "name": "CharityDonation",
+    "type": "channel.charity_campaign.donate",
+    "version": "1",
+    "description": "A user donates to the broadcaster's charity campaign.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "An ID of the donation. The ID is unique across campaigns."
+      },
+      "campaign_id": {
+        "type": "string",
+        "description": "The ID of the charity campaign."
+      },
+      "broadcaster_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who donated to the campaign."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who donated to the campaign."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who donated to the campaign."
+      },
+      "charity_name": {
+        "type": "string",
+        "description": "The charity's name."
+      },
+      "charity_description": {
+        "type": "string",
+        "description": "A description of the charity."
+      },
+      "charity_logo": {
+        "type": "string",
+        "description": "A URL to an image of the charity's logo. The image's type is PNG and its size is 100px X 100px."
+      },
+      "charity_website": {
+        "type": "string",
+        "description": "A URL to the charity's website."
+      },
+      "amount": {
+        "type": "Object",
+        "description": "An object that contains the current amount of donations that the campaign has received.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "CharityCampaignProgress",
+    "type": "channel.charity_campaign.progress",
+    "version": "1",
+    "description": "Progress is made towards the campaign's goal or when the broadcaster changes the fundraising goal.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the charity campaign."
+      },
+      "broadcaster_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "charity_name": {
+        "type": "string",
+        "description": "The charity's name."
+      },
+      "charity_description": {
+        "type": "string",
+        "description": "A description of the charity."
+      },
+      "charity_logo": {
+        "type": "string",
+        "description": "A URL to an image of the charity's logo. The image's type is PNG and its size is 100px X 100px."
+      },
+      "charity_website": {
+        "type": "string",
+        "description": "A URL to the charity's website."
+      },
+      "current_amount": {
+        "type": "Object",
+        "description": "An object that contains the current amount of donations that the campaign has received.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      },
+      "target_amount": {
+        "type": "Object",
+        "description": "An object that contains the campaign's target fundraising goal.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      }
+    }
+  },
+  {
+    "name": "CharityCampaignStart",
+    "type": "channel.charity_campaign.start",
+    "version": "1",
+    "description": "The broadcaster starts a charity campaign.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the charity campaign."
+      },
+      "broadcaster_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "charity_name": {
+        "type": "string",
+        "description": "The charity's name."
+      },
+      "charity_description": {
+        "type": "string",
+        "description": "A description of the charity."
+      },
+      "charity_logo": {
+        "type": "string",
+        "description": "A URL to an image of the charity's logo. The image's type is PNG and its size is 100px X 100px."
+      },
+      "charity_website": {
+        "type": "string",
+        "description": "A URL to the charity's website."
+      },
+      "current_amount": {
+        "type": "Object",
+        "description": "An object that contains the current amount of donations that the campaign has received.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      },
+      "target_amount": {
+        "type": "Object",
+        "description": "An object that contains the campaign's target fundraising goal.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the broadcaster started the campaign."
+      }
+    }
+  },
+  {
+    "name": "CharityCampaignStop",
+    "type": "channel.charity_campaign.stop",
+    "version": "1",
+    "description": "The broadcaster stops a charity campaign.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the charity campaign."
+      },
+      "broadcaster_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "charity_name": {
+        "type": "string",
+        "description": "The charity's name."
+      },
+      "charity_description": {
+        "type": "string",
+        "description": "A description of the charity."
+      },
+      "charity_logo": {
+        "type": "string",
+        "description": "A URL to an image of the charity's logo. The image's type is PNG and its size is 100px X 100px."
+      },
+      "charity_website": {
+        "type": "string",
+        "description": "A URL to the charity's website."
+      },
+      "current_amount": {
+        "type": "Object",
+        "description": "An object that contains the current amount of donations that the campaign has received.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      },
+      "target_amount": {
+        "type": "Object",
+        "description": "An object that contains the campaign's target fundraising goal.",
+        "fields": {
+          "value": {
+            "type": "integer",
+            "description": "The monetary amount. The amount is specified in the currency's minor unit. For example, the minor units for USD is cents, so if the amount is $5.50 USD, value is set to 550."
+          },
+          "decimal_places": {
+            "type": "integer",
+            "description": "The number of decimal places used by the currency. For example, USD uses two decimal places. Use this number to translate value from minor units to major units by using the formula:\\n\\nvalue / 10^decimal_places"
+          },
+          "currency": {
+            "type": "string",
+            "description": "The ISO-4217 three-letter currency code that identifies the type of currency in value."
+          }
+        }
+      },
+      "stopped_at": {
+        "type": "Date",
+        "description": "The time the broadcaster stopped the campaign."
+      }
+    }
+  },
+  {
+    "name": "ChannelChatClear",
+    "type": "channel.chat.clear",
+    "version": "1",
+    "description": "A moderator clears all messages from the chat room.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID to read chat as."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      }
+    }
+  },
+  {
+    "name": "ChannelChatClearUserMessages",
+    "type": "channel.chat.clear_user_messages",
+    "version": "1",
+    "description": "A moderator clears all messages from a specific user.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID to read chat as."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "target_user_id": {
+        "type": "string",
+        "description": "The user ID of the user who was banned or put in a timeout."
+      },
+      "target_user_login": {
+        "type": "string",
+        "description": "The user name of the user who was banned or put in a timeout."
+      },
+      "target_user_name": {
+        "type": "string",
+        "description": "The user login of the user who was banned or put in a timeout."
+      }
+    }
+  },
+  {
+    "name": "ChannelChatMessageDelete",
+    "type": "channel.chat.message_delete",
+    "version": "1",
+    "description": "A moderator removes a specific message.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID to read chat as."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "target_user_id": {
+        "type": "string",
+        "description": "The user ID of the user whose message was deleted."
+      },
+      "target_user_login": {
+        "type": "string",
+        "description": "The user name of the user whose message was deleted."
+      },
+      "target_user_name": {
+        "type": "string",
+        "description": "The user login of the user whose message was deleted."
+      },
+      "message_id": {
+        "type": "string",
+        "description": "The UUID of the message that was removed."
+      }
+    }
+  },
+  {
+    "name": "ChannelChatNotification",
+    "type": "channel.chat.notification",
+    "version": "1",
+    "description": "An event appears in chat.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID to read chat as."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "chatter_user_id": {
+        "type": "string",
+        "description": "The user ID of the user who sent the message."
+      },
+      "chatter_user_login": {
+        "type": "string",
+        "description": "The user login of the user who sent the message."
+      },
+      "chatter_user_name": {
+        "type": "string",
+        "description": "The user name of the user who sent the message."
+      },
+      "message_id": {
+        "type": "string",
+        "description": "The UUID of the message."
+      }
+    }
+  },
+  {
+    "name": "ChannelCheer",
+    "type": "channel.cheer",
+    "version": "1",
+    "description": "A user cheers.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "is_anonymous": {
+        "type": "boolean",
+        "description": "Whether the user cheered anonymously or not."
+      },
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who cheered. This is null if is_anonymous is true."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who cheered. This is null if is_anonymous is true."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who cheered. This is null if is_anonymous is true."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "message": {
+        "type": "string",
+        "description": "The message sent with the cheer."
+      },
+      "bits": {
+        "type": "integer",
+        "description": "The number of bits cheered."
+      }
+    }
+  },
+  {
+    "name": "ChannelFollow",
+    "type": "channel.follow",
+    "version": "2",
+    "description": "A user follows.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who followed."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who followed."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who followed."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "followed_at": {
+        "type": "Date",
+        "description": "The time the follow occurred."
+      }
+    }
+  },
+  {
+    "name": "GoalBegin",
+    "type": "channel.goal.begin",
+    "version": "1",
+    "description": "The broadcaster begins a goal.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the goal."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "type": {
+        "type": "string",
+        "description": "The type of goal. Possible values are:\\nfollow — The goal is to increase followers.\\nsubscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.\\nsubscription_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.\\nnew_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).\\nnew_subscription_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started)."
+      },
+      "description": {
+        "type": "string",
+        "description": "A description of the goal, if specified. The description may contain a maximum of 40 characters."
+      },
+      "current_amount": {
+        "type": "integer",
+        "description": "The goal's current value.\\n\\nThe goal's type determines how this value is increased or decreased.\\nIf type is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.\\nIf type is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.\\nIf type is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.\\nIf type is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.\\nIf type is new_subscription_count, this field is increased by 1 for each new subscription."
+      },
+      "target_amount": {
+        "type": "integer",
+        "description": "The goal's target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the broadcaster created the goal."
+      }
+    }
+  },
+  {
+    "name": "GoalEnd",
+    "type": "channel.goal.end",
+    "version": "1",
+    "description": "The broadcaster ends a goal.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the goal."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "type": {
+        "type": "string",
+        "description": "The type of goal. Possible values are:\\nfollow — The goal is to increase followers.\\nsubscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.\\nsubscription_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.\\nnew_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).\\nnew_subscription_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started)."
+      },
+      "description": {
+        "type": "string",
+        "description": "A description of the goal, if specified. The description may contain a maximum of 40 characters."
+      },
+      "is_achieved": {
+        "type": "boolean",
+        "description": "A Boolean value that indicates whether the broadcaster achieved their goal. Is true if the goal was achieved; otherwise, false."
+      },
+      "current_amount": {
+        "type": "integer",
+        "description": "The goal's current value.\\n\\nThe goal's type determines how this value is increased or decreased.\\nIf type is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.\\nIf type is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.\\nIf type is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.\\nIf type is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.\\nIf type is new_subscription_count, this field is increased by 1 for each new subscription."
+      },
+      "target_amount": {
+        "type": "integer",
+        "description": "The goal's target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the broadcaster created the goal."
+      },
+      "ended_at": {
+        "type": "Date",
+        "description": "The time the broadcaster ended the goal.\\n\\nOnly the channel.goal.end event includes this field."
+      }
+    }
+  },
+  {
+    "name": "GoalProgress",
+    "type": "channel.goal.progress",
+    "version": "1",
+    "description": "Progress (either positive or negative) is made towards the broadcaster's goal.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the goal."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "type": {
+        "type": "string",
+        "description": "The type of goal. Possible values are:\\nfollow — The goal is to increase followers.\\nsubscription — The goal is to increase subscriptions. This type shows the net increase or decrease in tier points associated with the subscriptions.\\nsubscription_count — The goal is to increase subscriptions. This type shows the net increase or decrease in the number of subscriptions.\\nnew_subscription — The goal is to increase subscriptions. This type shows only the net increase in tier points associated with the subscriptions (it does not account for users that unsubscribed since the goal started).\\nnew_subscription_count — The goal is to increase subscriptions. This type shows only the net increase in the number of subscriptions (it does not account for users that unsubscribed since the goal started)."
+      },
+      "description": {
+        "type": "string",
+        "description": "A description of the goal, if specified. The description may contain a maximum of 40 characters."
+      },
+      "current_amount": {
+        "type": "integer",
+        "description": "The goal's current value.\\n\\nThe goal's type determines how this value is increased or decreased.\\nIf type is follow, this field is set to the broadcaster's current number of followers. This number increases with new followers and decreases when users unfollow the broadcaster.\\nIf type is subscription, this field is increased and decreased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased or decreased by 2, not 1.\\nIf type is subscription_count, this field is increased by 1 for each new subscription and decreased by 1 for each user that unsubscribes.\\nIf type is new_subscription, this field is increased by the points value associated with the subscription tier. For example, if a tier-two subscription is worth 2 points, this field is increased by 2, not 1.\\nIf type is new_subscription_count, this field is increased by 1 for each new subscription."
+      },
+      "target_amount": {
+        "type": "integer",
+        "description": "The goal's target value. For example, if the broadcaster has 200 followers before creating the goal, and their goal is to double that number, this field is set to 400."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the broadcaster created the goal."
+      }
+    }
+  },
+  {
+    "name": "ChannelGuestStarGuestUpdate",
+    "type": "channel.guest_star_guest.update",
+    "version": "beta",
+    "description": "A guest or a slot is updated in an active Guest Star session.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "session_id": {
+        "type": "string",
+        "description": "ID representing the unique session that was started."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "description": "The user ID of the moderator who updated the guest's state. null if the update was performed by the guest."
+      },
+      "moderator_user_login": {
+        "type": "string",
+        "description": "The user login of the moderator. null if the update was performed by the guest."
+      },
+      "moderator_user_name": {
+        "type": "string",
+        "description": "The user name of the moderator. null if the update was performed by the guest."
+      },
+      "guest_user_id": {
+        "type": "string",
+        "description": "The user ID of the guest who transitioned states in the session. null if the slot is now empty."
+      },
+      "guest_user_login": {
+        "type": "string",
+        "description": "The guest user login. null if the slot is now empty."
+      },
+      "guest_user_name": {
+        "type": "string",
+        "description": "The guest user name. null if the slot is now empty."
+      },
+      "slot_id": {
+        "type": "string",
+        "description": "The ID of the slot assignment the guest is assigned to. null if the guest is in the INVITED, REMOVED, READY, or ACCEPTED state."
+      },
+      "state": {
+        "type": "string",
+        "description": "The current state of the user after the update has taken place. null if the slot is now empty. Can otherwise be one of the following:\\n  - invited — The guest has transitioned to the invite queue. This can take place when the guest was previously assigned a slot, but have been removed from the call and are sent back to the invite queue.\\n  - accepted — The guest has accepted the invite and is currently in the process of setting up to join the session.\\n  - ready — The guest has signaled they are ready and can be assigned a slot.\\n  - backstage — The guest has been assigned a slot in the session, but is not currently seen live in the broadcasting software.\\n  - live — The guest is now live in the host's broadcasting software.\\n  - removed — The guest was removed from the call or queue.\\n  - accepted — The guest has accepted the invite to the call."
+      },
+      "host_video_enabled": {
+        "type": "boolean",
+        "description": "Flag that signals whether the host is allowing the slot's video to be seen by participants within the session. null if the guest is not slotted."
+      },
+      "host_audio_enabled": {
+        "type": "boolean",
+        "description": "Flag that signals whether the host is allowing the slot's audio to be heard by participants within the session. null if the guest is not slotted."
+      },
+      "host_volume": {
+        "type": "integer",
+        "description": "Value between 0-100 that represents the slot's audio level as heard by participants within the session. null if the guest is not slotted."
+      }
+    }
+  },
+  {
+    "name": "ChannelGuestStarSessionBegin",
+    "type": "channel.guest_star_session.begin",
+    "version": "beta",
+    "description": "The broadcaster began a new Guest Star session.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "session_id": {
+        "type": "string",
+        "description": "ID representing the unique session that was started."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the session began."
+      }
+    }
+  },
+  {
+    "name": "ChannelGuestStarSessionEnd",
+    "type": "channel.guest_star_session.end",
+    "version": "beta",
+    "description": "A running Guest Star session ends.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "session_id": {
+        "type": "string",
+        "description": "ID representing the unique session that was started."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the session began."
+      },
+      "ended_at": {
+        "type": "Date",
+        "description": "The time the session ended."
+      }
+    }
+  },
+  {
+    "name": "ChannelGuestStarSettingsUpdate",
+    "type": "channel.guest_star_settings.update",
+    "version": "beta",
+    "description": "The broadcaster updates preferences for Guest Star.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "is_moderator_send_live_enabled": {
+        "type": "boolean",
+        "description": "Flag determining if Guest Star moderators have access to control whether a guest is live once assigned to a slot."
+      },
+      "slot_count": {
+        "type": "integer",
+        "description": "Number of slots the Guest Star call interface will allow the host to add to a call."
+      },
+      "is_browser_source_audio_enabled": {
+        "type": "boolean",
+        "description": "Flag determining if browser sources subscribed to sessions on this channel should output audio."
+      },
+      "group_layout": {
+        "type": "string",
+        "description": "This setting determines how the guests within a session should be laid out within a group browser source. Can be one of the following values:\\n  - tiled — All live guests are tiled within the browser source with the same size.\\n  - screenshare — All live guests are tiled within the browser source with the same size. If there is an active screen share, it is sized larger than the other guests.\\n  - horizontal_top — Indicates the group layout will contain all participants in a top-aligned horizontal stack.\\n  - horizontal_bottom — Indicates the group layout will contain all participants in a bottom-aligned horizontal stack.\\n  - vertical_left — Indicates the group layout will contain all participants in a left-aligned vertical stack.\\n  - vertical_right — Indicates the group layout will contain all participants in a right-aligned vertical stack."
+      }
+    }
+  },
+  {
+    "name": "HypeTrainBegin",
+    "type": "channel.hype_train.begin",
+    "version": "1",
+    "description": "A Hype Train begins.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The hype train ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "total": {
+        "type": "integer",
+        "description": "Total points contributed to the hype train."
+      },
+      "progress": {
+        "type": "integer",
+        "description": "The number of points contributed to the hype train at the current level."
+      },
+      "goal": {
+        "type": "integer",
+        "description": "The number of points required to reach the next level."
+      },
+      "top_contributions": {
+        "type": "HypeTrainTopContribution[]",
+        "description": "The contributors with the most points contributed."
+      },
+      "level": {
+        "type": "integer",
+        "description": "The starting level of the hype train."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the hype train started."
+      },
+      "expires_at": {
+        "type": "Date",
+        "description": "The time the hype train expires. The expiration is extended when the hype train reaches a new level."
+      }
+    }
+  },
+  {
+    "name": "HypeTrainEnd",
+    "type": "channel.hype_train.end",
+    "version": "1",
+    "description": "A Hype Train ends.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The hype train ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "level": {
+        "type": "integer",
+        "description": "The final level of the hype train."
+      },
+      "total": {
+        "type": "integer",
+        "description": "Total points contributed to the hype train."
+      },
+      "top_contributions": {
+        "type": "HypeTrainTopContribution[]",
+        "description": "The contributors with the most points contributed."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the hype train started."
+      },
+      "ended_at": {
+        "type": "Date",
+        "description": "The time the hype train ended."
+      },
+      "cooldown_ends_at": {
+        "type": "Date",
+        "description": "The time the hype train cooldown ends so that the next hype train can start."
+      }
+    }
+  },
+  {
+    "name": "HypeTrainProgress",
+    "type": "channel.hype_train.progress",
+    "version": "1",
+    "description": "A Hype Train makes progress.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The hype train ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "level": {
+        "type": "integer",
+        "description": "The current level of the hype train."
+      },
+      "total": {
+        "type": "integer",
+        "description": "Total points contributed to the hype train."
+      },
+      "progress": {
+        "type": "integer",
+        "description": "The number of points contributed to the hype train at the current level."
+      },
+      "goal": {
+        "type": "integer",
+        "description": "The number of points required to reach the next level."
+      },
+      "top_contributions": {
+        "type": "HypeTrainTopContribution[]",
+        "description": "The contributors with the most points contributed."
+      },
+      "last_contribution": {
+        "type": "Object",
+        "description": "The most recent contribution.",
+        "fields": {
+          "user_id": {
+            "type": "string",
+            "description": "The user ID of the user who made the contribution."
+          },
+          "user_login": {
+            "type": "string",
+            "description": "The user login name."
+          },
+          "user_name": {
+            "type": "string",
+            "description": "The user name."
+          },
+          "type": {
+            "type": "string",
+            "description": "The contribution method used. Possible values are:\\n  bits — Cheering with Bits.\\n  subscription — Subscription activity like subscribing or gifting subscriptions.\\n  other — Covers other contribution methods not listed."
+          },
+          "total": {
+            "type": "integer",
+            "description": "The total amount contributed. If type is bits, total represents the amount of Bits used. If type is subscription, total is 500, 1000, or 2500 to represent tier 1, 2, or 3 subscriptions, respectively."
+          }
+        }
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the hype train started."
+      },
+      "expires_at": {
+        "type": "Date",
+        "description": "The time the hype train expires. The expiration is extended when the hype train reaches a new level."
+      }
+    }
+  },
+  {
+    "name": "ChannelModeratorAdd",
+    "type": "channel.moderator.add",
+    "version": "1",
+    "description": "The broadcaster gives moderator privileges to a user.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the new moderator."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the new moderator."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the new moderator."
+      }
+    }
+  },
+  {
+    "name": "ChannelModeratorRemove",
+    "type": "channel.moderator.remove",
+    "version": "1",
+    "description": "The broadcaster removes moderator privileges from a user.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the removed moderator."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the removed moderator."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the removed moderator."
+      }
+    }
+  },
+  {
+    "name": "ChannelPollBegin",
+    "type": "channel.poll.begin",
+    "version": "1",
+    "description": "A poll starts.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "ID of the poll."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Question displayed for the poll."
+      },
+      "choices": {
+        "type": "ChannelPollChoice[]",
+        "description": "An array of choices for the poll."
+      },
+      "bits_voting": {
+        "type": "ChannelPollBitsVoting",
+        "description": "The bits voting settings for the poll."
+      },
+      "channel_points_voting": {
+        "type": "ChannelPollPointsVoting",
+        "description": "The Channel Points voting settings for the poll."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the poll started."
+      },
+      "ends_at": {
+        "type": "Date",
+        "description": "The time the poll will end."
+      }
+    }
+  },
+  {
+    "name": "ChannelPollEnd",
+    "type": "channel.poll.end",
+    "version": "1",
+    "description": "A poll ends.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "ID of the poll."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Question displayed for the poll."
+      },
+      "choices": {
+        "type": "ChannelPollChoice[]",
+        "description": "An array of choices for the poll. Includes vote counts."
+      },
+      "bits_voting": {
+        "type": "ChannelPollBitsVoting",
+        "description": "The bits voting settings for the poll."
+      },
+      "channel_points_voting": {
+        "type": "ChannelPollPointsVoting",
+        "description": "The Channel Points voting settings for the poll."
+      },
+      "status": {
+        "type": "string",
+        "description": "The status of the poll. Valid values are completed, archived, and terminated."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the poll started."
+      },
+      "ended_at": {
+        "type": "Date",
+        "description": "The time the poll ended."
+      }
+    }
+  },
+  {
+    "name": "ChannelPollProgress",
+    "type": "channel.poll.progress",
+    "version": "1",
+    "description": "A user responds to a poll.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "ID of the poll."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Question displayed for the poll."
+      },
+      "choices": {
+        "type": "ChannelPollChoice[]",
+        "description": "An array of choices for the poll. Includes vote counts."
+      },
+      "bits_voting": {
+        "type": "ChannelPollBitsVoting",
+        "description": "The bits voting settings for the poll."
+      },
+      "channel_points_voting": {
+        "type": "ChannelPollPointsVoting",
+        "description": "The Channel Points voting settings for the poll."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the poll started."
+      },
+      "ends_at": {
+        "type": "Date",
+        "description": "The time the poll will end."
+      }
+    }
+  },
+  {
+    "name": "ChannelPredictionBegin",
+    "type": "channel.prediction.begin",
+    "version": "1",
+    "description": "A Prediction startn.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "Channel Points Prediction ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Title for the Channel Points Prediction."
+      },
+      "outcomes": {
+        "type": "ChannelPredictionOutcome[]",
+        "description": "An array of outcomes for the Channel Points Prediction."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction started."
+      },
+      "locks_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction will automatically lock."
+      }
+    }
+  },
+  {
+    "name": "ChannelPredictionEnd",
+    "type": "channel.prediction.end",
+    "version": "1",
+    "description": "A Prediction ends.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "Channel Points Prediction ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Title for the Channel Points Prediction."
+      },
+      "winning_outcome_id": {
+        "type": "string",
+        "description": "ID of the winning outcome."
+      },
+      "outcomes": {
+        "type": "ChannelPredictionOutcome[]",
+        "description": "An array of outcomes for the Channel Points Prediction. Includes top_predictors."
+      },
+      "status": {
+        "type": "string",
+        "description": "The status of the Channel Points Prediction. Valid values are resolved and canceled."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction started."
+      },
+      "ended_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction ended."
+      }
+    }
+  },
+  {
+    "name": "ChannelPredictionLock",
+    "type": "channel.prediction.lock",
+    "version": "1",
+    "description": "A Prediction lockeds.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "Channel Points Prediction ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Title for the Channel Points Prediction."
+      },
+      "outcomes": {
+        "type": "ChannelPredictionOutcome[]",
+        "description": "An array of outcomes for the Channel Points Prediction. Includes top_predictors."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction started."
+      },
+      "locked_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction was locked."
+      }
+    }
+  },
+  {
+    "name": "ChannelPredictionProgress",
+    "type": "channel.prediction.progress",
+    "version": "1",
+    "description": "A user participates in a Prediction.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "Channel Points Prediction ID."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "Title for the Channel Points Prediction."
+      },
+      "outcomes": {
+        "type": "ChannelPredictionOutcome[]",
+        "description": "An array of outcomes for the Channel Points Prediction. Includes top_predictors."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction started."
+      },
+      "locks_at": {
+        "type": "Date",
+        "description": "The time the Channel Points Prediction will automatically lock."
+      }
+    }
+  },
+  {
+    "name": "ChannelRaid",
+    "type": "channel.raid",
+    "version": "1",
+    "description": "The broadcaster raids another broadcaster's channel.",
+    "condition": {
+      "from_broadcaster_user_id": {
+        "type": "string",
+        "required": false,
+        "description": "The user ID of the broadcaster that created the channel raid."
+      },
+      "to_broadcaster_user_id": {
+        "type": "string",
+        "required": false,
+        "description": "The user ID of the broadcaster that received the channel raid."
+      }
+    },
+    "definition": {
+      "from_broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster that created the raid."
+      },
+      "from_broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster that created the raid."
+      },
+      "from_broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster that created the raid."
+      },
+      "to_broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster that received the raid."
+      },
+      "to_broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster that received the raid."
+      },
+      "to_broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster that received the raid."
+      },
+      "viewers": {
+        "type": "integer",
+        "description": "The number of viewers in the raid."
+      }
+    }
+  },
+  {
+    "name": "ShieldModeBegin",
+    "type": "channel.shield_mode.begin",
+    "version": "1",
+    "description": "The broadcaster activates Shield Mode.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "description": "The user ID of the moderator that updated the shield mode's status. If the broadcaster updated the status, this ID will be the same as broadcaster_user_id."
+      },
+      "moderator_user_login": {
+        "type": "string",
+        "description": "The user login of the moderator."
+      },
+      "moderator_user_name": {
+        "type": "string",
+        "description": "The user name of the moderator."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the moderator activated shield mode."
+      }
+    }
+  },
+  {
+    "name": "ShieldModeEnd",
+    "type": "channel.shield_mode.end",
+    "version": "1",
+    "description": "The broadcaster deactivates Shield Mode.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "description": "The user ID of the moderator that updated the shield mode's status. If the broadcaster updated the status, this ID will be the same as broadcaster_user_id."
+      },
+      "moderator_user_login": {
+        "type": "string",
+        "description": "The user login of the moderator."
+      },
+      "moderator_user_name": {
+        "type": "string",
+        "description": "The user name of the moderator."
+      },
+      "ended_at": {
+        "type": "Date",
+        "description": "The time the moderator deactivated shield mode."
+      }
+    }
+  },
+  {
+    "name": "ShoutoutCreate",
+    "type": "channel.shoutout.create",
+    "version": "1",
+    "description": "The broadcaster sends a Shoutout.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "to_broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster that received the shoutout."
+      },
+      "to_broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "to_broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "description": "The user ID of the moderator that sent the shoutout. If the broadcaster sent the shoutout, this ID is the same as the ID in broadcaster_user_id."
+      },
+      "moderator_user_login": {
+        "type": "string",
+        "description": "The user login of the moderator."
+      },
+      "moderator_user_name": {
+        "type": "string",
+        "description": "The user name of the moderator."
+      },
+      "viewer_count": {
+        "type": "integer",
+        "description": "The number of users that were watching the broadcaster's stream at the time of the shoutout."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the moderator sent the shoutout."
+      },
+      "cooldown_ends_at": {
+        "type": "Date",
+        "description": "The time the broadcaster may send a shoutout to a different broadcaster."
+      },
+      "target_cooldown_ends_at": {
+        "type": "Date",
+        "description": "The time the broadcaster may send another shoutout to the broadcaster in to_broadcaster_user_id."
+      }
+    }
+  },
+  {
+    "name": "ShoutoutReceive",
+    "type": "channel.shoutout.receive",
+    "version": "1",
+    "description": "The broadcaster receives a Shoutout.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the moderator or broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "from_broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster that sent the shoutout."
+      },
+      "from_broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "from_broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "viewer_count": {
+        "type": "integer",
+        "description": "The number of users that were watching the from-broadcaster's stream at the time of the shoutout."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the moderator sent the shoutout."
+      }
+    }
+  },
+  {
+    "name": "ChannelSubscribe",
+    "type": "channel.subscribe",
+    "version": "1",
+    "description": "A user subscribes. This does not include resubscribes.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who subscribed."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who subscribed."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who subscribed."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "tier": {
+        "type": "string",
+        "description": "The tier of the subscription. Valid values are 1000, 2000, and 3000."
+      },
+      "is_gift": {
+        "type": "boolean",
+        "description": "Whether the subscription is a gift."
+      }
+    }
+  },
+  {
+    "name": "ChannelSubscriptionEnd",
+    "type": "channel.subscription.end",
+    "version": "1",
+    "description": "A subscription ends.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user whose subscription ended."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user whose subscription ended."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user whose subscription ended."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "tier": {
+        "type": "string",
+        "description": "The tier of the subscription that ended. Valid values are 1000, 2000, and 3000."
+      },
+      "is_gift": {
+        "type": "boolean",
+        "description": "Whether the subscription was a gift."
+      }
+    }
+  },
+  {
+    "name": "ChannelSubscriptionGift",
+    "type": "channel.subscription.gift",
+    "version": "1",
+    "description": "A user gives a gift subscription to one or more users.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who sent the subscription gift. Set to null if it was an anonymous subscription gift."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who sent the gift. Set to null if it was an anonymous subscription gift."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who sent the gift. Set to null if it was an anonymous subscription gift."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "total": {
+        "type": "integer",
+        "description": "The number of subscriptions in the subscription gift."
+      },
+      "tier": {
+        "type": "string",
+        "description": "The tier of the subscriptions in the subscription gift."
+      },
+      "cumulative_total": {
+        "type": "integer",
+        "description": "The number of subscriptions gifted by this user in the channel. This value is null for anonymous gifts or if the gifter has opted out of sharing this information."
+      },
+      "is_anonymous": {
+        "type": "boolean",
+        "description": "Whether the subscription gift was anonymous."
+      }
+    }
+  },
+  {
+    "name": "ChannelSubscriptionMessage",
+    "type": "channel.subscription.message",
+    "version": "1",
+    "description": "A user sends a resubscription chat message.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who sent a resubscription chat message."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who sent a resubscription chat message."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who a resubscription chat message."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "tier": {
+        "type": "string",
+        "description": "The tier of the user's subscription."
+      },
+      "message": {
+        "type": "Object",
+        "description": "An object that contains the resubscription message and emote information needed to recreate the message.",
+        "fields": {
+          "text": {
+            "type": "string",
+            "description": "The text of the resubscription chat message."
+          },
+          "emotes": {
+            "type": "Array",
+            "description": "An array that includes the emote ID and start and end positions for where the emote appears in the text.",
+            "fields": {
+              "begin": {
+                "type": "integer",
+                "description": "The index of where the Emote starts in the text."
+              },
+              "end": {
+                "type": "integer",
+                "description": "The index of where the Emote ends in the text."
+              },
+              "id": {
+                "type": "string",
+                "description": "The emote ID."
+              }
+            }
+          }
+        }
+      },
+      "cumulative_months": {
+        "type": "integer",
+        "description": "The total number of months the user is subscribed to the channel."
+      },
+      "streak_months": {
+        "type": "integer",
+        "description": "The number of consecutive months the user's current subscription is active. This value is null if the user has opted out of sharing this information."
+      },
+      "duration_months": {
+        "type": "integer",
+        "description": "The month duration of the subscription."
+      }
+    }
+  },
+  {
+    "name": "ChannelUnban",
+    "type": "channel.unban",
+    "version": "1",
+    "description": "A moderator unbans a user.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who was unbanned."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who was unbanned."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who was unbanned."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "moderator_user_id": {
+        "type": "string",
+        "description": "The user ID of the issuer of the unban."
+      },
+      "moderator_user_login": {
+        "type": "string",
+        "description": "The user login of the issuer of the unban."
+      },
+      "moderator_user_name": {
+        "type": "string",
+        "description": "The user name of the issuer of the unban."
+      }
+    }
+  },
+  {
+    "name": "ChannelUpdate",
+    "type": "channel.update",
+    "version": "2",
+    "description": "The broadcaster updates their channel properties. e.g., category, title, content classification labels, broadcast, or language.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "title": {
+        "type": "string",
+        "description": "The channel's stream title."
+      },
+      "language": {
+        "type": "string",
+        "description": "The channel's broadcast language."
+      },
+      "category_id": {
+        "type": "string",
+        "description": "The channel's category ID."
+      },
+      "category_name": {
+        "type": "string",
+        "description": "The category name."
+      },
+      "content_classification_labels": {
+        "type": "string[]",
+        "description": "Array of content classification label IDs currently applied on the Channel."
+      }
+    }
+  },
+  {
+    "name": "StreamOffline",
+    "type": "stream.offline",
+    "version": "1",
+    "description": "The broadcaster stops a stream.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      }
+    }
+  },
+  {
+    "name": "StreamOnline",
+    "type": "stream.online",
+    "version": "1",
+    "description": "The broadcaster starts a stream.",
+    "condition": {
+      "broadcaster_user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID of the broadcaster."
+      }
+    },
+    "definition": {
+      "id": {
+        "type": "string",
+        "description": "The ID of the stream."
+      },
+      "broadcaster_user_id": {
+        "type": "string",
+        "description": "The user ID of the broadcaster."
+      },
+      "broadcaster_user_login": {
+        "type": "string",
+        "description": "The user login of the broadcaster."
+      },
+      "broadcaster_user_name": {
+        "type": "string",
+        "description": "The user name of the broadcaster."
+      },
+      "type": {
+        "type": "string",
+        "description": "The stream type. Valid values are: live, playlist, watch_party, premiere, rerun."
+      },
+      "started_at": {
+        "type": "Date",
+        "description": "The time the stream went online."
+      }
+    }
+  },
+  {
+    "name": "UserUpdate",
+    "type": "user.update",
+    "version": "1",
+    "description": "A user updateds their account.",
+    "condition": {
+      "user_id": {
+        "type": "string",
+        "required": true,
+        "description": "The user ID."
+      }
+    },
+    "definition": {
+      "user_id": {
+        "type": "string",
+        "description": "The user ID of the user who was updated."
+      },
+      "user_login": {
+        "type": "string",
+        "description": "The user login of the user who was updated."
+      },
+      "user_name": {
+        "type": "string",
+        "description": "The user name of the user who was updated."
+      },
+      "email": {
+        "type": "string",
+        "description": "The user email address. The event includes the user's email address only if the app used to request this event type includes the user:read:email scope for the user; otherwise, the field is set to an empty string. See Create EventSub Subscription."
+      },
+      "email_verified": {
+        "type": "boolean",
+        "description": "A Boolean value that determines whether Twitch has verified the user's email address. Is true if Twitch has verified the email address; otherwise, false.\\n\\nNOTE: Ignore this field if the email field contains an empty string."
+      },
+      "description": {
+        "type": "string",
+        "description": "The user description."
+      }
+    }
+  }
+]

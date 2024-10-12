@@ -1,10 +1,6 @@
 import { BaseSubscription } from "../events-helpers.js"
 
-import {
-  ChannelPollBitsVoting,
-  ChannelPollChoice,
-  ChannelPollPointsVoting,
-} from "./channel.poll._.js"
+import { ChannelPollBitsVoting, ChannelPollChoice, ChannelPollPointsVoting } from "./channel.poll._.js"
 
 type ChannelPollProgressType = "channel.poll.progress"
 type ChannelPollProgressVersion = "1"
