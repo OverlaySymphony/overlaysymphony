@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   push:
     # paths:
-    #   - "common/scripts/**"
+    #   - "internal/scripts/**"
 
 env:
   WORKSPACE: "scripts"
-  DIRECTORY: common/scripts
+  DIRECTORY: internal/scripts
 
 jobs:
   verify:

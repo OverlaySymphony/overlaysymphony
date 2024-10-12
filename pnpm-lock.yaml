@@ -45,13 +45,13 @@ importers:
         specifier: ^20.0.0
         version: 20.0.0
 
-  common/eslint-config:
+  internal/eslint-config:
     dependencies:
       '@overlaysymphony/tooling':
         specifier: workspace:*
         version: link:../tooling
 
-  common/scripts:
+  internal/scripts:
     dependencies:
       chalk:
         specifier: ^4.1.2
@@ -82,7 +82,7 @@ importers:
         specifier: 'catalog:'
         version: 5.5.4
 
-  common/tooling:
+  internal/tooling:
     dependencies:
       '@bitovi/eslint-config':
         specifier: ^1.8.0
@@ -112,10 +112,10 @@ importers:
     devDependencies:
       '@overlaysymphony/eslint-config':
         specifier: workspace:*
-        version: link:../../common/eslint-config
+        version: link:../../internal/eslint-config
       '@overlaysymphony/tooling':
         specifier: workspace:*
-        version: link:../../common/tooling
+        version: link:../../internal/tooling
       '@testing-library/jest-dom':
         specifier: ^6.4.6
         version: 6.5.0
@@ -160,10 +160,10 @@ importers:
     devDependencies:
       '@overlaysymphony/eslint-config':
         specifier: workspace:*
-        version: link:../../common/eslint-config
+        version: link:../../internal/eslint-config
       '@overlaysymphony/tooling':
         specifier: workspace:*
-        version: link:../../common/tooling
+        version: link:../../internal/tooling
       '@vitest/coverage-v8':
         specifier: ^2.1.2
         version: 2.1.2(vitest@2.1.2(@types/node@20.16.11)(jsdom@25.0.1))
@@ -191,10 +191,10 @@ importers:
     devDependencies:
       '@overlaysymphony/eslint-config':
         specifier: workspace:*
-        version: link:../../common/eslint-config
+        version: link:../../internal/eslint-config
       '@overlaysymphony/tooling':
         specifier: workspace:*
-        version: link:../../common/tooling
+        version: link:../../internal/tooling
       '@overlaysymphony/twitch':
         specifier: workspace:*
         version: link:../twitch
@@ -227,10 +227,10 @@ importers:
         version: link:../core
       '@overlaysymphony/eslint-config':
         specifier: workspace:*
-        version: link:../../common/eslint-config
+        version: link:../../internal/eslint-config
       '@overlaysymphony/tooling':
         specifier: workspace:*
-        version: link:../../common/tooling
+        version: link:../../internal/tooling
       '@vitest/coverage-v8':
         specifier: ^2.1.2
         version: 2.1.2(vitest@2.1.2(@types/node@20.16.11)(jsdom@25.0.1))

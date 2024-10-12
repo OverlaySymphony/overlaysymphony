@@ -1,6 +1,6 @@
 packages:
-  - "common/**"
   - "examples/**"
+  - "internal/**"
   - "packages/**"
 
 catalog:
