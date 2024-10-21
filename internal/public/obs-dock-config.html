@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OBS Config Dock | OverlaySymphony</title>
+  </head>
+  <body>
+    <overlaysymfony-twitch-authentication client-id="%VITE_TWITCH_CLIENT_ID%">
+    </overlaysymfony-twitch-authentication>
+
+    <script>
+      window.overlaysymphonyTwitchScopes = [
+        "bits:read",
+        "channel:moderate",
+        "channel:read:charity",
+        "channel:read:goals",
+        "channel:read:hype_train",
+        "channel:read:polls",
+        "channel:read:predictions",
+        "channel:read:redemptions",
+        "channel:read:subscriptions",
+        "chat:read",
+        "chat:edit",
+        "moderation:read",
+        "moderator:manage:announcements",
+        "moderator:manage:shoutouts",
+        "moderator:read:followers",
+        "moderator:read:shield_mode",
+        "user:read:follows",
+      ]
+    </script>
+    <script type="module" src="./src/obs-dock-config.ts"></script>
+  </body>
+</html>

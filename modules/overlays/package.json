@@ -1,10 +1,10 @@
 {
-  "name": "overlaysymphony-examples-demo",
-  "private": true,
+  "name": "@overlaysymphony/overlays",
   "version": "0.0.1",
   "description": "",
   "type": "module",
   "exports": {
+    "./ui/*": "./src/ui/*.js",
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -14,23 +14,18 @@
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
-    "dev": "vite",
+    "dev": "echo TODO",
     "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo dist",
-    "build": "vite build"
-  },
-  "dependencies": {
-    "@overlaysymphony/obs": "workspace:*",
-    "@overlaysymphony/twitch": "workspace:*"
+    "build": "echo TODO"
   },
   "devDependencies": {
     "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
+    "@vitest/coverage-v8": "^2.1.2",
     "depcheck": "catalog:",
     "eslint": "catalog:",
-    "jsdom": "^25.0.0",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.4.8",
     "vitest": "^2.1.2"
   }
 }

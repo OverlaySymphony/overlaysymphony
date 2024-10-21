@@ -1,20 +1,11 @@
 packages:
-  - "examples/**"
   - "internal/**"
-  - "packages/**"
+  - "modules/**"
+  - "examples/**"
 
 catalog:
-  # common
+  "@types/node": ^20.16.11
   depcheck: ^1.4.7
   eslint: ^8.57.0
   prettier: ^3.3.3
   typescript: ~5.5.0
-
-  # node
-  "@types/node": ^20.16.11
-
-  # react
-  "@types/react": ^18.3.0
-  "@types/react-dom": ^18.3.0
-  react: ^18.3.0
-  react-dom: ^18.3.0

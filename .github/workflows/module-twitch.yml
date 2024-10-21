@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   push:
     # paths:
-    #   - "packages/twitch/**"
+    #   - "modules/twitch/**"
 
 env:
   WORKSPACE: "@overlaysymphony/twitch"
-  DIRECTORY: packages/twitch
+  DIRECTORY: modules/twitch
 
 jobs:
   verify:

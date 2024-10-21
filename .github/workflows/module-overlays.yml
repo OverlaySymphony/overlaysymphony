@@ -1,14 +1,14 @@
-name: Core
+name: "Module: Overlays"
 
 on:
   workflow_dispatch:
   push:
     # paths:
-    #   - "modules/core/**"
+    #   - "modules/overlays/**"
 
 env:
-  WORKSPACE: "@overlaysymphony/core"
-  DIRECTORY: modules/core
+  WORKSPACE: "@overlaysymphony/overlays"
+  DIRECTORY: modules/overlays
 
 jobs:
   verify:

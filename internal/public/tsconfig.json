@@ -1,8 +1,4 @@
 {
   "extends": "@overlaysymphony/tooling/typescript",
-  "compilerOptions": {
-    "module": "ESNext",
-    "moduleResolution": "bundler"
-  },
   "include": ["vite.config.ts", "src"]
 }

@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
   push:
     # paths:
-    #   - "packages/obs/**"
+    #   - "modules/obs/**"
 
 env:
   WORKSPACE: "@overlaysymphony/obs"
-  DIRECTORY: packages/obs
+  DIRECTORY: modules/obs
 
 jobs:
   verify:

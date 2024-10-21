@@ -1,7 +1,7 @@
 {
-  "name": "overlaysymphony-examples-demo",
+  "name": "public",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "",
   "type": "module",
   "exports": {
@@ -23,14 +23,13 @@
     "@overlaysymphony/twitch": "workspace:*"
   },
   "devDependencies": {
+    "@types/node": "catalog:",
     "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
     "depcheck": "catalog:",
     "eslint": "catalog:",
-    "jsdom": "^25.0.0",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.4.8",
-    "vitest": "^2.1.2"
+    "vite": "^5.4.8"
   }
 }

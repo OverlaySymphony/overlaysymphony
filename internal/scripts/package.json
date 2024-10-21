@@ -13,10 +13,9 @@
     "lint-eslint": "eslint --ext .js --ext .ts .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
-    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo",
-    "events-cleanup": "tsx src/apps/events/cleanup.ts",
-    "events-generate": "tsx src/apps/events/generate.ts",
-    "demo": "tsx src/apps/demo.ts"
+    "twitch:events:cleanup": "tsx src/apps/twitch-events/cleanup.ts",
+    "twitch:events:generate": "tsx src/apps/twitch-events/generate.ts",
+    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "chalk": "^4.1.2"

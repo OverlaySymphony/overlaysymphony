@@ -3,6 +3,3 @@ ignore-dirs:
 
 ignores:
   - "@types/*"
-
-  # used but not imported
-  - "@vitest/coverage-v8"
