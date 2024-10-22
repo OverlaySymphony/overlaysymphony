@@ -1,4 +1,6 @@
-import "@overlaysymphony/obs"
-import "@overlaysymphony/twitch"
+import "@overlaysymphony/overlays/ui/scene"
 
-console.log("hello world")
+import * as obs from "@overlaysymphony/obs/events"
+import { createEventSub } from "@overlaysymphony/twitch/eventsub"
+
+console.log("hello world", obs, createEventSub)

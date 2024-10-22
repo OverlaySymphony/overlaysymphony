@@ -27,5 +27,8 @@
     "prettier": "catalog:",
     "typescript": "catalog:",
     "vitest": "^2.1.2"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.13.4"
   }
 }

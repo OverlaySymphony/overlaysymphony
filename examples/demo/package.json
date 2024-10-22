@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@overlaysymphony/obs": "workspace:*",
+    "@overlaysymphony/overlays": "workspace:*",
     "@overlaysymphony/twitch": "workspace:*"
   },
   "devDependencies": {
