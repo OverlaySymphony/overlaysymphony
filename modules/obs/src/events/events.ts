@@ -1,4 +1,5 @@
 /// <reference types="obs-studio" />
+/// <reference types="../obs-studio.d.ts" />
 
 enum ControlLevel {
   "MISSING" = -1,

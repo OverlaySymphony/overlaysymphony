@@ -21,12 +21,12 @@
     "build": "echo TODO"
   },
   "dependencies": {
-    "@fontsource/montserrat": "^5.0.16"
+    "@fontsource/montserrat": "^5.0.16",
+    "@types/obs-studio": "^2.17.2"
   },
   "devDependencies": {
     "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
-    "@types/obs-studio": "^2.17.2",
     "@vitest/coverage-v8": "^2.1.2",
     "depcheck": "catalog:",
     "eslint": "catalog:",
