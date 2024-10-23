@@ -195,6 +195,9 @@ importers:
       '@fontsource/montserrat':
         specifier: ^5.0.16
         version: 5.1.0
+      '@types/obs-studio':
+        specifier: ^2.17.2
+        version: 2.17.2
     devDependencies:
       '@overlaysymphony/eslint-config':
         specifier: workspace:*
@@ -202,9 +205,6 @@ importers:
       '@overlaysymphony/tooling':
         specifier: workspace:*
         version: link:../../internal/tooling
-      '@types/obs-studio':
-        specifier: ^2.17.2
-        version: 2.17.2
       '@vitest/coverage-v8':
         specifier: ^2.1.2
         version: 2.1.2(vitest@2.1.2(@types/node@20.16.11)(jsdom@25.0.1))
