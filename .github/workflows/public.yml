@@ -28,7 +28,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' && 'github-pages' || null  }}
     needs: verify
 
     steps:
@@ -41,7 +41,7 @@ jobs:
       - name: Build
         uses: ./.github/actions/build
         env:
-          VITE_TWITCH_CLIENT_ID: ${{ vars.TWITCH_CLIENT_ID }}
+          VITE_TWITCH_CLIENT_ID: ${{ github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main' && vars.TWITCH_CLIENT_ID || null  }}
         with:
           args: --base=/${{ github.event.repository.name }}
 
