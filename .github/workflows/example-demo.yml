@@ -29,7 +29,6 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     needs: verify
-    if: false
 
     steps:
       - name: Checkout
@@ -40,6 +39,7 @@ jobs:
 
       - name: Test
         uses: ./.github/actions/test
+        if: false
 
   build:
     name: Build
