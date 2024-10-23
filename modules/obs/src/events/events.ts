@@ -1,7 +1,7 @@
 /// <reference types="obs-studio" />
 
 enum ControlLevel {
-  "OFFLINE" = -1,
+  "MISSING" = -1,
   "NONE" = 0,
   "READ_OBS" = 1,
   "READ_USER" = 2,
@@ -19,12 +19,12 @@ export async function getControlLevel(): Promise<ControlLevel> {
   return level
 }
 
-export async function ensureControlLevel(
+export async function verifyControlLevel(
   target: ControlLevel,
 ): Promise<boolean> {
   const level = await getControlLevel()
 
-  if (level === -1) {
+  if (level === ControlLevel.MISSING) {
     console.error("OBS context not available.")
   } else if (level < target) {
     console.error(
@@ -33,6 +33,18 @@ export async function ensureControlLevel(
   }
 
   return level >= target
+}
+
+export async function ensureControlLevel(target: ControlLevel): Promise<void> {
+  const level = await getControlLevel()
+
+  if (level === ControlLevel.MISSING) {
+    throw new Error("OBS context not available.")
+  } else if (level < target) {
+    throw new Error(
+      `Please elevate browser source "page permissions" to ${ControlLevel[target]} or higher.`,
+    )
+  }
 }
 
 export async function getStreaming(): Promise<boolean> {
@@ -45,7 +57,7 @@ export async function getStreaming(): Promise<boolean> {
 export async function onStreaming(
   callback: (status: boolean) => void,
 ): Promise<void> {
-  if (!(await ensureControlLevel(ControlLevel.READ_OBS))) return
+  if (!(await verifyControlLevel(ControlLevel.READ_OBS))) return
 
   const streaming = await getStreaming()
 
@@ -67,7 +79,7 @@ export async function getScenes(): Promise<string[]> {
 export async function onScenes(
   callback: (status: string[]) => void,
 ): Promise<void> {
-  if (!(await ensureControlLevel(ControlLevel.READ_USER))) return
+  if (!(await verifyControlLevel(ControlLevel.READ_USER))) return
 
   const scenes = await getScenes()
 
@@ -88,7 +100,7 @@ export async function getScene(): Promise<string> {
 export async function onScene(
   callback: (scene: string) => void,
 ): Promise<void> {
-  if (!(await ensureControlLevel(ControlLevel.READ_USER))) return
+  if (!(await verifyControlLevel(ControlLevel.READ_USER))) return
 
   const scene = await getScene()
 
@@ -102,7 +114,7 @@ export async function onScene(
 export async function onVisible(
   callback: (visible: boolean) => void,
 ): Promise<void> {
-  if (!(await ensureControlLevel(ControlLevel.NONE))) return
+  if (!(await verifyControlLevel(ControlLevel.NONE))) return
 
   window.addEventListener("obsSourceVisibleChanged", (event) => {
     callback(event.detail.visible)
