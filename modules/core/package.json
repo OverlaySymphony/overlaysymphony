@@ -1,7 +1,8 @@
 {
   "name": "@overlaysymphony/core",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.0",
+  "description": "Core module for the OverlaySymphony interactive streaming framework.",
+  "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "type": "module",
   "exports": {
     "./libs/*": "./src/libs/*/index.js",
