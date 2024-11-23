@@ -1,6 +1,6 @@
 {
   "name": "@overlaysymphony/obs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "OBS module for the OverlaySymphony interactive streaming framework.",
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "type": "module",
