@@ -5,7 +5,7 @@ inputs:
     default: ""
 
 runs:
-  using: "composite"
+  using: composite
 
   steps:
     - name: Build

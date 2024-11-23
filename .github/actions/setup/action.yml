@@ -1,5 +1,5 @@
 runs:
-  using: "composite"
+  using: composite
 
   steps:
     - name: Setup pnpm
@@ -8,13 +8,13 @@ runs:
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version-file: ".nvmrc"
-        cache: "pnpm"
+        node-version-file: .nvmrc
+        cache: pnpm
 
     - name: Install dependencies
       shell: bash
       run: pnpm install
 
-    # - name: Setup workspace
-    #   shell: bash
-    #   run: npx nx run --if-present ${{ env.WORKSPACE }}:ci-setup
+    - name: Setup workspace
+      shell: bash
+      run: pnpm run --if-present ${{ env.WORKSPACE }}:ci-setup

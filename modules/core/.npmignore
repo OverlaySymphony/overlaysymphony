@@ -1,0 +1,7 @@
+/.depcheckrc
+/.eslintignore
+/.eslintrc.json
+/.prettierignore
+/.prettierrc.json
+/tsconfig.json
+/vitest.config.ts

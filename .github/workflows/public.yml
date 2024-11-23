@@ -3,8 +3,10 @@ name: Public
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - "internal/public/**"
+    paths:
+      - .github/workflows/public.yml
+      - internal/tooling/**
+      - internal/public/**
 
 env:
   WORKSPACE: "public"
@@ -28,7 +30,7 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
-    environment: github-pages
+    environment: ${{ github.event_name == 'workflow_dispatch' && 'github-pages' || null  }}
     needs: verify
 
     steps:
@@ -41,12 +43,13 @@ jobs:
       - name: Build
         uses: ./.github/actions/build
         env:
-          VITE_TWITCH_CLIENT_ID: ${{ vars.TWITCH_CLIENT_ID }}
+          VITE_TWITCH_CLIENT_ID: ${{ github.event_name == 'workflow_dispatch' && vars.TWITCH_CLIENT_ID || null  }}
         with:
           args: --base=/${{ github.event.repository.name }}
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         with:
           path: ./internal/public/dist
 
@@ -56,10 +59,10 @@ jobs:
     environment: github-pages
     needs: build
 
-    if: github.event_name == 'workflow_dispatch' || github.ref == 'refs/heads/main'
+    if: ${{ github.event_name == 'workflow_dispatch' }}
 
     concurrency:
-      group: "pages"
+      group: pages
       cancel-in-progress: false
     permissions:
       id-token: write
@@ -69,5 +72,4 @@ jobs:
 
     steps:
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v4

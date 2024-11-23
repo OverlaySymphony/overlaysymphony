@@ -3,11 +3,13 @@ name: "Example: Demo"
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - "examples/demo/**"
+    paths:
+      - .github/workflows/example-demo.yml
+      - internal/tooling/**
+      - examples/demo/**
 
 env:
-  WORKSPACE: overlaysymphony-examples-demo
+  WORKSPACE: "overlaysymphony-examples-demo"
   DIRECTORY: examples/demo
 
 jobs:
@@ -29,7 +31,6 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     needs: verify
-    if: false
 
     steps:
       - name: Checkout
@@ -40,6 +41,7 @@ jobs:
 
       - name: Test
         uses: ./.github/actions/test
+        if: false
 
   build:
     name: Build

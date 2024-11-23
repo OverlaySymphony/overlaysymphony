@@ -3,8 +3,9 @@ name: Tooling
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - "internal/tooling/**"
+    paths:
+      - .github/workflows/internal-tooling.yml
+      - internal/tooling/**
 
 env:
   WORKSPACE: "@overlaysymphony/tooling"
