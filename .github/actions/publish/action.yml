@@ -38,11 +38,11 @@ runs:
           fi
         fi
 
-        echo pnpm version ${{ inputs.segment }} $PREID_CMD
+        pnpm version ${{ inputs.segment }} $PREID_CMD
 
         VERSION="$(cat package.json | jq -r '.version')"
-        echo git commit --all --message "Publish ${{ env.WORKSPACE }} v$VERSION"
-        echo git tag "${{ env.WORKSPACE }}/v$VERSION"
+        git commit --all --message "Publish ${{ env.WORKSPACE }} v$VERSION"
+        git tag "${{ env.WORKSPACE }}/v$VERSION"
 
     - name: Push Tag
       uses: ad-m/github-push-action@master
