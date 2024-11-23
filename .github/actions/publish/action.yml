@@ -16,7 +16,7 @@ runs:
 
   steps:
     - name: Determine Tag
-      id: tag
+      id: publish-tag
       shell: bash
       run: |
         if [[ ${{ inputs.segment }} == pre* ]]; then
@@ -51,10 +51,16 @@ runs:
         branch: ${{ github.ref }}
         tags: true
 
+    - name: Pack
+      id: publish-pack
+      working-directory: ${{ env.DIRECTORY }}
+      shell: bash
+      run: pnpm pack | tee >(echo "tarball=$(tail -1)" >> $GITHUB_OUTPUT)
+
     - name: Publish to NPM Registry
       uses: JS-DevTools/npm-publish@v3
       with:
         token: ${{ inputs.npm-token }}
-        package: ${{ env.DIRECTORY }}
+        package: ${{ env.DIRECTORY }}/${{ steps.publish-pack.outputs.tarball }}
         access: public
-        tag: ${{ steps.tag.outputs.tag }}
+        tag: ${{ steps.publish-tag.outputs.tag }}
