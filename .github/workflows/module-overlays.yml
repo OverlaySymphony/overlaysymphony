@@ -53,6 +53,10 @@ jobs:
     environment: ${{ github.event_name == 'workflow_dispatch' && 'npm' || null  }}
     needs: [verify, test]
 
+    permissions:
+      contents: write
+      pull-requests: write
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
