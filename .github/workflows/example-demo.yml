@@ -3,8 +3,10 @@ name: "Example: Demo"
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - examples/demo/**
+    paths:
+      - .github/workflows/example-demo.yml
+      - internal/tooling/**
+      - examples/demo/**
 
 env:
   WORKSPACE: "overlaysymphony-examples-demo"

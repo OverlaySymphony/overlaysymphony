@@ -3,8 +3,10 @@ name: Public
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - internal/public/**
+    paths:
+      - .github/workflows/public.yml
+      - internal/tooling/**
+      - internal/public/**
 
 env:
   WORKSPACE: "public"

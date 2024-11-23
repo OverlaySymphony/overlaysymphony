@@ -3,8 +3,10 @@ name: Scripts
 on:
   workflow_dispatch:
   push:
-    # paths:
-    #   - internal/scripts/**
+    paths:
+      - .github/workflows/internal-scripts.yml
+      - internal/tooling/**
+      - internal/scripts/**
 
 env:
   WORKSPACE: "scripts"

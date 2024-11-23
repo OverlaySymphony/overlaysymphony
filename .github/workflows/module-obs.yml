@@ -2,8 +2,10 @@ name: "Module: OBS"
 
 on:
   push:
-    # paths:
-    #   - modules/obs/**
+    paths:
+      - .github/workflows/module-obs.yml
+      - internal/tooling/**
+      - modules/obs/**
   workflow_dispatch:
     inputs:
       segment:

@@ -2,8 +2,10 @@ name: Core
 
 on:
   push:
-    # paths:
-    #   - modules/core/**
+    paths:
+      - .github/workflows/core.yml
+      - internal/tooling/**
+      - modules/core/**
   workflow_dispatch:
     inputs:
       segment:

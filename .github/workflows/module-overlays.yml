@@ -2,8 +2,10 @@ name: "Module: Overlays"
 
 on:
   push:
-    # paths:
-    #   - modules/overlays/**
+    paths:
+      - .github/workflows/module-overlays.yml
+      - internal/tooling/**
+      - modules/overlays/**
   workflow_dispatch:
     inputs:
       segment:

@@ -2,8 +2,10 @@ name: "Module: Twitch"
 
 on:
   push:
-    # paths:
-    #   - modules/twitch/**
+    paths:
+      - .github/workflows/module-twitch.yml
+      - internal/tooling/**
+      - modules/twitch/**
   workflow_dispatch:
     inputs:
       segment:
