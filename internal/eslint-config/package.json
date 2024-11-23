@@ -10,8 +10,5 @@
   },
   "scripts": {
     "clean": "rm -rf node_modules/.cache"
-  },
-  "dependencies": {
-    "@overlaysymphony/tooling": "workspace:*"
   }
 }

@@ -12,7 +12,7 @@ inputs:
     description: 'Appended to the prerelease segment. (default: "")'
 
 runs:
-  using: "composite"
+  using: composite
 
   steps:
     - name: Determine Tag

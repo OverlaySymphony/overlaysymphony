@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
     # paths:
-    #   - "internal/tooling/**"
+    #   - internal/tooling/**
 
 env:
   WORKSPACE: "@overlaysymphony/tooling"

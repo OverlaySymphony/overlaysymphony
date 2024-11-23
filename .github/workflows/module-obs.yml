@@ -3,7 +3,7 @@ name: "Module: OBS"
 on:
   push:
     # paths:
-    #   - "modules/obs/**"
+    #   - modules/obs/**
   workflow_dispatch:
     inputs:
       segment:
@@ -48,7 +48,7 @@ jobs:
         if: false
 
   build:
-    name: Build
+    name: ${{ github.event_name == 'workflow_dispatch' && 'Build and Publish' || 'Build'  }}
     runs-on: ubuntu-latest
     environment: ${{ github.event_name == 'workflow_dispatch' && 'npm' || null  }}
     needs: [verify, test]
@@ -60,13 +60,12 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
 
-      - name: Build
-        uses: ./.github/actions/build
-        if: false
+      # - name: Build
+      #   uses: ./.github/actions/build
 
       - name: Publish
         uses: ./.github/actions/publish
-        if: github.event_name == 'workflow_dispatch'
+        if: ${{ github.event_name == 'workflow_dispatch' }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           npm-token: ${{ secrets.NPM_TOKEN }}

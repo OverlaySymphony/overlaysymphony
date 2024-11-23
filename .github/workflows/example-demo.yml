@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
   push:
     # paths:
-    #   - "examples/demo/**"
+    #   - examples/demo/**
 
 env:
-  WORKSPACE: overlaysymphony-examples-demo
+  WORKSPACE: "overlaysymphony-examples-demo"
   DIRECTORY: examples/demo
 
 jobs:
