@@ -90,7 +90,7 @@ export class TwitchAuthentication extends HTMLElement {
     const end = parent.lastIndexOf("/")
     const baseURL = window.location.href.slice(0, end)
 
-    return this.getAttribute("popupUrl") ?? `${baseURL}/popup-twitch.html`
+    return this.getAttribute("popup-url") ?? `${baseURL}/popup-twitch.html`
   }
 
   async authenticate(): Promise<void> {

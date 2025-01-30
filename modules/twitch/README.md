@@ -1,4 +1,4 @@
-# `@overlaysymphony/obs`
+# `@overlaysymphony/twitch`
 
 This module enables [Twitch](https://dev.twitch.tv/docs/) integrations for the [OverlaySymphony interactive streaming framework](https://github.com/OverlaySymphony/overlaysymphony), including authentication, chat, eventsub, helix, and several helpers.
 

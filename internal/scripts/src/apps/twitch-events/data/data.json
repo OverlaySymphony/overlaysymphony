@@ -3,7 +3,7 @@
     "name": "ChannelAdBreakBegin",
     "type": "channel.ad_break.begin",
     "version": "beta",
-    "description": "A midroll commercial break starts running.",
+    "description": "a midroll commercial break starts running",
     "condition": {
       "broadcaster_id": {
         "type": "string",
@@ -54,7 +54,7 @@
     "name": "ChannelBan",
     "type": "channel.ban",
     "version": "1",
-    "description": "A moderator bans a user.",
+    "description": "a moderator bans a user",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -121,7 +121,7 @@
     "name": "ChannelPointsCustomRewardAdd",
     "type": "channel.channel_points_custom_reward.add",
     "version": "1",
-    "description": "The broadcaster creates a custom channel points reward.",
+    "description": "the broadcaster creates a custom channel points reward",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -216,7 +216,7 @@
     "name": "ChannelPointsCustomRewardRemove",
     "type": "channel.channel_points_custom_reward.remove",
     "version": "1",
-    "description": "The broadcaster removes a custom channel points reward.",
+    "description": "the broadcaster removes a custom channel points reward",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -316,7 +316,7 @@
     "name": "ChannelPointsCustomRewardUpdate",
     "type": "channel.channel_points_custom_reward.update",
     "version": "1",
-    "description": "The broadcaster updates a custom channel points reward.",
+    "description": "the broadcaster updates a custom channel points reward",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -416,7 +416,7 @@
     "name": "ChannelPointsCustomRewardRedemptionAdd",
     "type": "channel.channel_points_custom_reward_redemption.add",
     "version": "1",
-    "description": "A user redeems a custom channel points reward.",
+    "description": "a user redeems a custom channel points reward",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -480,7 +480,7 @@
     "name": "ChannelPointsCustomRewardRedemptionUpdate",
     "type": "channel.channel_points_custom_reward_redemption.update",
     "version": "1",
-    "description": "A moderator updates the redemption of a channel points custom reward.",
+    "description": "a moderator updates the redemption of a channel points custom reward",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -544,7 +544,7 @@
     "name": "CharityDonation",
     "type": "channel.charity_campaign.donate",
     "version": "1",
-    "description": "A user donates to the broadcaster's charity campaign.",
+    "description": "a user donates to the broadcaster's charity campaign",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -625,7 +625,7 @@
     "name": "CharityCampaignProgress",
     "type": "channel.charity_campaign.progress",
     "version": "1",
-    "description": "Progress is made towards the campaign's goal or when the broadcaster changes the fundraising goal.",
+    "description": "progress is made towards the campaign's goal or when the broadcaster changes the fundraising goal",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -708,7 +708,7 @@
     "name": "CharityCampaignStart",
     "type": "channel.charity_campaign.start",
     "version": "1",
-    "description": "The broadcaster starts a charity campaign.",
+    "description": "the broadcaster starts a charity campaign",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -795,7 +795,7 @@
     "name": "CharityCampaignStop",
     "type": "channel.charity_campaign.stop",
     "version": "1",
-    "description": "The broadcaster stops a charity campaign.",
+    "description": "the broadcaster stops a charity campaign",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -882,7 +882,7 @@
     "name": "ChannelChatClear",
     "type": "channel.chat.clear",
     "version": "1",
-    "description": "A moderator clears all messages from the chat room.",
+    "description": "a moderator clears all messages from the chat room",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -914,7 +914,7 @@
     "name": "ChannelChatClearUserMessages",
     "type": "channel.chat.clear_user_messages",
     "version": "1",
-    "description": "A moderator clears all messages from a specific user.",
+    "description": "a moderator clears all messages from a specific user",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -958,7 +958,7 @@
     "name": "ChannelChatMessageDelete",
     "type": "channel.chat.message_delete",
     "version": "1",
-    "description": "A moderator removes a specific message.",
+    "description": "a moderator removes a specific message",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1006,7 +1006,7 @@
     "name": "ChannelChatNotification",
     "type": "channel.chat.notification",
     "version": "1",
-    "description": "An event appears in chat.",
+    "description": "an event appears in chat",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1054,7 +1054,7 @@
     "name": "ChannelCheer",
     "type": "channel.cheer",
     "version": "1",
-    "description": "A user cheers.",
+    "description": "a user cheers",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1105,7 +1105,7 @@
     "name": "ChannelFollow",
     "type": "channel.follow",
     "version": "2",
-    "description": "A user follows.",
+    "description": "a user follows",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1153,7 +1153,7 @@
     "name": "GoalBegin",
     "type": "channel.goal.begin",
     "version": "1",
-    "description": "The broadcaster begins a goal.",
+    "description": "the broadcaster begins a goal",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1204,7 +1204,7 @@
     "name": "GoalEnd",
     "type": "channel.goal.end",
     "version": "1",
-    "description": "The broadcaster ends a goal.",
+    "description": "the broadcaster ends a goal",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1263,7 +1263,7 @@
     "name": "GoalProgress",
     "type": "channel.goal.progress",
     "version": "1",
-    "description": "Progress (either positive or negative) is made towards the broadcaster's goal.",
+    "description": "progress (either positive or negative) is made towards the broadcaster's goal",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1314,7 +1314,7 @@
     "name": "ChannelGuestStarGuestUpdate",
     "type": "channel.guest_star_guest.update",
     "version": "beta",
-    "description": "A guest or a slot is updated in an active Guest Star session.",
+    "description": "a guest or a slot is updated in an active Guest Star session",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1394,7 +1394,7 @@
     "name": "ChannelGuestStarSessionBegin",
     "type": "channel.guest_star_session.begin",
     "version": "beta",
-    "description": "The broadcaster began a new Guest Star session.",
+    "description": "the broadcaster began a new Guest Star session",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1434,7 +1434,7 @@
     "name": "ChannelGuestStarSessionEnd",
     "type": "channel.guest_star_session.end",
     "version": "beta",
-    "description": "A running Guest Star session ends.",
+    "description": "a running Guest Star session ends",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1478,7 +1478,7 @@
     "name": "ChannelGuestStarSettingsUpdate",
     "type": "channel.guest_star_settings.update",
     "version": "beta",
-    "description": "The broadcaster updates preferences for Guest Star.",
+    "description": "the broadcaster updates preferences for Guest Star",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1526,7 +1526,7 @@
     "name": "HypeTrainBegin",
     "type": "channel.hype_train.begin",
     "version": "1",
-    "description": "A Hype Train begins.",
+    "description": "a Hype Train begins",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1585,7 +1585,7 @@
     "name": "HypeTrainEnd",
     "type": "channel.hype_train.end",
     "version": "1",
-    "description": "A Hype Train ends.",
+    "description": "a Hype Train ends",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1640,7 +1640,7 @@
     "name": "HypeTrainProgress",
     "type": "channel.hype_train.progress",
     "version": "1",
-    "description": "A Hype Train makes progress.",
+    "description": "a Hype Train makes progress",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1725,7 +1725,7 @@
     "name": "ChannelModeratorAdd",
     "type": "channel.moderator.add",
     "version": "1",
-    "description": "The broadcaster gives moderator privileges to a user.",
+    "description": "the broadcaster gives moderator privileges to a user",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1764,7 +1764,7 @@
     "name": "ChannelModeratorRemove",
     "type": "channel.moderator.remove",
     "version": "1",
-    "description": "The broadcaster removes moderator privileges from a user.",
+    "description": "the broadcaster removes moderator privileges from a user",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1803,7 +1803,7 @@
     "name": "ChannelPollBegin",
     "type": "channel.poll.begin",
     "version": "1",
-    "description": "A poll starts.",
+    "description": "a poll starts",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1858,7 +1858,7 @@
     "name": "ChannelPollEnd",
     "type": "channel.poll.end",
     "version": "1",
-    "description": "A poll ends.",
+    "description": "a poll ends",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1917,7 +1917,7 @@
     "name": "ChannelPollProgress",
     "type": "channel.poll.progress",
     "version": "1",
-    "description": "A user responds to a poll.",
+    "description": "a user responds to a poll",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -1972,7 +1972,7 @@
     "name": "ChannelPredictionBegin",
     "type": "channel.prediction.begin",
     "version": "1",
-    "description": "A Prediction startn.",
+    "description": "a Prediction startn",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2019,7 +2019,7 @@
     "name": "ChannelPredictionEnd",
     "type": "channel.prediction.end",
     "version": "1",
-    "description": "A Prediction ends.",
+    "description": "a Prediction ends",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2074,7 +2074,7 @@
     "name": "ChannelPredictionLock",
     "type": "channel.prediction.lock",
     "version": "1",
-    "description": "A Prediction lockeds.",
+    "description": "a Prediction lockeds",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2121,7 +2121,7 @@
     "name": "ChannelPredictionProgress",
     "type": "channel.prediction.progress",
     "version": "1",
-    "description": "A user participates in a Prediction.",
+    "description": "a user participates in a Prediction",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2168,7 +2168,7 @@
     "name": "ChannelRaid",
     "type": "channel.raid",
     "version": "1",
-    "description": "The broadcaster raids another broadcaster's channel.",
+    "description": "the broadcaster raids another broadcaster's channel",
     "condition": {
       "from_broadcaster_user_id": {
         "type": "string",
@@ -2216,7 +2216,7 @@
     "name": "ShieldModeBegin",
     "type": "channel.shield_mode.begin",
     "version": "1",
-    "description": "The broadcaster activates Shield Mode.",
+    "description": "the broadcaster activates Shield Mode",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2264,7 +2264,7 @@
     "name": "ShieldModeEnd",
     "type": "channel.shield_mode.end",
     "version": "1",
-    "description": "The broadcaster deactivates Shield Mode.",
+    "description": "the broadcaster deactivates Shield Mode",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2312,7 +2312,7 @@
     "name": "ShoutoutCreate",
     "type": "channel.shoutout.create",
     "version": "1",
-    "description": "The broadcaster sends a Shoutout.",
+    "description": "the broadcaster sends a Shoutout",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2384,7 +2384,7 @@
     "name": "ShoutoutReceive",
     "type": "channel.shoutout.receive",
     "version": "1",
-    "description": "The broadcaster receives a Shoutout.",
+    "description": "the broadcaster receives a Shoutout",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2436,7 +2436,7 @@
     "name": "ChannelSubscribe",
     "type": "channel.subscribe",
     "version": "1",
-    "description": "A user subscribes. This does not include resubscribes.",
+    "description": "a user subscribes. This does not include resubscribes",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2483,7 +2483,7 @@
     "name": "ChannelSubscriptionEnd",
     "type": "channel.subscription.end",
     "version": "1",
-    "description": "A subscription ends.",
+    "description": "a subscription ends",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2530,7 +2530,7 @@
     "name": "ChannelSubscriptionGift",
     "type": "channel.subscription.gift",
     "version": "1",
-    "description": "A user gives a gift subscription to one or more users.",
+    "description": "a user gives a gift subscription to one or more users",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2585,7 +2585,7 @@
     "name": "ChannelSubscriptionMessage",
     "type": "channel.subscription.message",
     "version": "1",
-    "description": "A user sends a resubscription chat message.",
+    "description": "a user sends a resubscription chat message",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2668,7 +2668,7 @@
     "name": "ChannelUnban",
     "type": "channel.unban",
     "version": "1",
-    "description": "A moderator unbans a user.",
+    "description": "a moderator unbans a user",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2719,7 +2719,7 @@
     "name": "ChannelUpdate",
     "type": "channel.update",
     "version": "2",
-    "description": "The broadcaster updates their channel properties. e.g., category, title, content classification labels, broadcast, or language.",
+    "description": "the broadcaster updates their channel properties. e.g., category, title, content classification labels, broadcast, or language",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2766,7 +2766,7 @@
     "name": "StreamOffline",
     "type": "stream.offline",
     "version": "1",
-    "description": "The broadcaster stops a stream.",
+    "description": "the broadcaster stops a stream",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2793,7 +2793,7 @@
     "name": "StreamOnline",
     "type": "stream.online",
     "version": "1",
-    "description": "The broadcaster starts a stream.",
+    "description": "the broadcaster starts a stream",
     "condition": {
       "broadcaster_user_id": {
         "type": "string",
@@ -2832,7 +2832,7 @@
     "name": "UserUpdate",
     "type": "user.update",
     "version": "1",
-    "description": "A user updateds their account.",
+    "description": "a user updateds their account",
     "condition": {
       "user_id": {
         "type": "string",

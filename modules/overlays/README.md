@@ -1,4 +1,4 @@
-# `@overlaysymphony/core`
+# `@overlaysymphony/overlays`
 
 This module enables Overlays for the [OverlaySymphony interactive streaming framework](https://github.com/OverlaySymphony/overlaysymphony), though is extremely incomplete at this point.
 

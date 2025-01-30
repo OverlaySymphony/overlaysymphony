@@ -109,17 +109,17 @@ ${
       type ${name}Type = "${type}"
       type ${name}Version = "${version}"
 
-      /** The parameters under which an event fires when ${description} */
+      /** The parameters under which an event fires when ${description}. */
       export interface ${name}Condition {
 ${makeTypeDefinition(condition, "        ")}
       }
 
-      /** The event information when ${description} */
+      /** The event information when ${description}. */
       export interface ${name}Event {
 ${makeTypeDefinition(definition, "        ")}
       }
 
-      /** The event notification received when ${description} */
+      /** The event notification received when ${description}. */
       export type ${name}Subscription = BaseSubscription<
         ${name}Type,
         ${name}Version,
