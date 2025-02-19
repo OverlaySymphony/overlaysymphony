@@ -5,7 +5,7 @@
   "description": "",
   "type": "commonjs",
   "exports": {
-    "./eslint": "./src/eslint/eslint.js",
+    "./eslint": "./src/eslint/eslint.mjs",
     "./prettier": "./src/prettier/prettier.js",
     "./typescript": "./src/typescript/typescript.json",
     "./package.json": "./package.json"
@@ -13,16 +13,13 @@
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "echo",
-    "lint-eslint": "eslint --ext .js --ext .ts .",
+    "lint-eslint": "echo",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "clean": "rm -rf node_modules/.cache"
   },
-  "dependencies": {
-    "@bitovi/eslint-config": "^1.8.0"
-  },
   "devDependencies": {
-    "@overlaysymphony/eslint-config": "workspace:*"
+    "@christopherjbaker/eslint-config": "^3.0.0"
   },
   "peerDependencies": {
     "depcheck": "catalog:",

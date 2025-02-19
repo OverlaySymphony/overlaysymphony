@@ -49,8 +49,7 @@ export async function getCustomRewards(
     never,
     {
       broadcaster_id: string
-    },
-    never
+    }
   >(authentication, {
     method: "get",
     path: "/channel_points/custom_rewards",

@@ -22,7 +22,7 @@ type SubscriptionTransport =
   | SubscriptionWebhookTransport
   | SubscriptionWebsocketTransport
 
-export type SubscriptionRequest<Subscription extends BaseSubscription> = {
+export interface SubscriptionRequest<Subscription extends BaseSubscription> {
   type: Subscription["type"]
   version: Subscription["version"]
   condition: Subscription["condition"]
@@ -61,20 +61,11 @@ export async function createSubscription<
   authentication: Authentication,
   type: Type,
 ): Promise<ActiveSubscription<Subscription>> {
-  const subscription = buildSubscription(
-    type,
-    authentication.user.id,
-  ) as Subscription
+  const subscription = buildSubscription(type, authentication.user.id)
 
-  const [activeSubscription] = await helix<
-    ActiveSubscription<Subscription>,
-    never,
-    never,
-    SubscriptionRequest<Subscription>
-  >(authentication, {
+  const [activeSubscription] = await helix(authentication, {
     method: "post",
     path: "/eventsub/subscriptions",
-    // @ts-ignore
     body: {
       ...subscription,
       transport: {
@@ -91,7 +82,7 @@ export async function deleteSubscription(
   authentication: Authentication,
   id: string,
 ): Promise<void> {
-  await helix<never, never, { id: string }, never>(authentication, {
+  await helix<never, never, { id: string }>(authentication, {
     method: "delete",
     path: "/eventsub/subscriptions",
     params: {
@@ -111,8 +102,7 @@ export async function getSubscriptions(
       type?: TwitchSubscriptionType
       user_id?: string
       after?: string
-    },
-    never
+    }
   >(authentication, {
     method: "get",
     path: "/eventsub/subscriptions",

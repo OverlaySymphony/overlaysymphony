@@ -17,12 +17,13 @@ if (state.step === "initial") {
 
 if (state.step === "token") {
   const authentication = await authenticateResult(state.clientId, state)
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
   window.opener.postMessage({ type: "authentication", authentication }, "*")
   window.close()
 }
 
 if (state.step === "error") {
-  alert(`${state.error}. ${state.description || ""}`)
+  alert(`${state.error}. ${state.description ?? ""}`)
 }
 
 function getState():
@@ -101,12 +102,12 @@ function getState():
 
   return {
     step: "error",
-    error: validateString(query.error) || "Unknown Error",
+    error: validateString(query.error) ?? "Unknown Error",
     description: validateString(query.error_description),
   }
 }
 
-function validateString(input: string | unknown): string | undefined {
+function validateString(input: unknown): string | undefined {
   if (typeof input !== "string" || !input) {
     return undefined
   }

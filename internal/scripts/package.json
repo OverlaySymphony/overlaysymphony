@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "tsc --noEmit",
-    "lint-eslint": "eslint --ext .js --ext .ts .",
+    "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "twitch:events:cleanup": "tsx src/apps/twitch-events/cleanup.ts",
@@ -21,7 +21,6 @@
     "chalk": "^4.1.2"
   },
   "devDependencies": {
-    "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
     "@types/node": "catalog:",
     "depcheck": "catalog:",

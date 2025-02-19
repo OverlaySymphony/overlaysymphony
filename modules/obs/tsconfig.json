@@ -3,5 +3,5 @@
   "compilerOptions": {
     "types": ["vitest/globals", "obs-studio"]
   },
-  "include": ["src"]
+  "include": ["src", "eslint.config.mjs"]
 }

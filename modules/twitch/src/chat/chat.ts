@@ -22,7 +22,7 @@ type ChatMessageSubscriber = (
   callback: (event: TwitchChatEvent<"PRIVMSG">) => void,
 ) => () => void
 
-type ChatCommandSubscriber = {
+interface ChatCommandSubscriber {
   (
     callback: (event: TwitchChatEvent<"PRIVMSG-COMMAND">) => void,
     name?: never,
@@ -67,8 +67,7 @@ export async function createChat(
         command.type === "JOIN" ||
         command.type === "USERSTATE" ||
         command.type === "HOSTTARGET" ||
-        command.type === "NOTICE" ||
-        false
+        command.type === "NOTICE"
       ) {
         continue
       }
@@ -106,16 +105,15 @@ export async function createChat(
   return promise.then(() => {
     const listen: ChatListener = (callback) => {
       return pubsub.subscribe((event) => {
-        // @ts-ignore
         callback(event)
       })
     }
 
     const subscribe: ChatSubscriber = (types, callback) => {
       return pubsub.subscribe((event) => {
-        // @ts-ignore
+        // @ts-expect-error: generic events are complicated
         if (types.includes(event.type)) {
-          // @ts-ignore
+          // @ts-expect-error: generic events are complicated
           callback(event)
         }
       })

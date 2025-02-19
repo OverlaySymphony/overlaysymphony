@@ -22,9 +22,9 @@ interface TAValidation {
 }
 
 interface TAResult {
-  token_type: "bearer"
-  access_token: string
-  scope: string
+  token_type?: "bearer"
+  access_token?: string
+  scope?: string
 }
 
 const localStorageKey = "overlaysymphony:service:twitch"

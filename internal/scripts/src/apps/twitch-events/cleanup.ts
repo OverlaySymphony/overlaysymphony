@@ -8,6 +8,7 @@ for (const { definition } of events) {
   for (const key in definition) {
     const description = definition[key].description
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
     if (!items[key]) {
       items[key] = []
     }
@@ -20,6 +21,7 @@ for (const { definition } of events) {
 
 for (const key in items) {
   if (items[key].length === 1) {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete items[key]
   }
 }

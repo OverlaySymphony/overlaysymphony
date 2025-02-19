@@ -2,7 +2,5 @@ ignore-dirs:
   - dist
 
 ignores:
-  - "@types/*"
-
   # used but not imported
   - "@vitest/coverage-v8"

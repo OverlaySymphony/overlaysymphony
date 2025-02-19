@@ -5,7 +5,7 @@ import {
 
 declare global {
   interface Window {
-    overlaysymphonyTwitchScopes: string[]
+    overlaysymphonyTwitchScopes?: string[]
   }
 }
 
@@ -82,7 +82,7 @@ export class TwitchAuthentication extends HTMLElement {
     const key = (this.getAttribute("scopes-key") ??
       "overlaysymphonyTwitchScopes") as "overlaysymphonyTwitchScopes"
 
-    return window[key] || []
+    return window[key] ?? []
   }
 
   get popupUrl(): string {
@@ -112,7 +112,7 @@ export class TwitchAuthentication extends HTMLElement {
 
         window.removeEventListener("message", listener)
 
-        setCached(authentication)
+        setCached(authentication as BareAuthentication)
         this.render()
         resolve()
       }
@@ -133,7 +133,7 @@ export class TwitchAuthentication extends HTMLElement {
     try {
       await validateAuthentication(authentication)
       this.renderAuthenticated()
-    } catch (e) {
+    } catch (error) {
       clearCached()
       this.render()
     }
@@ -183,6 +183,7 @@ export class TwitchAuthentication extends HTMLElement {
     this.element.innerText = "Authenticate with Twitch"
     this.root.append(this.element)
 
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.element.addEventListener("click", () => this.authenticate())
   }
 
@@ -190,6 +191,7 @@ export class TwitchAuthentication extends HTMLElement {
     const cached = getCached(this.scopes)
 
     if (cached) {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       this.validate(cached)
     } else {
       this.renderUnauthenticated()

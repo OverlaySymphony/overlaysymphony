@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "tsc --noEmit",
-    "lint-eslint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
@@ -24,7 +24,6 @@
     "@overlaysymphony/twitch": "workspace:*"
   },
   "devDependencies": {
-    "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
     "depcheck": "catalog:",
     "eslint": "catalog:",

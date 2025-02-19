@@ -59,7 +59,7 @@ export default function createQueue<Data>(): Queue<Data> {
   }
 
   function dismiss() {
-    const { data } = queue.shift() || {}
+    const { data } = queue.shift() ?? {}
     return dispatch(data)
   }
 

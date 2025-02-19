@@ -1,8 +1,8 @@
-export type BaseSubscription<
+export interface BaseSubscription<
   Type = unknown,
   Version = unknown,
   Condition = unknown,
-> = {
+> {
   type: Type
   version: Version
   condition: Condition

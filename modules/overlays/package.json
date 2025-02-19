@@ -5,13 +5,13 @@
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "type": "module",
   "exports": {
-    "./ui/*": "./src/ui/*.js",
+    "./ui/*": "./src/ui/*.ts",
     "./package.json": "./package.json"
   },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "tsc --noEmit",
-    "lint-eslint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
@@ -23,7 +23,6 @@
     "@emotion/css": "^11.13.4"
   },
   "devDependencies": {
-    "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
     "@vitest/coverage-v8": "^2.1.2",
     "depcheck": "catalog:",

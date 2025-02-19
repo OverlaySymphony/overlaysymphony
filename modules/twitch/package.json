@@ -5,18 +5,18 @@
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "type": "module",
   "exports": {
-    "./authentication": "./src/authentication/index.js",
-    "./chat": "./src/chat/index.js",
-    "./eventsub": "./src/eventsub/index.js",
-    "./helix/*": "./src/helix/*/index.js",
-    "./helpers/*": "./src/helpers/*/index.js",
-    "./ui/*": "./src/ui/*.js",
+    "./authentication": "./src/authentication/index.ts",
+    "./chat": "./src/chat/index.ts",
+    "./eventsub": "./src/eventsub/index.ts",
+    "./helix/*": "./src/helix/*/index.ts",
+    "./helpers/*": "./src/helpers/*/index.ts",
+    "./ui/*": "./src/ui/*.ts",
     "./package.json": "./package.json"
   },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "tsc --noEmit",
-    "lint-eslint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
@@ -28,7 +28,6 @@
     "@overlaysymphony/core": "workspace:*"
   },
   "devDependencies": {
-    "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
     "@vitest/coverage-v8": "^2.1.2",
     "depcheck": "catalog:",

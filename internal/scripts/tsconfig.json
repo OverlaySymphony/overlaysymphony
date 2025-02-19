@@ -1,4 +1,4 @@
 {
   "extends": "@overlaysymphony/tooling/typescript",
-  "include": ["src"]
+  "include": ["src", "eslint.config.mjs"]
 }

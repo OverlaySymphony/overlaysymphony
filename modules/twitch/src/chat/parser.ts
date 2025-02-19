@@ -30,7 +30,7 @@ export default function parseEvent(input: string): ChatEvent | undefined {
 
   // core
   try {
-    const hasParameters = input.indexOf(":", idx) > -1
+    const hasParameters = input.includes(":", idx)
     if (hasParameters) {
       const endIdx = input.indexOf(":", idx)
 
@@ -42,7 +42,7 @@ export default function parseEvent(input: string): ChatEvent | undefined {
       return {
         ...message,
         source,
-        // @ts-ignore
+        // @ts-expect-error: generic objects are complicated
         tags,
       }
     } else {
@@ -51,11 +51,11 @@ export default function parseEvent(input: string): ChatEvent | undefined {
       return {
         ...message,
         source,
-        // @ts-ignore
+        // @ts-expect-error: generic objects are complicated
         tags,
       }
     }
-  } catch (e) {
+  } catch (error) {
     return undefined
   }
 }
@@ -129,8 +129,7 @@ function parseTags(input: string): Record<string, unknown> {
       key === "banDuration" ||
       key === "pinnedChatPaidAmount" ||
       key === "pinnedChatPaidExponent" ||
-      key === "slow" ||
-      false
+      key === "slow"
     ) {
       tags[key] = parseInt(value)
       continue
@@ -145,8 +144,7 @@ function parseTags(input: string): Record<string, unknown> {
       key === "emoteOnly" ||
       key === "followersOnly" ||
       key === "subsOnly" ||
-      key === "pinnedChatPaidIsSystemMessage" ||
-      false
+      key === "pinnedChatPaidIsSystemMessage"
     ) {
       tags[key] = !!parseInt(value)
       continue
@@ -163,14 +161,12 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
 
   switch (type) {
     case "PING":
-      // @ts-ignore
       return {
         type,
         message: parameters,
       }
 
     case "001":
-      // @ts-ignore
       return {
         type,
         channel: parts[0],
@@ -178,7 +174,6 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
       }
 
     case "CAP":
-      // @ts-ignore
       return {
         type,
         enabled: parts[1] === "ACK",
@@ -188,7 +183,6 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
 
     case "JOIN":
     case "PART":
-      // @ts-ignore
       return {
         type,
         channel: parts[0],
@@ -196,7 +190,6 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
 
     case "GLOBALUSERSTATE":
     case "RECONNECT":
-      // @ts-ignore
       return {
         type,
       }
@@ -206,7 +199,6 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
     case "NOTICE":
     case "ROOMSTATE":
     case "USERSTATE":
-      // @ts-ignore
       return {
         type,
         channel: parts[0],
@@ -214,7 +206,6 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
 
     case "CLEARMSG":
     case "USERNOTICE":
-      // @ts-ignore
       return {
         type,
         channel: parts[0],
@@ -222,10 +213,9 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
 
     case "PRIVMSG":
     case "WHISPER":
-      if (parameters[0] === "!") {
+      if (parameters.startsWith("!")) {
         const index = parameters.indexOf(" ")
 
-        // @ts-ignore
         return {
           type: `${type}-COMMAND`,
           channel: parts[0],
@@ -233,7 +223,6 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
           parameters: index > -1 ? parameters.slice(index + 1) : undefined,
         }
       } else {
-        // @ts-ignore
         return {
           type,
           channel: parts[0],
@@ -261,5 +250,5 @@ function parseCore(inputEvent: string, parameters: string): ChatEvent {
 }
 
 function toCamelCase(dashedCase: string): string {
-  return dashedCase.replace(/[-:]([a-z])/g, (_, b) => `${b.toUpperCase()}`)
+  return dashedCase.replace(/[-:]([a-z])/g, (_, b: string) => b.toUpperCase())
 }

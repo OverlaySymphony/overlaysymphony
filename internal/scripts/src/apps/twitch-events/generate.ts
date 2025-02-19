@@ -89,6 +89,7 @@ function makeEventFile({
   const imports = Object.entries(definition)
     .filter(([key, { type }]) => {
       if (["Object", "Array", "Date"].includes(type)) return false
+      // eslint-disable-next-line @typescript-eslint/prefer-string-starts-ends-with
       if (type[0] === type[0].toLowerCase()) return false
 
       return true

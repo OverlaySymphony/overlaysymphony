@@ -17,8 +17,8 @@ export function stringify(input: ParsedQuerystring): string {
 
 export function parse(input: string): ParsedQuerystring {
   input = decodeURIComponent(input)
-  if (input[0] === "#") input = input.slice(1)
-  if (input[0] === "?") input = input.slice(1)
+  if (input.startsWith("#")) input = input.slice(1)
+  if (input.startsWith("?")) input = input.slice(1)
 
   if (input.length === 0) {
     return {}

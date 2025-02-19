@@ -35,8 +35,8 @@ export async function createEventSub(
   const pubsub = createPubSub<TwitchNotificationMessage["payload"]>()
   const socket = new WebSocket("wss://eventsub.wss.twitch.tv/ws")
 
-  socket.addEventListener("message", async ({ data: rawData }) => {
-    const data = JSON.parse(rawData) as TwitchMessage
+  socket.addEventListener("message", ({ data: rawData }) => {
+    const data = JSON.parse(rawData as string) as TwitchMessage
     data.type = data.metadata.message_type
 
     if (data.type === "session_welcome") {
@@ -58,7 +58,6 @@ export async function createEventSub(
 
     const listen: EventSubListener = (callback) => {
       return pubsub.subscribe((event) => {
-        // @ts-ignore
         callback(event)
       })
     }
@@ -67,14 +66,15 @@ export async function createEventSub(
       for (const type of types) {
         if (!subscriptions[type]) {
           subscriptions[type] = true
+          // eslint-disable-next-line @typescript-eslint/no-floating-promises
           createSubscription(sessionId, authentication, type)
         }
       }
 
       return pubsub.subscribe((event) => {
-        // @ts-ignore
+        // @ts-expect-error: generic events are complicated
         if (types.includes(event.type)) {
-          // @ts-ignore
+          // @ts-expect-error: generic events are complicated
           callback(event)
         }
       })

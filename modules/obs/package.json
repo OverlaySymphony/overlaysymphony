@@ -5,15 +5,15 @@
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "type": "module",
   "exports": {
-    "./events": "./src/events/index.js",
+    "./events": "./src/events/index.ts",
     "./ui/*.css": "./src/ui/*.css",
-    "./ui/*": "./src/ui/*.js",
+    "./ui/*": "./src/ui/*.ts",
     "./package.json": "./package.json"
   },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "tsc --noEmit",
-    "lint-eslint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx .",
+    "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
@@ -26,7 +26,6 @@
     "@types/obs-studio": "^2.17.2"
   },
   "devDependencies": {
-    "@overlaysymphony/eslint-config": "workspace:*",
     "@overlaysymphony/tooling": "workspace:*",
     "@vitest/coverage-v8": "^2.1.2",
     "depcheck": "catalog:",

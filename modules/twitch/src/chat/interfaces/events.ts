@@ -13,20 +13,20 @@ type TagEmotes = Record<
   Array<[startPosition: string, endPosition: string]>
 >
 
-export type PingEvent = {
+export interface PingEvent {
   type: "PING"
   message: string
   source?: ChatEventSource
 }
 
-export type WelcomeEvent = {
+export interface WelcomeEvent {
   type: "001" // Logged in (successfully authenticated)
   channel: string
   message: string
   source?: ChatEventSource
 }
 
-export type CapabilitiesEvent = {
+export interface CapabilitiesEvent {
   type: "CAP"
   enabled: boolean
   nickname: string
@@ -34,21 +34,21 @@ export type CapabilitiesEvent = {
   source?: ChatEventSource
 }
 
-export type JoinEvent = {
+export interface JoinEvent {
   type: "JOIN"
   channel: string
   source?: ChatEventSource
 }
 
-export type PartEvent = {
+export interface PartEvent {
   type: "PART"
   channel: string
   source?: ChatEventSource
 }
 
-export type GlobalUserStateEvent = {
+export interface GlobalUserStateEvent {
   type: "GLOBALUSERSTATE"
-  tags: {
+  tags?: {
     userId: string
     userType: TagUserType
     displayName?: string
@@ -60,15 +60,15 @@ export type GlobalUserStateEvent = {
   source?: ChatEventSource
 }
 
-export type ReconnectEvent = {
+export interface ReconnectEvent {
   type: "RECONNECT"
   source?: ChatEventSource
 }
 
-export type ClearChatEvent = {
+export interface ClearChatEvent {
   type: "CLEARCHAT"
   channel: string
-  tags: {
+  tags?: {
     roomId: string
     targetUserId: string
     banDuration: number
@@ -76,26 +76,26 @@ export type ClearChatEvent = {
   source?: ChatEventSource
 }
 
-export type HostTargetEvent = {
+export interface HostTargetEvent {
   type: "HOSTTARGET"
   channel: string
   source?: ChatEventSource
 }
 
-export type NoticeEvent = {
+export interface NoticeEvent {
   type: "NOTICE"
   channel: string
-  tags: {
+  tags?: {
     msgId: string
     targetUserId: string
   }
   source?: ChatEventSource
 }
 
-export type RoomStateEvent = {
+export interface RoomStateEvent {
   type: "ROOMSTATE"
   channel: string
-  tags: {
+  tags?: {
     roomId: string
     slow: number
     emoteOnly: boolean
@@ -105,10 +105,10 @@ export type RoomStateEvent = {
   source?: ChatEventSource
 }
 
-export type UserStateEvent = {
+export interface UserStateEvent {
   type: "USERSTATE"
   channel: string
-  tags: {
+  tags?: {
     id: string
     userId: string
     userType: TagUserType
@@ -126,10 +126,10 @@ export type UserStateEvent = {
   source?: ChatEventSource
 }
 
-export type ClearMessageEvent = {
+export interface ClearMessageEvent {
   type: "CLEARMSG"
   channel: string
-  tags: {
+  tags?: {
     login: string
     roomId: string
     targetMsgId?: string
@@ -137,10 +137,10 @@ export type ClearMessageEvent = {
   source?: ChatEventSource
 }
 
-export type UserNoticeEvent = {
+export interface UserNoticeEvent {
   type: "USERNOTICE"
   channel: string
-  tags: {
+  tags?: {
     id: string
     userId: string
     userType: TagUserType
@@ -173,11 +173,11 @@ export type UserNoticeEvent = {
   source?: ChatEventSource
 }
 
-export type ChatMessageEvent = {
+export interface ChatMessageEvent {
   type: "PRIVMSG"
   channel: string
   message: string
-  tags: {
+  tags?: {
     id: string
     userId: string
     userType: TagUserType
@@ -212,11 +212,11 @@ export type ChatMessageEvent = {
   source?: ChatEventSource
 }
 
-export type WhisperMessageEvent = {
+export interface WhisperMessageEvent {
   type: "WHISPER"
   channel: string
   message: string
-  tags: {
+  tags?: {
     messageId: string
     threadId: string
     userId: string
@@ -230,21 +230,21 @@ export type WhisperMessageEvent = {
   source?: ChatEventSource
 }
 
-export type ChatCommandEvent = {
+export interface ChatCommandEvent {
   type: "PRIVMSG-COMMAND"
   channel: string
   command: string
   parameters?: string
-  tags: ChatMessageEvent["tags"]
+  tags?: ChatMessageEvent["tags"]
   source?: ChatEventSource
 }
 
-export type WhisperCommandEvent = {
+export interface WhisperCommandEvent {
   type: "WHISPER-COMMAND"
   channel: string
   command: string
   parameters?: string
-  tags: WhisperMessageEvent["tags"]
+  tags?: WhisperMessageEvent["tags"]
   source?: ChatEventSource
 }
 
