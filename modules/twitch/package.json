@@ -1,6 +1,6 @@
 {
   "name": "@overlaysymphony/twitch",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Twitch module for the OverlaySymphony interactive streaming framework.",
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "type": "module",
