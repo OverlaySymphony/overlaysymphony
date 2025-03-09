@@ -33,7 +33,7 @@
     "jsdom": "^25.0.0",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.4.8",
+    "vite": "^6.2.1",
     "vitest": "^2.1.2"
   }
 }

@@ -23,12 +23,12 @@
     "@overlaysymphony/twitch": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "catalog:",
     "@overlaysymphony/tooling": "workspace:*",
+    "@types/node": "catalog:",
     "depcheck": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.4.8"
+    "vite": "^6.2.1"
   }
 }
