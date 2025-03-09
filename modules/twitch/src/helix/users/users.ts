@@ -1,4 +1,4 @@
-import { Authentication } from "../../authentication/index.js"
+import { type Authentication } from "../../authentication/index.js"
 import { helix } from "../helix.js"
 
 export interface TwitchUser {

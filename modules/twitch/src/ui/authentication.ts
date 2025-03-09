@@ -1,6 +1,7 @@
 import {
-  BareAuthentication,
-  validateAuthentication,
+  clearCachedAuthentication,
+  getAuthentication,
+  popupAuthentication,
 } from "../authentication/index.js"
 
 declare global {
@@ -8,8 +9,6 @@ declare global {
     overlaysymphonyTwitchScopes?: string[]
   }
 }
-
-const localStorageKey = "overlaysymphony:service:twitch"
 
 export class TwitchAuthentication extends HTMLElement {
   static get observedAttributes(): string[] {
@@ -31,7 +30,7 @@ export class TwitchAuthentication extends HTMLElement {
     `)
 
     stylesheet.insertRule(`
-      button, .authenticating, .validating, .authenticated {
+      .authenticating, .validating, .authenticated, .unauthenticated {
         display: block;
         box-sizing: border-box;
         width: 100%;
@@ -48,13 +47,6 @@ export class TwitchAuthentication extends HTMLElement {
     `)
 
     stylesheet.insertRule(`
-      button {
-        background: #9146FF;
-        border: 2px outset buttonBorder;
-      }
-      `)
-
-    stylesheet.insertRule(`
       .authenticating, .validating {
         background: #949494;
         border: 2px solid transparent;
@@ -68,9 +60,17 @@ export class TwitchAuthentication extends HTMLElement {
       }
     `)
 
+    stylesheet.insertRule(`
+      .unauthenticated {
+        background: #9146FF;
+        border: 2px outset buttonBorder;
+      }
+    `)
+
     this.root = this.attachShadow({ mode: "open" })
     this.root.adoptedStyleSheets.push(stylesheet)
 
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     this.render()
   }
 
@@ -96,47 +96,15 @@ export class TwitchAuthentication extends HTMLElement {
   async authenticate(): Promise<void> {
     this.renderAuthenticating()
 
-    const url = new URL(
-      `${this.popupUrl}?scopes=${this.scopes.join("+")}&clientId=${this.clientId}`,
-    )
+    await popupAuthentication(this.clientId, this.scopes, this.popupUrl)
 
-    await new Promise<void>((resolve) => {
-      const listener = (event: MessageEvent) => {
-        if (event.origin !== url.origin) return
-
-        // const source = (event.source as Window | null)?.name
-        // if (source !== "OverlaySymphonyTwitchAuthenticationPopup") return
-
-        const { type, authentication } = event.data
-        if (type !== "authentication") return
-
-        window.removeEventListener("message", listener)
-
-        setCached(authentication as BareAuthentication)
-        this.render()
-        resolve()
-      }
-
-      window.addEventListener("message", listener)
-
-      window.open(
-        url,
-        "OverlaySymphonyTwitchAuthenticationPopup",
-        "width=520,height=840",
-      )
-    })
+    return this.render()
   }
 
-  async validate(authentication: BareAuthentication): Promise<void> {
-    this.renderValidating()
+  async unauthenticate(): Promise<void> {
+    clearCachedAuthentication()
 
-    try {
-      await validateAuthentication(authentication)
-      this.renderAuthenticated()
-    } catch (error) {
-      clearCached()
-      this.render()
-    }
+    return this.render()
   }
 
   clear(): void {
@@ -169,30 +137,31 @@ export class TwitchAuthentication extends HTMLElement {
   renderAuthenticated(): void {
     this.clear()
 
-    this.element = document.createElement("div")
+    this.element = document.createElement("button")
     this.element.classList.add("authenticated")
     this.element.innerText = "Authenticated"
-
     this.root.append(this.element)
+
+    this.element.addEventListener("click", () => this.unauthenticate())
   }
 
   renderUnauthenticated(): void {
     this.clear()
 
     this.element = document.createElement("button")
+    this.element.classList.add("unauthenticated")
     this.element.innerText = "Authenticate with Twitch"
     this.root.append(this.element)
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     this.element.addEventListener("click", () => this.authenticate())
   }
 
-  render(): void {
-    const cached = getCached(this.scopes)
+  async render(): Promise<void> {
+    this.renderValidating()
 
-    if (cached) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      this.validate(cached)
+    const authentication = await getAuthentication(this.scopes)
+    if (authentication) {
+      this.renderAuthenticated()
     } else {
       this.renderUnauthenticated()
     }
@@ -203,30 +172,3 @@ window.customElements.define(
   "overlaysymfony-twitch-authentication",
   TwitchAuthentication,
 )
-
-export function getCached(scopes: string[]): BareAuthentication | undefined {
-  const cache = localStorage.getItem(localStorageKey)
-  if (cache) {
-    const authentication = JSON.parse(cache) as BareAuthentication
-    authentication.expires = new Date(authentication.expires)
-
-    for (const scope of scopes) {
-      if (!authentication.scope.includes(scope)) {
-        localStorage.removeItem(localStorageKey)
-        return undefined
-      }
-    }
-
-    return authentication
-  }
-
-  return undefined
-}
-
-export function setCached(authentication: BareAuthentication): void {
-  localStorage.setItem(localStorageKey, JSON.stringify(authentication))
-}
-
-export function clearCached(): void {
-  localStorage.removeItem(localStorageKey)
-}

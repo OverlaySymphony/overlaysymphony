@@ -1,4 +1,4 @@
-import { TwitchNotificationMessage } from "./events/index.js"
+import { type TwitchNotificationMessage } from "./events/index.js"
 
 export interface SessionWelcomeMessage {
   type: "session_welcome"

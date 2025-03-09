@@ -1,4 +1,4 @@
-import createEmotion, { Emotion } from "@emotion/css/create-instance"
+import createEmotion, { type Emotion } from "@emotion/css/create-instance"
 
 export default class Scene extends HTMLElement {
   static get observedAttributes(): string[] {

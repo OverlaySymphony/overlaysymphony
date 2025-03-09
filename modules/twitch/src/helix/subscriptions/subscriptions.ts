@@ -1,10 +1,10 @@
-import { Authentication } from "../../authentication/index.js"
+import { type Authentication } from "../../authentication/index.js"
 import {
-  TwitchSubscription,
-  TwitchSubscriptionType,
+  type TwitchSubscription,
+  type TwitchSubscriptionType,
   buildSubscription,
 } from "../../eventsub/events/index.js"
-import { BaseSubscription } from "../../eventsub/events-helpers.js"
+import { type BaseSubscription } from "../../eventsub/events-helpers.js"
 import { helix } from "../helix.js"
 
 interface SubscriptionWebhookTransport {

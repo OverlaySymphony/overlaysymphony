@@ -1,6 +1,6 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
-import { ChannelPredictionOutcome } from "./channel.prediction._.js"
+import { type ChannelPredictionOutcome } from "./channel.prediction._.js"
 
 type ChannelPredictionLockType = "channel.prediction.lock"
 type ChannelPredictionLockVersion = "1"

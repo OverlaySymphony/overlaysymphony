@@ -1,4 +1,4 @@
-import { TwitchEventSub } from "../../eventsub/index.js"
+import { type TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Prediction {
   title: string

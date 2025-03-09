@@ -1,6 +1,6 @@
 import querystring from "@overlaysymphony/core/libs/querystring"
 
-import { Authentication } from "../authentication/index.js"
+import { type Authentication } from "../authentication/index.js"
 
 export async function helix<
   Data = never,

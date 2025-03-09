@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
 type ChannelGuestStarSessionEndType = "channel.guest_star_session.end"
 type ChannelGuestStarSessionEndVersion = "beta"

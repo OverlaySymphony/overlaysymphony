@@ -3,7 +3,7 @@ import path from "node:path"
 
 import trimTemplateString from "../../lib/trimTemplateString.js"
 
-import events, { Nested, TwitchEvent } from "./data/index.js"
+import events, { type Nested, type TwitchEvent } from "./data/index.js"
 
 const eventsByType = events.slice().sort((a, b) => (a.type > b.type ? 1 : -1))
 const eventsByName = events.slice().sort((a, b) => (a.name > b.name ? 1 : -1))

@@ -6,7 +6,7 @@
   "type": "commonjs",
   "exports": {
     "./eslint": "./src/eslint/eslint.mjs",
-    "./prettier": "./src/prettier/prettier.js",
+    "./prettier": "./src/prettier/prettier.mjs",
     "./typescript": "./src/typescript/typescript.json",
     "./package.json": "./package.json"
   },
@@ -19,7 +19,7 @@
     "clean": "rm -rf node_modules/.cache"
   },
   "devDependencies": {
-    "@christopherjbaker/eslint-config": "^3.0.0"
+    "@christopherjbaker/eslint-config": "^3.1.0"
   },
   "peerDependencies": {
     "depcheck": "catalog:",

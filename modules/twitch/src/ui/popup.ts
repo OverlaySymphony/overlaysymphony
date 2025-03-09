@@ -1,14 +1,14 @@
 import querystring from "@overlaysymphony/core/libs/querystring"
 
 import {
-  authenticateResult,
-  initiateAuthentication,
+  type BareAuthentication,
+  validateAuthentication,
 } from "../authentication/index.js"
 
 const state = getState()
 
 if (state.step === "initial") {
-  window.location.href = initiateAuthentication(
+  initiateAuthentication(
     state.clientId,
     `${window.location.origin}${window.location.pathname}`,
     state.scopes,
@@ -113,4 +113,42 @@ function validateString(input: unknown): string | undefined {
   }
 
   return input
+}
+
+function initiateAuthentication(
+  clientId: string,
+  redirect: string,
+  scope: string[],
+): void {
+  window.location.href = `https://id.twitch.tv/oauth2/authorize?${querystring.stringify(
+    {
+      response_type: "token",
+      client_id: clientId,
+      redirect_uri: redirect,
+      scope: scope.join("+"),
+      state: clientId,
+    },
+  )}`
+}
+
+async function authenticateResult(
+  clientId: string,
+  result: {
+    token_type?: "bearer"
+    access_token?: string
+    scope?: string
+  },
+): Promise<BareAuthentication> {
+  if (!result.token_type || !result.access_token || !result.scope) {
+    throw new Error("Invalid result.")
+  }
+
+  const authentication = await validateAuthentication({
+    clientId,
+    tokenType: result.token_type,
+    accessToken: result.access_token,
+    scope: result.scope.split("+"),
+  })
+
+  return authentication
 }

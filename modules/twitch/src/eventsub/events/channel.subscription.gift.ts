@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
 type ChannelSubscriptionGiftType = "channel.subscription.gift"
 type ChannelSubscriptionGiftVersion = "1"

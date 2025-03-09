@@ -1,6 +1,6 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
-import { ChannelPointsCustomRewardGlobalCooldown, ChannelPointsCustomRewardImage, ChannelPointsCustomRewardMaxPerStream, ChannelPointsCustomRewardMaxPerUserPerStream } from "./channel.channel_points_custom_reward._.js"
+import { type ChannelPointsCustomRewardGlobalCooldown, type ChannelPointsCustomRewardImage, type ChannelPointsCustomRewardMaxPerStream, type ChannelPointsCustomRewardMaxPerUserPerStream } from "./channel.channel_points_custom_reward._.js"
 
 type ChannelPointsCustomRewardRemoveType = "channel.channel_points_custom_reward.remove"
 type ChannelPointsCustomRewardRemoveVersion = "1"
