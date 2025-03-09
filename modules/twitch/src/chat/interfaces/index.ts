@@ -1,4 +1,4 @@
-import { ChatEvent } from "./events.js"
+import { type ChatEvent } from "./events.js"
 
 export type { ChatEvent, ChatEventSource } from "./events.js"
 

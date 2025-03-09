@@ -7,6 +7,9 @@
   "exports": {
     "./package.json": "./package.json"
   },
+  "imports": {
+    "#shared/*": "./src/shared/*/index.ts"
+  },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
     "lint-typecheck": "tsc --noEmit",
@@ -30,7 +33,7 @@
     "jsdom": "^25.0.0",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^5.4.8",
+    "vite": "^6.2.1",
     "vitest": "^2.1.2"
   }
 }

@@ -1,6 +1,4 @@
-import querystring from "@overlaysymphony/core/libs/querystring"
-
-import { TwitchUser, getUsers } from "../helix/users/index.js"
+import { type TwitchUser, getUsers } from "../helix/users/index.js"
 
 export interface Authentication {
   clientId: string
@@ -13,53 +11,97 @@ export interface Authentication {
 
 export type BareAuthentication = Omit<Authentication, "user">
 
-interface TAValidation {
-  client_id: string
-  login: string
-  scope: string[]
-  user_id: string
-  expires_in: number
-}
-
-interface TAResult {
-  token_type?: "bearer"
-  access_token?: string
-  scope?: string
-}
-
 const localStorageKey = "overlaysymphony:service:twitch"
 
-export async function getAuthentication(): Promise<Authentication> {
-  const raw = localStorage.getItem(localStorageKey)
-  if (!raw) {
-    throw new Error("Twitch authentication missing!")
+export function getCachedAuthentication(
+  scopes?: string[],
+): BareAuthentication | undefined {
+  const cache = localStorage.getItem(localStorageKey)
+  if (!cache) {
+    return undefined
   }
 
-  const cached = JSON.parse(raw) as BareAuthentication
-  cached.expires = new Date(cached.expires)
+  const authentication = JSON.parse(cache) as BareAuthentication
+  authentication.expires = new Date(authentication.expires)
 
-  const [user] = await getUsers(cached as Authentication)
-
-  const authentication: Authentication = {
-    ...cached,
-    user,
+  if (scopes) {
+    for (const scope of scopes) {
+      if (!authentication.scope.includes(scope)) {
+        localStorage.removeItem(localStorageKey)
+        return undefined
+      }
+    }
   }
 
   return authentication
 }
 
-export function initiateAuthentication(
+export function setCachedAuthentication(
+  authentication: BareAuthentication,
+): void {
+  localStorage.setItem(localStorageKey, JSON.stringify(authentication))
+}
+
+export function clearCachedAuthentication(): void {
+  localStorage.removeItem(localStorageKey)
+}
+
+export async function getAuthentication(
+  scopes?: string[],
+): Promise<Authentication | undefined> {
+  let authentication = getCachedAuthentication(scopes)
+  if (!authentication) {
+    return undefined
+  }
+
+  try {
+    authentication = await validateAuthentication(authentication)
+  } catch (error) {
+    clearCachedAuthentication()
+    return undefined
+  }
+
+  const [user] = await getUsers(authentication as Authentication)
+
+  return {
+    ...authentication,
+    user,
+  }
+}
+
+export async function popupAuthentication(
   clientId: string,
-  redirect: string,
-  scope: string[],
-): string {
-  return `https://id.twitch.tv/oauth2/authorize?${querystring.stringify({
-    response_type: "token",
-    client_id: clientId,
-    redirect_uri: redirect,
-    scope: scope.join("+"),
-    state: clientId,
-  })}`
+  scopes: string[],
+  popupUrl: string,
+): Promise<void> {
+  const url = new URL(
+    `${popupUrl}?scopes=${scopes.join("+")}&clientId=${clientId}`,
+  )
+
+  await new Promise<void>((resolve) => {
+    const listener = (event: MessageEvent) => {
+      if (event.origin !== url.origin) return
+
+      // const source = (event.source as Window | null)?.name
+      // if (source !== "OverlaySymphonyTwitchAuthenticationPopup") return
+
+      const { type, authentication } = event.data
+      if (type !== "authentication") return
+
+      window.removeEventListener("message", listener)
+
+      setCachedAuthentication(authentication as BareAuthentication)
+      resolve()
+    }
+
+    window.addEventListener("message", listener)
+
+    window.open(
+      url,
+      "OverlaySymphonyTwitchAuthenticationPopup",
+      "width=520,height=840",
+    )
+  })
 }
 
 export async function validateAuthentication(
@@ -76,7 +118,13 @@ export async function validateAuthentication(
     throw new Error(await response.text())
   }
 
-  const validated = (await response.json()) as TAValidation
+  const validated = (await response.json()) as {
+    client_id: string
+    login: string
+    scope: string[]
+    user_id: string
+    expires_in: number
+  }
 
   if (validated.client_id !== authentication.clientId) {
     throw new Error("ClientId mismatch.")
@@ -86,22 +134,4 @@ export async function validateAuthentication(
     ...authentication,
     expires: new Date(Date.now() + validated.expires_in * 1000),
   }
-}
-
-export async function authenticateResult(
-  clientId: string,
-  result: TAResult,
-): Promise<BareAuthentication> {
-  if (!result.token_type || !result.access_token || !result.scope) {
-    throw new Error("Invalid result.")
-  }
-
-  const authentication = await validateAuthentication({
-    clientId,
-    tokenType: result.token_type,
-    accessToken: result.access_token,
-    scope: result.scope.split("+"),
-  })
-
-  return authentication
 }

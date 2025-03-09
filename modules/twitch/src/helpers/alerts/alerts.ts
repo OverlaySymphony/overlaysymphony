@@ -1,7 +1,7 @@
-import createQueue, { Queue } from "@overlaysymphony/core/libs/queue"
+import createQueue, { type Queue } from "@overlaysymphony/core/libs/queue"
 
-import { TwitchNotificationMessage } from "../../eventsub/events/index.js"
-import { TwitchEventSub } from "../../eventsub/index.js"
+import { type TwitchNotificationMessage } from "../../eventsub/events/index.js"
+import { type TwitchEventSub } from "../../eventsub/index.js"
 
 export type Alert = TwitchNotificationMessage<
   | "channel.cheer"

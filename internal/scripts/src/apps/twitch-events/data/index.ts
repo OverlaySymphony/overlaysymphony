@@ -1,4 +1,4 @@
-import events_ from "./data.json" assert { type: "json" }
+import events_ from "./data.json" with { type: "json" }
 
 export type Nested<Type> = Record<string, Type & { fields?: Nested<Type> }>
 

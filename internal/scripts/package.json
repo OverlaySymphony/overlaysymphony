@@ -13,8 +13,9 @@
     "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
-    "twitch:events:cleanup": "tsx src/apps/twitch-events/cleanup.ts",
-    "twitch:events:generate": "tsx src/apps/twitch-events/generate.ts",
+    "exec": "node --disable-warning=ExperimentalWarning --experimental-strip-types",
+    "twitch:events:cleanup": "npm run exec src/apps/twitch-events/cleanup.ts",
+    "twitch:events:generate": "npm run exec src/apps/twitch-events/generate.ts",
     "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
   },
   "dependencies": {
@@ -26,7 +27,6 @@
     "depcheck": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "tsx": "^4.19.1",
     "typescript": "catalog:"
   }
 }

@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
 type ChannelChatMessageDeleteType = "channel.chat.message_delete"
 type ChannelChatMessageDeleteVersion = "1"

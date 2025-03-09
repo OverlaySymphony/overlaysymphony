@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
 type ChannelChatNotificationType = "channel.chat.notification"
 type ChannelChatNotificationVersion = "1"

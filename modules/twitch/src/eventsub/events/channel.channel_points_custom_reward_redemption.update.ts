@@ -1,6 +1,6 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
-import { ChannelPointsCustomRewardRedemptionReward } from "./channel.channel_points_custom_reward_redemption._.js"
+import { type ChannelPointsCustomRewardRedemptionReward } from "./channel.channel_points_custom_reward_redemption._.js"
 
 type ChannelPointsCustomRewardRedemptionUpdateType = "channel.channel_points_custom_reward_redemption.update"
 type ChannelPointsCustomRewardRedemptionUpdateVersion = "1"

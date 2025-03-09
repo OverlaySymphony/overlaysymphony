@@ -1,4 +1,4 @@
-import { BaseSubscription } from "../events-helpers.js"
+import { type BaseSubscription } from "../events-helpers.js"
 
 type GoalBeginType = "channel.goal.begin"
 type GoalBeginVersion = "1"
