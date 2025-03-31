@@ -12,8 +12,6 @@
   },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
-    "lint-typecheck": "echo",
-    "lint-eslint": "echo",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "clean": "rm -rf node_modules/.cache"

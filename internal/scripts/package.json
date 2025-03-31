@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "description": "",
   "type": "module",
+  "imports": {
+    "#output": "./src/lib/output.ts"
+  },
   "exports": {
     "./package.json": "./package.json"
   },
@@ -16,6 +19,7 @@
     "exec": "node --disable-warning=ExperimentalWarning --experimental-strip-types",
     "twitch:events:cleanup": "npm run exec src/apps/twitch-events/cleanup.ts",
     "twitch:events:generate": "npm run exec src/apps/twitch-events/generate.ts",
+    "hello": "npm run exec src/apps/hello/index.ts",
     "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
   },
   "dependencies": {

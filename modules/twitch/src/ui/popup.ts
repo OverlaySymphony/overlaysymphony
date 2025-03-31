@@ -144,8 +144,8 @@ async function authenticateResult(
   }
 
   const authentication = await validateAuthentication({
-    clientId,
     tokenType: result.token_type,
+    clientId,
     accessToken: result.access_token,
     scope: result.scope.split("+"),
   })

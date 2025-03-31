@@ -1,6 +1,3 @@
-ignore-dirs:
-  - dist
-
 ignores:
   - obs-studio
 

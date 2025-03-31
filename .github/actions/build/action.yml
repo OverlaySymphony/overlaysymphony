@@ -10,4 +10,4 @@ runs:
   steps:
     - name: Build
       shell: bash
-      run: npx nx run ${{ env.WORKSPACE }}:build ${{ inputs.args }}
+      run: npx nx run ${{ env.WORKSPACE }}:build -- ${{ inputs.args }}

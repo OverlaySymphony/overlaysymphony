@@ -1,14 +1,15 @@
 export default function createDefer<Data = void>(): {
   promise: Promise<Data>
   resolve: (value: Data) => void
-  reject: (reason?: string) => void
+  reject: (error?: string | Error) => void
 } {
   let resolve: ((value: Data) => void) | undefined = undefined
-  let reject: ((reason?: string) => void) | undefined = undefined
+  let reject: ((error?: string | Error) => void) | undefined = undefined
 
   const promise = new Promise<Data>((resolve_, reject_) => {
     resolve = resolve_
-    reject = reject_
+    reject = (error) =>
+      reject_(error instanceof Error ? error : new Error(error))
   })
 
   return {

@@ -26,3 +26,6 @@ jobs:
 
       - name: Verify
         uses: ./.github/actions/verify
+
+      - name: Hello
+        run: npx nx run scripts:hello

@@ -1,8 +1,8 @@
 import { type TwitchUser, getUsers } from "../helix/users/index.js"
 
 export interface Authentication {
-  clientId: string
   tokenType: "bearer"
+  clientId: string
   accessToken: string
   scope: string[]
   expires: Date

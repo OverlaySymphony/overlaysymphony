@@ -1,7 +1,7 @@
 packages:
-  - "internal/**"
-  - "modules/**"
-  - "examples/**"
+  - "internal/*"
+  - "modules/*"
+  - "examples/*"
 
 catalog:
   "@types/node": ^22.13.10

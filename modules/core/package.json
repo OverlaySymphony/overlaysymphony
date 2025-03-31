@@ -15,9 +15,7 @@
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "test": "vitest",
-    "dev": "echo TODO",
-    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo dist",
-    "build": "echo TODO"
+    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
   },
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",

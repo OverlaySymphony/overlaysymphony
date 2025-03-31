@@ -1,19 +1,37 @@
+inputs:
+  skip-typecheck:
+    description: "Skip `lint-typecheck`?"
+    default: ""
+  skip-eslint:
+    description: "Skip `lint-eslint`?"
+    default: ""
+  skip-prettier:
+    description: "Skip `lint-prettier`?"
+    default: ""
+  skip-depcheck:
+    description: "Skip `lint-depcheck`?"
+    default: ""
+
 runs:
   using: composite
 
   steps:
     - name: Typecheck
+      if: ${{ !inputs.skip-typecheck }}
       shell: bash
       run: npx nx run ${{ env.WORKSPACE }}:lint-typecheck
 
     - name: ESLint
+      if: ${{ !inputs.skip-eslint }}
       shell: bash
       run: npx nx run ${{ env.WORKSPACE }}:lint-eslint
 
     - name: Prettier
+      if: ${{ !inputs.skip-prettier }}
       shell: bash
       run: npx nx run ${{ env.WORKSPACE }}:lint-prettier
 
     - name: Depcheck
+      if: ${{ !inputs.skip-depcheck }}
       shell: bash
       run: npx nx run ${{ env.WORKSPACE }}:lint-depcheck

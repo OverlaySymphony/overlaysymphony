@@ -3,17 +3,19 @@
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "packageManager": "pnpm@10.0.0",
   "engines": {
-    "node": "20.x"
+    "node": "22.x"
   },
   "scripts": {
     "lint": "nx run-many -t lint",
+    "lint-typecheck": "nx run-many -t lint-typecheck",
+    "lint-eslint": "nx run-many -t lint-eslint",
+    "lint-prettier": "nx run-many -t lint-prettier",
+    "lint-depcheck": "nx run-many -t lint-depcheck",
+    "nuke": "rm -rf .nx node_modules */*/node_modules */*/*/node_modules",
     "clean": "nx run-many -t clean && nx reset",
-    "dev": "nx run-many -t dev",
-    "build": "nx run-many -t build",
-    "start": "nx run demo:start"
+    "build": "nx run-many -t build"
   },
   "devDependencies": {
-    "concurrently": "^9.0.1",
     "nx": "^20.0.0"
   }
 }

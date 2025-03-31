@@ -16,5 +16,6 @@ runs:
       run: pnpm install
 
     - name: Setup workspace
+      if: ${{ env.WORKSPACE }}
       shell: bash
       run: pnpm run --if-present ${{ env.WORKSPACE }}:ci-setup

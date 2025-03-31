@@ -25,3 +25,6 @@ jobs:
 
       - name: Verify
         uses: ./.github/actions/verify
+        with:
+          skip-typecheck: true
+          skip-eslint: true
