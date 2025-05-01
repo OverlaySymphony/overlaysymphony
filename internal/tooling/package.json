@@ -17,7 +17,7 @@
     "clean": "rm -rf node_modules/.cache"
   },
   "devDependencies": {
-    "@christopherjbaker/eslint-config": "^3.1.0"
+    "@christopherjbaker/eslint-config": "^3.1.2"
   },
   "peerDependencies": {
     "depcheck": "catalog:",
