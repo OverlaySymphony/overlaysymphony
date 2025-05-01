@@ -69,6 +69,32 @@ export async function getAuthentication(
   }
 }
 
+export async function setAuthentication(
+  clientId: string,
+  accessToken: string,
+  scope: string[] = [],
+): Promise<BareAuthentication | undefined> {
+  let authentication: BareAuthentication = {
+    tokenType: "bearer",
+    clientId,
+    accessToken,
+    scope,
+
+    // this is ignored and replaced by validateAuthentication
+    expires: new Date(),
+  }
+
+  try {
+    authentication = await validateAuthentication(authentication)
+  } catch (error) {
+    return undefined
+  }
+
+  setCachedAuthentication(authentication)
+
+  return authentication
+}
+
 export async function popupAuthentication(
   clientId: string,
   scopes: string[],

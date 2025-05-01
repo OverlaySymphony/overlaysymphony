@@ -1,6 +1,7 @@
 import { type TwitchEventSub } from "../../eventsub/index.js"
 
 export interface Poll {
+  id: string
   title: string
   choices: Array<{
     id: string
@@ -10,7 +11,7 @@ export interface Poll {
     votesChannelPoints: number
     votesNormal: number
   }>
-  endsAt: Date
+  endsAt?: Date
 }
 
 const mapTypeToTrigger = {
@@ -24,14 +25,25 @@ export function onPoll(
   handlePoll: (poll: Poll, trigger: "begin" | "progress" | "end") => void,
 ): void {
   const poll: Poll = {
+    id: "",
     title: "",
     choices: [],
-    endsAt: new Date(""),
+    endsAt: undefined,
   }
 
   eventsub.subscribe(
     ["channel.poll.begin", "channel.poll.progress", "channel.poll.end"],
     (payload) => {
+      // Twitch sometimes sends duplicate end events.
+      if (payload.type === "channel.poll.end") {
+        // Skip if its already ended
+        if (typeof poll.endsAt === "undefined") return
+
+        // Skip if its for the wrong poll.
+        if (payload.event.id !== poll.id) return
+      }
+
+      poll.id = payload.event.id
       poll.title = payload.event.title
       poll.choices = payload.event.choices.map(
         ({
@@ -55,6 +67,8 @@ export function onPoll(
         payload.type === "channel.poll.progress"
       ) {
         poll.endsAt = payload.event.ends_at
+      } else {
+        poll.endsAt = undefined
       }
 
       handlePoll(poll, mapTypeToTrigger[payload.type])

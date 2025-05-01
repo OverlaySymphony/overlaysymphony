@@ -136,8 +136,8 @@ importers:
         version: 3.5.3
     devDependencies:
       '@christopherjbaker/eslint-config':
-        specifier: ^3.1.2
-        version: 3.1.2(@typescript-eslint/eslint-plugin@8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2))(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2)
+        specifier: ^3.1.3
+        version: 3.1.3(@typescript-eslint/eslint-plugin@8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2))(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2)
 
   modules/core:
     devDependencies:
@@ -303,8 +303,8 @@ packages:
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
 
-  '@christopherjbaker/eslint-config@3.1.2':
-    resolution: {integrity: sha512-UdG1cTBdDcNEVygPKNzNWd8u7UsF6dE2iPTFSKhIjcwuOvKaHDQrhx4TrE5fVH0dGAA37EHObxzEaIbyqX5uQw==}
+  '@christopherjbaker/eslint-config@3.1.3':
+    resolution: {integrity: sha512-K/ZRVkZgZjPwQP5nBwIGDu//iipedXq0INr1sFdOdlPhw2zpmomHpAD5+N5Mx6YmraPGey/7Mqu6aEiTbNBGyw==}
     peerDependencies:
       eslint: '>= 9'
 
@@ -3010,7 +3010,7 @@ snapshots:
 
   '@bcoe/v8-coverage@0.2.3': {}
 
-  '@christopherjbaker/eslint-config@3.1.2(@typescript-eslint/eslint-plugin@8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2))(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2)':
+  '@christopherjbaker/eslint-config@3.1.3(@typescript-eslint/eslint-plugin@8.26.0(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2))(@typescript-eslint/parser@8.26.0(eslint@9.22.0)(typescript@5.8.2))(eslint@9.22.0)(typescript@5.8.2)':
     dependencies:
       '@eslint/js': 9.22.0
       eslint: 9.22.0

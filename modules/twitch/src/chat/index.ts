@@ -4,3 +4,4 @@ export type {
 } from "./interfaces/index.js"
 
 export * from "./chat.js"
+export * from "./helpers.js"
