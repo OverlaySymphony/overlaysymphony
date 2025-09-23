@@ -41,7 +41,7 @@ export function onRedemption(
   eventsub.subscribe(
     ["channel.channel_points_custom_reward_redemption.add"],
     (payload) => {
-      if (payload.event.reward.id === id) {
+      if (typeof id === "undefined" || payload.event.reward.id === id) {
         handleRedemption?.({
           id: payload.event.id,
           userId: payload.event.user_id,
