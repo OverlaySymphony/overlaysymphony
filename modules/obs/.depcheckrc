@@ -3,3 +3,4 @@ ignores:
 
   # used but not imported
   - "@vitest/coverage-v8"
+  - vite

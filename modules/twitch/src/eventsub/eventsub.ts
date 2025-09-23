@@ -66,8 +66,7 @@ export async function createEventSub(
       for (const type of types) {
         if (!subscriptions[type]) {
           subscriptions[type] = true
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          createSubscription(sessionId, authentication, type)
+          void createSubscription(sessionId, authentication, type)
         }
       }
 

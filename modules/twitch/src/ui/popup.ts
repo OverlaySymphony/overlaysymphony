@@ -17,8 +17,8 @@ if (state.step === "initial") {
 
 if (state.step === "token") {
   const authentication = await authenticateResult(state.clientId, state)
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-  window.opener.postMessage({ type: "authentication", authentication }, "*")
+  const opener = window.opener as Window | undefined
+  opener?.postMessage({ type: "authentication", authentication }, "*")
   window.close()
 }
 

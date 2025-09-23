@@ -276,7 +276,6 @@ export function buildSubscription<
   Subscription extends TwitchSubscription<Type>,
 >(type: Type, userId: string): Subscription {
   const creator = subscriptionBuilders[type]
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!creator) {
     throw new Error(`Unknown type ${type}`)
   }

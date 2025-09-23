@@ -12,7 +12,6 @@ enum ControlLevel {
 }
 
 export async function getControlLevel(): Promise<ControlLevel> {
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (!window.obsstudio) {
     return -1
   }

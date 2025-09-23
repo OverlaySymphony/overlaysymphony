@@ -70,8 +70,7 @@ export class TwitchAuthentication extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" })
     this.root.adoptedStyleSheets.push(stylesheet)
 
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    this.render()
+    void this.render()
   }
 
   get clientId(): string {

@@ -10,6 +10,7 @@
     "strict": true,
     "noEmit": true,
 
+    "allowImportingTsExtensions": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
@@ -18,9 +19,11 @@
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
+    "noUncheckedSideEffectImports": true,
     "noUnusedLocals": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "useDefineForClassFields": true
+    "useDefineForClassFields": true,
+    "verbatimModuleSyntax": true
   }
 }

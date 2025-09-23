@@ -16,14 +16,33 @@ export interface Redemption {
 
 export function onRedemption(
   eventsub: TwitchEventSub,
+  handleRedemption: (redemption: Redemption) => void,
+): void
+export function onRedemption(
+  eventsub: TwitchEventSub,
   id: string,
   handleRedemption: (redemption: Redemption) => void,
+): void
+
+export function onRedemption(
+  eventsub: TwitchEventSub,
+  ...config:
+    | [string, (redemption: Redemption) => void]
+    | [(redemption: Redemption) => void]
 ): void {
+  const id = typeof config[0] === "string" ? config[0] : undefined
+  const handleRedemption =
+    typeof config[0] === "function"
+      ? config[0]
+      : typeof config[1] === "function"
+        ? config[1]
+        : undefined
+
   eventsub.subscribe(
     ["channel.channel_points_custom_reward_redemption.add"],
     (payload) => {
       if (payload.event.reward.id === id) {
-        handleRedemption({
+        handleRedemption?.({
           id: payload.event.id,
           userId: payload.event.user_id,
           userLogin: payload.event.user_login,

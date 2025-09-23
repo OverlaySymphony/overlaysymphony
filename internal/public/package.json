@@ -29,6 +29,6 @@
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "^6.2.1"
+    "vite": "catalog:"
   }
 }

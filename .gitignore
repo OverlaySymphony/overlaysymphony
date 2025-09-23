@@ -4,15 +4,13 @@
 !.env.development
 
 # cache
-/.nx/cache
-/.nx/workspace-data
+/.nx
 
 # artifacts
 node_modules
 dist
 coverage
 junit.xml
-docs
 
 # misc
 .vscode
