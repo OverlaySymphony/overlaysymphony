@@ -45,13 +45,13 @@ jobs:
         env:
           VITE_TWITCH_CLIENT_ID: ${{ github.event_name == 'workflow_dispatch' && vars.TWITCH_CLIENT_ID || null  }}
         with:
-          args: --base=/${{ github.event.repository.name }}
+          args: --base=./
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         if: ${{ github.event_name == 'workflow_dispatch' }}
         with:
-          path: ./internal/public/dist
+          path: ${{ env.DIRECTORY }}/dist
 
   publish:
     name: Publish
@@ -67,8 +67,6 @@ jobs:
     permissions:
       id-token: write
       pages: write
-      contents: write
-      packages: write
 
     steps:
       - name: Deploy to GitHub Pages

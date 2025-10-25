@@ -5,9 +5,25 @@ import {
   validateAuthentication,
 } from "../authentication/index.js"
 
+const status = document.getElementById("status")
+const statuses = {
+  error: "Something went wrong.",
+  initializing: "Initializing Twitch authentication.",
+  validating: "Validating Twitch authenticate.",
+  ready: "Twitch authentication validated. You may close this window.",
+}
+function updateStatus(key: keyof typeof statuses, message?: string) {
+  if (!status) return
+
+  status.innerText = statuses[key] + (message ? ` ${message}` : "")
+}
+
 const state = getState()
 
 if (state.step === "initial") {
+  updateStatus("initializing")
+  setTimeout(() => updateStatus("error"), 500)
+
   initiateAuthentication(
     state.clientId,
     `${window.location.origin}${window.location.pathname}`,
@@ -16,14 +32,21 @@ if (state.step === "initial") {
 }
 
 if (state.step === "token") {
+  updateStatus("validating")
+
   const authentication = await authenticateResult(state.clientId, state)
   const opener = window.opener as Window | undefined
   opener?.postMessage({ type: "authentication", authentication }, "*")
+
+  updateStatus("ready")
   window.close()
 }
 
 if (state.step === "error") {
-  alert(`${state.error}. ${state.description ?? ""}`)
+  updateStatus(
+    "error",
+    `${state.error}${state.description ? `: ${state.description}` : "."}`,
+  )
 }
 
 function getState():
@@ -62,7 +85,7 @@ function getState():
           !scope ? "Missing scope." : "",
           !clientId ? "Missing state." : "",
         ]
-          .filter(Boolean)
+          .filter((value) => !!value)
           .join(" "),
       }
     }
