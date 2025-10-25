@@ -12,7 +12,7 @@ export function isBroadcaster(event: ApplicableChatEvent): boolean | null {
 
   if (typeof broadcaster === "undefined") return null
 
-  return !!broadcaster
+  return broadcaster
 }
 
 export function isMod(event: ApplicableChatEvent): boolean | null {
