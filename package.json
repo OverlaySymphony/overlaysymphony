@@ -16,6 +16,6 @@
     "build": "nx run-many -t build"
   },
   "devDependencies": {
-    "nx": "^20.0.0"
+    "nx": "^22.0.0"
   }
 }

@@ -4,18 +4,27 @@
   "targetDefaults": {
     "lint": {
       "cache": true,
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "test": {
       "cache": true,
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "dev": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ]
     },
     "build": {
       "cache": true,
-      "dependsOn": ["^build", "clean"]
+      "dependsOn": [
+        "^build",
+        "clean"
+      ]
     }
   }
 }
