@@ -51,7 +51,7 @@ export async function getCustomRewards(
       broadcaster_id: string
     }
   >(authentication, {
-    method: "get",
+    method: "GET",
     path: "/channel_points/custom_rewards",
     params: {
       broadcaster_id: authentication.user.id,

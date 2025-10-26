@@ -25,7 +25,7 @@ export async function getUsers(
   const data = await helix<TwitchUser, RawUser>(
     authentication,
     {
-      method: "get",
+      method: "GET",
       path: "/users",
       params: {
         id,

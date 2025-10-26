@@ -5,7 +5,7 @@
   "description": "",
   "type": "module",
   "imports": {
-    "#output": "./src/lib/output.ts"
+    "#shared/*": "./src/shared/*.ts"
   },
   "exports": {
     "./package.json": "./package.json"
@@ -17,13 +17,14 @@
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
     "exec": "node --disable-warning=ExperimentalWarning --experimental-strip-types",
-    "twitch:events:cleanup": "npm run exec src/apps/twitch-events/cleanup.ts",
-    "twitch:events:generate": "npm run exec src/apps/twitch-events/generate.ts",
+    "twitch.events.update": "npm run exec src/apps/twitch-events/update/index.ts",
+    "twitch.events.generate": "npm run exec src/apps/twitch-events/generate/index.ts",
     "hello": "npm run exec src/apps/hello/index.ts",
     "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
   },
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "node-html-parser": "^7.0.1"
   },
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",

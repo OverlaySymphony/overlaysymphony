@@ -66,7 +66,7 @@ export function onPoll(
         payload.type === "channel.poll.begin" ||
         payload.type === "channel.poll.progress"
       ) {
-        poll.endsAt = payload.event.ends_at
+        poll.endsAt = new Date(payload.event.ends_at)
       } else {
         poll.endsAt = undefined
       }

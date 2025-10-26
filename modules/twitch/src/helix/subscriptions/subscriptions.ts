@@ -1,10 +1,6 @@
 import { type Authentication } from "../../authentication/index.js"
-import {
-  type TwitchSubscription,
-  type TwitchSubscriptionType,
-  buildSubscription,
-} from "../../eventsub/events/index.js"
-import { type BaseSubscription } from "../../eventsub/events-helpers.js"
+import { type EventConfigs, type EventType } from "../../eventsub/index.js"
+
 import { helix } from "../helix.js"
 
 interface SubscriptionWebhookTransport {
@@ -22,15 +18,15 @@ type SubscriptionTransport =
   | SubscriptionWebhookTransport
   | SubscriptionWebsocketTransport
 
-export interface SubscriptionRequest<Subscription extends BaseSubscription> {
-  type: Subscription["type"]
-  version: Subscription["version"]
-  condition: Subscription["condition"]
+interface SubscriptionRequest<Type extends EventType> {
+  type: EventConfigs[Type]["Type"]
+  version: EventConfigs[Type]["Version"]
+  condition: EventConfigs[Type]["Condition"]
   transport: SubscriptionTransport
 }
 
-export type ActiveSubscription<Subscription extends BaseSubscription> =
-  Subscription & {
+type ActiveSubscription<Type extends EventType> =
+  EventConfigs[Type]["Subscription"] & {
     id: string
     status:
       | "enabled"
@@ -53,29 +49,46 @@ export type ActiveSubscription<Subscription extends BaseSubscription> =
     transport: SubscriptionTransport
   }
 
-export async function createSubscription<
-  Type extends TwitchSubscriptionType,
-  Subscription extends TwitchSubscription<Type>,
->(
-  sessionId: string,
+export async function createSubscription<Type extends EventType>(
   authentication: Authentication,
-  type: Type,
-): Promise<ActiveSubscription<Subscription>> {
-  const subscription = buildSubscription(type, authentication.user.id)
-
-  const [activeSubscription] = await helix(authentication, {
-    method: "post",
+  transport: SubscriptionTransport,
+  subscription: EventConfigs[Type]["Subscription"],
+): Promise<ActiveSubscription<Type>> {
+  const [activeSubscription] = await helix<
+    ActiveSubscription<EventType>,
+    never,
+    never,
+    SubscriptionRequest<EventType>
+  >(authentication, {
+    method: "POST",
     path: "/eventsub/subscriptions",
     body: {
       ...subscription,
-      transport: {
-        method: "websocket" as const,
-        session_id: sessionId,
-      },
+      transport,
     },
   })
 
   return activeSubscription
+}
+
+export async function getSubscriptions(
+  authentication: Authentication,
+): Promise<Array<ActiveSubscription<EventType>>> {
+  const subscriptions = await helix<
+    ActiveSubscription<EventType>,
+    never,
+    {
+      status?: ActiveSubscription<EventType>["status"]
+      type?: EventType
+      user_id?: string
+      after?: string
+    }
+  >(authentication, {
+    method: "GET",
+    path: "/eventsub/subscriptions",
+  })
+
+  return subscriptions
 }
 
 export async function deleteSubscription(
@@ -83,30 +96,10 @@ export async function deleteSubscription(
   id: string,
 ): Promise<void> {
   await helix<never, never, { id: string }>(authentication, {
-    method: "delete",
+    method: "DELETE",
     path: "/eventsub/subscriptions",
     params: {
       id,
     },
   })
-}
-
-export async function getSubscriptions(
-  authentication: Authentication,
-): Promise<Array<ActiveSubscription<TwitchSubscription>>> {
-  const subscriptions = await helix<
-    ActiveSubscription<TwitchSubscription>,
-    never,
-    {
-      status?: ActiveSubscription<TwitchSubscription>["status"]
-      type?: TwitchSubscriptionType
-      user_id?: string
-      after?: string
-    }
-  >(authentication, {
-    method: "get",
-    path: "/eventsub/subscriptions",
-  })
-
-  return subscriptions
 }

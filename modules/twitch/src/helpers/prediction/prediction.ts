@@ -55,7 +55,7 @@ export function onPrediction(
         payload.type === "channel.prediction.begin" ||
         payload.type === "channel.prediction.progress"
       ) {
-        prediction.locksAt = payload.event.locks_at
+        prediction.locksAt = new Date(payload.event.locks_at)
       } else {
         prediction.locksAt = undefined
       }

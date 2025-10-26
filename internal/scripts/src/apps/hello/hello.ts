@@ -1,3 +1,3 @@
-import { print } from "#output"
+import { print } from "#shared/output"
 
 print("hello")

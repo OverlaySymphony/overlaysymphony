@@ -1,22 +1,24 @@
 import events_ from "./data.json" with { type: "json" }
 
-export type Nested<Type> = Record<string, Type & { fields?: Nested<Type> }>
-
-export interface TwitchEvent {
-  name: string
+export type TwitchConfig = {
+  id: string
+  label: string
   type: string
   version: string
+  primary: boolean
+  scopes: string[] | null
   description: string
-  condition: Nested<{
-    type: string
-    required: boolean
-    description: string
-  }>
-  definition: Nested<{
-    type: string
-    required: boolean
-    description: string
-  }>
+  condition: FieldType
+  event: FieldType
 }
 
-export default events_ as unknown as TwitchEvent[]
+export type FieldType = {
+  type: string
+  required: boolean
+  description: string
+  fields?: Record<string, FieldType>
+}
+
+const events: Record<string, TwitchConfig> = events_
+
+export default events

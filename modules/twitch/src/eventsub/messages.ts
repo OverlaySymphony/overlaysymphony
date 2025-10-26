@@ -1,6 +1,6 @@
-import { type TwitchNotificationMessage } from "./events/index.js"
+import { type EventConfigs, type EventType } from "./events-helpers.js"
 
-export interface SessionWelcomeMessage {
+export type SessionWelcomeMessage = {
   type: "session_welcome"
   metadata: {
     message_id: string
@@ -18,7 +18,7 @@ export interface SessionWelcomeMessage {
   }
 }
 
-export interface SessionKeepaliveMessage {
+export type SessionKeepaliveMessage = {
   type: "session_keepalive"
   metadata: {
     message_id: string
@@ -28,7 +28,19 @@ export interface SessionKeepaliveMessage {
   payload: Record<string, never>
 }
 
+export type NotificationMessage<Type extends EventType = EventType> = {
+  type: "notification"
+  metadata: {
+    message_id: string
+    message_type: "notification"
+    message_timestamp: Date
+    subscription_type: EventConfigs[Type]["Type"]
+    subscription_version: EventConfigs[Type]["Version"]
+  }
+  payload: EventConfigs[Type]["Payload"]
+}
+
 export type TwitchMessage =
   | SessionWelcomeMessage
   | SessionKeepaliveMessage
-  | TwitchNotificationMessage
+  | NotificationMessage

@@ -1,3 +1,5 @@
+import "./events/index.js"
+
 import createDefer from "@overlaysymphony/core/libs/defer"
 import createPubSub from "@overlaysymphony/core/libs/pubsub"
 
@@ -5,25 +7,18 @@ import { type Authentication } from "../authentication/index.js"
 import { createSubscription } from "../helix/subscriptions/index.js"
 
 import {
-  type TwitchNotificationMessage,
-  type TwitchSubscriptionType,
-} from "./events/index.js"
+  type EventType,
+  type EventConfigs,
+  buildSubscription,
+} from "./events-helpers.js"
 import { type TwitchMessage } from "./messages.js"
 
-type EventSubListener = (
-  callback: (event: TwitchNotificationMessage["payload"]) => void,
+type EventSubSubscriber = <Type extends EventType>(
+  types: Type[],
+  callback: (event: EventConfigs[Type]["Payload"]) => void,
 ) => () => void
 
-type EventSubSubscriber = <
-  EventType extends TwitchSubscriptionType,
-  Event extends TwitchNotificationMessage<EventType>["payload"],
->(
-  types: EventType[],
-  callback: (event: Event) => void,
-) => () => void
-
-export interface TwitchEventSub {
-  listen: EventSubListener
+export type TwitchEventSub = {
   subscribe: EventSubSubscriber
 }
 
@@ -32,7 +27,7 @@ export async function createEventSub(
 ): Promise<TwitchEventSub> {
   const { promise, resolve } = createDefer<string>()
 
-  const pubsub = createPubSub<TwitchNotificationMessage["payload"]>()
+  const pubsub = createPubSub<EventConfigs[EventType]["Payload"]>()
   const socket = new WebSocket("wss://eventsub.wss.twitch.tv/ws")
 
   socket.addEventListener("message", ({ data: rawData }) => {
@@ -54,33 +49,30 @@ export async function createEventSub(
   })
 
   return promise.then((sessionId) => {
-    const subscriptions: Partial<Record<TwitchSubscriptionType, boolean>> = {}
-
-    const listen: EventSubListener = (callback) => {
-      return pubsub.subscribe((event) => {
-        callback(event)
-      })
-    }
+    const subscriptions: Partial<Record<EventType, boolean>> = {}
 
     const subscribe: EventSubSubscriber = (types, callback) => {
       for (const type of types) {
         if (!subscriptions[type]) {
           subscriptions[type] = true
-          void createSubscription(sessionId, authentication, type)
+
+          void createSubscription(
+            authentication,
+            { method: "websocket", session_id: sessionId },
+            buildSubscription(type, authentication.user.id),
+          )
         }
       }
 
       return pubsub.subscribe((event) => {
         // @ts-expect-error: generic events are complicated
         if (types.includes(event.type)) {
-          // @ts-expect-error: generic events are complicated
           callback(event)
         }
       })
     }
 
     return {
-      listen,
       subscribe,
     }
   })
