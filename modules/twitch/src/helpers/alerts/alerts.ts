@@ -1,15 +1,16 @@
 import createQueue, { type Queue } from "@overlaysymphony/core/libs/queue"
 
-import { type EventConfigs } from "../../eventsub/events-helpers.ts"
+import { type EventPayload } from "../../eventsub/events-helpers.js"
 import { type TwitchEventSub } from "../../eventsub/index.js"
 
-export type Alert = EventConfigs[
+export type Alert = EventPayload<
   | "channel.cheer"
   | "channel.follow"
   | "channel.raid"
   | "channel.subscribe"
   | "channel.subscription.gift"
-  | "channel.subscription.message"]["Payload"]
+  | "channel.subscription.message"
+>
 
 export const mapTypeToPriority = {
   "channel.follow": 0,
@@ -24,7 +25,7 @@ export function onAlert(
   eventsub: TwitchEventSub,
   handleAlert: (alert: Alert) => void,
 ): void {
-  eventsub.subscribe(
+  eventsub.on(
     [
       "channel.cheer",
       "channel.follow",

@@ -44,7 +44,7 @@ export interface TwitchChat {
   onCommand: ChatCommandSubscriber
 }
 
-export async function createChat(
+export default async function createChat(
   authentication: Authentication,
   channel: string = authentication.user.login,
 ): Promise<TwitchChat> {

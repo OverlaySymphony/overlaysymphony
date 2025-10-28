@@ -38,7 +38,7 @@ export function onRedemption(
         ? config[1]
         : undefined
 
-  eventsub.subscribe(
+  eventsub.on(
     ["channel.channel_points_custom_reward_redemption.add"],
     (payload) => {
       if (typeof id === "undefined" || payload.event.reward.id === id) {

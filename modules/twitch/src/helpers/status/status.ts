@@ -22,7 +22,7 @@ export function onStatus(
     labels: [],
   }
 
-  eventsub.subscribe(
+  eventsub.on(
     [
       "channel.update",
       "stream.online",

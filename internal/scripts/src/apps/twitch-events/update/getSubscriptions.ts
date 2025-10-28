@@ -75,7 +75,7 @@ export default async function getSubscriptions() {
 
         const scopes = cleanScopes(authorization)
 
-        const description = clearDescription(tableDescription)
+        const description = cleanDescription(tableDescription)
 
         return {
           label,
@@ -138,10 +138,10 @@ async function fetchRaw() {
     })
 }
 
-function clearDescription(input: string) {
+function cleanDescription(input: string) {
   return input
     .replace(/^./, (character) => character.toLowerCase())
-    .replace(/^a user is notified if (their|a) /, "The user's ")
+    .replace(/^a user is notified if (their|a) /, "the user's ")
     .replace(/^a notification when /, "")
     .replace(/^a notification for when /, "")
     .replace(/^a notification is sent when /, "")

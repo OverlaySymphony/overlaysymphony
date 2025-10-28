@@ -6,18 +6,18 @@ declare module "../events-helpers.js" {
   }
 }
 
-/** Channel Chat User Message Update v1: When The user's message's automod status is updated. */
+/** Channel Chat User Message Update v1: When the user's message's automod status is updated. */
 type ChannelChatUserMessageUpdate = EventConfig<{
   Type: "channel.chat.user_message_update"
   Version: "1"
-  /** The conditions to listen for when The user's message's automod status is updated. */
+  /** The conditions to listen for when the user's message's automod status is updated. */
   Condition: {
     /** User ID of the channel to receive chat message events for. */
     broadcaster_user_id: string
     /** The user ID to read chat as. */
     user_id: string
   }
-  /** The event fired when The user's message's automod status is updated. */
+  /** The event fired when the user's message's automod status is updated. */
   Event: {
     /** The ID of the broadcaster specified in the request. */
     broadcaster_user_id: string

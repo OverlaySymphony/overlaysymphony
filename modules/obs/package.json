@@ -6,6 +6,7 @@
   "type": "module",
   "exports": {
     "./events": "./src/events/index.ts",
+    "./browser": "./src/browser/index.ts",
     "./ui/*.css": "./src/ui/*.css",
     "./ui/*": "./src/ui/*.ts",
     "./package.json": "./package.json"
@@ -21,6 +22,7 @@
   },
   "dependencies": {
     "@fontsource/montserrat": "^5.0.16",
+    "@overlaysymphony/core": "workspace:*",
     "@types/obs-studio": "^2.17.2"
   },
   "devDependencies": {

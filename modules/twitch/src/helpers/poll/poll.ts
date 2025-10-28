@@ -31,7 +31,7 @@ export function onPoll(
     endsAt: undefined,
   }
 
-  eventsub.subscribe(
+  eventsub.on(
     ["channel.poll.begin", "channel.poll.progress", "channel.poll.end"],
     (payload) => {
       // Twitch sometimes sends duplicate end events.

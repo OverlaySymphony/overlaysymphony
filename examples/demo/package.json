@@ -8,7 +8,7 @@
     "./package.json": "./package.json"
   },
   "imports": {
-    "#shared/*": "./src/shared/*/index.ts"
+    "#shared/*": "./src/shared/*.ts"
   },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "@overlaysymphony/obs": "workspace:*",
-    "@overlaysymphony/overlays": "workspace:*",
     "@overlaysymphony/twitch": "workspace:*"
   },
   "devDependencies": {

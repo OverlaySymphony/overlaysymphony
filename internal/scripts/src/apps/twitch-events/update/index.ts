@@ -1,7 +1,7 @@
 import fs from "node:fs"
 import path from "node:path"
 
-import { type TwitchConfig } from "../data/index.ts"
+import { type EventConfig } from "../data/index.ts"
 
 import getSubscriptions from "./getSubscriptions.ts"
 import getTypes from "./getTypes.ts"
@@ -10,7 +10,7 @@ const { subscriptions, conditionsFb } = await getSubscriptions()
 
 const { conditions, events } = await getTypes(conditionsFb)
 
-const configs: Record<string, TwitchConfig> = {}
+const configs: Record<string, EventConfig> = {}
 for (const id in subscriptions) {
   const subscription = subscriptions[id]
   const condition = conditions[id] ?? conditions[id.replace(/@.+$/, "")]
@@ -33,13 +33,11 @@ for (const id in subscriptions) {
     condition: {
       type: "object",
       required: true,
-      description: "",
       fields: condition,
     },
     event: {
       type: "object",
       required: true,
-      description: "",
       fields: event,
     },
   }

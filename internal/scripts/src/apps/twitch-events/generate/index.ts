@@ -2,8 +2,9 @@ import fs from "node:fs"
 import path from "node:path"
 
 import trim from "#shared/trim"
+import { makeTypeDefinition } from "#shared/type"
 
-import configs, { type FieldType, type TwitchConfig } from "../data/index.ts"
+import configs, { type EventConfig } from "../data/index.ts"
 
 const basePath = path.join(
   import.meta.dirname,
@@ -13,7 +14,7 @@ const basePath = path.join(
 const contents = makeIndexFile()
 fs.writeFileSync(path.join(basePath, "index.ts"), contents)
 
-function shouldSkip(config: TwitchConfig) {
+function shouldSkip(config: EventConfig) {
   if (!config.primary) return true
   if (config.id.startsWith("conduit.")) return true
   if (config.id.startsWith("drop.")) return true
@@ -53,7 +54,7 @@ function makeEventFile({
   description,
   condition,
   event,
-}: TwitchConfig) {
+}: EventConfig) {
   const name = type.replace(/(?:[^a-z]|^)([a-z])/gi, (match, letter: string) =>
     letter.toUpperCase(),
   )
@@ -112,50 +113,7 @@ ${Object.entries(condition.fields ?? {})
           },
         }),
       })
-  `,
+    `,
     true,
   )
-}
-
-function makeTypeDefinition(
-  fields: FieldType["fields"],
-  prefix: string,
-): string {
-  return Object.entries(fields ?? {})
-    .map(([key, { type, required, description, fields }]) => {
-      const intro = makeTypeDescription(description, prefix)
-      const open = `${prefix}${key}${required ? "" : "?"}`
-
-      if (type === "object" && fields) {
-        return [
-          intro,
-          `${open}: {`,
-          makeTypeDefinition(fields, `${prefix}  `),
-          `${prefix}}`,
-        ].join("\n")
-      }
-
-      if (type === "object[]" && fields) {
-        return [
-          intro,
-          `${open}: Array<{`,
-          makeTypeDefinition(fields, `${prefix}  `),
-          `${prefix}}>`,
-        ].join("\n")
-      }
-
-      return [intro, `${open}: ${type}`].join("\n")
-    })
-    .join("\n")
-}
-
-function makeTypeDescription(description: string, prefix: string) {
-  const lines = description.split("\n")
-  if (lines.length === 1) {
-    return `${prefix}/** ${description} */`
-  }
-
-  return ["/**", ...lines.map((line) => ` *${line ? ` ${line}` : ""}`), " */"]
-    .map((line) => `${prefix}${line}`)
-    .join("\n")
 }

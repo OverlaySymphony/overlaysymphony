@@ -6,18 +6,18 @@ declare module "../events-helpers.js" {
   }
 }
 
-/** Channel Chat User Message Hold v1: When The user's message is caught by automod. */
+/** Channel Chat User Message Hold v1: When the user's message is caught by automod. */
 type ChannelChatUserMessageHold = EventConfig<{
   Type: "channel.chat.user_message_hold"
   Version: "1"
-  /** The conditions to listen for when The user's message is caught by automod. */
+  /** The conditions to listen for when the user's message is caught by automod. */
   Condition: {
     /** User ID of the channel to receive chat message events for. */
     broadcaster_user_id: string
     /** The user ID to read chat as. */
     user_id: string
   }
-  /** The event fired when The user's message is caught by automod. */
+  /** The event fired when the user's message is caught by automod. */
   Event: {
     /** The ID of the broadcaster specified in the request. */
     broadcaster_user_id: string

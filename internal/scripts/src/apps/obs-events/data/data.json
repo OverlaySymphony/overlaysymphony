@@ -1,0 +1,291 @@
+{
+  "streaming.starting": {
+    "label": "Streaming Starting",
+    "type": "streaming.starting",
+    "listener": "obsStreamingStarting",
+    "permissions": "READ_OBS",
+    "description": "streaming is starting.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"starting\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "streaming.started": {
+    "label": "Streaming Started",
+    "type": "streaming.started",
+    "listener": "obsStreamingStarted",
+    "permissions": "READ_OBS",
+    "description": "streaming has successfully started.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"active\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "streaming.stopping": {
+    "label": "Streaming Stopping",
+    "type": "streaming.stopping",
+    "listener": "obsStreamingStopping",
+    "permissions": "READ_OBS",
+    "description": "streaming is stopping.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"stopping\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "streaming.stopped": {
+    "label": "Streaming Stopped",
+    "type": "streaming.stopped",
+    "listener": "obsStreamingStopped",
+    "permissions": "READ_OBS",
+    "description": "streaming has fully stopped.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"inactive\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "recording.starting": {
+    "label": "Recording Starting",
+    "type": "recording.starting",
+    "listener": "obsRecordingStarting",
+    "permissions": "READ_OBS",
+    "description": "recording is starting.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"starting\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "recording.started": {
+    "label": "Recording Started",
+    "type": "recording.started",
+    "listener": "obsRecordingStarted",
+    "permissions": "READ_OBS",
+    "description": "recording has successfully started.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"active\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "recording.stopping": {
+    "label": "Recording.stopping",
+    "type": "recording.stopping",
+    "listener": "obsRecordingStopping",
+    "permissions": "READ_OBS",
+    "description": "recording is stopping.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"stopping\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "recording.stopped": {
+    "label": "Recording.stopped",
+    "type": "recording.stopped",
+    "listener": "obsRecordingStopped",
+    "permissions": "READ_OBS",
+    "description": "recording has fully stopped.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"inactive\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "recording.paused": {
+    "label": "Recording.paused",
+    "type": "recording.paused",
+    "listener": "obsRecordingPaused",
+    "permissions": "READ_OBS",
+    "description": "the recording has been paused.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"paused\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "recording.unpaused": {
+    "label": "Recording.unpaused",
+    "type": "recording.unpaused",
+    "listener": "obsRecordingUnpaused",
+    "permissions": "READ_OBS",
+    "description": "the recording has been unpaused.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"active\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "replaybuffer.starting": {
+    "label": "Replaybuffer.starting",
+    "type": "replaybuffer.starting",
+    "listener": "obsReplaybufferStarting",
+    "permissions": "READ_OBS",
+    "description": "the replay buffer is starting.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"starting\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "replaybuffer.started": {
+    "label": "Replaybuffer.started",
+    "type": "replaybuffer.started",
+    "listener": "obsReplaybufferStarted",
+    "permissions": "READ_OBS",
+    "description": "the replay buffer has successfully started.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"active\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "replaybuffer.stopping": {
+    "label": "Replaybuffer.stopping",
+    "type": "replaybuffer.stopping",
+    "listener": "obsReplaybufferStopping",
+    "permissions": "READ_OBS",
+    "description": "the replay buffer is stopping.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"stopping\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "replaybuffer.stopped": {
+    "label": "Replaybuffer.stopped",
+    "type": "replaybuffer.stopped",
+    "listener": "obsReplaybufferStopped",
+    "permissions": "READ_OBS",
+    "description": "the replay buffer has fully stopped.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"inactive\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "replaybuffer.saved": {
+    "label": "Replaybuffer.saved",
+    "type": "replaybuffer.saved",
+    "listener": "obsReplaybufferSaved",
+    "permissions": "READ_OBS",
+    "description": "the replay buffer has been saved.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"active\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "virtualcam.started": {
+    "label": "Virtualcam.started",
+    "type": "virtualcam.started",
+    "listener": "obsVirtualcamStarted",
+    "permissions": "READ_OBS",
+    "description": "the virtual camera is started.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"active\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "virtualcam.stopped": {
+    "label": "Virtualcam.stopped",
+    "type": "virtualcam.stopped",
+    "listener": "obsVirtualcamStopped",
+    "permissions": "READ_OBS",
+    "description": "the virtual camera is stopped.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"inactive\"",
+          "required": true
+        }
+      }
+    }
+  }
+}

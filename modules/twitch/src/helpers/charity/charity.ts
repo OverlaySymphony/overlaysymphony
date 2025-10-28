@@ -42,7 +42,7 @@ export function onCharity(
     targetAmount: 0,
   }
 
-  eventsub.subscribe(
+  eventsub.on(
     [
       "channel.charity_campaign.start",
       "channel.charity_campaign.progress",

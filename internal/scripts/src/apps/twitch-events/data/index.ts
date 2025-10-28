@@ -1,6 +1,8 @@
+import { type FieldType } from "#shared/type"
+
 import events_ from "./data.json" with { type: "json" }
 
-export type TwitchConfig = {
+export type EventConfig = {
   id: string
   label: string
   type: string
@@ -12,13 +14,6 @@ export type TwitchConfig = {
   event: FieldType
 }
 
-export type FieldType = {
-  type: string
-  required: boolean
-  description: string
-  fields?: Record<string, FieldType>
-}
-
-const events: Record<string, TwitchConfig> = events_
+const events: Record<string, EventConfig> = events_
 
 export default events

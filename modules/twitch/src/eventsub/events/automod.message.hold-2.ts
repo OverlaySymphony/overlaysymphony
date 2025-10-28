@@ -6,18 +6,18 @@ declare module "../events-helpers.js" {
   }
 }
 
-/** Automod Message Hold v2: When The user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones. */
+/** Automod Message Hold v2: When the user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones. */
 type AutomodMessageHold = EventConfig<{
   Type: "automod.message.hold"
   Version: "2"
-  /** The conditions to listen for when The user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones. */
+  /** The conditions to listen for when the user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones. */
   Condition: {
     /** User ID of the broadcaster (channel). */
     broadcaster_user_id: string
     /** User ID of the moderator. */
     moderator_user_id: string
   }
-  /** The event fired when The user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones. */
+  /** The event fired when the user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones. */
   Event: {
     /** The ID of the broadcaster specified in the request. */
     broadcaster_user_id: string

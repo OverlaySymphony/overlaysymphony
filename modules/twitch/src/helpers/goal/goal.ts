@@ -24,7 +24,7 @@ export function onGoal(
     targetAmount: 0,
   }
 
-  eventsub.subscribe(
+  eventsub.on(
     ["channel.goal.begin", "channel.goal.progress", "channel.goal.end"],
     (payload) => {
       goal.type = payload.event.type

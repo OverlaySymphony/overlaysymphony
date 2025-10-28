@@ -26,6 +26,8 @@ export type EventConfig<
 export interface EventConfigs {}
 
 export type EventType = keyof EventConfigs
+export type EventPayload<Type extends EventType = EventType> =
+  EventConfigs[Type]["Payload"]
 
 const events: {
   [Type in EventType]?: {

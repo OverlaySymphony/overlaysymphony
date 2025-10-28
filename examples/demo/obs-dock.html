@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dock | OverlaySymphony Demo</title>
+  </head>
+  <body>
+    <overlaysymfony-twitch-authentication
+      client-id="%VITE_TWITCH_CLIENT_ID%"
+      popup-url="https://overlaysymphony.github.io/overlaysymphony/popup-twitch.html"
+    >
+    </overlaysymfony-twitch-authentication>
+
+    <script>
+      window.overlaysymphonyTwitchScopes = [
+        "bits:read",
+        "channel:moderate",
+        "channel:read:charity",
+        "channel:read:goals",
+        "channel:read:hype_train",
+        "channel:read:polls",
+        "channel:read:predictions",
+        "channel:read:redemptions",
+        "channel:read:subscriptions",
+        "chat:read",
+        "chat:edit",
+        "moderation:read",
+        "moderator:manage:announcements",
+        "moderator:manage:shoutouts",
+        "moderator:read:followers",
+        "moderator:read:shield_mode",
+        "user:read:follows",
+      ]
+    </script>
+    <script type="module" src="./src/obs-dock/index.ts"></script>
+  </body>
+</html>

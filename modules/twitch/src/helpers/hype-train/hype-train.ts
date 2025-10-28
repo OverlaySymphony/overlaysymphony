@@ -27,7 +27,7 @@ export function onHypeTrain(
     goal: 0,
   }
 
-  eventsub.subscribe(
+  eventsub.on(
     [
       "channel.hype_train.begin",
       "channel.hype_train.progress",

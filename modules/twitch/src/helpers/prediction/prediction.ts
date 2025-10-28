@@ -32,7 +32,7 @@ export function onPrediction(
     locksAt: new Date(""),
   }
 
-  eventsub.subscribe(
+  eventsub.on(
     [
       "channel.prediction.begin",
       "channel.prediction.progress",

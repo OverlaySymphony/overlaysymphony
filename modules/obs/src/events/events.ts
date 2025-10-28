@@ -16,7 +16,7 @@ export async function getControlLevel(): Promise<ControlLevel> {
     return -1
   }
 
-  const level = await toPromise(window.obsstudio.getControlLevel)
+  const level = await promisify(window.obsstudio.getControlLevel)
   return level
 }
 
@@ -51,7 +51,7 @@ export async function ensureControlLevel(target: ControlLevel): Promise<void> {
 export async function getStreaming(): Promise<boolean> {
   await ensureControlLevel(ControlLevel.READ_OBS)
 
-  const status = await toPromise(window.obsstudio.getStatus)
+  const status = await promisify(window.obsstudio.getStatus)
   return status.streaming
 }
 
@@ -73,7 +73,7 @@ export async function onStreaming(
 export async function getScenes(): Promise<string[]> {
   await ensureControlLevel(ControlLevel.READ_USER)
 
-  const scenes = await toPromise(window.obsstudio.getScenes)
+  const scenes = await promisify(window.obsstudio.getScenes)
   return scenes
 }
 
@@ -94,7 +94,7 @@ export async function onScenes(
 export async function getScene(): Promise<string> {
   await ensureControlLevel(ControlLevel.READ_USER)
 
-  const scene = await toPromise(window.obsstudio.getCurrentScene)
+  const scene = await promisify(window.obsstudio.getCurrentScene)
   return scene.name
 }
 
@@ -122,6 +122,6 @@ export async function onVisible(
   })
 }
 
-function toPromise<T>(fn: (resolve: (value: T) => void) => void): Promise<T> {
+function promisify<T>(fn: (resolve: (value: T) => void) => void): Promise<T> {
   return new Promise((resolve) => fn(resolve))
 }
