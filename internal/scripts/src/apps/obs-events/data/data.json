@@ -287,5 +287,73 @@
         }
       }
     }
+  },
+  "exit": {
+    "label": "Exit",
+    "type": "exit",
+    "listener": "obsExit",
+    "permissions": "READ_OBS",
+    "description": "The program is about to exit. This is the last chance to call any frontend API functions for any saving / cleanup / etc. After returning from this event callback, it is not permitted to make any further frontend API calls.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "status": {
+          "type": "\"exiting\"",
+          "required": true
+        }
+      }
+    }
+  },
+  "scene": {
+    "label": "Scene Change",
+    "type": "scene",
+    "listener": "obsSceneChanged",
+    "permissions": "READ_OBS",
+    "description": "The current scene has changed.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "scene": {
+          "type": "string",
+          "required": true
+        }
+      }
+    }
+  },
+  "source.visible": {
+    "label": "Source Visible",
+    "type": "source.visible",
+    "listener": "obsSourceVisibleChanged",
+    "permissions": "READ_OBS",
+    "description": "This source changes visible.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "visible": {
+          "type": "boolean",
+          "required": true
+        }
+      }
+    }
+  },
+  "source.active": {
+    "label": "Source Active",
+    "type": "source.active",
+    "listener": "obsSourceActiveChanged",
+    "permissions": "READ_OBS",
+    "description": "This source changes active.",
+    "event": {
+      "type": "object",
+      "required": true,
+      "fields": {
+        "active": {
+          "type": "boolean",
+          "required": true
+        }
+      }
+    }
   }
 }

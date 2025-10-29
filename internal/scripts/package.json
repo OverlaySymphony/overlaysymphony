@@ -16,12 +16,11 @@
     "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
     "lint-depcheck": "depcheck .",
-    "exec": "node --disable-warning=ExperimentalWarning --experimental-strip-types",
-    "obs.events.update": "npm run exec src/apps/obs-events/update/index.ts",
-    "obs.events.generate": "npm run exec src/apps/obs-events/generate/index.ts",
-    "twitch.events.update": "npm run exec src/apps/twitch-events/update/index.ts",
-    "twitch.events.generate": "npm run exec src/apps/twitch-events/generate/index.ts",
-    "hello": "npm run exec src/apps/hello/index.ts",
+    "obs.events.update": "node src/apps/obs-events/update/index.ts",
+    "obs.events.generate": "node src/apps/obs-events/generate/index.ts",
+    "twitch.events.update": "node src/apps/twitch-events/update/index.ts",
+    "twitch.events.generate": "node src/apps/twitch-events/generate/index.ts",
+    "hello": "node src/apps/hello/index.ts",
     "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
   },
   "dependencies": {
