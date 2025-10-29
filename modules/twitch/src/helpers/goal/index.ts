@@ -1,1 +1,1 @@
-export * from "./goal.js"
+export * from "./goal.ts"

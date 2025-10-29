@@ -1,8 +1,8 @@
 export type {
   TwitchChatEventType,
   TwitchChatEvent,
-} from "./interfaces/index.js"
+} from "./interfaces/index.ts"
 
-export { default } from "./chat.js"
-export * from "./chat.js"
-export * from "./helpers.js"
+export { default } from "./chat.ts"
+export * from "./chat.ts"
+export * from "./helpers.ts"

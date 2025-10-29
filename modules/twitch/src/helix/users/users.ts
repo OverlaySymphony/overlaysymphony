@@ -1,5 +1,5 @@
-import { type Authentication } from "../../authentication/index.js"
-import { helix } from "../helix.js"
+import { type Authentication } from "../../authentication/index.ts"
+import { helix } from "../helix.ts"
 
 export interface TwitchUser {
   id: string

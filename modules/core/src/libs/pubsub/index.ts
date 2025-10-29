@@ -1,2 +1,2 @@
-export { default } from "./pubsub.js"
-export * from "./pubsub.js"
+export { default } from "./pubsub.ts"
+export * from "./pubsub.ts"

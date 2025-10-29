@@ -3,7 +3,7 @@ export {
   type EventConfigs,
   type EventType,
   registerEvent,
-} from "./events-helpers.js"
+} from "./events-helpers.ts"
 
-export { default } from "./browser.js"
-export * from "./browser.js"
+export { default } from "./browser.ts"
+export * from "./browser.ts"

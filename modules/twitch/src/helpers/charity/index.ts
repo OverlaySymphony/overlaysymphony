@@ -1,1 +1,1 @@
-export * from "./charity.js"
+export * from "./charity.ts"

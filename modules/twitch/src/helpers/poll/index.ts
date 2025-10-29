@@ -1,1 +1,1 @@
-export * from "./poll.js"
+export * from "./poll.ts"

@@ -1,4 +1,4 @@
-import { type TwitchUser, getUsers } from "../helix/users/index.js"
+import { type TwitchUser, getUsers } from "../helix/users/index.ts"
 
 export interface Authentication {
   tokenType: "bearer"

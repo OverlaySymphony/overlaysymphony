@@ -1,1 +1,1 @@
-export * from "./hype-train.js"
+export * from "./hype-train.ts"

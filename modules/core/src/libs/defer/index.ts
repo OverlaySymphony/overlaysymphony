@@ -1,1 +1,1 @@
-export { default } from "./defer.js"
+export { default } from "./defer.ts"

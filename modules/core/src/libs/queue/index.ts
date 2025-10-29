@@ -1,2 +1,2 @@
-export { default } from "./queue.js"
-export * from "./queue.js"
+export { default } from "./queue.ts"
+export * from "./queue.ts"

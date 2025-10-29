@@ -1,2 +1,2 @@
-export { default } from "./alerts.js"
-export * from "./alerts.js"
+export { default } from "./alerts.ts"
+export * from "./alerts.ts"

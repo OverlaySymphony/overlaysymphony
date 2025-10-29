@@ -1,4 +1,4 @@
-import { type EventConfigs, type EventType } from "./events-helpers.js"
+import { type EventConfigs, type EventType } from "./events-helpers.ts"
 
 export type SessionWelcomeMessage = {
   type: "session_welcome"

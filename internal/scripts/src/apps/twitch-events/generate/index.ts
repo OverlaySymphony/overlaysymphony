@@ -40,7 +40,7 @@ function makeIndexFile() {
     .sort()
 
   return trim(
-    ids.map((id) => `import "./${id.replace("@", "-")}.js"`).join("\n"),
+    ids.map((id) => `import "./${id.replace("@", "-")}.ts"`).join("\n"),
     true,
   )
 }
@@ -67,9 +67,9 @@ function makeEventFile({
 
   return trim(
     `
-      import { type EventConfig, registerEvent } from "../events-helpers.js"
+      import { type EventConfig, registerEvent } from "../events-helpers.ts"
 
-      declare module "../events-helpers.js" {
+      declare module "../events-helpers.ts" {
         interface EventConfigs {
           "${type}": ${name}
         }

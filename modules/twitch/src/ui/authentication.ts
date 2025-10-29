@@ -2,7 +2,7 @@ import {
   clearCachedAuthentication,
   getAuthentication,
   popupAuthentication,
-} from "../authentication/index.js"
+} from "../authentication/index.ts"
 
 declare global {
   interface Window {

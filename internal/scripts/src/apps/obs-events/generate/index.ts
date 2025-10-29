@@ -26,7 +26,7 @@ function makeIndexFile() {
     .map(([id]) => id)
     .sort()
 
-  return trim(ids.map((id) => `import "./${id}.js"`).join("\n"), true)
+  return trim(ids.map((id) => `import "./${id}.ts"`).join("\n"), true)
 }
 
 function makeEventFile({
@@ -43,9 +43,9 @@ function makeEventFile({
 
   return trim(
     `
-      import { type EventConfig, registerEvent } from "../events-helpers.js"
+      import { type EventConfig, registerEvent } from "../events-helpers.ts"
 
-      declare module "../events-helpers.js" {
+      declare module "../events-helpers.ts" {
         interface EventConfigs {
           "${type}": ${name}
         }

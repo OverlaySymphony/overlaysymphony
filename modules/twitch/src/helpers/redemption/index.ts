@@ -1,1 +1,1 @@
-export * from "./redemption.js"
+export * from "./redemption.ts"

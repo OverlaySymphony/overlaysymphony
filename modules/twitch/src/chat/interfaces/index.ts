@@ -1,6 +1,6 @@
-import { type ChatEvent } from "./events.js"
+import { type ChatEvent } from "./events.ts"
 
-export type { ChatEvent, ChatEventSource } from "./events.js"
+export type { ChatEvent, ChatEventSource } from "./events.ts"
 
 export type TwitchChatEventType = ChatEvent["type"]
 

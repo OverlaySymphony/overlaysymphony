@@ -1,7 +1,7 @@
-import { type Authentication } from "../../authentication/index.js"
-import { type EventConfigs, type EventType } from "../../eventsub/index.js"
+import { type Authentication } from "../../authentication/index.ts"
+import { type EventConfigs, type EventType } from "../../eventsub/index.ts"
 
-import { helix } from "../helix.js"
+import { helix } from "../helix.ts"
 
 interface SubscriptionWebhookTransport {
   method: "webhook"

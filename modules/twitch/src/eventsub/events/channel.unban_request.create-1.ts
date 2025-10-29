@@ -1,6 +1,6 @@
-import { type EventConfig, registerEvent } from "../events-helpers.js"
+import { type EventConfig, registerEvent } from "../events-helpers.ts"
 
-declare module "../events-helpers.js" {
+declare module "../events-helpers.ts" {
   interface EventConfigs {
     "channel.unban_request.create": ChannelUnbanRequestCreate
   }

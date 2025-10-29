@@ -1,4 +1,4 @@
-import { type TwitchEventSub } from "../../eventsub/index.js"
+import { type TwitchEventSub } from "../../eventsub/index.ts"
 
 export interface Goal {
   type: string

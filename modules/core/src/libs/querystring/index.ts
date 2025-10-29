@@ -1,2 +1,2 @@
-export { default } from "./querystring.js"
-export * from "./querystring.js"
+export { default } from "./querystring.ts"
+export * from "./querystring.ts"

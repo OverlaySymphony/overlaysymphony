@@ -1,12 +1,12 @@
 /// <reference types="obs-studio" />
 /// <reference types="../obs-studio.d.ts" />
 
-import "./events/index.js"
+import "./events/index.ts"
 
 import createEvents, { type Events } from "@overlaysymphony/core/libs/events"
 
 import { ControlLevel, getControlLevel } from "./actions-helpers.ts"
-import { type EventPayload, createSubscription } from "./events-helpers.js"
+import { type EventPayload, createSubscription } from "./events-helpers.ts"
 
 export type ObsBrowser = Events<EventPayload>
 

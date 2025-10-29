@@ -1,1 +1,1 @@
-export { default } from "./broadcast.js"
+export { default } from "./broadcast.ts"

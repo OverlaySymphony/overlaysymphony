@@ -3,7 +3,7 @@ import querystring from "@overlaysymphony/core/libs/querystring"
 import {
   type BareAuthentication,
   validateAuthentication,
-} from "../authentication/index.js"
+} from "../authentication/index.ts"
 
 const status = document.getElementById("status")
 const statuses = {

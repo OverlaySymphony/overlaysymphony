@@ -1,13 +1,13 @@
-import "./events/index.js"
+import "./events/index.ts"
 
 import createDefer from "@overlaysymphony/core/libs/defer"
 import createEvents, { type Events } from "@overlaysymphony/core/libs/events"
 
-import { type Authentication } from "../authentication/index.js"
-import { createSubscription } from "../helix/subscriptions/index.js"
+import { type Authentication } from "../authentication/index.ts"
+import { createSubscription } from "../helix/subscriptions/index.ts"
 
-import { type EventPayload, buildSubscription } from "./events-helpers.js"
-import { type TwitchMessage } from "./messages.js"
+import { type EventPayload, buildSubscription } from "./events-helpers.ts"
+import { type TwitchMessage } from "./messages.ts"
 
 export type TwitchEventSub = Events<EventPayload>
 
