@@ -1,16 +1,16 @@
-name: "Example: Demo"
+name: "Example: Code Demo"
 
 on:
   workflow_dispatch:
   push:
     paths:
-      - .github/workflows/example-demo.yml
+      - .github/workflows/example-demo-code.yml
       - internal/tooling/**
-      - examples/demo/**
+      - examples/demo-code/**
 
 env:
-  WORKSPACE: "overlaysymphony-examples-demo"
-  DIRECTORY: examples/demo
+  WORKSPACE: "overlaysymphony-examples-demo-code"
+  DIRECTORY: examples/demo-code
 
 jobs:
   verify:

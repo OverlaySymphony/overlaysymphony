@@ -39,7 +39,7 @@ importers:
         specifier: ^22.0.0
         version: 22.0.1
 
-  examples/demo:
+  examples/demo-code:
     dependencies:
       '@overlaysymphony/obs':
         specifier: workspace:*
