@@ -13,8 +13,12 @@ export interface TwitchUser {
   created_at: Date
 }
 
-type RawUser = Omit<TwitchUser, "created_at"> & {
-  created_at: string
+interface UsersResponse {
+  data: Array<
+    Omit<TwitchUser, "created_at"> & {
+      created_at: string
+    }
+  >
 }
 
 export async function getUsers(
@@ -22,21 +26,20 @@ export async function getUsers(
   id?: string | string[],
   login?: string | string[],
 ): Promise<TwitchUser[]> {
-  const data = await helix<TwitchUser, RawUser>(
-    authentication,
-    {
-      method: "GET",
-      path: "/users",
-      params: {
-        id,
-        login,
-      },
+  const { data: users } = await helix<
+    UsersResponse,
+    { id?: string | string[]; login?: string | string[] }
+  >(authentication, {
+    method: "GET",
+    path: "/users",
+    params: {
+      id,
+      login,
     },
-    ({ created_at, ...data }) => ({
-      ...data,
-      created_at: new Date(created_at),
-    }),
-  )
+  })
 
-  return data
+  return users.map(({ created_at, ...user }) => ({
+    ...user,
+    created_at: new Date(created_at),
+  }))
 }
