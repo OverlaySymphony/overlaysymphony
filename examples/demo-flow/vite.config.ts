@@ -1,11 +1,12 @@
 import { readdirSync } from "node:fs"
 import { resolve } from "node:path"
 
+import react from "@vitejs/plugin-react"
 import { defineConfig as defineViteConfig } from "vite"
 
 export default defineViteConfig((baseEnv) => {
   return {
-    plugins: [],
+    plugins: [react()],
     build: {
       target: "esnext",
       rollupOptions: {

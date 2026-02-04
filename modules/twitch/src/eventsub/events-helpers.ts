@@ -1,3 +1,9 @@
+export interface EventConfigs {}
+
+export type EventType = keyof EventConfigs
+export type EventPayload<Type extends EventType = EventType> =
+  EventConfigs[Type]["Payload"]
+
 export type EventConfig<
   Config extends {
     Type: string
@@ -22,12 +28,6 @@ export type EventConfig<
     event: Config["Event"]
   }
 }
-
-export interface EventConfigs {}
-
-export type EventType = keyof EventConfigs
-export type EventPayload<Type extends EventType = EventType> =
-  EventConfigs[Type]["Payload"]
 
 const events: {
   [Type in EventType]?: {

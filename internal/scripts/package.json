@@ -1,5 +1,5 @@
 {
-  "name": "scripts",
+  "name": "@overlaysymphony/scripts",
   "private": true,
   "version": "0.0.0",
   "description": "",
@@ -8,6 +8,7 @@
     "#shared/*": "./src/shared/*.ts"
   },
   "exports": {
+    "./*": "./src/shared/*.ts",
     "./package.json": "./package.json"
   },
   "scripts": {

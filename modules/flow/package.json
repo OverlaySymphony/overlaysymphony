@@ -1,0 +1,45 @@
+{
+  "name": "@overlaysymphony/flow",
+  "version": "0.2.3",
+  "description": "Flow logic module for the OverlaySymphony interactive streaming framework.",
+  "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
+  "type": "module",
+  "exports": {
+    ".": "./src/main.ts",
+    "./modules": "./src/modules/index.ts",
+    "./editor": "./src/Editor/index.ts",
+    "./viewer": "./src/Viewer/index.ts",
+    "./package.json": "./package.json"
+  },
+  "imports": {
+    "#shared/*": "./src/shared/*/index.ts"
+  },
+  "scripts": {
+    "lint": "pnpm run \"/^lint-.*/\"",
+    "lint-typecheck": "tsc --noEmit",
+    "lint-eslint": "eslint .",
+    "lint-prettier": "prettier --check .",
+    "lint-depcheck": "depcheck .",
+    "test": "vitest",
+    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
+  },
+  "dependencies": {
+    "@dagrejs/dagre": "^1.1.5",
+    "@xyflow/react": "^12.8.3",
+    "classnames": "^2.5.1"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@overlaysymphony/tooling": "workspace:*",
+    "@types/react": "^19.1.10",
+    "@vitest/coverage-v8": "catalog:",
+    "depcheck": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "vitest": "catalog:"
+  }
+}

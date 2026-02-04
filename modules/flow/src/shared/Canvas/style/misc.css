@@ -1,0 +1,34 @@
+/** Guides
+ *
+ * .react-flow
+ *
+ * canvas.os-flow__guides
+ */
+.os-flow__guides {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/** Minimap
+ *
+ * .react-flow
+ *
+ * .react-flow__minimap.react-flow__panel.${position}
+ *   .react-flow__minimap-svg
+ *   rect.react-flow__minimap-node
+ *   path.react-flow__minimap-mask
+ */
+
+/** Background
+ *
+ * .react-flow
+ *
+ * svg.react-flow__background
+ *   pattern
+ *     .react-flow__background-pattern
+ *   rect
+ */

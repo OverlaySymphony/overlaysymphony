@@ -1,0 +1,9 @@
+{
+  "extends": "@overlaysymphony/tooling/typescript",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler"
+  },
+  "include": ["src", "vite.config.ts", "eslint.config.mjs"]
+}

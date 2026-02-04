@@ -1,0 +1,74 @@
+/** Edges
+ *
+ * .react-flow
+ *   .react-flow__renderer
+ *     .react-flow__pane
+ *       .react-flow__viewport
+ *
+ * .react-flow__edges
+ *   svg.react-flow__marker
+ *   svg
+ *     g.react-flow__edge.react-flow__edge-${edgeType} (.selectable .selected .inactive .updating .animated)
+ *       path.react-flow__edge-path
+ *       path.react-flow__edge-interaction
+ *       g.react-flow__edge-textwrapper
+ *         rect.react-flow__edge-textbg
+ *         text.react-flow__edge-text
+ *       circle.react-flow__edgeupdater.react-flow__edgeupdater-${handleType}
+ * svg.react-flow__connectionline
+ *   g.react-flow__connection
+ *     path.react-flow__connection-path
+ * .react-flow__edgelabel-renderer
+ */
+
+.react-flow__edges {
+}
+
+.react-flow__marker {
+}
+
+.react-flow__edge {
+  &.inactive {
+  }
+
+  &.selectable {
+    &.selected {
+    }
+  }
+
+  &.animated {
+  }
+
+  &.updating {
+    .react-flow__edge-path {
+      stroke: #777;
+    }
+  }
+
+  .react-flow__edge-path {
+  }
+
+  .react-flow__edge-textwrapper {
+    .react-flow__edge-text {
+      font-size: 10px;
+      fill: var(--xy-edge-label-color, var(--xy-edge-label-color-default));
+    }
+
+    .react-flow__edge-textbg {
+      fill: var(
+        --xy-edge-label-background-color,
+        var(--xy-edge-label-background-color-default)
+      );
+    }
+  }
+}
+
+.react-flow__connectionline {
+  .react-flow__connection {
+    .react-flow__connection-path {
+    }
+  }
+}
+
+.react-flow__edgelabel-renderer {
+}

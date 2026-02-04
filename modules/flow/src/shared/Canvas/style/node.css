@@ -1,0 +1,131 @@
+/** Nodes
+ *
+ * .react-flow
+ *   .react-flow__renderer
+ *     .react-flow__pane
+ *       .react-flow__viewport
+ *
+ * .react-flow__nodes
+ *   .react-flow__node.react-flow__node-${nodeType} (.draggable .dragging .selectable .selected)
+ *     .react-flow__resize-control.${position} (.handle .line)
+ *     .react-flow__node-toolbar
+ *     .react-flow__handle.react-flow__handle-${position} (.connectingfrom .connectionindicator)
+ */
+
+.react-flow__nodes {
+}
+
+.react-flow__node {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 100px;
+  padding: var(--xy-node-padding, var(--xy-node-padding-default));
+
+  font-size: 12px;
+  text-align: center;
+  color: var(--xy-node-color, var(--xy-node-color-default));
+  background-color: var(
+    --xy-node-background-color,
+    var(--xy-node-background-color-default)
+  );
+
+  border: var(--xy-node-border, var(--xy-node-border-default));
+  border-radius: var(
+    --xy-node-border-radius,
+    var(--xy-node-border-radius-default)
+  );
+
+  &.selectable {
+    &:hover {
+      box-shadow: var(
+        --xy-node-boxshadow-hover,
+        var(--xy-node-boxshadow-hover-default)
+      );
+    }
+
+    &.selected,
+    &:focus,
+    &:focus-visible {
+      box-shadow: var(
+        --xy-node-boxshadow-selected,
+        var(--xy-node-boxshadow-selected-default)
+      );
+    }
+
+    &:focus,
+    &:focus-visible {
+      outline: none;
+    }
+  }
+
+  .draggable {
+  }
+
+  .dragging {
+  }
+}
+
+.react-flow__resize-control {
+}
+
+.react-flow__node-toolbar {
+}
+
+.react-flow__handle {
+  width: 6px;
+  height: 6px;
+  background-color: var(
+    --xy-handle-background-color,
+    var(--xy-handle-background-color-default)
+  );
+  border: 1px solid
+    var(--xy-handle-border-color, var(--xy-handle-border-color-default));
+  border-radius: 100%;
+
+  &.react-flow__handle-left {
+    margin-left: calc(
+      -1 * var(--xy-node-padding, var(--xy-node-padding-default))
+    );
+  }
+
+  &.react-flow__handle-right {
+    margin-right: calc(
+      -1 * var(--xy-node-padding, var(--xy-node-padding-default))
+    );
+  }
+
+  &.connectionindicator {
+  }
+
+  &.connectingfrom {
+  }
+}
+
+.os-flow__ports {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+
+  .os-flow__ports-list {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.os-flow__port {
+  position: relative;
+
+  .os-flow__port-label {
+    font-size: 0.75em;
+
+    .os-flow__ports-inputs & {
+      text-align: left;
+    }
+
+    .os-flow__ports-outputs & {
+      text-align: right;
+    }
+  }
+}

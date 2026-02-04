@@ -9,7 +9,7 @@ on:
       - internal/scripts/**
 
 env:
-  WORKSPACE: "scripts"
+  WORKSPACE: "@overlaysymphony/scripts"
   DIRECTORY: internal/scripts
 
 jobs:
@@ -28,4 +28,4 @@ jobs:
         uses: ./.github/actions/verify
 
       - name: Hello
-        run: npx nx run scripts:hello
+        run: npx nx run ${{ env.WORKSPACE }}:hello

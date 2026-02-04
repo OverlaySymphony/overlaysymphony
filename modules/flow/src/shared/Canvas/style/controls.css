@@ -1,0 +1,86 @@
+/** Controls
+ *
+ * .react-flow
+ *
+ * .react-flow__controls.${orientation}
+ *   .react-flow__controls-button.react-flow__controls-${buttonType}
+ */
+
+.react-flow__controls {
+  box-shadow: var(
+    --xy-controls-box-shadow,
+    var(--xy-controls-box-shadow-default)
+  );
+
+  &.vertical {
+    .react-flow__controls-button {
+      border-width: 0 0 1px 0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &.horizontal {
+    .react-flow__controls-button {
+      border-width: 0 1px 0 0;
+
+      &:last-child {
+        border-right: none;
+      }
+    }
+  }
+}
+
+.react-flow__controls-button {
+  height: 26px;
+  width: 26px;
+  padding: 4px;
+
+  border: none;
+  background: var(
+    --xy-controls-button-background-color,
+    var(--xy-controls-button-background-color-default)
+  );
+  border: 1px solid
+    var(
+      --xy-controls-button-border-color-props,
+      var(
+        --xy-controls-button-border-color,
+        var(--xy-controls-button-border-color-default)
+      )
+    );
+
+  color: var(
+    --xy-controls-button-color-props,
+    var(--xy-controls-button-color, var(--xy-controls-button-color-default))
+  );
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background: var(
+      --xy-controls-button-background-color-hover-props,
+      var(
+        --xy-controls-button-background-color-hover,
+        var(--xy-controls-button-background-color-hover-default)
+      )
+    );
+    color: var(
+      --xy-controls-button-color-hover-props,
+      var(
+        --xy-controls-button-color-hover,
+        var(--xy-controls-button-color-hover-default)
+      )
+    );
+  }
+
+  &:disabled {
+    pointer-events: none;
+
+    svg {
+      fill-opacity: 0.4;
+    }
+  }
+}
