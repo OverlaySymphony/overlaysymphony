@@ -5,7 +5,9 @@
     "type": "automod.message.hold",
     "version": "1",
     "primary": false,
-    "scopes": ["moderator:manage:automod"],
+    "scopes": [
+      "moderator:manage:automod"
+    ],
     "description": "the user's message is caught by automod for review.",
     "condition": {
       "type": "object",
@@ -149,7 +151,9 @@
     "type": "automod.message.hold",
     "version": "2",
     "primary": true,
-    "scopes": ["moderator:manage:automod"],
+    "scopes": [
+      "moderator:manage:automod"
+    ],
     "description": "the user's message is caught by automod for review.  Only public blocked terms trigger notifications, not private ones.",
     "condition": {
       "type": "object",
@@ -293,7 +297,9 @@
     "type": "automod.message.update",
     "version": "1",
     "primary": false,
-    "scopes": ["moderator:manage:automod"],
+    "scopes": [
+      "moderator:manage:automod"
+    ],
     "description": "a message in the automod queue had its status changed.",
     "condition": {
       "type": "object",
@@ -457,7 +463,9 @@
     "type": "automod.message.update",
     "version": "2",
     "primary": true,
-    "scopes": ["moderator:manage:automod"],
+    "scopes": [
+      "moderator:manage:automod"
+    ],
     "description": "a message in the automod queue had its status changed. Only public blocked terms trigger notifications, not private ones.",
     "condition": {
       "type": "object",
@@ -621,7 +629,9 @@
     "type": "automod.settings.update",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:automod"],
+    "scopes": [
+      "moderator:read:automod"
+    ],
     "description": "the broadcaster's automod settings are updated.",
     "condition": {
       "type": "object",
@@ -727,7 +737,9 @@
     "type": "automod.terms.update",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:manage:automod"],
+    "scopes": [
+      "moderator:manage:automod"
+    ],
     "description": "the broadcaster's automod terms are updated. Changes to private terms are not sent.",
     "condition": {
       "type": "object",
@@ -803,7 +815,9 @@
     "type": "channel.bits.use",
     "version": "1",
     "primary": true,
-    "scopes": ["bits:read"],
+    "scopes": [
+      "bits:read"
+    ],
     "description": "Bits are used on a channel.",
     "condition": {
       "type": "object",
@@ -1047,7 +1061,9 @@
     "type": "channel.follow",
     "version": "2",
     "primary": true,
-    "scopes": ["moderator:read:followers"],
+    "scopes": [
+      "moderator:read:followers"
+    ],
     "description": "the specified channel receives a follow.",
     "condition": {
       "type": "object",
@@ -1113,7 +1129,9 @@
     "type": "channel.ad_break.begin",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:ads"],
+    "scopes": [
+      "channel:read:ads"
+    ],
     "description": "a midroll commercial break has started running.",
     "condition": {
       "type": "object",
@@ -1184,7 +1202,9 @@
     "type": "channel.chat.clear",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "a moderator or bot has cleared all messages from the chat room.",
     "condition": {
       "type": "object",
@@ -1230,7 +1250,9 @@
     "type": "channel.chat.clear_user_messages",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "a moderator or bot has cleared all messages from a specific user.",
     "condition": {
       "type": "object",
@@ -1291,7 +1313,9 @@
     "type": "channel.chat.message",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "a user sends a message to a specific chat room.",
     "condition": {
       "type": "object",
@@ -1605,7 +1629,9 @@
     "type": "channel.chat.message_delete",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "a moderator has removed a specific message.",
     "condition": {
       "type": "object",
@@ -1671,7 +1697,9 @@
     "type": "channel.chat.notification",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "an event that appears in chat has occurred.",
     "condition": {
       "type": "object",
@@ -2265,7 +2293,9 @@
     "type": "channel.chat_settings.update",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "the broadcaster's chat settings are updated.",
     "condition": {
       "type": "object",
@@ -2346,7 +2376,9 @@
     "type": "channel.chat.user_message_hold",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "the user's message is caught by automod.",
     "condition": {
       "type": "object",
@@ -2475,7 +2507,9 @@
     "type": "channel.chat.user_message_update",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:chat"],
+    "scopes": [
+      "user:read:chat"
+    ],
     "description": "the user's message's automod status is updated.",
     "condition": {
       "type": "object",
@@ -2609,7 +2643,9 @@
     "type": "channel.subscribe",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:subscriptions"],
+    "scopes": [
+      "channel:read:subscriptions"
+    ],
     "description": "the specified channel receives a subscriber. This does not include resubscribes.",
     "condition": {
       "type": "object",
@@ -2675,7 +2711,9 @@
     "type": "channel.subscription.end",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:subscriptions"],
+    "scopes": [
+      "channel:read:subscriptions"
+    ],
     "description": "a subscription to the specified channel ends.",
     "condition": {
       "type": "object",
@@ -2741,7 +2779,9 @@
     "type": "channel.subscription.gift",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:subscriptions"],
+    "scopes": [
+      "channel:read:subscriptions"
+    ],
     "description": "a viewer gives a gift subscription to one or more users in the specified channel.",
     "condition": {
       "type": "object",
@@ -2817,7 +2857,9 @@
     "type": "channel.subscription.message",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:subscriptions"],
+    "scopes": [
+      "channel:read:subscriptions"
+    ],
     "description": "a user sends a resubscription chat message in a specific channel.",
     "condition": {
       "type": "object",
@@ -2927,7 +2969,9 @@
     "type": "channel.cheer",
     "version": "1",
     "primary": true,
-    "scopes": ["bits:read"],
+    "scopes": [
+      "bits:read"
+    ],
     "description": "a user cheers on the specified channel.",
     "condition": {
       "type": "object",
@@ -3064,7 +3108,9 @@
     "type": "channel.ban",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:moderate"],
+    "scopes": [
+      "channel:moderate"
+    ],
     "description": "a viewer is banned from the specified channel.",
     "condition": {
       "type": "object",
@@ -3155,7 +3201,9 @@
     "type": "channel.unban",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:moderate"],
+    "scopes": [
+      "channel:moderate"
+    ],
     "description": "a viewer is unbanned from the specified channel.",
     "condition": {
       "type": "object",
@@ -3226,7 +3274,10 @@
     "type": "channel.unban_request.create",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:unban", "moderator:manage:unban"],
+    "scopes": [
+      "moderator:read:unban",
+      "moderator:manage:unban"
+    ],
     "description": "a user creates an unban request.",
     "condition": {
       "type": "object",
@@ -3302,7 +3353,10 @@
     "type": "channel.unban_request.resolve",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:unban", "moderator:manage:unban"],
+    "scopes": [
+      "moderator:read:unban",
+      "moderator:manage:unban"
+    ],
     "description": "an unban request has been resolved.",
     "condition": {
       "type": "object",
@@ -4339,7 +4393,9 @@
     "type": "channel.moderator.add",
     "version": "1",
     "primary": true,
-    "scopes": ["moderation:read"],
+    "scopes": [
+      "moderation:read"
+    ],
     "description": "moderator privileges were added to a user on the specified channel.",
     "condition": {
       "type": "object",
@@ -4395,7 +4451,9 @@
     "type": "channel.moderator.remove",
     "version": "1",
     "primary": true,
-    "scopes": ["moderation:read"],
+    "scopes": [
+      "moderation:read"
+    ],
     "description": "moderator privileges were removed from a user on the specified channel.",
     "condition": {
       "type": "object",
@@ -4790,7 +4848,10 @@
     "type": "channel.channel_points_automatic_reward_redemption.add",
     "version": "1",
     "primary": false,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a viewer has redeemed an automatic channel points reward on the specified channel.",
     "condition": {
       "type": "object",
@@ -4929,7 +4990,10 @@
     "type": "channel.channel_points_automatic_reward_redemption.add",
     "version": "2",
     "primary": true,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a viewer has redeemed an automatic channel points reward on the specified channel.",
     "condition": {
       "type": "object",
@@ -5068,7 +5132,10 @@
     "type": "channel.channel_points_custom_reward.add",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a custom channel points reward has been created for the specified channel.",
     "condition": {
       "type": "object",
@@ -5264,7 +5331,10 @@
     "type": "channel.channel_points_custom_reward.update",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a custom channel points reward has been updated for the specified channel.",
     "condition": {
       "type": "object",
@@ -5465,7 +5535,10 @@
     "type": "channel.channel_points_custom_reward.remove",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a custom channel points reward has been removed from the specified channel.",
     "condition": {
       "type": "object",
@@ -5666,7 +5739,10 @@
     "type": "channel.channel_points_custom_reward_redemption.add",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a viewer has redeemed a custom channel points reward on the specified channel.",
     "condition": {
       "type": "object",
@@ -5774,7 +5850,10 @@
     "type": "channel.channel_points_custom_reward_redemption.update",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:redemptions", "channel:manage:redemptions"],
+    "scopes": [
+      "channel:read:redemptions",
+      "channel:manage:redemptions"
+    ],
     "description": "a redemption of a channel points custom reward has been updated for the specified channel.",
     "condition": {
       "type": "object",
@@ -5882,7 +5961,10 @@
     "type": "channel.poll.begin",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:polls", "channel:manage:polls"],
+    "scopes": [
+      "channel:read:polls",
+      "channel:manage:polls"
+    ],
     "description": "a poll started on the specified channel.",
     "condition": {
       "type": "object",
@@ -6009,7 +6091,10 @@
     "type": "channel.poll.progress",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:polls", "channel:manage:polls"],
+    "scopes": [
+      "channel:read:polls",
+      "channel:manage:polls"
+    ],
     "description": "users respond to a poll on the specified channel.",
     "condition": {
       "type": "object",
@@ -6136,7 +6221,10 @@
     "type": "channel.poll.end",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:polls", "channel:manage:polls"],
+    "scopes": [
+      "channel:read:polls",
+      "channel:manage:polls"
+    ],
     "description": "a poll ended on the specified channel.",
     "condition": {
       "type": "object",
@@ -6268,7 +6356,10 @@
     "type": "channel.prediction.begin",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:predictions", "channel:manage:predictions"],
+    "scopes": [
+      "channel:read:predictions",
+      "channel:manage:predictions"
+    ],
     "description": "a Prediction started on the specified channel.",
     "condition": {
       "type": "object",
@@ -6393,7 +6484,10 @@
     "type": "channel.prediction.progress",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:predictions", "channel:manage:predictions"],
+    "scopes": [
+      "channel:read:predictions",
+      "channel:manage:predictions"
+    ],
     "description": "users participated in a Prediction on the specified channel.",
     "condition": {
       "type": "object",
@@ -6518,7 +6612,10 @@
     "type": "channel.prediction.lock",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:predictions", "channel:manage:predictions"],
+    "scopes": [
+      "channel:read:predictions",
+      "channel:manage:predictions"
+    ],
     "description": "a Prediction was locked on the specified channel.",
     "condition": {
       "type": "object",
@@ -6643,7 +6740,10 @@
     "type": "channel.prediction.end",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:predictions", "channel:manage:predictions"],
+    "scopes": [
+      "channel:read:predictions",
+      "channel:manage:predictions"
+    ],
     "description": "a Prediction ended on the specified channel.",
     "condition": {
       "type": "object",
@@ -6778,7 +6878,9 @@
     "type": "channel.suspicious_user.update",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:suspicious"],
+    "scopes": [
+      "moderator:read:suspicious"
+    ],
     "description": "a suspicious user has been updated.",
     "condition": {
       "type": "object",
@@ -6859,7 +6961,9 @@
     "type": "channel.suspicious_user.message",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:suspicious"],
+    "scopes": [
+      "moderator:read:suspicious"
+    ],
     "description": "a chat message has been sent by a suspicious user.",
     "condition": {
       "type": "object",
@@ -7013,7 +7117,10 @@
     "type": "channel.vip.add",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:vips", "channel:manage:vips"],
+    "scopes": [
+      "channel:read:vips",
+      "channel:manage:vips"
+    ],
     "description": "a VIP is added to the channel.",
     "condition": {
       "type": "object",
@@ -7069,7 +7176,10 @@
     "type": "channel.vip.remove",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:vips", "channel:manage:vips"],
+    "scopes": [
+      "channel:read:vips",
+      "channel:manage:vips"
+    ],
     "description": "a VIP is removed from the channel.",
     "condition": {
       "type": "object",
@@ -7125,7 +7235,10 @@
     "type": "channel.warning.acknowledge",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:warnings", "moderator:manage:warnings"],
+    "scopes": [
+      "moderator:read:warnings",
+      "moderator:manage:warnings"
+    ],
     "description": "a user awknowledges a warning. Broadcasters and moderators can see the warning's details.",
     "condition": {
       "type": "object",
@@ -7186,7 +7299,10 @@
     "type": "channel.warning.send",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:warnings", "moderator:manage:warnings"],
+    "scopes": [
+      "moderator:read:warnings",
+      "moderator:manage:warnings"
+    ],
     "description": "a user is sent a warning. Broadcasters and moderators can see the warning's details.",
     "condition": {
       "type": "object",
@@ -7272,7 +7388,9 @@
     "type": "channel.hype_train.begin",
     "version": "1",
     "primary": false,
-    "scopes": ["channel:read:hype"],
+    "scopes": [
+      "channel:read:hype"
+    ],
     "description": "a Hype Train begins on the specified channel.",
     "condition": {
       "type": "object",
@@ -7417,7 +7535,9 @@
     "type": "channel.hype_train.begin",
     "version": "2",
     "primary": true,
-    "scopes": ["channel:read:hype"],
+    "scopes": [
+      "channel:read:hype"
+    ],
     "description": "a Hype Train begins on the specified channel.",
     "condition": {
       "type": "object",
@@ -7562,7 +7682,9 @@
     "type": "channel.hype_train.progress",
     "version": "1",
     "primary": false,
-    "scopes": ["channel:read:hype"],
+    "scopes": [
+      "channel:read:hype"
+    ],
     "description": "a Hype Train makes progress on the specified channel.",
     "condition": {
       "type": "object",
@@ -7707,7 +7829,9 @@
     "type": "channel.hype_train.progress",
     "version": "2",
     "primary": true,
-    "scopes": ["channel:read:hype"],
+    "scopes": [
+      "channel:read:hype"
+    ],
     "description": "a Hype Train makes progress on the specified channel.",
     "condition": {
       "type": "object",
@@ -7852,7 +7976,9 @@
     "type": "channel.hype_train.end",
     "version": "1",
     "primary": false,
-    "scopes": ["channel:read:hype"],
+    "scopes": [
+      "channel:read:hype"
+    ],
     "description": "a Hype Train ends on the specified channel.",
     "condition": {
       "type": "object",
@@ -7960,7 +8086,9 @@
     "type": "channel.hype_train.end",
     "version": "2",
     "primary": true,
-    "scopes": ["channel:read:hype"],
+    "scopes": [
+      "channel:read:hype"
+    ],
     "description": "a Hype Train ends on the specified channel.",
     "condition": {
       "type": "object",
@@ -8068,7 +8196,9 @@
     "type": "channel.charity_campaign.donate",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:charity"],
+    "scopes": [
+      "channel:read:charity"
+    ],
     "description": "a user donates to the broadcaster's charity campaign.",
     "condition": {
       "type": "object",
@@ -8176,7 +8306,9 @@
     "type": "channel.charity_campaign.start",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:charity"],
+    "scopes": [
+      "channel:read:charity"
+    ],
     "description": "the broadcaster starts a charity campaign.",
     "condition": {
       "type": "object",
@@ -8291,7 +8423,9 @@
     "type": "channel.charity_campaign.progress",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:charity"],
+    "scopes": [
+      "channel:read:charity"
+    ],
     "description": "progress is made towards the campaign's goal or the broadcaster changes the fundraising goal.",
     "condition": {
       "type": "object",
@@ -8401,7 +8535,9 @@
     "type": "channel.charity_campaign.stop",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:charity"],
+    "scopes": [
+      "channel:read:charity"
+    ],
     "description": "the broadcaster stops a charity campaign.",
     "condition": {
       "type": "object",
@@ -8743,7 +8879,10 @@
     "type": "channel.shield_mode.begin",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:shield", "moderator:manage:shield"],
+    "scopes": [
+      "moderator:read:shield",
+      "moderator:manage:shield"
+    ],
     "description": "the broadcaster activates Shield Mode.",
     "condition": {
       "type": "object",
@@ -8814,7 +8953,10 @@
     "type": "channel.shield_mode.end",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:shield", "moderator:manage:shield"],
+    "scopes": [
+      "moderator:read:shield",
+      "moderator:manage:shield"
+    ],
     "description": "the broadcaster deactivates Shield Mode.",
     "condition": {
       "type": "object",
@@ -8885,7 +9027,10 @@
     "type": "channel.shoutout.create",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:shoutouts", "moderator:manage:shoutouts"],
+    "scopes": [
+      "moderator:read:shoutouts",
+      "moderator:manage:shoutouts"
+    ],
     "description": "the specified broadcaster sends a Shoutout.",
     "condition": {
       "type": "object",
@@ -8981,7 +9126,10 @@
     "type": "channel.shoutout.receive",
     "version": "1",
     "primary": true,
-    "scopes": ["moderator:read:shoutouts", "moderator:manage:shoutouts"],
+    "scopes": [
+      "moderator:read:shoutouts",
+      "moderator:manage:shoutouts"
+    ],
     "description": "the specified broadcaster receives a Shoutout.",
     "condition": {
       "type": "object",
@@ -9267,7 +9415,9 @@
     "type": "channel.goal.begin",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:goals"],
+    "scopes": [
+      "channel:read:goals"
+    ],
     "description": "the broadcaster begins a goal.",
     "condition": {
       "type": "object",
@@ -9348,7 +9498,9 @@
     "type": "channel.goal.progress",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:goals"],
+    "scopes": [
+      "channel:read:goals"
+    ],
     "description": "progress (either positive or negative) is made towards the broadcaster's goal.",
     "condition": {
       "type": "object",
@@ -9429,7 +9581,9 @@
     "type": "channel.goal.end",
     "version": "1",
     "primary": true,
-    "scopes": ["channel:read:goals"],
+    "scopes": [
+      "channel:read:goals"
+    ],
     "description": "the broadcaster ends a goal.",
     "condition": {
       "type": "object",
@@ -9699,7 +9853,9 @@
     "type": "user.update",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:email"],
+    "scopes": [
+      "user:read:email"
+    ],
     "description": "a user has updated their account.",
     "condition": {
       "type": "object",
@@ -9755,7 +9911,10 @@
     "type": "user.whisper.message",
     "version": "1",
     "primary": true,
-    "scopes": ["user:read:whispers", "user:manage:whispers"],
+    "scopes": [
+      "user:read:whispers",
+      "user:manage:whispers"
+    ],
     "description": "a user receives a whisper.",
     "condition": {
       "type": "object",

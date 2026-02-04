@@ -49,14 +49,19 @@ type ActiveSubscription<Type extends EventType> =
     transport: SubscriptionTransport
   }
 
+type ActiveSubscriptionResponse<Type extends EventType> = {
+  data: Array<ActiveSubscription<Type>>
+}
+
 export async function createSubscription<Type extends EventType>(
   authentication: Authentication,
   transport: SubscriptionTransport,
   subscription: EventConfigs[Type]["Subscription"],
 ): Promise<ActiveSubscription<Type>> {
-  const [activeSubscription] = await helix<
-    ActiveSubscription<EventType>,
-    never,
+  const {
+    data: [activeSubscription],
+  } = await helix<
+    ActiveSubscriptionResponse<EventType>,
     never,
     SubscriptionRequest<EventType>
   >(authentication, {
@@ -74,8 +79,8 @@ export async function createSubscription<Type extends EventType>(
 export async function getSubscriptions(
   authentication: Authentication,
 ): Promise<Array<ActiveSubscription<EventType>>> {
-  const subscriptions = await helix<
-    ActiveSubscription<EventType>,
+  const { data: subscriptions } = await helix<
+    ActiveSubscriptionResponse<EventType>,
     never,
     {
       status?: ActiveSubscription<EventType>["status"]
@@ -95,7 +100,7 @@ export async function deleteSubscription(
   authentication: Authentication,
   id: string,
 ): Promise<void> {
-  await helix<never, never, { id: string }>(authentication, {
+  await helix<never, { id: string }>(authentication, {
     method: "DELETE",
     path: "/eventsub/subscriptions",
     params: {

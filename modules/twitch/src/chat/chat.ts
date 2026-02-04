@@ -27,11 +27,13 @@ type ChatMessageSubscriber = (
 
 interface ChatCommandSubscriber {
   (
+    name: string,
     callback: (event: TwitchChatEvent<"PRIVMSG-COMMAND">) => void,
-    name?: never,
+    _?: never,
   ): () => void
   (
     name: string,
+    pattern: string,
     callback: (event: TwitchChatEvent<"PRIVMSG-COMMAND">) => void,
   ): () => void
 }
@@ -134,8 +136,9 @@ export default async function createChat(
       })
     }
 
-    const onCommand: ChatCommandSubscriber = (...args) => {
-      const name = typeof args[0] === "string" ? args[0] : undefined
+    const onCommand: ChatCommandSubscriber = (name, ...args) => {
+      const pattern = typeof args[0] === "string" ? args[0] : undefined
+
       const callback = typeof args[0] === "function" ? args[0] : args[1]
       if (!callback) {
         throw new Error("onCommand: Missing callback.")
@@ -144,6 +147,10 @@ export default async function createChat(
       return pubsub.subscribe((event) => {
         if (event.type === "PRIVMSG-COMMAND") {
           if (typeof name === "undefined" || event.command === name) {
+            if (pattern) {
+              // event.parameters = event.parameters
+            }
+
             callback(event)
           }
         }
