@@ -1,3 +1,4 @@
+import { isBroadcaster } from "@overlaysymphony/twitch/chat"
 import { onAlert } from "@overlaysymphony/twitch/helpers/alerts"
 
 import { browser } from "#shared/services/obs"
@@ -17,14 +18,18 @@ browser.on(
   },
 )
 
-chat.onCommand("hi", (event) => {
-  chat.send(`Welcome in, @${event.tags?.displayName}!`)
+chat.onCommand("hi", async (event) => {
+  if (isBroadcaster(event)) {
+    await chat.send(`Welcome in, @${event.chatter_user_name}!`)
+  } else {
+    await chat.send(`Welcome in, @${event.chatter_user_name}!`)
+  }
 })
 
-onAlert(eventsub, (payload) => {
+onAlert(eventsub, async (payload) => {
   if (payload.type === "channel.follow") {
     // chat.send(`Welcome aboard, @${payload.event.user_login}!`)
-    chat.send(`Welcome aboard, ${payload.event.user_name}!`)
+    await chat.send(`Welcome aboard, ${payload.event.user_name}!`)
     return
   }
 

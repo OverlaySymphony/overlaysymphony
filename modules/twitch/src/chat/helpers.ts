@@ -1,36 +1,45 @@
 interface ApplicableChatEvent {
-  tags?: {
-    mod?: boolean
-    badges?: {
-      broadcaster?: boolean
-    }
-  }
+  badges: Array<{
+    set_id: string
+    id: string
+    info: string
+  }>
 }
 
-export function isBroadcaster(event: ApplicableChatEvent): boolean | null {
-  const broadcaster = event.tags?.badges?.broadcaster
-
-  if (typeof broadcaster === "undefined") return null
+export function isBroadcaster(event: ApplicableChatEvent): boolean {
+  const broadcaster = !!event.badges.find((badge) => {
+    return badge.set_id === "broadcaster"
+  })
 
   return broadcaster
 }
 
-export function isMod(event: ApplicableChatEvent): boolean | null {
-  const broadcaster = event.tags?.badges?.broadcaster
-  const mod = event.tags?.mod
+export function isModerator(event: ApplicableChatEvent): boolean {
+  const broadcaster = !!event.badges.find((badge) => {
+    return badge.set_id === "broadcaster"
+  })
+  const moderator = !!event.badges.find((badge) => {
+    return badge.set_id === "moderator"
+  })
 
-  if (typeof broadcaster === "undefined" || typeof mod === "undefined")
-    return null
-
-  return broadcaster || mod
+  return broadcaster || moderator
 }
 
-export function isModOnly(event: ApplicableChatEvent): boolean | null {
-  const broadcaster = event.tags?.badges?.broadcaster
-  const mod = event.tags?.mod
+export function isModeratorOnly(event: ApplicableChatEvent): boolean {
+  const broadcaster = !!event.badges.find((badge) => {
+    return badge.set_id === "broadcaster"
+  })
+  const moderator = !!event.badges.find((badge) => {
+    return badge.set_id === "moderator"
+  })
 
-  if (typeof broadcaster === "undefined" || typeof mod === "undefined")
-    return null
+  return !broadcaster && moderator
+}
 
-  return mod && !broadcaster
+export function isSubscriber(event: ApplicableChatEvent): false | number {
+  const subscriber = event.badges.find((badge) => {
+    return badge.set_id === "subscriber"
+  })
+
+  return +(subscriber?.info ?? "0") || false
 }

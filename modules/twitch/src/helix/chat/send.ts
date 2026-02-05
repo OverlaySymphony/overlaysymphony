@@ -77,6 +77,7 @@ export async function sendChatShoutout(
 export async function sendChatMessage(
   authentication: Authentication,
   message: string,
+  broadcaster_id: string = authentication.user.id,
   reply_parent_message_id?: string,
 ): Promise<ChatMessage> {
   const {
@@ -85,8 +86,8 @@ export async function sendChatMessage(
   } = await helix<
     ChatMessageResponse,
     {
-      broadcaster_id: string
       sender_id: string
+      broadcaster_id: string
       message: string
       reply_parent_message_id?: string
     }
@@ -94,8 +95,8 @@ export async function sendChatMessage(
     method: "GET",
     path: "/chat/message",
     params: {
-      broadcaster_id: authentication.user.id,
       sender_id: authentication.user.id,
+      broadcaster_id,
       message,
       reply_parent_message_id,
     },

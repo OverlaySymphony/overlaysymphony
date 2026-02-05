@@ -1,168 +1,96 @@
-import createDefer from "@overlaysymphony/core/libs/defer"
-import createPubSub from "@overlaysymphony/core/libs/pubsub"
-
 import { type Authentication } from "../authentication/index.ts"
+import { type EventPayload } from "../eventsub/events-helpers.ts"
+import createEventSub, { type TwitchEventSub } from "../eventsub/index.ts"
+import { sendChatAnnouncement, sendChatMessage } from "../helix/chat/index.ts"
 
-import {
-  type TwitchChatEvent,
-  type TwitchChatEventType,
-} from "./interfaces/index.ts"
-import parseCommand from "./parser.ts"
-
-type ChatListener = (callback: (event: TwitchChatEvent) => void) => () => void
-
-type ChatSubscriber = <
-  EventType extends TwitchChatEventType,
-  Event extends TwitchChatEvent<EventType>,
->(
-  types: EventType[],
-  callback: (event: Event) => void,
-) => () => void
-
-type ChatSender = (message: string) => void
-
-type ChatMessageSubscriber = (
-  callback: (event: TwitchChatEvent<"PRIVMSG">) => void,
-) => () => void
-
-interface ChatCommandSubscriber {
-  (
-    name: string,
-    callback: (event: TwitchChatEvent<"PRIVMSG-COMMAND">) => void,
-    _?: never,
-  ): () => void
-  (
-    name: string,
-    pattern: string,
-    callback: (event: TwitchChatEvent<"PRIVMSG-COMMAND">) => void,
-  ): () => void
+type ChatMessage = EventPayload<"channel.chat.message">["event"]
+type ChatCommand = ChatMessage & {
+  message: {
+    command: string
+    parameters?: string[]
+  } & ChatMessage["message"]
 }
 
+type ChatSender = (message: string) => Promise<void>
+type ChatAnnouncer = (message: string, color?: string) => Promise<void>
+
+type ChatMessageSubscriber = (
+  callback: (event: ChatMessage) => void,
+) => () => void
+
+type ChatCommandSubscriber = (
+  name: string,
+  callback: (event: ChatCommand) => void,
+  ___?: never,
+) => () => void
+// type ChatCommandSubscriber = (
+//   name: string,
+//   pattern: string,
+//   callback: (event: ChatCommand) => void,
+// ) => () => void
+
 export interface TwitchChat {
-  listen: ChatListener
-  subscribe: ChatSubscriber
   send: ChatSender
+  announce: ChatAnnouncer
   onMessage: ChatMessageSubscriber
   onCommand: ChatCommandSubscriber
 }
 
 export default async function createChat(
   authentication: Authentication,
-  channel: string = authentication.user.login,
+  eventsub?: TwitchEventSub,
 ): Promise<TwitchChat> {
-  const { promise, resolve } = createDefer()
+  eventsub ??= await createEventSub(authentication)
 
-  const pubsub = createPubSub<TwitchChatEvent>()
-  const socket = new WebSocket("wss://irc-ws.chat.twitch.tv:443")
+  const send: ChatSender = async (message) => {
+    await sendChatMessage(authentication, message)
+  }
 
-  socket.addEventListener("open", (connection) => {
-    socket.send("CAP REQ :twitch.tv/tags twitch.tv/commands")
-  })
+  const announce: ChatAnnouncer = async (message, color) => {
+    await sendChatAnnouncement(authentication, message, color)
+  }
 
-  socket.addEventListener("message", ({ data }: { data: string }) => {
-    const messages = data.split("\r\n").filter(Boolean)
-    for (const input of messages) {
-      const command = parseCommand(input)
-      if (!command) {
-        continue
-      }
+  const onMessage: ChatMessageSubscriber = (callback) => {
+    return eventsub.on(["channel.chat.message"], (payload) => {
+      callback(payload.event)
+    })
+  }
 
-      if (
-        command.type === "001" ||
-        command.type === "JOIN" ||
-        command.type === "USERSTATE" ||
-        command.type === "HOSTTARGET" ||
-        command.type === "NOTICE"
-      ) {
-        continue
-      }
+  const onCommand: ChatCommandSubscriber = (name, ...args) => {
+    const pattern = typeof args[0] === "string" ? args[0] : undefined
 
-      if (command.type === "PING") {
-        socket.send(`PONG :${command.message}`)
-        continue
-      }
-
-      if (command.type === "CAP") {
-        socket.send(`PASS oauth:${authentication.accessToken}`)
-        socket.send(`NICK ${authentication.user.login}`)
-        continue
-      }
-
-      if (command.type === "RECONNECT") {
-        console.warn("The server is about to terminate for maintenance.")
-        continue
-      }
-
-      if (command.type === "GLOBALUSERSTATE") {
-        socket.send(`JOIN #${channel}`)
-        continue
-      }
-
-      if (command.type === "ROOMSTATE") {
-        resolve()
-        continue
-      }
-
-      pubsub.dispatch(command)
+    const callback = typeof args[0] === "function" ? args[0] : args[1]
+    if (!callback) {
+      throw new Error("onCommand: Missing callback.")
     }
-  })
 
-  return promise.then(() => {
-    const listen: ChatListener = (callback) => {
-      return pubsub.subscribe((event) => {
-        callback(event)
+    const regex = new RegExp(`^\\s*!([a-z0-9])(?:\\s+(.+))$`, "i")
+
+    return onMessage((payload) => {
+      const [command, text] =
+        payload.message.text.match(regex) ?? ([] as Array<string | undefined>)
+
+      if (command !== name) {
+        return
+      }
+
+      const parameters = pattern ? undefined : text?.split(" ")
+
+      callback({
+        ...payload,
+        message: {
+          command: "",
+          parameters,
+          ...payload.message,
+        },
       })
-    }
+    })
+  }
 
-    const subscribe: ChatSubscriber = (types, callback) => {
-      return pubsub.subscribe((event) => {
-        // @ts-expect-error: generic events are complicated
-        if (types.includes(event.type)) {
-          // @ts-expect-error: generic events are complicated
-          callback(event)
-        }
-      })
-    }
-
-    const send: ChatSender = (message) => {
-      socket.send(`PRIVMSG #${authentication.user.login} :${message}`)
-    }
-
-    const onMessage: ChatMessageSubscriber = (callback) => {
-      return pubsub.subscribe((event) => {
-        if (event.type === "PRIVMSG") {
-          callback(event)
-        }
-      })
-    }
-
-    const onCommand: ChatCommandSubscriber = (name, ...args) => {
-      const pattern = typeof args[0] === "string" ? args[0] : undefined
-
-      const callback = typeof args[0] === "function" ? args[0] : args[1]
-      if (!callback) {
-        throw new Error("onCommand: Missing callback.")
-      }
-
-      return pubsub.subscribe((event) => {
-        if (event.type === "PRIVMSG-COMMAND") {
-          if (typeof name === "undefined" || event.command === name) {
-            if (pattern) {
-              // event.parameters = event.parameters
-            }
-
-            callback(event)
-          }
-        }
-      })
-    }
-
-    return {
-      listen,
-      subscribe,
-      send,
-      onMessage,
-      onCommand,
-    }
-  })
+  return {
+    send,
+    announce,
+    onMessage,
+    onCommand,
+  }
 }
