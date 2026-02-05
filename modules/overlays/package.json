@@ -3,6 +3,10 @@
   "version": "0.1.1",
   "description": "Overlay module for the OverlaySymphony interactive streaming framework.",
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OverlaySymphony/overlaysymphony"
+  },
   "type": "module",
   "exports": {
     "./ui/*": "./src/ui/*.ts",

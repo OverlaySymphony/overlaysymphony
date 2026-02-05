@@ -2,9 +2,6 @@ inputs:
   github-token:
     description: "The token for pushing tags and version changes to github.."
     required: true
-  npm-token:
-    description: "The token for publishing the package to npm."
-    required: true
   segment:
     description: "The version segment to increment: major, minor, patch, or prerelease."
     required: true
@@ -51,16 +48,7 @@ runs:
         branch: ${{ github.ref }}
         tags: true
 
-    - name: Pack
-      id: publish-pack
+    - name: Publish
       working-directory: ${{ env.DIRECTORY }}
       shell: bash
-      run: pnpm pack | tee >(echo "tarball=$(tail -1)" >> $GITHUB_OUTPUT)
-
-    - name: Publish to NPM Registry
-      uses: JS-DevTools/npm-publish@v3
-      with:
-        token: ${{ inputs.npm-token }}
-        package: ${{ env.DIRECTORY }}/${{ steps.publish-pack.outputs.tarball }}
-        access: public
-        tag: ${{ steps.publish-tag.outputs.tag }}
+      run: pnpm publish

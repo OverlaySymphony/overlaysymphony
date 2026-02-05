@@ -1,6 +1,10 @@
 {
   "private": true,
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OverlaySymphony/overlaysymphony"
+  },
   "packageManager": "pnpm@10.0.0",
   "engines": {
     "node": "22.x"
