@@ -8,7 +8,5 @@ if (!authentication) {
   throw new Error("Missing Twitch authentication.")
 }
 
-export const [eventsub, chat] = await Promise.all([
-  createEventSub(authentication),
-  createChat(authentication),
-])
+export const eventsub = await createEventSub(authentication)
+export const chat = await createChat(authentication, eventsub)

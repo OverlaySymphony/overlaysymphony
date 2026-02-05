@@ -1,9 +1,0 @@
-import { type ChatEvent } from "./events.ts"
-
-export type { ChatEvent, ChatEventSource } from "./events.ts"
-
-export type TwitchChatEventType = ChatEvent["type"]
-
-export type TwitchChatEvent<
-  Type extends TwitchChatEventType = TwitchChatEventType,
-> = Extract<ChatEvent, { type: Type }>
