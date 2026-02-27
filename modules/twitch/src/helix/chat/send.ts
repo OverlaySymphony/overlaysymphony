@@ -93,7 +93,7 @@ export async function sendChatMessage(
     }
   >(authentication, {
     method: "POST",
-    path: "/chat/message",
+    path: "/chat/messages",
     params: {
       sender_id: authentication.user.id,
       broadcaster_id,
