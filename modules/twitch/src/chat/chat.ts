@@ -21,13 +21,7 @@ type ChatMessageSubscriber = (
 type ChatCommandSubscriber = (
   name: string,
   callback: (event: ChatCommand) => void,
-  ___?: never,
 ) => () => void
-// type ChatCommandSubscriber = (
-//   name: string,
-//   pattern: string,
-//   callback: (event: ChatCommand) => void,
-// ) => () => void
 
 export interface TwitchChat {
   send: ChatSender
@@ -56,25 +50,18 @@ export default async function createChat(
     })
   }
 
-  const onCommand: ChatCommandSubscriber = (name, ...args) => {
-    const pattern = typeof args[0] === "string" ? args[0] : undefined
-
-    const callback = typeof args[0] === "function" ? args[0] : args[1]
-    if (!callback) {
-      throw new Error("onCommand: Missing callback.")
-    }
-
-    const regex = new RegExp(`^\\s*!([a-z0-9])(?:\\s+(.+))$`, "i")
+  const onCommand: ChatCommandSubscriber = (name, callback) => {
+    const regex = /^\s*!([a-z0-9]+)(?:\s+(.+))?$/i
 
     return onMessage((payload) => {
-      const [command, text] =
+      const [, command, text] =
         payload.message.text.match(regex) ?? ([] as Array<string | undefined>)
 
       if (command !== name) {
         return
       }
 
-      const parameters = pattern ? undefined : text?.split(" ")
+      const parameters = text?.split(" ")
 
       callback({
         ...payload,

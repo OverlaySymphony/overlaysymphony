@@ -135,7 +135,7 @@ export async function updateRedemption(
       status: "CANCELED" | "FULFILLED"
     }
   >(authentication, {
-    method: "GET",
+    method: "POST",
     path: "/channel_points/custom_rewards",
     params: {
       broadcaster_id: authentication.user.id,

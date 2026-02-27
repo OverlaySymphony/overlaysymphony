@@ -21,11 +21,11 @@ interface UsersResponse {
   >
 }
 
-export async function getUsers(
+export async function getUser(
   authentication: Authentication,
-  id?: string | string[],
   login?: string | string[],
-): Promise<TwitchUser[]> {
+  id?: string | string[],
+): Promise<TwitchUser | undefined> {
   const { data: users } = await helix<
     UsersResponse,
     { id?: string | string[]; login?: string | string[] }
@@ -38,8 +38,10 @@ export async function getUsers(
     },
   })
 
-  return users.map(({ created_at, ...user }) => ({
+  const [{ created_at, ...user }] = users
+
+  return {
     ...user,
     created_at: new Date(created_at),
-  }))
+  }
 }

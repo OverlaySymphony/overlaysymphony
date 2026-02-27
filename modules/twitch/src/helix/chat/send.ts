@@ -39,7 +39,7 @@ export async function sendChatAnnouncement(
       color?: string
     }
   >(authentication, {
-    method: "GET",
+    method: "POST",
     path: "/chat/announcements",
     params: {
       moderator_id: authentication.user.id,
@@ -64,7 +64,7 @@ export async function sendChatShoutout(
       to_broadcaster_id: string
     }
   >(authentication, {
-    method: "GET",
+    method: "POST",
     path: "/chat/shoutouts",
     params: {
       moderator_id: authentication.user.id,
@@ -92,7 +92,7 @@ export async function sendChatMessage(
       reply_parent_message_id?: string
     }
   >(authentication, {
-    method: "GET",
+    method: "POST",
     path: "/chat/message",
     params: {
       sender_id: authentication.user.id,
