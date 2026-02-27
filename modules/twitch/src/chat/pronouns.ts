@@ -33,17 +33,17 @@ const pronouns: Record<string, Pronouns> = {
   },
   shethem: {
     subject: "she",
-    object: "they",
+    object: "them",
     posessive: "their",
   },
   hethem: {
     subject: "he",
-    object: "they",
+    object: "them",
     posessive: "their",
   },
   heshe: {
     subject: "he",
-    object: "she",
+    object: "her",
     posessive: "their",
   },
   xexem: {
@@ -123,10 +123,7 @@ export async function getUserPronouns(
 export async function getPronouns(
   login: string,
   fallback: keyof typeof pronouns = "theythem",
-): Promise<{
-  subject: string
-  object: string
-}> {
+): Promise<Pronouns> {
   if (!(login in cache)) {
     try {
       const id = await getUserPronouns(login)

@@ -7,7 +7,7 @@ type ChatMessage = EventPayload<"channel.chat.message">["event"]
 type ChatCommand = ChatMessage & {
   message: {
     command: string
-    parameters?: string[]
+    parameters?: string
   } & ChatMessage["message"]
 }
 
@@ -54,14 +54,12 @@ export default async function createChat(
     const regex = /^\s*!([a-z0-9]+)(?:\s+(.+))?$/i
 
     return onMessage((payload) => {
-      const [, command, text] =
+      const [, command, parameters] =
         payload.message.text.match(regex) ?? ([] as Array<string | undefined>)
 
       if (command !== name) {
         return
       }
-
-      const parameters = text?.split(" ")
 
       callback({
         ...payload,

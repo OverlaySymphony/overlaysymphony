@@ -8,7 +8,7 @@ export function stringify(input: ParsedQuerystring): string {
 
   for (const [key, value] of Object.entries(input)) {
     if (typeof value !== "undefined" && value !== null) {
-      output.push(`${key}=${value}`)
+      output.push(`${key}=${encodeURIComponent(value)}`)
     }
   }
 
