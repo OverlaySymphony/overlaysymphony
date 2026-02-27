@@ -1,6 +1,6 @@
 {
   "name": "@overlaysymphony/core",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Core module for the OverlaySymphony interactive streaming framework.",
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "repository": {
