@@ -1,3 +1,6 @@
+name: "Test"
+description: ""
+
 runs:
   using: composite
 

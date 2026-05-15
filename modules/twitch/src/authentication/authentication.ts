@@ -1,4 +1,4 @@
-import { type TwitchUser, getUser } from "../helix/users/index.ts"
+import { type TwitchUser, getCurrentUser } from "../helix/users/index.ts"
 
 export interface Authentication {
   tokenType: "bearer"
@@ -61,7 +61,7 @@ export async function getAuthentication(
     return undefined
   }
 
-  const user = await getUser(authentication as Authentication)
+  const user = await getCurrentUser(authentication as Authentication)
   if (!user) {
     return undefined
   }

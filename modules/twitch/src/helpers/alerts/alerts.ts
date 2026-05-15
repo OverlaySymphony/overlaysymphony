@@ -47,7 +47,7 @@ export function onAlert(
 
 export default function createAlertQueue(
   eventsub: TwitchEventSub,
-  handleAlert: (alert: Alert) => void,
+  handleAlert: (alert: Alert) => unknown,
 ): Queue<Alert>["dismiss"] {
   const queue = createQueue<Alert>()
   queue.listen(handleAlert)

@@ -46,6 +46,8 @@ export default async function createChat(
 
   const onMessage: ChatMessageSubscriber = (callback) => {
     return eventsub.on(["channel.chat.message"], (payload) => {
+      if (payload.event.broadcaster_user_id !== authentication.user.id) return
+
       callback(payload.event)
     })
   }

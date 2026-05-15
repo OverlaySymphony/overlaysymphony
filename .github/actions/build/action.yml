@@ -1,4 +1,14 @@
+name: "Build"
+description: ""
+
 inputs:
+  artifact-name:
+    description: ""
+    required: false
+  command:
+    description: ""
+    required: false
+    default: "build"
   args:
     description: ""
     required: false
@@ -10,4 +20,10 @@ runs:
   steps:
     - name: Build
       shell: bash
-      run: npx nx run ${{ env.WORKSPACE }}:build -- ${{ inputs.args }}
+      run: npx nx run ${{ env.WORKSPACE }}:${{ inputs.command }} -- ${{ inputs.args }}
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name || 'build'  }}
+        path: ${{ env.DIRECTORY }}/dist

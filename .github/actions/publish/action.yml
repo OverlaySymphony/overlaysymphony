@@ -1,6 +1,9 @@
+name: "Publish"
+description: ""
+
 inputs:
   github-token:
-    description: "The token for pushing tags and version changes to github.."
+    description: "The token for pushing tags and version changes to github."
     required: true
   segment:
     description: "The version segment to increment: major, minor, patch, or prerelease."
@@ -8,12 +11,20 @@ inputs:
   preId:
     description: 'Appended to the prerelease segment. (default: "")'
 
+outputs:
+  tag:
+    description: "Publish tag"
+    value: ${{ steps.tag.outputs.tag }}
+  version:
+    description: "Publish version"
+    value: ${{ steps.version.outputs.version }}
+
 runs:
   using: composite
 
   steps:
     - name: Determine Tag
-      id: publish-tag
+      id: tag
       shell: bash
       run: |
         if [[ ${{ inputs.segment }} == pre* ]]; then
@@ -23,6 +34,7 @@ runs:
         fi
 
     - name: Increment Version
+      id: version
       working-directory: ${{ env.DIRECTORY }}
       shell: bash
       run: |
@@ -38,6 +50,8 @@ runs:
         pnpm version ${{ inputs.segment }} $PREID_CMD
 
         VERSION="$(cat package.json | jq -r '.version')"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
         git commit --all --message "Publish ${{ env.WORKSPACE }} v$VERSION"
         git tag "${{ env.WORKSPACE }}/v$VERSION"
 

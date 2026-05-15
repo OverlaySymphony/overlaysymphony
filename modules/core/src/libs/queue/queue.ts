@@ -1,4 +1,4 @@
-type Handler<Data> = (data: Data) => void
+type Handler<Data> = (data: Data) => unknown
 
 type Listener<Data> = (handler: Handler<Data>) => () => void
 type Enqueuer<Data> = (priority: number, data: Data) => void
@@ -27,8 +27,18 @@ export default function createQueue<Data>(): Queue<Data> {
     }
 
     current = { data }
-    for (const handler of handlers) {
-      handler(current.data)
+    const results = handlers
+      .map((handler) => handler(data))
+      .filter(
+        (item) =>
+          item &&
+          typeof item === "object" &&
+          "then" in item &&
+          typeof item.then === "function",
+      )
+
+    if (results.length > 0) {
+      void Promise.all(results).then(dismiss)
     }
   }
 
