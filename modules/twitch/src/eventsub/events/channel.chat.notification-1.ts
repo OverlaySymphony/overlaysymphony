@@ -306,12 +306,12 @@ type ChannelChatNotification = EventConfig<{
 
 registerEvent("channel.chat.notification", {
   scopes: ["user:read:chat"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.chat.notification",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      user_id: userId,
+      broadcaster_user_id: targetUserId,
+      user_id: currentUserId,
     },
   }),
 })

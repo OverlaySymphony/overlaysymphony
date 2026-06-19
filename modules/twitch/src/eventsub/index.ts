@@ -1,6 +1,7 @@
 export {
   type EventConfig,
   type EventConfigs,
+  type EventPayload,
   type EventType,
   registerEvent,
 } from "./events-helpers.ts"

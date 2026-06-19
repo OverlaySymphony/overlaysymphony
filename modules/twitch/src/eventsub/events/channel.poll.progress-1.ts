@@ -63,11 +63,11 @@ type ChannelPollProgress = EventConfig<{
 
 registerEvent("channel.poll.progress", {
   scopes: ["channel:manage:polls", "channel:read:polls"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.poll.progress",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

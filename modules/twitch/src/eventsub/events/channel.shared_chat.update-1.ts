@@ -45,11 +45,11 @@ type ChannelSharedChatUpdate = EventConfig<{
 
 registerEvent("channel.shared_chat.update", {
   scopes: [],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.shared_chat.update",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

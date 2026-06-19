@@ -64,11 +64,11 @@ type ChannelCharityCampaignProgress = EventConfig<{
 
 registerEvent("channel.charity_campaign.progress", {
   scopes: ["channel:read:charity"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.charity_campaign.progress",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

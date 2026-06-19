@@ -34,11 +34,11 @@ type ChannelModeratorAdd = EventConfig<{
 
 registerEvent("channel.moderator.add", {
   scopes: ["moderation:read"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.moderator.add",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

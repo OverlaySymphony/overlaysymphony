@@ -38,11 +38,11 @@ type ChannelSubscriptionEnd = EventConfig<{
 
 registerEvent("channel.subscription.end", {
   scopes: ["channel:read:subscriptions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.subscription.end",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

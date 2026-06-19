@@ -40,11 +40,11 @@ type ChannelAdBreakBegin = EventConfig<{
 
 registerEvent("channel.ad_break.begin", {
   scopes: ["channel:read:ads"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.ad_break.begin",
     version: "1",
     condition: {
-      broadcaster_id: userId,
+      broadcaster_id: targetUserId,
     },
   }),
 })

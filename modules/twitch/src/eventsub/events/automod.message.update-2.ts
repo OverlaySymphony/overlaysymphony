@@ -83,12 +83,12 @@ type AutomodMessageUpdate = EventConfig<{
 
 registerEvent("automod.message.update", {
   scopes: ["moderator:manage:automod"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "automod.message.update",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

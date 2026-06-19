@@ -38,12 +38,12 @@ type ChannelFollow = EventConfig<{
 
 registerEvent("channel.follow", {
   scopes: ["moderator:read:followers"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.follow",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

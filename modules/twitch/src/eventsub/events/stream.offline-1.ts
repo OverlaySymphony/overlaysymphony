@@ -28,11 +28,11 @@ type StreamOffline = EventConfig<{
 
 registerEvent("stream.offline", {
   scopes: [],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "stream.offline",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

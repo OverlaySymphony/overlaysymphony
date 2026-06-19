@@ -65,11 +65,11 @@ type ChannelPollEnd = EventConfig<{
 
 registerEvent("channel.poll.end", {
   scopes: ["channel:manage:polls", "channel:read:polls"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.poll.end",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

@@ -19,7 +19,7 @@ export function onHypeTrain(
     hypeTrain: HypeTrain,
     trigger: "begin" | "progress" | "end",
   ) => void,
-): void {
+): () => void {
   const hypeTrain: HypeTrain = {
     level: 0,
     total: 0,
@@ -27,7 +27,7 @@ export function onHypeTrain(
     goal: 0,
   }
 
-  eventsub.on(
+  return eventsub.on(
     [
       "channel.hype_train.begin",
       "channel.hype_train.progress",

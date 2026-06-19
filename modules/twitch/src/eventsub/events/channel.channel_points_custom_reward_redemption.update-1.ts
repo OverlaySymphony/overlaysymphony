@@ -55,11 +55,11 @@ type ChannelChannelPointsCustomRewardRedemptionUpdate = EventConfig<{
 
 registerEvent("channel.channel_points_custom_reward_redemption.update", {
   scopes: ["channel:manage:redemptions", "channel:read:redemptions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.channel_points_custom_reward_redemption.update",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

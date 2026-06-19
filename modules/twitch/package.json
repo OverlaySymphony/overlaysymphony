@@ -12,6 +12,7 @@
     "./authentication": "./src/authentication/index.ts",
     "./chat": "./src/chat/index.ts",
     "./eventsub": "./src/eventsub/index.ts",
+    "./helix": "./src/helix/index.ts",
     "./helix/*": "./src/helix/*/index.ts",
     "./helpers/*": "./src/helpers/*/index.ts",
     "./ui/*": "./src/ui/*.ts",

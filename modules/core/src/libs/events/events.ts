@@ -21,6 +21,7 @@ export default async function createEvents<
     connectData: ConnectData,
     type: Payload["type"],
   ) => Promise<void>,
+  unique?: (type: Payload["type"]) => string,
 ): Promise<Events<Payload>> {
   const pubsub = createPubSub<Payload>()
 
@@ -31,12 +32,13 @@ export default async function createEvents<
     }
   }
 
-  const subscriptions: Partial<Record<Payload["type"], boolean>> = {}
+  const subscriptions: Partial<Record<string, boolean>> = {}
 
   const on: EventSubSubscriber<Payload> = (types, callback) => {
     for (const type of types) {
-      if (!subscriptions[type]) {
-        subscriptions[type] = true
+      const key = unique?.(type) ?? type
+      if (!subscriptions[key]) {
+        subscriptions[key] = true
 
         void createSubscription(pubsub, connectData, type)
       }

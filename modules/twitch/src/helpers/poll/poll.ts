@@ -23,7 +23,7 @@ const mapTypeToTrigger = {
 export function onPoll(
   eventsub: TwitchEventSub,
   handlePoll: (poll: Poll, trigger: "begin" | "progress" | "end") => void,
-): void {
+): () => void {
   const poll: Poll = {
     id: "",
     title: "",
@@ -31,7 +31,7 @@ export function onPoll(
     endsAt: undefined,
   }
 
-  eventsub.on(
+  return eventsub.on(
     ["channel.poll.begin", "channel.poll.progress", "channel.poll.end"],
     (payload) => {
       // Twitch sometimes sends duplicate end events.

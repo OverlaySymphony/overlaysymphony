@@ -46,12 +46,12 @@ type ChannelWarningSend = EventConfig<{
 
 registerEvent("channel.warning.send", {
   scopes: ["moderator:manage:warnings", "moderator:read:warnings"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.warning.send",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

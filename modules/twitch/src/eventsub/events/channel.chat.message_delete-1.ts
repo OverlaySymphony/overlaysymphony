@@ -38,12 +38,12 @@ type ChannelChatMessageDelete = EventConfig<{
 
 registerEvent("channel.chat.message_delete", {
   scopes: ["user:read:chat"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.chat.message_delete",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      user_id: userId,
+      broadcaster_user_id: targetUserId,
+      user_id: currentUserId,
     },
   }),
 })

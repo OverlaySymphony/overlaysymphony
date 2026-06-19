@@ -74,12 +74,12 @@ type ChannelSuspiciousUserMessage = EventConfig<{
 
 registerEvent("channel.suspicious_user.message", {
   scopes: ["moderator:read:suspicious"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.suspicious_user.message",
     version: "1",
     condition: {
-      moderator_user_id: userId,
-      broadcaster_user_id: userId,
+      moderator_user_id: currentUserId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

@@ -34,11 +34,11 @@ type StreamOnline = EventConfig<{
 
 registerEvent("stream.online", {
   scopes: [],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "stream.online",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

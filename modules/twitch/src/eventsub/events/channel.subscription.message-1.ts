@@ -56,11 +56,11 @@ type ChannelSubscriptionMessage = EventConfig<{
 
 registerEvent("channel.subscription.message", {
   scopes: ["channel:read:subscriptions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.subscription.message",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

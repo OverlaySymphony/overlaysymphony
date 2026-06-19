@@ -31,7 +31,7 @@ export function onCharity(
     trigger: "progress" | "start" | "stop",
   ) => void,
   handleDonation: (donation: CharityDonation, charity: Charity) => void,
-): void {
+): () => void {
   const charity: Charity = {
     name: "",
     description: "",
@@ -42,7 +42,7 @@ export function onCharity(
     targetAmount: 0,
   }
 
-  eventsub.on(
+  return eventsub.on(
     [
       "channel.charity_campaign.start",
       "channel.charity_campaign.progress",

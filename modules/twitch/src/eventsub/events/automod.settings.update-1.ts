@@ -54,12 +54,12 @@ type AutomodSettingsUpdate = EventConfig<{
 
 registerEvent("automod.settings.update", {
   scopes: ["moderator:read:automod"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "automod.settings.update",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

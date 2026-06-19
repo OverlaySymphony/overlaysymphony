@@ -9,42 +9,60 @@ import { createSubscription } from "../helix/subscriptions/index.ts"
 import { type EventPayload, buildSubscription } from "./events-helpers.ts"
 import { type TwitchMessage } from "./messages.ts"
 
-export type TwitchEventSub = Events<EventPayload>
+export type TwitchEventSub = Events<EventPayload> & {
+  targetUserId: string
+}
 
+// TODO: connection instead of authentication
 export default async function createEventSub(
   authentication: Authentication,
+  targetUserId?: string,
 ): Promise<TwitchEventSub> {
-  return createEvents<EventPayload, string>(
-    async (pubsub) => {
-      const socket = new WebSocket("wss://eventsub.wss.twitch.tv/ws")
+  const currentUserId = authentication.user.id
+  targetUserId ??= currentUserId
 
-      const { promise, resolve } = createDefer<string>()
-      socket.addEventListener("message", ({ data: rawData }) => {
-        const data = JSON.parse(rawData as string) as TwitchMessage
-        data.type = data.metadata.message_type
+  return {
+    targetUserId,
+    ...(await createEvents<EventPayload, string>(
+      async (pubsub) => {
+        const socket = new WebSocket("wss://eventsub.wss.twitch.tv/ws")
 
-        if (data.type === "session_welcome") {
-          resolve(data.payload.session.id)
-          return
-        }
+        const { promise, resolve } = createDefer<string>()
+        socket.addEventListener("message", ({ data: rawData }) => {
+          const data = JSON.parse(rawData as string) as TwitchMessage
+          data.type = data.metadata.message_type
 
-        if (data.type === "notification") {
-          data.payload.id = data.metadata.message_id
-          data.payload.type = data.payload.subscription.type
+          if (data.type === "session_welcome") {
+            resolve(data.payload.session.id)
+            return
+          }
 
-          pubsub.dispatch(data.payload)
-          return
-        }
-      })
+          if (data.type === "notification") {
+            data.payload.id = data.metadata.message_id
+            data.payload.type = data.payload.subscription.type
 
-      return await promise
-    },
-    async (pubsub, sessionId, type) => {
-      await createSubscription(
-        authentication,
-        { method: "websocket", session_id: sessionId },
-        buildSubscription(type, authentication.user.id),
-      )
-    },
-  )
+            pubsub.dispatch(data.payload)
+            return
+          }
+        })
+
+        return await promise
+      },
+      async (pubsub, sessionId, type) => {
+        await createSubscription(
+          authentication,
+          { method: "websocket", session_id: sessionId },
+          buildSubscription(type, currentUserId, targetUserId),
+        )
+      },
+      (type) => {
+        const subscription = buildSubscription(
+          type,
+          currentUserId,
+          targetUserId,
+        )
+        return `${type}-${JSON.stringify(subscription)}`
+      },
+    )),
+  }
 }

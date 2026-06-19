@@ -66,11 +66,11 @@ type ChannelPredictionEnd = EventConfig<{
 
 registerEvent("channel.prediction.end", {
   scopes: ["channel:manage:predictions", "channel:read:predictions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.prediction.end",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

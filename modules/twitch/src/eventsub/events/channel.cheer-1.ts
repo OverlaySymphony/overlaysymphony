@@ -40,11 +40,11 @@ type ChannelCheer = EventConfig<{
 
 registerEvent("channel.cheer", {
   scopes: ["bits:read"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.cheer",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

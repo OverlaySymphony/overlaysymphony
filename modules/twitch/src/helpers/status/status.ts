@@ -13,7 +13,7 @@ export interface Status {
 export function onStatus(
   eventsub: TwitchEventSub,
   handleStatus: (status: Status) => void,
-): void {
+): () => void {
   const status: Status = {
     online: false,
     shieldMode: false,
@@ -22,7 +22,7 @@ export function onStatus(
     labels: [],
   }
 
-  eventsub.on(
+  return eventsub.on(
     [
       "channel.update",
       "stream.online",

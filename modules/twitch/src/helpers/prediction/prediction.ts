@@ -25,14 +25,14 @@ export function onPrediction(
     prediction: Prediction,
     trigger: "begin" | "progress" | "lock" | "end",
   ) => void,
-): void {
+): () => void {
   const prediction: Prediction = {
     title: "",
     outcomes: [],
     locksAt: new Date(""),
   }
 
-  eventsub.on(
+  return eventsub.on(
     [
       "channel.prediction.begin",
       "channel.prediction.progress",

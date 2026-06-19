@@ -34,11 +34,11 @@ type ChannelModeratorRemove = EventConfig<{
 
 registerEvent("channel.moderator.remove", {
   scopes: ["moderation:read"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.moderator.remove",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

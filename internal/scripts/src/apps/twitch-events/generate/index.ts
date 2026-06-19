@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import fs from "node:fs"
 import path from "node:path"
 
@@ -94,7 +95,7 @@ ${makeTypeDefinition(event.fields, "          ")}
           .sort()
           .map((scope) => `"${scope}"`)
           .join(", ")}],
-        subscriber: (userId) => ({
+        subscriber: (currentUserId, targetUserId) => ({
           type: "${type}",
           version: "${version}",
           condition: {
@@ -108,7 +109,9 @@ ${Object.entries(condition.fields ?? {})
   .filter(
     ([key]) => type !== "channel.raid" || key !== "from_broadcaster_user_id",
   )
-  .map(([key, { type, required }]) => `            ${key}: userId,`)
+  .map(
+    ([key, { type, required }]) => `            ${key}: ${getUserType(key)},`,
+  )
   .join("\n")}
           },
         }),
@@ -116,4 +119,16 @@ ${Object.entries(condition.fields ?? {})
     `,
     true,
   )
+}
+
+function getUserType(key: string) {
+  if (key.endsWith("broadcaster_user_id") || key === "broadcaster_id") {
+    return "targetUserId"
+  }
+
+  if (key.endsWith("user_id")) {
+    return "currentUserId"
+  }
+
+  throw new Error(`Unknown key ${key}`)
 }

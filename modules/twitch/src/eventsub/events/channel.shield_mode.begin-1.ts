@@ -40,12 +40,12 @@ type ChannelShieldModeBegin = EventConfig<{
 
 registerEvent("channel.shield_mode.begin", {
   scopes: ["moderator:manage:shield", "moderator:read:shield"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.shield_mode.begin",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

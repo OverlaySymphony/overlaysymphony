@@ -78,11 +78,11 @@ type ChannelChannelPointsAutomaticRewardRedemptionAdd = EventConfig<{
 
 registerEvent("channel.channel_points_automatic_reward_redemption.add", {
   scopes: ["channel:manage:redemptions", "channel:read:redemptions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.channel_points_automatic_reward_redemption.add",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

@@ -71,12 +71,12 @@ type ChannelChatUserMessageUpdate = EventConfig<{
 
 registerEvent("channel.chat.user_message_update", {
   scopes: ["user:read:chat"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.chat.user_message_update",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      user_id: userId,
+      broadcaster_user_id: targetUserId,
+      user_id: currentUserId,
     },
   }),
 })

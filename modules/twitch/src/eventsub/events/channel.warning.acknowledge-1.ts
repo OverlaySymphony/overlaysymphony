@@ -36,12 +36,12 @@ type ChannelWarningAcknowledge = EventConfig<{
 
 registerEvent("channel.warning.acknowledge", {
   scopes: ["moderator:manage:warnings", "moderator:read:warnings"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.warning.acknowledge",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

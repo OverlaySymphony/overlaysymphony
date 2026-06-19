@@ -1,14 +1,21 @@
-type ParsedQuerystring = Record<
-  string,
-  string | number | boolean | null | undefined
->
+type Value = string | number | boolean | null | undefined
+type ParsedQuerystring = Record<string, Value | Value[]>
 
 export function stringify(input: ParsedQuerystring): string {
   const output: string[] = []
 
   for (const [key, value] of Object.entries(input)) {
-    if (typeof value !== "undefined" && value !== null) {
-      output.push(`${key}=${encodeURIComponent(value)}`)
+    if (Array.isArray(value)) {
+      const values = value
+      for (const value of values) {
+        if (typeof value !== "undefined" && value !== null) {
+          output.push(`${key}=${encodeURIComponent(value)}`)
+        }
+      }
+    } else {
+      if (typeof value !== "undefined" && value !== null) {
+        output.push(`${key}=${encodeURIComponent(value)}`)
+      }
     }
   }
 

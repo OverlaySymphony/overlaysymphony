@@ -34,11 +34,11 @@ type ChannelVipRemove = EventConfig<{
 
 registerEvent("channel.vip.remove", {
   scopes: ["channel:manage:vips", "channel:read:vips"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.vip.remove",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

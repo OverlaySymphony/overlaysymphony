@@ -64,12 +64,12 @@ type ChannelChatUserMessageHold = EventConfig<{
 
 registerEvent("channel.chat.user_message_hold", {
   scopes: ["user:read:chat"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.chat.user_message_hold",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      user_id: userId,
+      broadcaster_user_id: targetUserId,
+      user_id: currentUserId,
     },
   }),
 })

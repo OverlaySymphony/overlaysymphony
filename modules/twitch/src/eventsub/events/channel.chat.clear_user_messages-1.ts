@@ -36,12 +36,12 @@ type ChannelChatClearUserMessages = EventConfig<{
 
 registerEvent("channel.chat.clear_user_messages", {
   scopes: ["user:read:chat"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.chat.clear_user_messages",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      user_id: userId,
+      broadcaster_user_id: targetUserId,
+      user_id: currentUserId,
     },
   }),
 })

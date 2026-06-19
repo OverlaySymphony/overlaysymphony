@@ -51,12 +51,12 @@ registerEvent("channel.guest_star_settings.update@be", {
     "moderator:manage:guest",
     "moderator:read:guest",
   ],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.guest_star_settings.update@be",
     version: "beta",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

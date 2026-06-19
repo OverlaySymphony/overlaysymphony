@@ -80,11 +80,11 @@ type ChannelHypeTrainBegin = EventConfig<{
 
 registerEvent("channel.hype_train.begin", {
   scopes: ["channel:read:hype"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.hype_train.begin",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

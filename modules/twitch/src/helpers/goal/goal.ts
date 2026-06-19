@@ -16,7 +16,7 @@ const mapTypeToTrigger = {
 export function onGoal(
   eventsub: TwitchEventSub,
   handleGoal: (goal: Goal, trigger: "begin" | "progress" | "end") => void,
-): void {
+): () => void {
   const goal: Goal = {
     type: "",
     description: "",
@@ -24,7 +24,7 @@ export function onGoal(
     targetAmount: 0,
   }
 
-  eventsub.on(
+  return eventsub.on(
     ["channel.goal.begin", "channel.goal.progress", "channel.goal.end"],
     (payload) => {
       goal.type = payload.event.type

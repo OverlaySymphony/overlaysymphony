@@ -93,11 +93,11 @@ type ChannelChannelPointsCustomRewardRemove = EventConfig<{
 
 registerEvent("channel.channel_points_custom_reward.remove", {
   scopes: ["channel:manage:redemptions", "channel:read:redemptions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.channel_points_custom_reward.remove",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

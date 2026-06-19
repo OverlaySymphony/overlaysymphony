@@ -48,12 +48,12 @@ type AutomodTermsUpdate = EventConfig<{
 
 registerEvent("automod.terms.update", {
   scopes: ["moderator:manage:automod"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "automod.terms.update",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

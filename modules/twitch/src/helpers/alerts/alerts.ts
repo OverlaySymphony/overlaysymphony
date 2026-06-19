@@ -24,8 +24,8 @@ export const mapTypeToPriority = {
 export function onAlert(
   eventsub: TwitchEventSub,
   handleAlert: (alert: Alert) => void,
-): void {
-  eventsub.on(
+): () => void {
+  return eventsub.on(
     [
       "channel.cheer",
       "channel.follow",

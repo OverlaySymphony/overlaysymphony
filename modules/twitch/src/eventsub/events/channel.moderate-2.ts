@@ -247,12 +247,12 @@ registerEvent("channel.moderate", {
     "moderator:read:vips",
     "moderator:read:warnings",
   ],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.moderate",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

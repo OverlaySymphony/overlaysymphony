@@ -34,11 +34,11 @@ type ChannelVipAdd = EventConfig<{
 
 registerEvent("channel.vip.add", {
   scopes: ["channel:manage:vips", "channel:read:vips"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.vip.add",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

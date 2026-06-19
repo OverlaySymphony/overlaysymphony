@@ -66,11 +66,11 @@ type ChannelCharityCampaignStop = EventConfig<{
 
 registerEvent("channel.charity_campaign.stop", {
   scopes: ["channel:read:charity"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.charity_campaign.stop",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

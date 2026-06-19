@@ -62,11 +62,11 @@ type ChannelPredictionProgress = EventConfig<{
 
 registerEvent("channel.prediction.progress", {
   scopes: ["channel:manage:predictions", "channel:read:predictions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.prediction.progress",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

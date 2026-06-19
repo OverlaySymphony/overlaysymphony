@@ -41,11 +41,11 @@ type UserWhisperMessage = EventConfig<{
 
 registerEvent("user.whisper.message", {
   scopes: ["user:manage:whispers", "user:read:whispers"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "user.whisper.message",
     version: "1",
     condition: {
-      user_id: userId,
+      user_id: currentUserId,
     },
   }),
 })

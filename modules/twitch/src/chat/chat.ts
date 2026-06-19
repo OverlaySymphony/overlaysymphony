@@ -32,9 +32,11 @@ export interface TwitchChat {
 
 export default async function createChat(
   authentication: Authentication,
-  eventsub?: TwitchEventSub,
+  eventsub?: TwitchEventSub | string,
 ): Promise<TwitchChat> {
-  eventsub ??= await createEventSub(authentication)
+  if (!eventsub || typeof eventsub === "string") {
+    eventsub = await createEventSub(authentication, eventsub)
+  }
 
   const send: ChatSender = async (message) => {
     await sendChatMessage(authentication, message)
@@ -46,7 +48,7 @@ export default async function createChat(
 
   const onMessage: ChatMessageSubscriber = (callback) => {
     return eventsub.on(["channel.chat.message"], (payload) => {
-      if (payload.event.broadcaster_user_id !== authentication.user.id) return
+      if (payload.event.source_broadcaster_user_id) return
 
       callback(payload.event)
     })

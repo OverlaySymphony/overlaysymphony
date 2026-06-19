@@ -32,7 +32,10 @@ export type EventConfig<
 const events: {
   [Type in EventType]?: {
     scopes: string[]
-    subscriber: (userId: string) => EventConfigs[Type]["Subscription"]
+    subscriber: (
+      currentUserId: string,
+      targetUserId: string,
+    ) => EventConfigs[Type]["Subscription"]
   }
 } = {}
 
@@ -40,7 +43,10 @@ export function registerEvent<Type extends EventType>(
   type: Type,
   config: {
     scopes: string[]
-    subscriber: (userId: string) => EventConfigs[Type]["Subscription"]
+    subscriber: (
+      currentUserId: string,
+      targetUserId: string,
+    ) => EventConfigs[Type]["Subscription"]
   },
 ): void {
   // @ts-expect-error too complex for typescript
@@ -49,9 +55,10 @@ export function registerEvent<Type extends EventType>(
 
 export function buildSubscription<Type extends EventType>(
   type: Type,
-  userId: string,
+  currentUserId: string,
+  targetUserId: string,
 ): EventConfigs[Type]["Subscription"] {
   if (!events[type]) throw new Error(`Event ${type} is not registered.`)
 
-  return events[type].subscriber(userId)
+  return events[type].subscriber(currentUserId, targetUserId)
 }

@@ -38,11 +38,11 @@ type ChannelRaid = EventConfig<{
 
 registerEvent("channel.raid", {
   scopes: [],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.raid",
     version: "1",
     condition: {
-      to_broadcaster_user_id: userId,
+      to_broadcaster_user_id: targetUserId,
     },
   }),
 })

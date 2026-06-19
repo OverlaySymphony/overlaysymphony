@@ -36,11 +36,11 @@ type ChannelSharedChatEnd = EventConfig<{
 
 registerEvent("channel.shared_chat.end", {
   scopes: [],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.shared_chat.end",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

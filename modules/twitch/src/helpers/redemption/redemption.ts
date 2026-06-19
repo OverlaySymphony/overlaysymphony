@@ -29,7 +29,7 @@ export function onRedemption(
   ...config:
     | [string, (redemption: Redemption) => void]
     | [(redemption: Redemption) => void]
-): void {
+): () => void {
   const id = typeof config[0] === "string" ? config[0] : undefined
   const handleRedemption =
     typeof config[0] === "function"
@@ -38,7 +38,7 @@ export function onRedemption(
         ? config[1]
         : undefined
 
-  eventsub.on(
+  return eventsub.on(
     ["channel.channel_points_custom_reward_redemption.add"],
     (payload) => {
       if (typeof id === "undefined" || payload.event.reward.id === id) {

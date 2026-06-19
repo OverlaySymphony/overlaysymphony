@@ -38,11 +38,11 @@ type ChannelSubscribe = EventConfig<{
 
 registerEvent("channel.subscribe", {
   scopes: ["channel:read:subscriptions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.subscribe",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

@@ -52,6 +52,35 @@ export async function getUser(
   }
 }
 
+export async function getUsers(
+  authentication: Authentication,
+  login?: string | string[],
+  id?: string | string[],
+): Promise<TwitchUser[] | undefined> {
+  if (!login && !id) return undefined
+
+  if (typeof login === "string" && login.startsWith("@")) {
+    login = login.slice(1)
+  }
+
+  const { data: users } = await helix<
+    UsersResponse,
+    { id?: string | string[]; login?: string | string[] }
+  >(authentication, {
+    method: "GET",
+    path: "/users",
+    params: {
+      id,
+      login,
+    },
+  })
+
+  return users.map(({ created_at, ...user }) => ({
+    ...user,
+    created_at: new Date(created_at),
+  }))
+}
+
 export async function getCurrentUser(
   authentication: Authentication,
 ): Promise<TwitchUser | undefined> {

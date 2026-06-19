@@ -70,11 +70,11 @@ type ChannelGoalProgress = EventConfig<{
 
 registerEvent("channel.goal.progress", {
   scopes: ["channel:read:goals"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.goal.progress",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

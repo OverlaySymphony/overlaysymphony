@@ -102,11 +102,11 @@ type ChannelBitsUse = EventConfig<{
 
 registerEvent("channel.bits.use", {
   scopes: ["bits:read"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.bits.use",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

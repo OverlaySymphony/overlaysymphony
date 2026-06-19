@@ -38,11 +38,11 @@ type ChannelUpdate = EventConfig<{
 
 registerEvent("channel.update", {
   scopes: [],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.update",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

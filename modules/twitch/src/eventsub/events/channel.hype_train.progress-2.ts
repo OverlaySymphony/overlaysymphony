@@ -80,11 +80,11 @@ type ChannelHypeTrainProgress = EventConfig<{
 
 registerEvent("channel.hype_train.progress", {
   scopes: ["channel:read:hype"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.hype_train.progress",
     version: "2",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

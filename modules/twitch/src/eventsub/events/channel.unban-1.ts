@@ -40,11 +40,11 @@ type ChannelUnban = EventConfig<{
 
 registerEvent("channel.unban", {
   scopes: ["channel:moderate"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.unban",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

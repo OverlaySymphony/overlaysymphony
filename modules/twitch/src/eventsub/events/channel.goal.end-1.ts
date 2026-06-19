@@ -70,11 +70,11 @@ type ChannelGoalEnd = EventConfig<{
 
 registerEvent("channel.goal.end", {
   scopes: ["channel:read:goals"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.goal.end",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

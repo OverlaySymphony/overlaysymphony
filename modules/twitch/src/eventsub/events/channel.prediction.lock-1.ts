@@ -62,11 +62,11 @@ type ChannelPredictionLock = EventConfig<{
 
 registerEvent("channel.prediction.lock", {
   scopes: ["channel:manage:predictions", "channel:read:predictions"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.prediction.lock",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })

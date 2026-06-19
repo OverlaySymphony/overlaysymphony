@@ -50,12 +50,12 @@ type ChannelShoutoutCreate = EventConfig<{
 
 registerEvent("channel.shoutout.create", {
   scopes: ["moderator:manage:shoutouts", "moderator:read:shoutouts"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.shoutout.create",
     version: "1",
     condition: {
-      broadcaster_user_id: userId,
-      moderator_user_id: userId,
+      broadcaster_user_id: targetUserId,
+      moderator_user_id: currentUserId,
     },
   }),
 })

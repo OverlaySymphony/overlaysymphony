@@ -38,11 +38,11 @@ type UserUpdate = EventConfig<{
 
 registerEvent("user.update", {
   scopes: ["user:read:email"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "user.update",
     version: "1",
     condition: {
-      user_id: userId,
+      user_id: currentUserId,
     },
   }),
 })

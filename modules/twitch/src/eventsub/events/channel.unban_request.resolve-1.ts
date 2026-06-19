@@ -53,12 +53,12 @@ type ChannelUnbanRequestResolve = EventConfig<{
 
 registerEvent("channel.unban_request.resolve", {
   scopes: ["moderator:manage:unban", "moderator:read:unban"],
-  subscriber: (userId) => ({
+  subscriber: (currentUserId, targetUserId) => ({
     type: "channel.unban_request.resolve",
     version: "1",
     condition: {
-      moderator_user_id: userId,
-      broadcaster_user_id: userId,
+      moderator_user_id: currentUserId,
+      broadcaster_user_id: targetUserId,
     },
   }),
 })
