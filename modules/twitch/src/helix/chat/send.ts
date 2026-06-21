@@ -1,18 +1,6 @@
 import { type Authentication } from "../../authentication/index.ts"
 import { helix } from "../helix.ts"
 
-interface ChatMessageResponse {
-  data: Array<{
-    message_id: string /** The message id for the message that was sent. */
-    is_sent: boolean /** If the message passed all checks and was sent. */
-  }>
-  /** The reason the message was dropped, if any. */
-  drop_reason?: {
-    code: string /** Code for why the message was dropped. */
-    message: string /** Message for why the message was dropped. */
-  }
-}
-
 interface ChatMessage {
   message_id: string /** The message id for the message that was sent. */
   is_sent: boolean /** If the message passed all checks and was sent. */
@@ -21,6 +9,10 @@ interface ChatMessage {
     code: string /** Code for why the message was dropped. */
     message: string /** Message for why the message was dropped. */
   }
+}
+
+interface ChatMessageResponse {
+  data: ChatMessage[]
 }
 
 export async function sendChatAnnouncement(
@@ -82,7 +74,6 @@ export async function sendChatMessage(
 ): Promise<ChatMessage> {
   const {
     data: [data],
-    drop_reason,
   } = await helix<
     ChatMessageResponse,
     {
@@ -102,8 +93,11 @@ export async function sendChatMessage(
     },
   })
 
-  return {
-    ...data,
-    drop_reason,
+  if (!data.is_sent) {
+    throw new Error(
+      `${data.drop_reason?.code ?? "error"}: ${data.drop_reason?.message ?? "Unknown."}`,
+    )
   }
+
+  return data
 }
