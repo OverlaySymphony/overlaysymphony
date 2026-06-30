@@ -1,4 +1,4 @@
-name: Tooling
+name: "Internal: Tooling"
 
 on:
   workflow_dispatch:

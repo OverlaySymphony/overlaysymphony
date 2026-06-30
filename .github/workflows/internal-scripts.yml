@@ -1,4 +1,4 @@
-name: Scripts
+name: "Internal: Scripts"
 
 on:
   workflow_dispatch:

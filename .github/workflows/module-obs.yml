@@ -9,8 +9,14 @@ on:
   workflow_dispatch:
     inputs:
       segment:
-        description: "The version segment to increment: major, minor, patch, or prerelease."
+        type: choice
+        description: "The version segment to increment."
         required: true
+        options:
+          - major
+          - minor
+          - patch
+          - prerelease
       preId:
         description: 'Appended to the prerelease segment. (default: "")'
 

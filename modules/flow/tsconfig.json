@@ -1,8 +1,0 @@
-{
-  "extends": "@overlaysymphony/tooling/typescript",
-  "compilerOptions": {
-    "types": ["vitest/globals"],
-    "jsx": "react-jsx"
-  },
-  "include": ["src", "vitest.config.ts", "eslint.config.mjs"]
-}

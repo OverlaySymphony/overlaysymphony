@@ -1,11 +1,11 @@
-name: "Module: Overlays"
+name: "Module: Core"
 
 on:
   push:
     paths:
-      - .github/workflows/module-overlays.yml
+      - .github/workflows/module-core.yml
       - internal/tooling/**
-      - modules/overlays/**
+      - modules/core/**
   workflow_dispatch:
     inputs:
       segment:
@@ -21,8 +21,8 @@ on:
         description: 'Appended to the prerelease segment. (default: "")'
 
 env:
-  WORKSPACE: "@overlaysymphony/overlays"
-  DIRECTORY: modules/overlays
+  WORKSPACE: "@overlaysymphony/core"
+  DIRECTORY: modules/core
 
 jobs:
   verify:

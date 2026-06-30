@@ -1,6 +1,0 @@
-/.depcheckrc
-/.prettierignore
-/.prettierrc.json
-/eslint.config.mjs
-/tsconfig.json
-/vitest.config.ts

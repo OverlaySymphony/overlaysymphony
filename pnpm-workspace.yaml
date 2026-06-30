@@ -1,4 +1,5 @@
 packages:
+  - "external/*"
   - "internal/*"
   - "modules/*"
   - "examples/*"
