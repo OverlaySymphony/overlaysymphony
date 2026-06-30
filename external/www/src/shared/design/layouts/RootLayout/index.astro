@@ -1,0 +1,58 @@
+---
+export type Props = {
+  title: string
+  children: unknown
+}
+
+const { title } = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" href="/favicon/favicon.ico" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/favicon/favicon-96x96.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/favicon/favicon-180x180.png"
+    />
+
+    <meta name="apple-mobile-web-app-title" content="CJB Dev" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <slot name="head" />
+
+    <title>
+      {
+        title
+          ? `${title.replace(/ - Overlay Symphony$/, "")} | Overlay Symphony`
+          : "Overlay Symphony"
+      }
+    </title>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import url("#design/foundations.css");
+
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+  }
+</style>

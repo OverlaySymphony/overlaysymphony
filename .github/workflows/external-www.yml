@@ -1,0 +1,48 @@
+name: "External: SDK"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/external-www.yml
+      - internal/tooling/**
+      - external/www/**
+
+env:
+  WORKSPACE: "www"
+  DIRECTORY: external/www
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Verify
+        uses: ./.github/actions/verify
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    environment: ${{ github.event_name == 'workflow_dispatch' && 'github-pages' || null  }}
+    needs: verify
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Build
+        uses: ./.github/actions/build
+        env:
+          VITE_TWITCH_CLIENT_ID: ${{ github.event_name == 'workflow_dispatch' && vars.TWITCH_CLIENT_ID || null  }}
+        with:
+          args: --base=./

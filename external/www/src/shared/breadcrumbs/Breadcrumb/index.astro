@@ -1,0 +1,7 @@
+---
+import { type Breadcrumb } from "../breadcrumb"
+
+export type Props = Required<Pick<Breadcrumb, "href" | "label">> & Breadcrumb
+
+Astro.locals.breadcrumbs.unshift(Astro.props)
+---

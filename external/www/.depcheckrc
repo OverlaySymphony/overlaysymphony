@@ -1,0 +1,11 @@
+ignore-dirs:
+  - dist
+
+ignores:
+  - "@types/*"
+  - "astro:*"
+  # used but not imported
+  - "@astrojs/check"
+  - "@astrojs/ts-plugin"
+  - "@vitest/coverage-v8"
+  - prettier-plugin-astro

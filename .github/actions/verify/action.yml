@@ -19,6 +19,10 @@ runs:
   using: composite
 
   steps:
+    - name: Prelint
+      shell: bash
+      run: pnpm run --filter ${{ env.WORKSPACE }} --if-present prelint
+
     - name: Typecheck
       if: ${{ !inputs.skip-typecheck }}
       shell: bash

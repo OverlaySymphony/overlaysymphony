@@ -1,0 +1,32 @@
+---
+import Layout from "#design/layouts/RootLayout.astro"
+import { type Breadcrumb, getMatch, getStructure } from "#shared/breadcrumbs"
+
+export type Props = {
+  children: unknown
+}
+
+const { root, title } = getStructure(Astro.locals.breadcrumbs as Breadcrumb[])
+
+const match = getMatch(root?.navigation ?? [], Astro.originPathname)
+---
+
+<Layout title={title}>
+  {root?.navigation && (
+    <header>
+      <a class="logo" href={root.href}>{root.label}</a>
+
+      <nav>
+        {
+          root.navigation.map(({ label, href }) => (
+            <a class:list={[{ active: match?.href === href }]} href={href}>
+              {label}
+            </a>
+          ))
+        }
+      </nav>
+    </header>
+  )}
+
+  <slot />
+</Layout>

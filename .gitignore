@@ -5,6 +5,7 @@
 
 # cache
 /.nx
+.astro
 
 # artifacts
 node_modules

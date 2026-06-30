@@ -1,0 +1,43 @@
+---
+import { type HTMLAttributes } from "astro/types"
+
+import { type Token, tokenize, isTokenizable } from "#design/helpers/tokenizer"
+
+export type Props = {
+  as?: string
+} & Omit<HTMLAttributes<"div">, "style">
+
+const { as, className, ...props } = Astro.props
+
+const Component = as ?? "span"
+
+const children = await Astro.slots.render("default")
+
+function renderTokens(tokens: Token["children"]) {
+  return (
+    <>
+      {tokens.map((token) => {
+        if (!token) return null
+        if (typeof token === "string") return token
+
+        const Component = token.tag ?? Fragment
+
+        return (
+          <Component {...token.props}>{renderTokens(token.children)}</Component>
+        )
+      })}
+    </>
+  )
+}
+---
+
+<Component
+  {...props}
+  class:list={[ className]}
+>
+  {isTokenizable(children) ? renderTokens(tokenize(children)) : children}
+</Component>
+
+<style>
+  @import url("@cjb-labs/design-web/foundations/typography.css");
+</style>

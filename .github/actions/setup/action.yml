@@ -21,4 +21,4 @@ runs:
     - name: Setup workspace
       if: ${{ env.WORKSPACE }}
       shell: bash
-      run: pnpm run --if-present ${{ env.WORKSPACE }}:ci-setup
+      run: pnpm run --filter ${{ env.WORKSPACE }} --if-present ci-setup

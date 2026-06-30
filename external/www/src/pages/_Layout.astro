@@ -1,0 +1,23 @@
+---
+import ParentLayout from "#design/layouts/StandardLayout.astro"
+import { Breadcrumb } from "#shared/page"
+
+export type Props = {
+  children: unknown
+}
+---
+
+<Breadcrumb
+  href="/"
+  label="Overlay Symphony"
+  navigation={[
+    { label: "Features", href: "/features" },
+    { label: "Modules", href: "/modules" },
+    { label: "Docs", href: "/docs" },
+    { label: "Open Editor", href: "/editor" },
+  ]}
+/>
+
+<ParentLayout>
+  <slot />
+</ParentLayout>
