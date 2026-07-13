@@ -70,7 +70,7 @@ const matchers: Array<{
   },
   {
     patterns: [/^(.*?[^a-zA-Z])??`(.*?)`([^a-zA-Z].*)??$/],
-    handle: ["code", { className: "inline" }],
+    handle: ["code", { class: "inline" }],
   },
   {
     patterns: [/^(.*?[^a-zA-Z])??~~(.*?)~~([^a-zA-Z].*)??$/],

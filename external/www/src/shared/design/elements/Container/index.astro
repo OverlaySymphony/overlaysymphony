@@ -1,0 +1,23 @@
+---
+import { type HTMLAttributes } from "astro/types"
+
+export type Props = {
+  as?: string
+} & Omit<HTMLAttributes<"div">, "style">
+
+const { as, class: className, ...props } = Astro.props
+
+const Component = as ?? "div"
+---
+
+<Component {...props} class:list={["container", className]}>
+  <slot />
+</Component>
+
+<style>
+  .container {
+    max-width: var(--os-container-width);
+    margin: 0 auto;
+    padding: 0 var(--os-container-gutter);
+  }
+</style>

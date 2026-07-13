@@ -1,9 +1,143 @@
 ---
+import Button from "#design/elements/Button.astro"
+import Card from "#design/patterns/Card.astro"
+import CardGrid from "#design/patterns/CardGrid.astro"
+import Hero from "#design/patterns/Hero.astro"
+import NodeGraph from "#design/patterns/NodeGraph.astro"
+import Section from "#design/patterns/Section.astro"
+import StatusList from "#design/patterns/StatusList.astro"
+import Window from "#design/patterns/Window.astro"
+
 import Layout from "./_Layout.astro"
 ---
 
 <Layout>
-  <ul>
-    <li><a href="/temporary">Temporary</a></li>
-  </ul>
+  <Hero
+    eyebrow="Live stream automation"
+    headline="Wire up your stream like a *signal chain*, not a spreadsheet."
+    sub="Overlay Symphony is an **event-driven, modular** automation tool for Twitch. Compose triggers, conditions, and actions into overlays that **run locally inside OBS** — no cloud relay, no third-party outage, no monthly bill."
+  >
+    <Button slot="actions" href="/editor" arrow>Open the editor</Button>
+    <Button slot="actions" href="/modules" variant="ghost">Read the docs</Button>
+
+    <Window title="routing / new-follower.automation" centered>
+      <NodeGraph
+        nodes={[
+          { kind: "trigger", title: "Channel · Follow", meta: "twitch.eventsub" },
+          {
+            kind: "condition",
+            title: "Not seen in 30d",
+            meta: "user.lastSeen ≥ 30d",
+          },
+          {
+            kind: "action",
+            title: "Play overlay · Welcome",
+            meta: 'overlay.fire("welcome")',
+          },
+        ]}
+      />
+    </Window>
+  </Hero>
+
+  <Section
+    index="01"
+    eyebrow="Why it's different"
+    title="Built the way streamers actually work — local, modular, recoverable."
+    lede="Tools that depend on a vendor staying online are tools you don't fully own. Symphony inverts that."
+  >
+    <CardGrid columns={4}>
+      <Card icon="grid" title="Modular by default" tag="4 modules · counting">
+        Every integration — Twitch, OBS, overlays — is a discrete module. Enable
+        what you need, ignore the rest. No bundled bloat.
+      </Card>
+
+      <Card icon="browser" title="Runs inside OBS" tag="browser-source native">
+        Paste a single URL into a browser source. Automations execute in that
+        browser context — your machine, your runtime, no proxy.
+      </Card>
+
+      <Card
+        icon="signal"
+        title="No server to outage"
+        tag="zero-runtime-dependency"
+      >
+        Once an automation is configured, it doesn't phone home. If our website
+        is down, your stream keeps running. Period.
+      </Card>
+
+      <Card
+        icon="nodes"
+        title="Node-based automations"
+        tag="trigger · condition · action"
+      >
+        Compose triggers → conditions → actions visually. Branch on chat content,
+        viewer state, time of day. Reuse blocks across overlays.
+      </Card>
+    </CardGrid>
+  </Section>
+
+  <Section
+    index="02"
+    eyebrow="How it works"
+    title="Three steps. Then you forget it exists."
+    lede="Configure once in the editor, paste once into OBS, stream forever."
+  >
+    <CardGrid columns={3} gap="spaced">
+      <Card variant="raised" label="Step 01" title="Configure modules">
+        Connect Twitch, hook into OBS, register your overlay scenes. Each module
+        is its own panel — turn on what you need.
+
+        <StatusList
+          slot="media"
+          items={[
+            { tone: "trigger", key: "twitch", value: "— connected as @yourname" },
+            {
+              tone: "trigger",
+              key: "obs.websocket",
+              value: "— ws://127.0.0.1:4455",
+            },
+            {
+              tone: "trigger",
+              key: "overlays",
+              value: "— 3 scenes registered",
+            },
+            { tone: "muted", key: "discord", value: "— disabled", dim: true },
+          ]}
+        />
+      </Card>
+
+      <Card variant="raised" label="Step 02" title="Build automations">
+        Drag a trigger, attach conditions, wire up actions. Save it as part of an
+        overlay scene.
+
+        <StatusList
+          slot="media"
+          items={[
+            { tone: "trigger", key: "trigger", value: 'chat.command "!so"' },
+            { tone: "condition", key: "if", value: "user.role ≥ mod" },
+            { tone: "condition", key: "if", value: "args[0] is_user" },
+            { tone: "action", key: "do", value: "overlay.shoutout(args[0])" },
+            { tone: "action", key: "do", value: 'chat.reply("welcome back!")' },
+          ]}
+        />
+      </Card>
+
+      <Card variant="raised" label="Step 03" title="Paste into OBS">
+        One URL per overlay scene. Add it as a Browser Source in OBS. From then
+        on, everything runs there.
+
+        <StatusList
+          slot="media"
+          items={[
+            { value: "browser source url:" },
+            {
+              highlight: true,
+              value: "file:///overlays/welcome.html#scene=main",
+            },
+            { tone: "trigger", key: "status", value: "— listening · 0 errors" },
+          ]}
+        />
+      </Card>
+    </CardGrid>
+  </Section>
 </Layout>

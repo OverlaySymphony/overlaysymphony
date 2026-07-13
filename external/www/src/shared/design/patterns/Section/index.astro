@@ -1,0 +1,86 @@
+---
+import Container from "#design/elements/Container.astro"
+import Eyebrow from "#design/elements/Eyebrow.astro"
+import Typography from "#design/elements/Typography.astro"
+
+export type Props = {
+  id?: string
+  index?: string
+  eyebrow?: string
+  title?: string
+  lede?: string
+  divider?: boolean
+}
+
+const { id, index, eyebrow, title, lede, divider = true } = Astro.props
+
+const hasHead = Boolean(eyebrow ?? title ?? lede)
+---
+
+<section id={id} class:list={["section", { divider }]}>
+  <Container>
+    {
+      hasHead && (
+        <div class="head">
+          <div class="headline">
+            {eyebrow && (
+              <div class="eyebrow">
+                <Eyebrow index={index}>{eyebrow}</Eyebrow>
+              </div>
+            )}
+
+            {title && (
+              <div class="title">
+                <Typography as="h2" role="title" size="medium">
+                  {title}
+                </Typography>
+              </div>
+            )}
+          </div>
+
+          {lede && (
+            <div class="lede">
+              <Typography as="p" role="body">
+                {lede}
+              </Typography>
+            </div>
+          )}
+        </div>
+      )
+    }
+
+    <slot />
+  </Container>
+</section>
+
+<style>
+  .section {
+    padding: var(--os-space-25) 0;
+  }
+
+  .divider {
+    border-top: var(--os-hairline) solid var(--os-color-line);
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--os-space-8);
+    align-items: end;
+    justify-content: space-between;
+    margin-bottom: var(--os-space-14);
+  }
+
+  .eyebrow {
+    margin-bottom: var(--os-space-3);
+  }
+
+  .title {
+    max-width: 40rem;
+  }
+
+  .lede {
+    max-width: 22.5rem;
+    color: var(--os-color-text-muted);
+  }
+</style>

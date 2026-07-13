@@ -1,0 +1,61 @@
+---
+export type Props = {
+  href?: string
+  size?: "medium" | "small"
+  markOnly?: boolean
+}
+
+const { href, size = "medium", markOnly = false } = Astro.props
+
+const Component = href ? "a" : "span"
+---
+
+<Component
+  href={href}
+  class:list={["logo", size]}
+  aria-label={markOnly ? "Overlay Symphony" : undefined}
+>
+  <span class="mark" aria-hidden="true"></span>
+
+  {
+    !markOnly && (
+      <span class="name">
+        Overlay<span class="accent">Symphony</span>
+      </span>
+    )
+  }
+</Component>
+
+<style>
+  .logo {
+    display: flex;
+    gap: var(--os-space-3);
+    align-items: center;
+    font-weight: var(--os-weight-semibold);
+    letter-spacing: var(--os-tracking-tight);
+  }
+
+  .medium {
+    font-size: 1.0625rem;
+  }
+
+  .medium .mark {
+    width: 1.375rem;
+    height: 1.375rem;
+  }
+
+  .small .mark {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+
+  .mark {
+    display: block;
+    flex: none;
+    background: var(--os-color-teal);
+  }
+
+  .accent {
+    color: var(--os-color-teal);
+  }
+</style>

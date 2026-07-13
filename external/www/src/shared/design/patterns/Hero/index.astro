@@ -1,0 +1,90 @@
+---
+import Container from "#design/elements/Container.astro"
+import Eyebrow from "#design/elements/Eyebrow.astro"
+import Typography from "#design/elements/Typography.astro"
+
+export type Props = {
+  eyebrow?: string
+  headline: string
+  sub?: string
+}
+
+const { eyebrow, headline, sub } = Astro.props
+
+const hasActions = Astro.slots.has("actions")
+const hasFeature = Astro.slots.has("default")
+---
+
+<header class="hero">
+  <Container>
+    {
+      eyebrow && (
+        <div class="eyebrow">
+          <Eyebrow marker>{eyebrow}</Eyebrow>
+        </div>
+      )
+    }
+
+    <div class="headline">
+      <Typography as="h1" role="title" size="large">{headline}</Typography>
+    </div>
+
+    {
+      sub && (
+        <div class="sub">
+          <Typography as="p" role="body" size="large">
+            {sub}
+          </Typography>
+        </div>
+      )
+    }
+
+    {
+      hasActions && (
+        <div class="actions">
+          <slot name="actions" />
+        </div>
+      )
+    }
+
+    {
+      hasFeature && (
+        <div class="feature">
+          <slot />
+        </div>
+      )
+    }
+  </Container>
+</header>
+
+<style>
+  .hero {
+    padding: var(--os-space-30) 0 var(--os-space-25);
+  }
+
+  .eyebrow {
+    margin-bottom: var(--os-space-7);
+  }
+
+  .headline {
+    max-width: 58.75rem;
+    margin-bottom: var(--os-space-7);
+  }
+
+  .sub {
+    max-width: 38.75rem;
+    margin-bottom: var(--os-space-10);
+    color: var(--os-color-text-muted);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--os-space-3);
+    align-items: center;
+  }
+
+  .feature {
+    margin-top: var(--os-space-20);
+  }
+</style>

@@ -1,0 +1,135 @@
+---
+import { type IconName } from "#design/elements/Icon"
+import Icon from "#design/elements/Icon.astro"
+import Panel from "#design/elements/Panel.astro"
+import Typography from "#design/elements/Typography.astro"
+
+import { type Variant } from "./card"
+
+export * from "./card"
+
+export type Props = {
+  variant?: Variant
+  label?: string
+  icon?: IconName
+  title: string
+  tag?: string
+  href?: string
+}
+
+const { variant = "flat", label, icon, title, tag, href } = Astro.props
+
+const Component = variant === "raised" ? Panel : "div"
+
+const hasMedia = Astro.slots.has("media")
+---
+
+<Component class:list={["card", variant]}>
+  {label && <span class="label">{label}</span>}
+
+  {
+    icon && (
+      <span class="icon">
+        <Icon name={icon} />
+      </span>
+    )
+  }
+
+  <Typography as="h3" role="title" size="small">
+    {title}
+  </Typography>
+
+  <Typography as="p" role="body" size="small" class="copy">
+    <slot />
+  </Typography>
+
+  {
+    hasMedia && (
+      <div class="media">
+        <slot name="media" />
+      </div>
+    )
+  }
+
+  {
+    tag &&
+      (href ? (
+        <a class="tag" href={href}>
+          {tag}
+        </a>
+      ) : (
+        <span class="tag">{tag}</span>
+      ))
+  }
+</Component>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-3);
+    min-width: 0;
+  }
+
+  .flat {
+    min-height: 15rem;
+    padding: var(--os-space-8) var(--os-space-7) var(--os-space-10);
+    background: var(--os-color-bg);
+  }
+
+  .raised {
+    padding: var(--os-space-7);
+  }
+
+  .label {
+    display: flex;
+    gap: var(--os-space-2);
+    align-items: center;
+    font-family: var(--os-font-code);
+    font-size: var(--os-label-large-size);
+    line-height: var(--os-label-large-leading);
+    letter-spacing: var(--os-label-medium-tracking);
+    text-transform: uppercase;
+    color: var(--os-color-teal);
+  }
+
+  .label::before {
+    width: var(--os-space-6);
+    height: var(--os-hairline);
+    content: "";
+    background: var(--os-color-teal);
+  }
+
+  .icon {
+    display: block;
+    width: var(--os-space-7);
+    height: var(--os-space-7);
+    color: var(--os-color-teal);
+  }
+
+  .copy {
+    color: var(--os-color-text-muted);
+  }
+
+  .media {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--os-space-2);
+  }
+
+  .tag {
+    margin-top: auto;
+    padding-top: var(--os-space-2);
+    font-family: var(--os-font-code);
+    font-size: var(--os-label-medium-size);
+    line-height: var(--os-label-medium-leading);
+    letter-spacing: var(--os-label-medium-tracking);
+    text-transform: uppercase;
+    color: var(--os-color-text-faint);
+    transition: color var(--os-transition-fast);
+  }
+
+  a.tag:hover {
+    color: var(--os-color-teal);
+  }
+</style>

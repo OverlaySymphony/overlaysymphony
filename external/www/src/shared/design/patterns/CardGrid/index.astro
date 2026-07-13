@@ -1,0 +1,64 @@
+---
+import { type Columns, type Gap } from "./card-grid"
+
+export * from "./card-grid"
+
+export type Props = {
+  columns?: Columns
+  gap?: Gap
+}
+
+const { columns = 4, gap = "hairline" } = Astro.props
+---
+
+<div class:list={["grid", gap, `columns-${columns}`]}>
+  <slot />
+</div>
+
+<style>
+  .grid {
+    display: grid;
+    min-width: 0;
+  }
+
+  .hairline {
+    gap: var(--os-hairline);
+    background: var(--os-color-line);
+    border: var(--os-hairline) solid var(--os-color-line);
+  }
+
+  .spaced {
+    gap: var(--os-space-6);
+  }
+
+  .columns-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .columns-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .columns-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  @media (width <= 980px) {
+    .columns-4 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (width <= 860px) {
+    .columns-3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (width <= 560px) {
+    .columns-2,
+    .columns-4 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,70 @@
+---
+import Panel from "#design/elements/Panel.astro"
+import Typography from "#design/elements/Typography.astro"
+
+export type Props = {
+  title: string
+  centered?: boolean
+}
+
+const { title, centered = false } = Astro.props
+---
+
+<Panel class="window">
+  <div class="bar">
+    <Typography role="label" size="medium" class="title">{title}</Typography>
+
+    <span class="dots" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+
+  <div class:list={["body", { centered }]}>
+    <slot />
+  </div>
+</Panel>
+
+<style>
+  .window {
+    overflow: hidden;
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--os-space-3) var(--os-space-4);
+    border-bottom: var(--os-hairline) solid var(--os-color-line);
+  }
+
+  .title {
+    color: var(--os-color-text-faint);
+  }
+
+  .dots {
+    display: flex;
+    gap: var(--os-space-2);
+  }
+
+  .dots span {
+    width: var(--os-space-2);
+    height: var(--os-space-2);
+    background: var(--os-color-line-strong);
+  }
+
+  .body {
+    padding: var(--os-space-4);
+  }
+
+  .centered {
+    display: flex;
+    align-items: center;
+
+    /* `safe` keeps overflowing content scrollable instead of centring it out of view. */
+    justify-content: safe center;
+    padding: var(--os-space-7) var(--os-space-4);
+    overflow-x: auto;
+  }
+</style>

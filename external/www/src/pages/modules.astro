@@ -1,0 +1,206 @@
+---
+import Button from "#design/elements/Button.astro"
+import Card from "#design/patterns/Card.astro"
+import CardGrid from "#design/patterns/CardGrid.astro"
+import Hero from "#design/patterns/Hero.astro"
+import Section from "#design/patterns/Section.astro"
+import StatusList from "#design/patterns/StatusList.astro"
+import Window from "#design/patterns/Window.astro"
+import { Breadcrumb } from "#shared/page"
+
+import Layout from "./_Layout.astro"
+
+const repository = "https://github.com/OverlaySymphony/overlaysymphony"
+const readme = (module: string) =>
+  `${repository}/tree/main/modules/${module}#readme`
+---
+
+<Breadcrumb href="/modules" label="Modules" />
+
+<Layout>
+  <Hero
+    eyebrow="Modules"
+    headline="Take the parts you need. *Leave the rest.*"
+    sub="Every integration ships as its own package, versioned on its own schedule. Nothing is bundled, nothing is implied, and nothing you skip costs you anything at runtime."
+  >
+    <Button slot="actions" href={repository} arrow>View on GitHub</Button>
+    <Button slot="actions" href="/features" variant="ghost">
+      See how they fit
+    </Button>
+
+    <Window title="install / overlaysymphony">
+      <StatusList
+        framed={false}
+        items={[
+          { value: "# install only what you need" },
+          {
+            highlight: true,
+            value: "pnpm add @overlaysymphony/twitch @overlaysymphony/obs",
+          },
+        ]}
+      />
+    </Window>
+  </Hero>
+
+  <Section
+    index="01"
+    eyebrow="The packages"
+    title="Four modules, published independently."
+    lede="Each one is a real npm package with its own README, its own version, and its own release cadence."
+  >
+    <CardGrid columns={2} gap="spaced">
+      <Card
+        variant="raised"
+        icon="chat"
+        label="v0.4.0"
+        title="Twitch"
+        tag="@overlaysymphony/twitch"
+        href={readme("twitch")}
+      >
+        Authentication, chat, EventSub, and Helix — plus helpers that turn the
+        noisy parts of the API into state you can read straight from an
+        automation.
+
+        <StatusList
+          slot="media"
+          items={[
+            {
+              tone: "trigger",
+              key: "authentication",
+              value: "device + implicit flows",
+            },
+            {
+              tone: "trigger",
+              key: "chat",
+              value: "messages, commands, moderation",
+            },
+            {
+              tone: "trigger",
+              key: "eventsub",
+              value: "subscriptions over websocket",
+            },
+            {
+              tone: "condition",
+              key: "helix",
+              value: "channels, streams, users, subs",
+            },
+            {
+              tone: "action",
+              key: "helpers",
+              value:
+                "alerts, charity, goal, hype-train, poll, prediction, redemption, status",
+            },
+          ]}
+        />
+      </Card>
+
+      <Card
+        variant="raised"
+        icon="browser"
+        label="v0.2.1"
+        title="OBS"
+        tag="@overlaysymphony/obs"
+        href={readme("obs")}
+      >
+        Talk to OBS from inside the browser source it is already rendering.
+        Listen for scene and source events, and drive OBS back through its own
+        API.
+
+        <StatusList
+          slot="media"
+          items={[
+            {
+              tone: "trigger",
+              key: "browser/events",
+              value: "scene + visibility changes",
+            },
+            {
+              tone: "action",
+              key: "browser/actions",
+              value: "control OBS from the overlay",
+            },
+            { tone: "action", key: "ui/dock", value: "custom OBS docks" },
+          ]}
+        />
+      </Card>
+
+      <Card
+        variant="raised"
+        icon="scene"
+        label="v0.1.1"
+        title="Overlays"
+        tag="@overlaysymphony/overlays"
+        href={readme("overlays")}
+      >
+        Scene composition for the overlays themselves. This is the newest module
+        and the least finished — expect it to move.
+
+        <StatusList
+          slot="media"
+          items={[
+            { tone: "action", key: "ui/scene", value: "scene rendering" },
+          ]}
+        />
+      </Card>
+
+      <Card
+        variant="raised"
+        icon="grid"
+        label="v0.2.4"
+        title="Core"
+        tag="@overlaysymphony/core"
+        href={readme("core")}
+      >
+        The plumbing the other modules are built on: an event bus, pub/sub,
+        cross-context broadcast, queues, and deferral. **You should not need to
+        use this package directly.**
+
+        <StatusList
+          slot="media"
+          items={[
+            { tone: "muted", key: "libs/events", value: "typed event emitter" },
+            { tone: "muted", key: "libs/pubsub", value: "subscriptions" },
+            {
+              tone: "muted",
+              key: "libs/broadcast",
+              value: "cross-context messaging",
+            },
+            { tone: "muted", key: "libs/queue", value: "serialised work" },
+            { tone: "muted", key: "libs/defer", value: "deferred promises" },
+            { tone: "muted", key: "libs/querystring", value: "url state" },
+          ]}
+        />
+      </Card>
+    </CardGrid>
+  </Section>
+
+  <Section
+    index="02"
+    eyebrow="Stability"
+    title="Used in anger, but still moving."
+    lede="Honest expectations beat a roadmap."
+  >
+    <Window title="notice / semver">
+      <StatusList
+        framed={false}
+        items={[
+          {
+            tone: "condition",
+            key: "status",
+            value: "— under active development",
+          },
+          {
+            tone: "trigger",
+            key: "releases",
+            value: "— used live on the maintainer's own stream",
+          },
+          {
+            tone: "action",
+            key: "semver",
+            value: "— followed, but timelines are not guaranteed",
+          },
+        ]}
+      />
+    </Window>
+  </Section>
+</Layout>

@@ -1,43 +1,103 @@
 ---
 import { type HTMLAttributes } from "astro/types"
 
-import { type Token, tokenize, isTokenizable } from "#design/helpers/tokenizer"
+import { tokenize, isTokenizable } from "#design/helpers/tokenizer"
+
+import Tokens from "./Tokens.astro"
+import { type Role, type Size } from "./typography"
+
+export * from "./typography"
 
 export type Props = {
   as?: string
+  role?: Role
+  size?: Size
 } & Omit<HTMLAttributes<"div">, "style">
 
-const { as, className, ...props } = Astro.props
+const {
+  as,
+  role = "body",
+  size = "medium",
+  class: className,
+  ...props
+} = Astro.props
 
 const Component = as ?? "span"
 
 const children = await Astro.slots.render("default")
 
-function renderTokens(tokens: Token["children"]) {
-  return (
-    <>
-      {tokens.map((token) => {
-        if (!token) return null
-        if (typeof token === "string") return token
-
-        const Component = token.tag ?? Fragment
-
-        return (
-          <Component {...token.props}>{renderTokens(token.children)}</Component>
-        )
-      })}
-    </>
+const style = (["size", "weight", "tracking", "leading"] as const)
+  .map(
+    (property) =>
+      `--typography-${property}:var(--os-${role}-${size}-${property})`,
   )
-}
+  .join(";")
 ---
 
-<Component
-  {...props}
-  class:list={[ className]}
->
-  {isTokenizable(children) ? renderTokens(tokenize(children)) : children}
+<Component {...props} class:list={["typography", role, className]} style={style}>
+  {
+    isTokenizable(children) ? (
+      <Tokens tokens={tokenize(children)} />
+    ) : (
+      children
+    )
+  }
 </Component>
 
 <style>
-  @import url("@cjb-labs/design-web/foundations/typography.css");
+  .typography {
+    margin: 0;
+    font-size: var(--typography-size);
+    font-weight: var(--typography-weight);
+    line-height: var(--typography-leading);
+    letter-spacing: var(--typography-tracking);
+  }
+
+  .title,
+  .body {
+    font-family: var(--os-font-body);
+  }
+
+  .label,
+  .code {
+    font-family: var(--os-font-code);
+  }
+
+  .title {
+    text-wrap: balance;
+  }
+
+  .body {
+    text-wrap: pretty;
+  }
+
+  .label {
+    text-transform: uppercase;
+  }
+
+  /* Tokenized children are built at render time, so Astro's compile-time scoping misses them. */
+  .typography :global(em) {
+    font-style: normal;
+    color: var(--os-color-teal);
+  }
+
+  .typography :global(strong) {
+    font-weight: var(--os-weight-medium);
+    color: var(--os-color-text);
+  }
+
+  .typography :global(code.inline) {
+    font-family: var(--os-font-code);
+    font-size: 0.9em;
+    color: var(--os-color-teal);
+  }
+
+  .typography :global(a) {
+    color: var(--os-color-teal);
+    transition: color var(--os-transition-fast);
+  }
+
+  .typography :global(a:hover) {
+    color: var(--os-color-teal-hover);
+  }
 </style>

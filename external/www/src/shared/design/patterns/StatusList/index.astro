@@ -1,0 +1,98 @@
+---
+import Panel from "#design/elements/Panel.astro"
+
+import { type StatusItem } from "./status-list"
+
+export * from "./status-list"
+
+export type Props = {
+  items: StatusItem[]
+  framed?: boolean
+}
+
+const { items, framed = true } = Astro.props
+
+const Component = framed ? Panel : "div"
+---
+
+<Component class="status" {...framed ? { inset: true } : {}}>
+  {
+    items.map((item) =>
+      item.highlight ? (
+        <span class="highlight">{item.value}</span>
+      ) : (
+        <span class:list={["line", { dim: item.dim }]}>
+          {item.tone && <span class:list={["dot", item.tone]} aria-hidden="true" />}
+          {item.key && <span class="key">{item.key}</span>}
+          {item.value && <span class="value">{item.value}</span>}
+        </span>
+      ),
+    )
+  }
+</Component>
+
+<style>
+  .status {
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-2);
+    min-width: 0;
+    padding: var(--os-space-4);
+    overflow-wrap: anywhere;
+    font-family: var(--os-font-code);
+    font-size: var(--os-code-medium-size);
+    line-height: var(--os-code-medium-leading);
+    color: var(--os-color-text-muted);
+  }
+
+  .line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--os-space-2) var(--os-space-3);
+    align-items: baseline;
+  }
+
+  .dot {
+    flex: none;
+    align-self: center;
+    width: var(--os-space-2);
+    height: var(--os-space-2);
+  }
+
+  .trigger {
+    background: var(--os-color-trigger);
+  }
+
+  .condition {
+    background: var(--os-color-condition);
+  }
+
+  .action {
+    background: var(--os-color-action);
+  }
+
+  .muted {
+    background: var(--os-color-line-strong);
+  }
+
+  .key {
+    color: var(--os-color-text);
+  }
+
+  .value {
+    color: var(--os-color-text-muted);
+  }
+
+  .dim .key,
+  .dim .value {
+    color: var(--os-color-text-faint);
+  }
+
+  .highlight {
+    padding: var(--os-space-2) var(--os-space-3);
+    overflow-wrap: anywhere;
+    color: var(--os-color-text);
+    background: var(--os-color-bg-elev-2);
+    border-left: 2px solid var(--os-color-teal);
+  }
+</style>

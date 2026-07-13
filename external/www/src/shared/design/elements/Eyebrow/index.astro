@@ -1,0 +1,64 @@
+---
+import { type HTMLAttributes } from "astro/types"
+
+import { type Tone } from "./eyebrow"
+
+export * from "./eyebrow"
+
+export type Props = {
+  marker?: boolean
+  index?: string
+  tone?: Tone
+} & Omit<HTMLAttributes<"span">, "style">
+
+const {
+  marker = false,
+  index,
+  tone = index ? "muted" : "accent",
+  class: className,
+  ...props
+} = Astro.props
+---
+
+<span {...props} class:list={["eyebrow", tone, className]}>
+  {marker && <span class="marker" aria-hidden="true" />}
+  {index && <span class="index">{index}</span>}
+  {index && <span class="separator" aria-hidden="true">/</span>}
+  <slot />
+</span>
+
+<style>
+  .eyebrow {
+    display: inline-flex;
+    gap: var(--os-space-2);
+    align-items: center;
+    font-family: var(--os-font-code);
+    font-size: var(--os-label-large-size);
+    font-weight: var(--os-label-large-weight);
+    line-height: var(--os-label-large-leading);
+    letter-spacing: var(--os-label-large-tracking);
+    text-transform: uppercase;
+  }
+
+  .accent {
+    color: var(--os-color-teal);
+  }
+
+  .muted {
+    color: var(--os-color-text-muted);
+  }
+
+  .marker {
+    width: var(--os-space-2);
+    height: var(--os-space-2);
+    background: var(--os-color-teal);
+  }
+
+  .index {
+    color: var(--os-color-teal);
+  }
+
+  .separator {
+    color: var(--os-color-text-faint);
+  }
+</style>

@@ -1,7 +1,20 @@
 ---
+import Button from "#design/elements/Button.astro"
+import Hero from "#design/patterns/Hero.astro"
+import { Breadcrumb } from "#shared/page"
+
 import Layout from "./_Layout.astro"
 ---
 
+<Breadcrumb href="/404" label="Not found" minor />
+
 <Layout>
-  <h1>Error: Not found</h1>
+  <Hero
+    eyebrow="Error 404"
+    headline="That chain *doesn't route* anywhere."
+    sub="The page you asked for isn't here. It may have moved, or it may never have existed."
+  >
+    <Button slot="actions" href="/" arrow>Back to the start</Button>
+    <Button slot="actions" href="/modules" variant="ghost">Browse the modules</Button>
+  </Hero>
 </Layout>

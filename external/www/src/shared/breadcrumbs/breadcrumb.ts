@@ -1,6 +1,7 @@
 export type Navigation = {
   label: string
   href: string
+  cta?: boolean
 }
 
 export type Breadcrumb = {

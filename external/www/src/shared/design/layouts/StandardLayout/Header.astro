@@ -1,0 +1,78 @@
+---
+import Button from "#design/elements/Button.astro"
+import Container from "#design/elements/Container.astro"
+import { type Breadcrumb, type Navigation } from "#shared/breadcrumbs"
+
+import Logo from "./Logo.astro"
+
+export type Props = {
+  root: Breadcrumb
+  navigation: Navigation[]
+  active?: Navigation
+}
+
+const { root, navigation, active } = Astro.props
+---
+
+<header class="header">
+  <Container class="row">
+    <Logo href={root.href} />
+
+    <nav class="links">
+      {
+        navigation.map(({ label, href, cta }) =>
+          cta ? (
+            <Button href={href} size="small">
+              {label}
+            </Button>
+          ) : (
+            <a class:list={["link", { active: active?.href === href }]} href={href}>
+              {label}
+            </a>
+          ),
+        )
+      }
+    </nav>
+  </Container>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--os-color-bg) 85%, transparent);
+    border-bottom: var(--os-hairline) solid var(--os-color-line);
+    backdrop-filter: blur(10px);
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--os-header-height);
+  }
+
+  .links {
+    display: flex;
+    gap: var(--os-space-7);
+    align-items: center;
+  }
+
+  .link {
+    font-size: var(--os-control-medium-size);
+    color: var(--os-color-text-muted);
+    transition: color var(--os-transition-fast);
+  }
+
+  .link:hover,
+  .active {
+    color: var(--os-color-text);
+  }
+
+  @media (width <= 720px) {
+    .link {
+      display: none;
+    }
+  }
+</style>

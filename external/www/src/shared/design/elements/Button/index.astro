@@ -1,0 +1,84 @@
+---
+import { type HTMLAttributes } from "astro/types"
+
+import { type Size, type Variant } from "./button"
+
+export * from "./button"
+
+export type Props = {
+  variant?: Variant
+  size?: Size
+  arrow?: boolean
+  href?: string
+} & Omit<HTMLAttributes<"button">, "style">
+
+const {
+  variant = "primary",
+  size = "medium",
+  arrow = false,
+  href,
+  class: className,
+  ...props
+} = Astro.props
+
+const Component = href ? "a" : "button"
+---
+
+<Component {...props} href={href} class:list={["button", variant, size, className]}>
+  <slot />
+  {arrow && <span class="arrow" aria-hidden="true">&rarr;</span>}
+</Component>
+
+<style>
+  .button {
+    display: inline-flex;
+    gap: var(--os-space-2);
+    align-items: center;
+    border: var(--os-hairline) solid transparent;
+    border-radius: var(--os-radius-sm);
+    transition:
+      background var(--os-transition-fast),
+      border-color var(--os-transition-fast);
+  }
+
+  .medium {
+    padding: var(--os-space-3) var(--os-space-5);
+    font-size: var(--os-control-large-size);
+  }
+
+  .small {
+    padding: var(--os-space-2) var(--os-space-4);
+    font-size: var(--os-control-medium-size);
+  }
+
+  .primary {
+    font-weight: var(--os-weight-semibold);
+    color: var(--os-color-text-inverse);
+    background: var(--os-color-teal);
+  }
+
+  .primary:hover {
+    background: var(--os-color-teal-hover);
+  }
+
+  .primary:active {
+    background: var(--os-color-teal-active);
+  }
+
+  .ghost {
+    font-weight: var(--os-weight-medium);
+    color: var(--os-color-text);
+    background: transparent;
+    border-color: var(--os-color-line-strong);
+  }
+
+  .ghost:hover {
+    background: var(--os-color-bg-elev);
+    border-color: var(--os-color-text-faint);
+  }
+
+  .arrow {
+    font-family: var(--os-font-code);
+    font-weight: var(--os-weight-regular);
+  }
+</style>

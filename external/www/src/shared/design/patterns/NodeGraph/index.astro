@@ -1,0 +1,148 @@
+---
+import { type Node, NODE_LABELS } from "./node-graph"
+
+export * from "./node-graph"
+
+export type Props = {
+  nodes: Node[]
+}
+
+const { nodes } = Astro.props
+---
+
+<div class="wrapper">
+  <div class="graph">
+    {
+      nodes.map((node, index) => (
+        <>
+          {index > 0 && <span class="edge" aria-hidden="true" />}
+
+          <div class:list={["node", node.kind]}>
+            <span class="label">{node.label ?? NODE_LABELS[node.kind]}</span>
+            <span class="title">{node.title}</span>
+            {node.meta && <span class="meta">{node.meta}</span>}
+          </div>
+        </>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .wrapper {
+    container-type: inline-size;
+    width: 100%;
+  }
+
+  .graph {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+  }
+
+  .node {
+    --node-color: var(--os-color-text-muted);
+    --node-border: var(--os-color-line-strong);
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: var(--os-space-2);
+    min-width: 12.5rem;
+    padding: var(--os-space-3) var(--os-space-4);
+    background: var(--os-color-bg);
+    border: var(--os-hairline) solid var(--node-border);
+    border-radius: var(--os-radius-md);
+  }
+
+  .trigger {
+    --node-color: var(--os-color-trigger);
+    --node-border: var(--os-color-trigger-border);
+  }
+
+  .condition {
+    --node-color: var(--os-color-condition);
+    --node-border: var(--os-color-condition-border);
+  }
+
+  .action {
+    --node-color: var(--os-color-action);
+    --node-border: var(--os-color-action-border);
+  }
+
+  .label {
+    display: flex;
+    gap: var(--os-space-2);
+    align-items: center;
+    font-family: var(--os-font-code);
+    font-size: var(--os-label-small-size);
+    line-height: var(--os-label-small-leading);
+    letter-spacing: var(--os-label-small-tracking);
+    text-transform: uppercase;
+    color: var(--node-color);
+  }
+
+  .label::before {
+    display: inline-block;
+    width: var(--os-space-2);
+    height: var(--os-space-2);
+    content: "";
+    background: var(--node-color);
+  }
+
+  .title {
+    font-family: var(--os-font-body);
+    font-size: var(--os-body-small-size);
+    font-weight: var(--os-weight-medium);
+    line-height: var(--os-title-small-leading);
+    letter-spacing: var(--os-tracking-tight);
+    color: var(--os-color-text);
+  }
+
+  .meta {
+    font-family: var(--os-font-code);
+    font-size: var(--os-code-small-size);
+    line-height: var(--os-code-small-leading);
+    color: var(--os-color-text-muted);
+  }
+
+  .edge {
+    position: relative;
+    align-self: center;
+    width: var(--os-space-16);
+    height: var(--os-hairline);
+    background: var(--os-color-line-strong);
+  }
+
+  .edge::after {
+    position: absolute;
+    top: -3px;
+    right: -1px;
+    width: 0;
+    height: 0;
+    content: "";
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-left: 6px solid var(--os-color-line-strong);
+  }
+
+  @container (width < 46rem) {
+    .graph {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .edge {
+      width: var(--os-hairline);
+      height: var(--os-space-7);
+      margin: 0 auto;
+    }
+
+    .edge::after {
+      top: auto;
+      right: -3px;
+      bottom: -1px;
+      transform: rotate(90deg);
+    }
+  }
+</style>

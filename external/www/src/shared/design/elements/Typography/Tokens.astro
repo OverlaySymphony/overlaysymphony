@@ -1,0 +1,31 @@
+---
+import { type Token } from "#design/helpers/tokenizer"
+
+// Astro frontmatter is TypeScript, not TSX, so the tree is walked by a self-rendering
+// component rather than a recursive local function.
+import Self from "./Tokens.astro"
+
+export type Props = {
+  tokens: Token["children"]
+}
+
+const { tokens } = Astro.props
+---
+
+{
+  tokens.map((token) => {
+    if (!token) return null
+
+    // Tokens are slices of already-rendered slot HTML; emitting them as text would
+    // escape their entities a second time.
+    if (typeof token === "string") return <Fragment set:html={token} />
+
+    const Tag = token.tag
+
+    return (
+      <Tag {...token.props}>
+        <Self tokens={token.children} />
+      </Tag>
+    )
+  })
+}

@@ -1,0 +1,28 @@
+---
+import { type HTMLAttributes } from "astro/types"
+
+export type Props = {
+  as?: string
+  inset?: boolean
+} & Omit<HTMLAttributes<"div">, "style">
+
+const { as, inset = false, class: className, ...props } = Astro.props
+
+const Component = as ?? "div"
+---
+
+<Component {...props} class:list={["panel", { inset }, className]}>
+  <slot />
+</Component>
+
+<style>
+  .panel {
+    background: var(--os-color-bg-elev);
+    border: var(--os-hairline) solid var(--os-color-line);
+    border-radius: var(--os-radius-md);
+  }
+
+  .inset {
+    background: var(--os-color-bg);
+  }
+</style>
