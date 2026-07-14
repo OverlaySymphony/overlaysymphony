@@ -61,6 +61,7 @@
   --os-color-action-border: var(--os-color-amber-border);
 
   /* fonts */
+  --os-root-font-size: 16px;
   --os-font-body: "Geist", system-ui, sans-serif;
   --os-font-code: "Geist Mono", ui-monospace, monospace;
 
@@ -184,11 +185,14 @@
 }
 
 html {
+  font-size: var(--os-root-font-size);
   background: var(--os-color-bg);
   color: var(--os-color-text);
 }
 
 body {
+  min-height: 100vh;
+  margin: 0;
   font-family: var(--os-font-body);
   font-feature-settings: "ss01", "cv11";
   line-height: var(--os-body-medium-leading);

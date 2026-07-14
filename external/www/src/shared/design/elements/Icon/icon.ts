@@ -5,12 +5,3 @@ export type IconName =
   | "nodes"
   | "chat"
   | "scene"
-
-export const ICON_NAMES: IconName[] = [
-  "grid",
-  "browser",
-  "signal",
-  "nodes",
-  "chat",
-  "scene",
-]
