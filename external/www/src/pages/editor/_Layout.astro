@@ -1,0 +1,20 @@
+---
+import ParentLayout from "#design/layouts/AppLayout.astro"
+import { Breadcrumb } from "#shared/page"
+
+export type Props = {
+  path?: string[]
+  status?: string
+  initials?: string
+  children: unknown
+}
+
+const { path, status, initials } = Astro.props
+---
+
+<Breadcrumb href="/" label="Overlay Symphony" />
+
+<ParentLayout path={path} status={status} initials={initials}>
+  <slot name="actions" slot="actions" />
+  <slot />
+</ParentLayout>

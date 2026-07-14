@@ -1,4 +1,4 @@
-import { type NodeKind } from "#design/patterns/NodeGraph"
+import { type NodeKind } from "#design/marketing/NodeGraph"
 
 export type Tone = NodeKind | "muted"
 

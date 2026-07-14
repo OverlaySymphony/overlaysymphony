@@ -1,26 +1,38 @@
 ---
 import { type HTMLAttributes } from "astro/types"
 
-import { type Tone } from "./eyebrow"
+import { type Size, type Tone, TONE_COLORS } from "./eyebrow"
 
 export * from "./eyebrow"
 
 export type Props = {
-  marker?: boolean
+  marker?: boolean | Tone
   index?: string
   tone?: Tone
+  size?: Size
 } & Omit<HTMLAttributes<"span">, "style">
 
 const {
   marker = false,
   index,
   tone = index ? "muted" : "accent",
+  size = "large",
   class: className,
   ...props
 } = Astro.props
+
+const markerTone = typeof marker === "string" ? marker : tone
+
+const style = [
+  `--eyebrow-color:${TONE_COLORS[tone]}`,
+  `--eyebrow-marker:${TONE_COLORS[markerTone]}`,
+  ...(["size", "weight", "tracking", "leading"] as const).map(
+    (property) => `--eyebrow-${property}:var(--os-label-${size}-${property})`,
+  ),
+].join(";")
 ---
 
-<span {...props} class:list={["eyebrow", tone, className]}>
+<span {...props} class:list={["eyebrow", className]} style={style}>
   {marker && <span class="marker" aria-hidden="true" />}
   {index && <span class="index">{index}</span>}
   {index && <span class="separator" aria-hidden="true">/</span>}
@@ -33,25 +45,19 @@ const {
     gap: var(--os-space-2);
     align-items: center;
     font-family: var(--os-font-code);
-    font-size: var(--os-label-large-size);
-    font-weight: var(--os-label-large-weight);
-    line-height: var(--os-label-large-leading);
-    letter-spacing: var(--os-label-large-tracking);
+    font-size: var(--eyebrow-size);
+    font-weight: var(--eyebrow-weight);
+    line-height: var(--eyebrow-leading);
+    letter-spacing: var(--eyebrow-tracking);
     text-transform: uppercase;
-  }
-
-  .accent {
-    color: var(--os-color-teal);
-  }
-
-  .muted {
-    color: var(--os-color-text-muted);
+    color: var(--eyebrow-color);
   }
 
   .marker {
+    flex: none;
     width: var(--os-space-2);
     height: var(--os-space-2);
-    background: var(--os-color-teal);
+    background: var(--eyebrow-marker);
   }
 
   .index {

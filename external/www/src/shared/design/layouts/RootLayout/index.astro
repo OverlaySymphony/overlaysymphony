@@ -1,10 +1,11 @@
 ---
 export type Props = {
   title: string
+  fullscreen?: boolean
   children: unknown
 }
 
-const { title } = Astro.props
+const { title, fullscreen = false } = Astro.props
 ---
 
 <!doctype html>
@@ -39,7 +40,7 @@ const { title } = Astro.props
       }
     </title>
   </head>
-  <body>
+  <body class:list={{ fullscreen }}>
     <slot />
   </body>
 </html>

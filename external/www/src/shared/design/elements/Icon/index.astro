@@ -79,6 +79,24 @@ const { name } = Astro.props
       </>
     )
   }
+  {name === "play" && <path d="M7 5 L19 12 L7 19 Z" fill="currentColor" stroke="none" />}
+  {
+    name === "copy" && (
+      <>
+        <rect x="4" y="4" width="12" height="12" />
+        <rect x="9" y="9" width="12" height="12" />
+      </>
+    )
+  }
+  {
+    name === "trash" && (
+      <>
+        <path d="M4 7 H20" />
+        <path d="M7 7 V20 H17 V7" />
+        <path d="M9 7 V4 H15 V7" />
+      </>
+    )
+  }
 </svg>
 
 <style>

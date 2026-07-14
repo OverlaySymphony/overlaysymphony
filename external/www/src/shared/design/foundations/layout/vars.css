@@ -1,0 +1,52 @@
+/*
+ * Breakpoints. Custom properties cannot be used in media conditions, so these
+ * are repeated literally wherever they are needed. Keep them in sync.
+ *
+ *   560px  card grids collapse to a single column
+ *   720px  container gutter narrows, nav links hide
+ *   860px  spaced card grids collapse to a single column
+ *   980px  four-column card grids collapse to two
+ *
+ * Node graphs turn vertical on a container query instead, since they have to
+ * fold inside a narrow card just as readily as on a narrow screen.
+ */
+
+:root {
+  /* space */
+  --os-space-1: 0.25rem;
+  --os-space-2: 0.5rem;
+  --os-space-3: 0.75rem;
+  --os-space-4: 1rem;
+  --os-space-5: 1.25rem;
+  --os-space-6: 1.5rem;
+  --os-space-7: 1.75rem;
+  --os-space-8: 2rem;
+  --os-space-10: 2.5rem;
+  --os-space-12: 3rem;
+  --os-space-14: 3.5rem;
+  --os-space-16: 4rem;
+  --os-space-20: 5rem;
+  --os-space-24: 6rem;
+  --os-space-25: 6.25rem;
+  --os-space-30: 7.5rem;
+
+  /* radius */
+  --os-radius-sm: 2px;
+  --os-radius-md: 3px;
+
+  /* layout */
+  --os-container-width: 75rem;
+  --os-container-gutter: var(--os-space-8);
+  --os-header-height: 4rem;
+  --os-hairline: 1px;
+
+  /* app chrome */
+  --os-app-topbar-height: 3.25rem;
+  --os-app-header-height: 2.5rem;
+}
+
+@media (width <= 720px) {
+  :root {
+    --os-container-gutter: var(--os-space-5);
+  }
+}

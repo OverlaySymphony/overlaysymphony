@@ -1,4 +1,6 @@
 ---
+import Eyebrow from "#design/elements/Eyebrow.astro"
+
 import { type Node, NODE_LABELS } from "./node-graph"
 
 export * from "./node-graph"
@@ -18,7 +20,9 @@ const { nodes } = Astro.props
           {index > 0 && <span class="edge" aria-hidden="true" />}
 
           <div class:list={["node", node.kind]}>
-            <span class="label">{node.label ?? NODE_LABELS[node.kind]}</span>
+            <Eyebrow marker tone={node.kind} size="small">
+              {node.label ?? NODE_LABELS[node.kind]}
+            </Eyebrow>
             <span class="title">{node.title}</span>
             {node.meta && <span class="meta">{node.meta}</span>}
           </div>
@@ -41,7 +45,6 @@ const { nodes } = Astro.props
   }
 
   .node {
-    --node-color: var(--os-color-text-muted);
     --node-border: var(--os-color-line-strong);
 
     position: relative;
@@ -56,38 +59,15 @@ const { nodes } = Astro.props
   }
 
   .trigger {
-    --node-color: var(--os-color-trigger);
     --node-border: var(--os-color-trigger-border);
   }
 
   .condition {
-    --node-color: var(--os-color-condition);
     --node-border: var(--os-color-condition-border);
   }
 
   .action {
-    --node-color: var(--os-color-action);
     --node-border: var(--os-color-action-border);
-  }
-
-  .label {
-    display: flex;
-    gap: var(--os-space-2);
-    align-items: center;
-    font-family: var(--os-font-code);
-    font-size: var(--os-label-small-size);
-    line-height: var(--os-label-small-leading);
-    letter-spacing: var(--os-label-small-tracking);
-    text-transform: uppercase;
-    color: var(--node-color);
-  }
-
-  .label::before {
-    display: inline-block;
-    width: var(--os-space-2);
-    height: var(--os-space-2);
-    content: "";
-    background: var(--node-color);
   }
 
   .title {

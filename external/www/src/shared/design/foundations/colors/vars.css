@@ -1,0 +1,59 @@
+:root {
+  /* surfaces */
+  --os-color-bg: #0a0e12;
+  --os-color-bg-elev: #11161c;
+  --os-color-bg-elev-2: #161d24;
+  --os-color-bg-elev-3: #1b232c;
+
+  /* hairlines */
+  --os-color-line: #1c242d;
+  --os-color-line-strong: #2a343f;
+
+  /* text */
+  --os-color-text: #e8edf2;
+  --os-color-text-muted: #8a96a3;
+  --os-color-text-faint: #535e6a;
+  --os-color-text-inverse: #0a0e12;
+
+  /* accents */
+  --os-color-teal: #5dcaa5;
+  --os-color-teal-hover: #6ed4b1;
+  --os-color-teal-active: #1d9e75;
+  --os-color-teal-wash: rgb(93 202 165 / 8%);
+  --os-color-teal-border: rgb(93 202 165 / 40%);
+
+  --os-color-purple: #b68cf2;
+  --os-color-purple-hover: #c5a3f5;
+  --os-color-purple-active: #9463dd;
+  --os-color-purple-wash: rgb(182 140 242 / 10%);
+  --os-color-purple-border: rgb(182 140 242 / 40%);
+
+  --os-color-amber: #f0b454;
+  --os-color-amber-hover: #f4c473;
+  --os-color-amber-active: #d1913a;
+  --os-color-amber-wash: rgb(240 180 84 / 10%);
+  --os-color-amber-border: rgb(240 180 84 / 40%);
+
+  --os-color-red: #e0727a;
+  --os-color-red-hover: #ea8b92;
+  --os-color-red-active: #c25a62;
+  --os-color-red-wash: rgb(224 114 122 / 10%);
+  --os-color-red-border: rgb(224 114 122 / 40%);
+
+  --os-color-trigger: var(--os-color-teal);
+  --os-color-trigger-wash: var(--os-color-teal-wash);
+  --os-color-trigger-border: var(--os-color-teal-border);
+
+  --os-color-condition: var(--os-color-purple);
+  --os-color-condition-wash: var(--os-color-purple-wash);
+  --os-color-condition-border: var(--os-color-purple-border);
+
+  --os-color-action: var(--os-color-amber);
+  --os-color-action-wash: var(--os-color-amber-wash);
+  --os-color-action-border: var(--os-color-amber-border);
+
+  /* chrome */
+  --os-color-dot: rgb(255 255 255 / 4%);
+  --os-color-scrollbar: #1f2730;
+  --os-color-scrollbar-hover: #2a343f;
+}

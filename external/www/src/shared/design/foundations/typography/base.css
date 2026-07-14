@@ -1,0 +1,11 @@
+html {
+  font-size: var(--os-root-font-size);
+}
+
+body {
+  font-family: var(--os-font-body);
+  font-feature-settings: "ss01", "cv11";
+  line-height: var(--os-body-medium-leading);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}

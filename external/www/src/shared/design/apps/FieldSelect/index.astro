@@ -1,0 +1,64 @@
+---
+import { type HTMLAttributes } from "astro/types"
+
+import Field from "#design/apps/Field.astro"
+
+import { type Option } from "./field-select"
+
+export * from "./field-select"
+
+export type Props = {
+  label: string
+  help?: string
+  options: Option[]
+  value?: string
+} & Omit<HTMLAttributes<"select">, "style" | "value">
+
+const { label, help, options, value, class: className, ...props } = Astro.props
+---
+
+<Field label={label} help={help}>
+  <select {...props} class:list={["select", className]}>
+    {
+      options.map((option) => (
+        <option value={option.value} selected={option.value === value}>
+          {option.label}
+        </option>
+      ))
+    }
+  </select>
+</Field>
+
+<style>
+  .select {
+    width: 100%;
+    padding: var(--os-space-2) var(--os-space-7) var(--os-space-2)
+      var(--os-space-3);
+    font-size: var(--os-control-small-size);
+    appearance: none;
+    background-color: var(--os-color-bg);
+
+    /* The caret: two triangles meeting at a point, drawn from gradients. */
+    background-image: linear-gradient(
+        45deg,
+        transparent 50%,
+        var(--os-color-text-muted) 50%
+      ),
+      linear-gradient(135deg, var(--os-color-text-muted) 50%, transparent 50%);
+    background-repeat: no-repeat;
+    background-position:
+      calc(100% - 0.875rem) 50%,
+      calc(100% - 0.625rem) 50%;
+    background-size:
+      4px 4px,
+      4px 4px;
+    border: var(--os-hairline) solid var(--os-color-line-strong);
+    border-radius: var(--os-radius-sm);
+    outline: none;
+    transition: border-color var(--os-transition-fast);
+  }
+
+  .select:focus {
+    border-color: var(--os-color-teal);
+  }
+</style>

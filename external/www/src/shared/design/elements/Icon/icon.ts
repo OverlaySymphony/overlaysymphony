@@ -5,3 +5,6 @@ export type IconName =
   | "nodes"
   | "chat"
   | "scene"
+  | "play"
+  | "copy"
+  | "trash"

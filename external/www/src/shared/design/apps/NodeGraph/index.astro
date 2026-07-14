@@ -1,0 +1,198 @@
+---
+import Typography from "#design/elements/Typography.astro"
+
+import { type Section } from "./node-graph"
+import Node from "./Node.astro"
+
+export * from "./node-graph"
+
+export type Props = {
+  sections: Section[]
+  selected?: string
+}
+
+const { sections, selected } = Astro.props
+---
+
+<div class="graph">
+  {
+    sections.map((section, index) => (
+      <>
+        {index > 0 && <span class="connector" aria-hidden="true" />}
+
+        <div class="section">
+          <Typography role="label" size="small" class="section-label">
+            {section.label}
+          </Typography>
+
+          <div class:list={["nodes", section.layout ?? "stack"]}>
+            {section.layout === "fork" && section.forkLabel && (
+              <span class="fork-label">{section.forkLabel}</span>
+            )}
+
+            {section.nodes.map((node, nodeIndex) => (
+              <>
+                {section.layout !== "fork" && nodeIndex > 0 && (
+                  <span class="connector" aria-hidden="true" />
+                )}
+                <Node node={node} selected={node.id === selected} />
+              </>
+            ))}
+          </div>
+
+          {section.insert && (
+            <div class="insert">
+              <button
+                type="button"
+                class:list={["insert-button", section.kind]}
+                title={section.insert}
+              >
+                <span aria-hidden="true">+</span>
+                <span class="sr-only">{section.insert}</span>
+              </button>
+            </div>
+          )}
+        </div>
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .graph {
+    display: flex;
+    flex-direction: column;
+    max-width: 45rem;
+    padding: var(--os-space-8) var(--os-space-6) var(--os-space-16);
+    margin: 0 auto;
+  }
+
+  .section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-label {
+    display: flex;
+    gap: var(--os-space-3);
+    align-items: center;
+    margin-bottom: var(--os-space-3);
+    color: var(--os-color-text-faint);
+  }
+
+  /* The label rides a rule that runs to the edge of the pipeline. */
+  .section-label::after {
+    flex: 1;
+    height: var(--os-hairline);
+    content: "";
+    background: var(--os-color-line);
+  }
+
+  .nodes {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fork {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--os-space-4);
+    padding-top: var(--os-space-6);
+  }
+
+  /* The bar joining the two branches, plus a stub dropping from it into each. */
+  .fork::before {
+    position: absolute;
+    top: 0;
+    right: 25%;
+    left: 25%;
+    height: var(--os-hairline);
+    content: "";
+    background: var(--os-color-line-strong);
+  }
+
+  .fork > :global(.node) {
+    position: relative;
+  }
+
+  .fork > :global(.node)::before {
+    position: absolute;
+    top: calc(var(--os-space-6) * -1);
+    left: 50%;
+    width: var(--os-hairline);
+    height: var(--os-space-6);
+    content: "";
+    background: var(--os-color-line-strong);
+  }
+
+  .fork-label {
+    position: absolute;
+    top: calc(var(--os-space-2) * -1);
+    left: 50%;
+    padding: 0 var(--os-space-2);
+    font-family: var(--os-font-code);
+    font-size: var(--os-label-small-size);
+    letter-spacing: var(--os-label-small-tracking);
+    text-transform: uppercase;
+    color: var(--os-color-text-faint);
+    background: var(--os-color-bg);
+    transform: translateX(-50%);
+  }
+
+  .connector {
+    width: var(--os-hairline);
+    height: var(--os-space-7);
+    margin: 0 auto;
+    background: var(--os-color-line-strong);
+  }
+
+  .insert {
+    display: flex;
+    justify-content: center;
+    padding: var(--os-space-2) 0;
+  }
+
+  /* Sits on the connector line, so it needs a halo of page background to break it. */
+  .insert-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: var(--os-control-medium-size);
+    line-height: 1;
+    color: var(--os-color-text-muted);
+    background: var(--os-color-bg);
+    border: var(--os-hairline) solid var(--os-color-line-strong);
+    border-radius: 999px;
+    box-shadow: 0 0 0 4px var(--os-color-bg);
+    transition:
+      color var(--os-transition-fast),
+      border-color var(--os-transition-fast);
+  }
+
+  .insert-button.trigger:hover {
+    color: var(--os-color-trigger);
+    border-color: var(--os-color-trigger);
+  }
+
+  .insert-button.condition:hover {
+    color: var(--os-color-condition);
+    border-color: var(--os-color-condition);
+  }
+
+  .insert-button.action:hover {
+    color: var(--os-color-action);
+    border-color: var(--os-color-action);
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+</style>

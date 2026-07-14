@@ -1,0 +1,81 @@
+:root {
+  /* fonts */
+  --os-root-font-size: 16px;
+  --os-font-body: "Geist", system-ui, sans-serif;
+  --os-font-code: "Geist Mono", ui-monospace, monospace;
+
+  /* type: title */
+  --os-title-large-size: clamp(2.5rem, 6.5vw, 4.75rem);
+  --os-title-large-weight: 600;
+  --os-title-large-tracking: -0.035em;
+  --os-title-large-leading: 1.02;
+
+  --os-title-medium-size: clamp(1.875rem, 4vw, 2.75rem);
+  --os-title-medium-weight: 600;
+  --os-title-medium-tracking: -0.025em;
+  --os-title-medium-leading: 1.08;
+
+  --os-title-small-size: 1.125rem;
+  --os-title-small-weight: 600;
+  --os-title-small-tracking: -0.015em;
+  --os-title-small-leading: 1.3;
+
+  /* type: body */
+  --os-body-large-size: 1.1875rem;
+  --os-body-large-weight: 400;
+  --os-body-large-tracking: 0;
+  --os-body-large-leading: 1.55;
+
+  --os-body-medium-size: 1rem;
+  --os-body-medium-weight: 400;
+  --os-body-medium-tracking: 0;
+  --os-body-medium-leading: 1.55;
+
+  --os-body-small-size: 0.90625rem;
+  --os-body-small-weight: 400;
+  --os-body-small-tracking: 0;
+  --os-body-small-leading: 1.55;
+
+  /* type: label */
+  --os-label-large-size: 0.75rem;
+  --os-label-large-weight: 400;
+  --os-label-large-tracking: 0.08em;
+  --os-label-large-leading: 1.4;
+
+  --os-label-medium-size: 0.6875rem;
+  --os-label-medium-weight: 400;
+  --os-label-medium-tracking: 0.06em;
+  --os-label-medium-leading: 1.4;
+
+  --os-label-small-size: 0.625rem;
+  --os-label-small-weight: 400;
+  --os-label-small-tracking: 0.08em;
+  --os-label-small-leading: 1.4;
+
+  /* type: code */
+  --os-code-large-size: 0.8125rem;
+  --os-code-large-weight: 400;
+  --os-code-large-tracking: 0;
+  --os-code-large-leading: 1.5;
+
+  --os-code-medium-size: 0.75rem;
+  --os-code-medium-weight: 400;
+  --os-code-medium-tracking: 0;
+  --os-code-medium-leading: 1.5;
+
+  --os-code-small-size: 0.6875rem;
+  --os-code-small-weight: 400;
+  --os-code-small-tracking: 0;
+  --os-code-small-leading: 1.5;
+
+  /* type: shared */
+  --os-weight-regular: 400;
+  --os-weight-medium: 500;
+  --os-weight-semibold: 600;
+  --os-tracking-tight: -0.01em;
+
+  /* type: control — interactive text (buttons, nav links, list rows, inputs) */
+  --os-control-large-size: 0.9375rem;
+  --os-control-medium-size: 0.875rem;
+  --os-control-small-size: 0.8125rem;
+}

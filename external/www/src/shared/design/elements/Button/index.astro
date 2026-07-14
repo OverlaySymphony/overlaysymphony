@@ -1,21 +1,27 @@
 ---
 import { type HTMLAttributes } from "astro/types"
 
-import { type Size, type Variant } from "./button"
+import { type Size, type Tone, type Variant } from "./button"
 
 export * from "./button"
 
 export type Props = {
   variant?: Variant
   size?: Size
+  tone?: Tone
   arrow?: boolean
+  square?: boolean
+  block?: boolean
   href?: string
 } & Omit<HTMLAttributes<"button">, "style">
 
 const {
   variant = "primary",
   size = "medium",
+  tone = "accent",
   arrow = false,
+  square = false,
+  block = false,
   href,
   class: className,
   ...props
@@ -24,7 +30,11 @@ const {
 const Component = href ? "a" : "button"
 ---
 
-<Component {...props} href={href} class:list={["button", variant, size, className]}>
+<Component
+  {...props}
+  href={href}
+  class:list={["button", variant, size, tone, { square, block }, className]}
+>
   <slot />
   {arrow && <span class="arrow" aria-hidden="true">&rarr;</span>}
 </Component>
@@ -37,6 +47,7 @@ const Component = href ? "a" : "button"
     border: var(--os-hairline) solid transparent;
     border-radius: var(--os-radius-sm);
     transition:
+      color var(--os-transition-fast),
       background var(--os-transition-fast),
       border-color var(--os-transition-fast);
   }
@@ -49,6 +60,11 @@ const Component = href ? "a" : "button"
   .small {
     padding: var(--os-space-2) var(--os-space-4);
     font-size: var(--os-control-medium-size);
+  }
+
+  .xsmall {
+    padding: var(--os-space-2) var(--os-space-3);
+    font-size: var(--os-control-small-size);
   }
 
   .primary {
@@ -75,6 +91,60 @@ const Component = href ? "a" : "button"
   .ghost:hover {
     background: var(--os-color-bg-elev);
     border-color: var(--os-color-text-faint);
+  }
+
+  .text {
+    color: var(--os-color-text-muted);
+    background: transparent;
+  }
+
+  /* A text button is a run of text, so it sits flush with whatever it's stacked
+   * against. An icon button still needs its box. */
+  .text:not(.square) {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .text.accent:hover {
+    color: var(--os-color-text);
+  }
+
+  .text.danger:hover {
+    color: var(--os-color-red);
+  }
+
+  .dashed {
+    color: var(--os-color-text-muted);
+    background: transparent;
+    border-style: dashed;
+    border-color: var(--os-color-line-strong);
+  }
+
+  .dashed:hover {
+    color: var(--os-color-teal);
+    border-style: solid;
+    border-color: var(--os-color-teal);
+  }
+
+  .square {
+    justify-content: center;
+    aspect-ratio: 1;
+    padding: 0;
+  }
+
+  /* An icon button reads as a target only once it's hovered; the resting state
+   * is the bare glyph. */
+  .text.square:hover {
+    border-color: var(--os-color-line-strong);
+  }
+
+  .xsmall.square {
+    width: 1.625rem;
+  }
+
+  .block {
+    display: flex;
+    width: 100%;
   }
 
   .arrow {

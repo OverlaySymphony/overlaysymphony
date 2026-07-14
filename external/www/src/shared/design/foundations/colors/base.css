@@ -1,0 +1,27 @@
+html {
+  background: var(--os-color-bg);
+  color: var(--os-color-text);
+}
+
+::selection {
+  background: var(--os-color-teal);
+  color: var(--os-color-text-inverse);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--os-color-scrollbar);
+  border: 2px solid var(--os-color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--os-color-scrollbar-hover);
+}
