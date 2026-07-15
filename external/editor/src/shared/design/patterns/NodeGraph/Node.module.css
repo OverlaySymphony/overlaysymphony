@@ -1,0 +1,65 @@
+.node {
+  display: flex;
+  flex-direction: column;
+  gap: var(--os-space-2);
+  width: 100%;
+  padding: var(--os-space-3) var(--os-space-4);
+  text-align: left;
+  background: var(--os-color-bg-elev);
+  border: var(--os-hairline) solid var(--os-color-line-strong);
+  border-radius: var(--os-radius-md);
+  transition:
+    background var(--os-transition-fast),
+    border-color var(--os-transition-fast);
+}
+
+.node:hover {
+  border-color: var(--os-color-text-faint);
+}
+
+.trigger.selected {
+  border-color: var(--os-color-trigger);
+}
+
+.condition.selected {
+  border-color: var(--os-color-condition);
+}
+
+.action.selected {
+  border-color: var(--os-color-action);
+}
+
+.selected {
+  background: var(--os-color-bg-elev-2);
+}
+
+.head {
+  display: flex;
+  gap: var(--os-space-3);
+  align-items: center;
+  justify-content: space-between;
+}
+
+.module {
+  color: var(--os-color-text-faint);
+}
+
+.handle {
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+  color: var(--os-color-text-faint);
+}
+
+.title {
+  font-size: var(--os-control-large-size);
+  font-weight: var(--os-weight-medium);
+  letter-spacing: var(--os-tracking-tight);
+  color: var(--os-color-text);
+}
+
+.meta {
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-medium-size);
+  line-height: var(--os-code-medium-leading);
+  color: var(--os-color-text-muted);
+}

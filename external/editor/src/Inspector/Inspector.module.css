@@ -1,0 +1,28 @@
+.inspector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--os-space-6);
+  padding: var(--os-space-5) var(--os-space-4) var(--os-space-10);
+}
+
+.outputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--os-space-3);
+  padding-top: var(--os-space-4);
+  border-top: var(--os-hairline) dashed var(--os-color-line);
+}
+
+.outputsHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.outputsHelp {
+  color: var(--os-color-text-faint);
+}
+
+.count {
+  color: var(--os-color-text-faint);
+}

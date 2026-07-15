@@ -2,22 +2,11 @@
 
 Shared across workspaces. A workspace's own CLAUDE.md states where its design system lives and may override anything here — the override wins.
 
-## The directory is the module
+## Components are modlets
 
-The import map makes a directory path the import specifier:
+Each component is a modlet (see `modlets.md`), reached through the `#design/*` import map: `#design/<tier>/Card` → `<tier>/Card/index.*`, `#design/<tier>/Card.astro` → `<tier>/Card/index.astro`. How the index is laid out is the framework's concern — `astro.md` for Astro components, `react.md` for React ones.
 
-```jsonc
-// package.json
-"imports": {
-  "#design/*.css":   "./<design-root>/*/index.css",
-  "#design/*.astro": "./<design-root>/*/index.astro",
-  "#design/*":       "./<design-root>/*/index.ts"
-}
-```
-
-So `#design/patterns/Card.astro` → `patterns/Card/index.astro`.
-
-A directory therefore has exactly three possible entry points — `index.astro`, `index.ts`, `index.css` — and **every other file in it is private**. That privacy is what makes co-location safe: a sub-component or helper living inside a component's directory cannot become someone else's dependency by accident.
+The tokens layer (`foundations`) is plain CSS reached as `index.css`; it has no component.
 
 ## Tiers
 
@@ -31,13 +20,6 @@ Ordered by what each layer knows about. Dependencies flow downhill only: foundat
 | `layouts/`     | Page shells and document chrome.                                                                                                                       |
 
 The elements/patterns line is **simple vs. composed**, not small vs. big. It is intuition, not a hard rule — but when a component composes another, it's a pattern.
-
-## Inside a component directory
-
-- **`index.astro`** — the component. Also `export * from "./<name>"` so a consumer needing the component _and_ its types writes one import, not two.
-- **`index.ts`** — values other code needs directly: types, constants, helpers. **Never** re-exports the `.astro` component; that goes through Astro's import rules. Omit the file entirely when there is nothing to export.
-- **`<component-name>.ts`** — where those values live (`card.ts`, `node-graph.ts`). `index.ts` is a barrel over it.
-- **Anything else** — sub-components and helpers used _only_ by this component. They live here precisely because nothing outside can reach them. Promote one out only when a second consumer actually appears.
 
 ## Typography
 

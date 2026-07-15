@@ -1,0 +1,3 @@
+ignores:
+  # used but not imported
+  - "@overlaysymphony/tooling"

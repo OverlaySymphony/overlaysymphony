@@ -1,0 +1,107 @@
+.button {
+  display: inline-flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  border: var(--os-hairline) solid transparent;
+  border-radius: var(--os-radius-sm);
+  transition:
+    color var(--os-transition-fast),
+    background var(--os-transition-fast),
+    border-color var(--os-transition-fast);
+}
+
+.medium {
+  padding: var(--os-space-3) var(--os-space-5);
+  font-size: var(--os-control-large-size);
+}
+
+.small {
+  padding: var(--os-space-2) var(--os-space-4);
+  font-size: var(--os-control-medium-size);
+}
+
+.xsmall {
+  padding: var(--os-space-2) var(--os-space-3);
+  font-size: var(--os-control-small-size);
+}
+
+.primary {
+  font-weight: var(--os-weight-semibold);
+  color: var(--os-color-text-inverse);
+  background: var(--os-color-teal);
+}
+
+.primary:hover {
+  background: var(--os-color-teal-hover);
+}
+
+.primary:active {
+  background: var(--os-color-teal-active);
+}
+
+.ghost {
+  font-weight: var(--os-weight-medium);
+  color: var(--os-color-text);
+  background: transparent;
+  border-color: var(--os-color-line-strong);
+}
+
+.ghost:hover {
+  background: var(--os-color-bg-elev);
+  border-color: var(--os-color-text-faint);
+}
+
+.text {
+  color: var(--os-color-text-muted);
+  background: transparent;
+}
+
+.text:not(.square) {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.text.accent:hover {
+  color: var(--os-color-text);
+}
+
+.text.danger:hover {
+  color: var(--os-color-red);
+}
+
+.dashed {
+  color: var(--os-color-text-muted);
+  background: transparent;
+  border-style: dashed;
+  border-color: var(--os-color-line-strong);
+}
+
+.dashed:hover {
+  color: var(--os-color-teal);
+  border-style: solid;
+  border-color: var(--os-color-teal);
+}
+
+.square {
+  justify-content: center;
+  aspect-ratio: 1;
+  padding: 0;
+}
+
+.text.square:hover {
+  border-color: var(--os-color-line-strong);
+}
+
+.xsmall.square {
+  width: 1.625rem;
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+.arrow {
+  font-family: var(--os-font-code);
+  font-weight: var(--os-weight-regular);
+}

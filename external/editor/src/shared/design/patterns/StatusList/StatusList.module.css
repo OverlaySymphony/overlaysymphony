@@ -1,0 +1,41 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--os-space-1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  gap: var(--os-space-3);
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: var(--os-space-2);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: var(--os-radius-sm);
+  transition: background var(--os-transition-fast);
+}
+
+button.row:hover {
+  background: var(--os-color-bg-elev-2);
+}
+
+.key {
+  min-width: 0;
+}
+
+.value {
+  flex: none;
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+  color: var(--os-color-text-faint);
+}
+
+.copied {
+  color: var(--os-color-teal);
+}

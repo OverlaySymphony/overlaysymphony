@@ -1,0 +1,64 @@
+.list {
+  display: flex;
+  flex-direction: column;
+  padding: var(--os-space-2) 0;
+  margin: 0;
+  list-style: none;
+}
+
+.item {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  width: 100%;
+  padding: var(--os-space-2) var(--os-space-4) var(--os-space-2)
+    var(--os-space-3);
+  font-size: var(--os-control-small-size);
+  text-align: left;
+  color: var(--os-color-text-muted);
+  background: transparent;
+  border: 0;
+  border-left: 2px solid transparent;
+  transition:
+    color var(--os-transition-fast),
+    background var(--os-transition-fast);
+}
+
+.item:hover {
+  color: var(--os-color-text);
+  background: var(--os-color-bg-elev);
+}
+
+.active {
+  color: var(--os-color-text);
+  background: var(--os-color-bg-elev);
+  border-left-color: var(--os-color-teal);
+}
+
+.marker {
+  flex: none;
+  width: var(--os-space-2);
+  height: var(--os-space-2);
+  background: var(--os-color-line-strong);
+}
+
+.active .marker {
+  background: var(--os-color-teal);
+}
+
+.name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.badge {
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+  color: var(--os-color-text-faint);
+}
+
+.active .badge {
+  color: var(--os-color-text-muted);
+}

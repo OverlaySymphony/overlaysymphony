@@ -1,0 +1,54 @@
+.typography {
+  margin: 0;
+  font-size: var(--typography-size);
+  font-weight: var(--typography-weight);
+  line-height: var(--typography-leading);
+  letter-spacing: var(--typography-tracking);
+}
+
+.title,
+.body {
+  font-family: var(--os-font-body);
+}
+
+.label,
+.code {
+  font-family: var(--os-font-code);
+}
+
+.title {
+  text-wrap: balance;
+}
+
+.body {
+  text-wrap: pretty;
+}
+
+.label {
+  text-transform: uppercase;
+}
+
+.typography :global(em) {
+  font-style: normal;
+  color: var(--os-color-teal);
+}
+
+.typography :global(strong) {
+  font-weight: var(--os-weight-medium);
+  color: var(--os-color-text);
+}
+
+.typography :global(code.inline) {
+  font-family: var(--os-font-code);
+  font-size: 0.9em;
+  color: var(--os-color-teal);
+}
+
+.typography :global(a) {
+  color: var(--os-color-teal);
+  transition: color var(--os-transition-fast);
+}
+
+.typography :global(a:hover) {
+  color: var(--os-color-teal-hover);
+}

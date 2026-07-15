@@ -27,6 +27,8 @@ Name a thing for what it **could** be used for, not what it currently _is_ used 
 
 `CardGrid`, not `FeatureGrid`. `StatusList`, not `ModuleStatus`. If the name bakes in today's only caller, the next caller has to either rename it or misuse it. A label on the thing ("Step 01") is data; it does not belong in the type name.
 
+Names are **short and semantic, not descriptive**: one word, occasionally two, rarely three, almost never more. Necessary prefixes don't spend that budget — React's `use*` on a hook, say. Reach for a second word only when one is genuinely ambiguous, a third only when two still are. The name says what the thing _is_ and how it _can_ be used, in the fewest words that carry it.
+
 ## Modules and reuse
 
 - **Combine things that serve the same semantic purpose.** If two of them differ only by which switches are flipped — one has an icon, one has a numbered label, one pins a footnote — they are one thing with optional arguments, not two. Look for this actively; near-duplicates are the default failure mode.

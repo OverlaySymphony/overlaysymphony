@@ -1,0 +1,31 @@
+name: "Internal: Design"
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/internal-design.yml
+      - internal/tooling/**
+      - internal/design/**
+
+env:
+  WORKSPACE: "@overlaysymphony/design"
+  DIRECTORY: internal/design
+
+jobs:
+  verify:
+    name: Verify
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Verify
+        uses: ./.github/actions/verify
+        with:
+          skip-typecheck: true
+          skip-eslint: true

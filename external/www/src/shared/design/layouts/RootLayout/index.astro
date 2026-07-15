@@ -1,11 +1,10 @@
 ---
 export type Props = {
   title: string
-  fullscreen?: boolean
   children: unknown
 }
 
-const { title, fullscreen = false } = Astro.props
+const { title } = Astro.props
 ---
 
 <!doctype html>
@@ -40,11 +39,11 @@ const { title, fullscreen = false } = Astro.props
       }
     </title>
   </head>
-  <body class:list={{ fullscreen }}>
+  <body>
     <slot />
   </body>
 </html>
 
 <style is:global>
-  @import url("#design/foundations.css");
+  @import url("@overlaysymphony/design/foundations.css");
 </style>

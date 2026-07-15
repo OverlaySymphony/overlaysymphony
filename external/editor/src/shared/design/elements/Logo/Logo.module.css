@@ -1,0 +1,31 @@
+.logo {
+  display: flex;
+  gap: var(--os-space-3);
+  align-items: center;
+  font-weight: var(--os-weight-semibold);
+  letter-spacing: var(--os-tracking-tight);
+}
+
+.medium {
+  font-size: 1.0625rem;
+}
+
+.medium .mark {
+  width: 1.375rem;
+  height: 1.375rem;
+}
+
+.small .mark {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.mark {
+  display: block;
+  flex: none;
+  background: var(--os-color-teal);
+}
+
+.accent {
+  color: var(--os-color-teal);
+}

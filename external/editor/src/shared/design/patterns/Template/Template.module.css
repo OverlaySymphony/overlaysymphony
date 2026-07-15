@@ -1,0 +1,29 @@
+.template {
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-medium-size);
+  line-height: var(--os-code-medium-leading);
+  color: var(--os-color-text);
+  overflow-wrap: anywhere;
+}
+
+.token {
+  padding: 0 var(--os-space-1);
+  color: var(--token-color);
+  background: var(--token-wash);
+  border-radius: var(--os-radius-sm);
+}
+
+.trigger {
+  --token-color: var(--os-color-trigger);
+  --token-wash: var(--os-color-trigger-wash);
+}
+
+.condition {
+  --token-color: var(--os-color-condition);
+  --token-wash: var(--os-color-condition-wash);
+}
+
+.action {
+  --token-color: var(--os-color-action);
+  --token-wash: var(--os-color-action-wash);
+}

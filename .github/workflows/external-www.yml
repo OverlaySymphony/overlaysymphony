@@ -1,4 +1,4 @@
-name: "External: SDK"
+name: "External: WWW"
 
 on:
   workflow_dispatch:

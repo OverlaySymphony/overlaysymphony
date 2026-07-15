@@ -6,6 +6,7 @@ Repo-wide conventions:
 
 @.claude/monorepo.md
 @.claude/code-style.md
+@.claude/modlets.md
 
 Anything narrower belongs to a workspace, not here. Each workspace has its own CLAUDE.md and imports the modules it needs (`.claude/astro.md`, `.claude/design-system.md`, …). This file loads everywhere; theirs load only where they apply. Keep it that way — a rule learned in one workspace stays in that workspace until a second one needs it.
 
@@ -16,7 +17,7 @@ Grouped by audience, per `monorepo.md`:
 | Root        | Contains                                                                                     |
 | ----------- | -------------------------------------------------------------------------------------------- |
 | `modules/`  | The published packages (`@overlaysymphony/*`). Versioned and released independently.         |
-| `external/` | Consumed by users — `www` (the site), `sdk` (the OBS dock and browser-source entry points).  |
+| `external/` | Consumed by users — `www` (the site), `editor` (the React config app), `studio` (the OBS dock, overlay, and Twitch popup). |
 | `internal/` | Consumed by the repo — `tooling` (the shared ESLint/Prettier/TypeScript configs), `scripts`. |
 | `examples/` | Demonstrations. Not published.                                                               |
 

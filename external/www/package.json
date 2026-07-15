@@ -24,6 +24,7 @@
     "build": "astro build"
   },
   "dependencies": {
+    "@overlaysymphony/design": "workspace:*",
     "astro": "^7.0.3",
     "globals": "16.5.0"
   },

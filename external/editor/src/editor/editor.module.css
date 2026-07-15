@@ -1,0 +1,41 @@
+.editor {
+  display: grid;
+  grid-template-columns: 12.5rem 12.5rem minmax(0, 1fr) 18.75rem;
+  height: 100%;
+  min-height: 0;
+}
+
+.count {
+  color: var(--os-color-text-faint);
+}
+
+.canvasTitle {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  color: var(--os-color-text-muted);
+}
+
+.canvasArrow {
+  color: var(--os-color-text-faint);
+}
+
+.canvasCurrent {
+  color: var(--os-color-text);
+}
+
+.toolbar {
+  display: flex;
+  gap: var(--os-space-1);
+  align-items: center;
+}
+
+.glyph {
+  display: block;
+  width: var(--os-space-4);
+  height: var(--os-space-4);
+}
+
+.inspectorModule {
+  color: var(--os-color-text);
+}

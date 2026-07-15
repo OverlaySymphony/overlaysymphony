@@ -6,6 +6,7 @@
   "type": "commonjs",
   "exports": {
     "./eslint": "./src/eslint/eslint.mjs",
+    "./eslint-react": "./src/eslint/eslint-react.mjs",
     "./prettier": "./src/prettier/prettier.mjs",
     "./typescript": "./src/typescript/typescript.json",
     "./package.json": "./package.json"

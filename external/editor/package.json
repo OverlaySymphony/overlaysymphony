@@ -1,0 +1,44 @@
+{
+  "name": "editor",
+  "private": true,
+  "version": "0.0.0",
+  "description": "",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "imports": {
+    "#design/*.css": "./src/shared/design/*/index.css",
+    "#design/*": "./src/shared/design/*/index.ts",
+    "#shared/*": "./src/shared/*/index.ts"
+  },
+  "scripts": {
+    "lint": "pnpm run \"/^lint-.*/\"",
+    "lint-typecheck": "tsc --noEmit",
+    "lint-eslint": "eslint .",
+    "lint-prettier": "prettier --check .",
+    "lint-depcheck": "depcheck .",
+    "test": "vitest",
+    "dev": "vite",
+    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo dist",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@overlaysymphony/design": "workspace:*",
+    "classnames": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:"
+  },
+  "devDependencies": {
+    "@overlaysymphony/tooling": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "depcheck": "catalog:",
+    "eslint": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

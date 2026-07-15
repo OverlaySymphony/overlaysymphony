@@ -1,0 +1,27 @@
+.eyebrow {
+  display: inline-flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  font-family: var(--os-font-code);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  line-height: var(--eyebrow-leading);
+  letter-spacing: var(--eyebrow-tracking);
+  text-transform: uppercase;
+  color: var(--eyebrow-color);
+}
+
+.marker {
+  flex: none;
+  width: var(--os-space-2);
+  height: var(--os-space-2);
+  background: var(--eyebrow-marker);
+}
+
+.index {
+  color: var(--os-color-teal);
+}
+
+.separator {
+  color: var(--os-color-text-faint);
+}

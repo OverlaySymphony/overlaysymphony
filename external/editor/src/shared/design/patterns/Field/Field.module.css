@@ -1,0 +1,13 @@
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--os-space-2);
+}
+
+.label {
+  color: var(--os-color-text-faint);
+}
+
+.help {
+  color: var(--os-color-text-faint);
+}

@@ -27,3 +27,12 @@ Elements created at _render_ time (rather than appearing statically in the templ
 ## Verify by rendering
 
 Astro's type checking and build cover a narrow slice of what can be wrong. Escaped entities, an overflowing layout, a rule that lost a specificity race — all of these build cleanly and are visibly broken. Render the page and look at it.
+
+## Components are modlets, index-first
+
+An Astro component is a modlet (see `modlets.md`), but Astro forces the rule's exception: an Astro component can't be re-exported through a `.ts` barrel, so the **index is the component** — not a barrel over a `Component.astro` — and values files keep their lowercase `<name>.ts` form rather than `<Modlet>.<purpose>.ts`:
+
+- **`index.astro`** — the component. It `export * from "./<name>"` so one import brings the component and its types.
+- **`index.ts`** — barrels the types/values from `<name>.ts`; omit it when there's nothing to export.
+- **`<name>.ts`** — the types, constants, helpers (`card.ts`).
+- **Anything else** — private sub-components and helpers.

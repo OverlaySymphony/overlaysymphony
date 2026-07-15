@@ -5,6 +5,7 @@ ignores:
   - "@types/*"
   - "astro:*"
   # used but not imported
+  - "@overlaysymphony/design"
   - "@astrojs/check"
   - "@astrojs/ts-plugin"
   - "@vitest/coverage-v8"
