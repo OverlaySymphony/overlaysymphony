@@ -1,6 +1,7 @@
 export * from "./recording.ts"
 export * from "./replay-buffer.ts"
 export * from "./scenes.ts"
+export * from "./status.ts"
 export * from "./streaming.ts"
 export * from "./transitions.ts"
 export * from "./virtualcam.ts"

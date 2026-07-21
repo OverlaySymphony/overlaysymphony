@@ -36,7 +36,13 @@ const Component = href ? "a" : "button"
   class:list={["button", variant, size, tone, { square, block }, className]}
 >
   <slot />
-  {arrow && <span class="arrow" aria-hidden="true">&rarr;</span>}
+  {
+    arrow && (
+      <span class="arrow" aria-hidden="true">
+        &rarr;
+      </span>
+    )
+  }
 </Component>
 
 <style>

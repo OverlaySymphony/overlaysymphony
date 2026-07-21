@@ -17,11 +17,7 @@ const MODULE_OPTIONS = [
   { value: "webhook", label: "Webhook" },
 ]
 
-export type InspectorProps = {
-  node: Node
-}
-
-const Inspector: React.FC<InspectorProps> = ({ node }) => {
+const Inspector: React.FC<{ node: Node }> = ({ node }) => {
   return (
     <div className={styles.inspector}>
       {node.kind === "trigger" ? <TriggerConfig /> : <NodeConfig node={node} />}

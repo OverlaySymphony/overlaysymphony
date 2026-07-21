@@ -18,12 +18,17 @@ import Layout from "./_Layout.astro"
     sub="Overlay Symphony is an **event-driven, modular** automation tool for Twitch. Compose triggers, conditions, and actions into overlays that **run locally inside OBS** — no cloud relay, no third-party outage, no monthly bill."
   >
     <Button slot="actions" href="/editor" arrow>Open the editor</Button>
-    <Button slot="actions" href="/modules" variant="ghost">Read the docs</Button>
+    <Button slot="actions" href="/modules" variant="ghost">Read the docs</Button
+    >
 
     <Window title="routing / new-follower.automation" centered>
       <NodeGraph
         nodes={[
-          { kind: "trigger", title: "Channel · Follow", meta: "twitch.eventsub" },
+          {
+            kind: "trigger",
+            title: "Channel · Follow",
+            meta: "twitch.eventsub",
+          },
           {
             kind: "condition",
             title: "Not seen in 30d",
@@ -70,8 +75,8 @@ import Layout from "./_Layout.astro"
         title="Node-based automations"
         tag="trigger · condition · action"
       >
-        Compose triggers → conditions → actions visually. Branch on chat content,
-        viewer state, time of day. Reuse blocks across overlays.
+        Compose triggers → conditions → actions visually. Branch on chat
+        content, viewer state, time of day. Reuse blocks across overlays.
       </Card>
     </CardGrid>
   </Section>
@@ -90,7 +95,11 @@ import Layout from "./_Layout.astro"
         <StatusList
           slot="media"
           items={[
-            { tone: "trigger", key: "twitch", value: "— connected as @yourname" },
+            {
+              tone: "trigger",
+              key: "twitch",
+              value: "— connected as @yourname",
+            },
             {
               tone: "trigger",
               key: "obs.websocket",
@@ -107,8 +116,8 @@ import Layout from "./_Layout.astro"
       </Card>
 
       <Card variant="raised" label="Step 02" title="Build automations">
-        Drag a trigger, attach conditions, wire up actions. Save it as part of an
-        overlay scene.
+        Drag a trigger, attach conditions, wire up actions. Save it as part of
+        an overlay scene.
 
         <StatusList
           slot="media"

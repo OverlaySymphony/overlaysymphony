@@ -1,9 +1,9 @@
 import { readdirSync } from "node:fs"
 import { resolve } from "node:path"
 
-import { defineConfig as defineViteConfig } from "vite"
+import { defineConfig } from "vite"
 
-export default defineViteConfig((baseEnv) => {
+export default defineConfig((baseEnv) => {
   return {
     plugins: [],
     build: {

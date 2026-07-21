@@ -1,6 +1,6 @@
 import { type EventConfigs, type EventType } from "./events-helpers.ts"
 
-export type SessionWelcomeMessage = {
+type SessionWelcomeMessage = {
   type: "session_welcome"
   metadata: {
     message_id: string
@@ -18,7 +18,7 @@ export type SessionWelcomeMessage = {
   }
 }
 
-export type SessionKeepaliveMessage = {
+type SessionKeepaliveMessage = {
   type: "session_keepalive"
   metadata: {
     message_id: string
@@ -28,7 +28,7 @@ export type SessionKeepaliveMessage = {
   payload: Record<string, never>
 }
 
-export type NotificationMessage<Type extends EventType = EventType> = {
+type NotificationMessage<Type extends EventType = EventType> = {
   type: "notification"
   metadata: {
     message_id: string

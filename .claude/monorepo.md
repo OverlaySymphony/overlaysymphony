@@ -22,7 +22,7 @@ An internal tooling package exports the ESLint, Prettier, and TypeScript configs
 
 A package's `lint` script is an aggregator — `pnpm run "/^lint-.*/"` — so any script named `lint-*` is picked up and run in parallel for free. Add a new check by naming it that way; don't wire it into the aggregator by hand.
 
-Every check must pass, `depcheck` included: an unused or undeclared dependency is a failure, not a warning.
+Every check must pass, dependency and dead-code hygiene included: an unused or undeclared dependency, or an unused export, is a failure, not a warning.
 
 ## Packages export source, through subpaths
 

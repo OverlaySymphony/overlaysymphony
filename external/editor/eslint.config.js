@@ -1,8 +1,8 @@
 import config from "@overlaysymphony/tooling/eslint-react"
+import { globalIgnores } from "eslint/config"
 
 export default [
-  {
-    ignores: ["dist"],
-  },
+  //
+  globalIgnores(["coverage/", "dist/"]),
   ...config,
 ]

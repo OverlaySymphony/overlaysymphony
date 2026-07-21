@@ -23,9 +23,9 @@
     "lint-typecheck": "tsc --noEmit",
     "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
-    "lint-depcheck": "depcheck .",
+    "lint-knip": "knip",
     "test": "vitest",
-    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
+    "clean": "rm -rf node_modules/.cache coverage junit.xml tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "@overlaysymphony/core": "workspace:*"
@@ -33,7 +33,7 @@
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",
     "@vitest/coverage-v8": "catalog:",
-    "depcheck": "catalog:",
+    "knip": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",

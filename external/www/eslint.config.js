@@ -1,40 +1,8 @@
-import config from "@overlaysymphony/tooling/eslint"
-import eslintPluginAstro from "eslint-plugin-astro"
-import globals from "globals"
+import config from "@overlaysymphony/tooling/eslint-astro"
+import { globalIgnores } from "eslint/config"
 
 export default [
-  {
-    ignores: [".astro", "dist"],
-  },
-  {
-    settings: {
-      "import/core-modules": [
-        "astro",
-        "astro:actions",
-        "astro:assets",
-        "astro:config",
-        "astro:content",
-        "astro:env",
-        "astro:i18n",
-        "astro:middleware",
-        "astro:static-paths",
-        "astro:transitions",
-      ],
-    },
-  },
+  //
+  globalIgnores([".astro/", "coverage/", "dist/"]),
   ...config,
-  {
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        astroHTML: false,
-      },
-    },
-  },
-  {
-    rules: {
-      "import/no-unresolved": ["error", { ignore: ["^astro:"] }],
-    },
-  },
-  ...eslintPluginAstro.configs["flat/recommended"],
 ]

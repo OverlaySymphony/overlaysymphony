@@ -4,7 +4,6 @@ import createEventSub from "@overlaysymphony/twitch/eventsub"
 
 const authentication = await getAuthentication()
 if (!authentication) {
-  // TODO: show error modal
   throw new Error("Missing Twitch authentication.")
 }
 

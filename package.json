@@ -14,7 +14,8 @@
     "lint-typecheck": "nx run-many -t lint-typecheck",
     "lint-eslint": "nx run-many -t lint-eslint",
     "lint-prettier": "nx run-many -t lint-prettier",
-    "lint-depcheck": "nx run-many -t lint-depcheck",
+    "lint-knip": "nx run-many -t lint-knip",
+    "test": "nx run-many -t test",
     "nuke": "rm -rf .nx node_modules */*/node_modules */*/*/node_modules",
     "clean": "nx run-many -t clean && nx reset",
     "build": "nx run-many -t build"

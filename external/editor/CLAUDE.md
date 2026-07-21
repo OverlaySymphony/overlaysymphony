@@ -46,4 +46,4 @@ The editor holds actual `useState` — selecting a composition/automation/node d
 
 ## Checks
 
-`lint` runs typecheck (`tsc --noEmit`, JSX via the `react-jsx` tsconfig override), eslint (React rules via `@overlaysymphony/tooling/eslint-react`), prettier, and depcheck. `build` is `vite build`; confirm the entry still emits.
+`lint` runs typecheck (`tsc --noEmit`, JSX via the `react-jsx` tsconfig override), eslint (React rules via `@overlaysymphony/tooling/eslint-react`), prettier, and knip. `build` is `vite build`; confirm the entry still emits.

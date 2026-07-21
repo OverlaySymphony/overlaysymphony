@@ -10,9 +10,10 @@ import NodeGraph, { NODE_LABELS } from "#design/patterns/NodeGraph"
 import Pane from "#design/patterns/Pane"
 
 import { COMPOSITIONS, PIPELINE } from "../data.ts"
-import Inspector from "../Inspector/index.ts"
 
-import styles from "./Editor.module.css"
+import styles from "./App.module.css"
+
+import Inspector from "./Inspector/index.ts"
 
 const Editor: React.FC = () => {
   const [compositionId, setCompositionId] = useState(COMPOSITIONS[0].id)

@@ -14,4 +14,4 @@ How these built files map to deployed URLs is unsettled — don't assume clean p
 
 ## Checks
 
-`lint` runs typecheck (`tsc --noEmit`), eslint (`@overlaysymphony/tooling/eslint` — the non-React config), prettier, and depcheck. `build` is `vite build`; confirm every entry still emits.
+`lint` runs typecheck (`tsc --noEmit`), eslint (`@overlaysymphony/tooling/eslint` — the non-React config), prettier, and knip. `build` is `vite build`; confirm every entry still emits.

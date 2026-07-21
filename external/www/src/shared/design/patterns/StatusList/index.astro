@@ -22,7 +22,9 @@ const Component = framed ? Panel : "div"
         <span class="highlight">{item.value}</span>
       ) : (
         <span class:list={["line", { dim: item.dim }]}>
-          {item.tone && <span class:list={["dot", item.tone]} aria-hidden="true" />}
+          {item.tone && (
+            <span class:list={["dot", item.tone]} aria-hidden="true" />
+          )}
           {item.key && <span class="key">{item.key}</span>}
           {item.value && <span class="value">{item.value}</span>}
         </span>

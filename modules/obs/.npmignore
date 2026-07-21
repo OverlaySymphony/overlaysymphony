@@ -1,4 +1,4 @@
-/.depcheckrc
+/knip.config.ts
 /.prettierignore
 /.prettierrc.json
 /eslint.config.mjs

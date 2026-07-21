@@ -53,7 +53,6 @@ jobs:
 
       - name: Test
         uses: ./.github/actions/test
-        if: false
 
   build:
     name: ${{ github.event_name == 'workflow_dispatch' && 'Build and Publish' || 'Build'  }}

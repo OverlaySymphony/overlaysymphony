@@ -17,22 +17,6 @@ export async function getControlLevel(): Promise<ControlLevel> {
   return level
 }
 
-export async function verifyControlLevel(
-  target: ControlLevel,
-): Promise<boolean> {
-  const level = await getControlLevel()
-
-  if (level < target) {
-    console.error(
-      `Please elevate browser source "page permissions" to ${ControlLevel[target]} or higher.`,
-    )
-
-    return false
-  }
-
-  return true
-}
-
 export async function ensureControlLevel(
   target: ControlLevel,
 ): Promise<boolean> {

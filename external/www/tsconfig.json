@@ -1,9 +1,12 @@
 {
   "extends": "astro/tsconfigs/strictest",
   "compilerOptions": {
+    "types": ["vitest/globals"],
+    "noEmit": true,
+
     "exactOptionalPropertyTypes": false,
     "noUnusedParameters": false
   },
-  "include": [".astro/types.d.ts", "src", "*.js", "*.ts", ".prettierrc.js"],
+  "include": ["src", "*.js", "*.ts", ".astro/types.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

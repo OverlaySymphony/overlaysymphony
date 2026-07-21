@@ -35,7 +35,13 @@ const style = [
 <span {...props} class:list={["eyebrow", className]} style={style}>
   {marker && <span class="marker" aria-hidden="true" />}
   {index && <span class="index">{index}</span>}
-  {index && <span class="separator" aria-hidden="true">/</span>}
+  {
+    index && (
+      <span class="separator" aria-hidden="true">
+        /
+      </span>
+    )
+  }
   <slot />
 </span>
 

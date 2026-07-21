@@ -4,7 +4,6 @@ import Container from "#design/elements/Container.astro"
 import Logo from "#design/elements/Logo.astro"
 import { type Breadcrumb, type Navigation } from "#shared/breadcrumbs"
 
-
 export type Props = {
   root: Breadcrumb
   navigation: Navigation[]
@@ -26,7 +25,10 @@ const { root, navigation, active } = Astro.props
               {label}
             </Button>
           ) : (
-            <a class:list={["link", { active: active?.href === href }]} href={href}>
+            <a
+              class:list={["link", { active: active?.href === href }]}
+              href={href}
+            >
               {label}
             </a>
           ),

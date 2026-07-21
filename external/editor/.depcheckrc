@@ -1,6 +1,0 @@
-ignore-dirs:
-  - dist
-
-ignores:
-  # used but not imported
-  - "@vitest/coverage-v8"

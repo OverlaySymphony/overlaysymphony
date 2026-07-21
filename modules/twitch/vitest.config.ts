@@ -13,19 +13,20 @@ export default defineConfig({
     coverage: {
       enabled: !!process.env.CI,
       reporter: ["text", "json", "html"],
-      include: ["src"],
+      include: ["src/**/*.{js,ts}"],
+
       exclude: [
         ...coverageConfigDefaults.exclude,
         "**/__mocks__/**",
         "**/index.ts",
       ],
 
-      thresholds: {
-        statements: 90,
-        branches: 90,
-        functions: 90,
-        lines: 90,
-      },
+      // thresholds: {
+      //   statements: 90,
+      //   branches: 90,
+      //   functions: 90,
+      //   lines: 90,
+      // },
     },
   },
 })

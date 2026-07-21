@@ -21,7 +21,9 @@ import Layout from "./_Layout.astro"
     sub="Symphony is built from small, independent modules that meet at a single idea: a **trigger** fires, **conditions** decide, **actions** happen — all inside the browser source you already have open in OBS."
   >
     <Button slot="actions" href="/modules" arrow>Browse the modules</Button>
-    <Button slot="actions" href="/editor" variant="ghost">Open the editor</Button>
+    <Button slot="actions" href="/editor" variant="ghost">
+      Open the editor
+    </Button>
   </Hero>
 
   <Section
@@ -37,13 +39,13 @@ import Layout from "./_Layout.astro"
       </Card>
 
       <Card icon="nodes" title="Conditions" tag="role · state · helix">
-        Gate a chain on viewer role, follow age, command arguments, active scene,
-        or the result of a Helix lookup. Branch instead of duplicating.
+        Gate a chain on viewer role, follow age, command arguments, active
+        scene, or the result of a Helix lookup. Branch instead of duplicating.
       </Card>
 
       <Card icon="scene" title="Actions" tag="overlay · obs · chat">
-        Fire an overlay scene, drive OBS through its WebSocket, reply in chat, or
-        hand off to another automation. Actions compose.
+        Fire an overlay scene, drive OBS through its WebSocket, reply in chat,
+        or hand off to another automation. Actions compose.
       </Card>
 
       <Card icon="grid" title="Helpers" tag="8 twitch helpers">
@@ -91,9 +93,13 @@ import Layout from "./_Layout.astro"
         </Window>
       </Card>
 
-      <Card variant="raised" label="Example 02" title="Give your mods a shortcut">
-        A chat command is scoped to moderators, then drives OBS directly over its
-        WebSocket. The same chain works in any scene.
+      <Card
+        variant="raised"
+        label="Example 02"
+        title="Give your mods a shortcut"
+      >
+        A chat command is scoped to moderators, then drives OBS directly over
+        its WebSocket. The same chain works in any scene.
 
         <Window slot="media" title="routing / shoutout.automation" centered>
           <NodeGraph
@@ -130,7 +136,11 @@ import Layout from "./_Layout.astro"
       <StatusList
         framed={false}
         items={[
-          { tone: "trigger", key: "hype-train", value: "level 3 · 62% to next" },
+          {
+            tone: "trigger",
+            key: "hype-train",
+            value: "level 3 · 62% to next",
+          },
           { tone: "trigger", key: "poll", value: '"next game?" · 1,204 votes' },
           {
             tone: "condition",

@@ -1,4 +1,7 @@
 {
   "extends": "@overlaysymphony/tooling/typescript",
-  "include": ["src", "vite.config.ts", "eslint.config.mjs"]
+  "compilerOptions": {
+    "types": ["vitest/globals"]
+  },
+  "include": ["src", "*.js", "*.ts"]
 }

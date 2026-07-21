@@ -16,13 +16,13 @@
     "lint-typecheck": "tsc --noEmit",
     "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
-    "lint-depcheck": "depcheck .",
+    "lint-knip": "knip",
     "obs.events.update": "node src/apps/obs-events/update/index.ts",
     "obs.events.generate": "node src/apps/obs-events/generate/index.ts",
     "twitch.events.update": "node src/apps/twitch-events/update/index.ts",
     "twitch.events.generate": "node src/apps/twitch-events/generate/index.ts",
     "hello": "node src/apps/hello/index.ts",
-    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo"
+    "clean": "rm -rf node_modules/.cache coverage junit.xml tsconfig.tsbuildinfo"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -31,9 +31,10 @@
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",
     "@types/node": "catalog:",
-    "depcheck": "catalog:",
+    "knip": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   }
 }

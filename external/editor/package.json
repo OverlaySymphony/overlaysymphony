@@ -17,10 +17,10 @@
     "lint-typecheck": "tsc --noEmit",
     "lint-eslint": "eslint .",
     "lint-prettier": "prettier --check .",
-    "lint-depcheck": "depcheck .",
+    "lint-knip": "knip",
     "test": "vitest",
     "dev": "vite",
-    "clean": "rm -rf node_modules/.cache tsconfig.tsbuildinfo dist",
+    "clean": "rm -rf node_modules/.cache coverage junit.xml tsconfig.tsbuildinfo dist",
     "build": "vite build"
   },
   "dependencies": {
@@ -35,10 +35,11 @@
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "@vitejs/plugin-react": "catalog:",
-    "depcheck": "catalog:",
+    "knip": "catalog:",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
-    "vite": "catalog:"
+    "vite": "catalog:",
+    "vitest": "catalog:"
   }
 }

@@ -11,8 +11,8 @@ inputs:
   skip-prettier:
     description: "Skip `lint-prettier`?"
     default: ""
-  skip-depcheck:
-    description: "Skip `lint-depcheck`?"
+  skip-knip:
+    description: "Skip `lint-knip`?"
     default: ""
 
 runs:
@@ -38,7 +38,7 @@ runs:
       shell: bash
       run: npx nx run ${{ env.WORKSPACE }}:lint-prettier
 
-    - name: Depcheck
-      if: ${{ !inputs.skip-depcheck }}
+    - name: Knip
+      if: ${{ !inputs.skip-knip }}
       shell: bash
-      run: npx nx run ${{ env.WORKSPACE }}:lint-depcheck
+      run: npx nx run ${{ env.WORKSPACE }}:lint-knip

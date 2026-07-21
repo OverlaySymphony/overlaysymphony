@@ -79,7 +79,11 @@ const { name } = Astro.props
       </>
     )
   }
-  {name === "play" && <path d="M7 5 L19 12 L7 19 Z" fill="currentColor" stroke="none" />}
+  {
+    name === "play" && (
+      <path d="M7 5 L19 12 L7 19 Z" fill="currentColor" stroke="none" />
+    )
+  }
   {
     name === "copy" && (
       <>
