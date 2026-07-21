@@ -4,8 +4,11 @@ import { resolve } from "node:path"
 import { defineConfig } from "vite"
 import { coverageConfigDefaults } from "vitest/config"
 
+import { importCssStyleSheets } from "./vite-plugin.import-css-style-sheets.ts"
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [importCssStyleSheets()],
   build: {
     target: "esnext",
     rollupOptions: {
