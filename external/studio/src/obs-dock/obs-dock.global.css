@@ -1,0 +1,5 @@
+@import url("@overlaysymphony/design/foundations.css");
+
+html {
+  overscroll-behavior-y: none;
+}

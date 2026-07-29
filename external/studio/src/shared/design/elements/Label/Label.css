@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--os-font-code);
+  font-size: var(--os-label-small-size);
+  letter-spacing: var(--os-label-large-tracking);
+  text-transform: uppercase;
+  color: var(--os-color-text-faint);
+}

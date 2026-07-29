@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: flex-start;
+  padding-top: var(--os-space-1);
+  font-size: var(--os-label-medium-size);
+  line-height: 1.45;
+  color: var(--os-color-text-faint);
+}
+
+.lock {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  margin-top: 4px;
+  background: var(--os-color-text-faint);
+}
+
+:host([tone="ok"]) .lock {
+  background: var(--os-color-teal);
+}
+
+:host([tone="condition"]) .lock {
+  background: var(--os-color-purple);
+}
+
+:host([tone="action"]) .lock {
+  background: var(--os-color-amber);
+}

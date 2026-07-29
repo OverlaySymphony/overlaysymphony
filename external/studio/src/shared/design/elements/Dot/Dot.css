@@ -1,0 +1,14 @@
+:host {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  background: var(--os-color-line-strong);
+}
+
+:host([tone="ok"]) {
+  background: var(--os-color-teal);
+}
+
+:host([tone="err"]) {
+  background: var(--os-color-red);
+}

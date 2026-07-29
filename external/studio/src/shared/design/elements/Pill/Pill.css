@@ -1,0 +1,17 @@
+:host {
+  display: inline-block;
+  padding: 2px var(--os-space-2);
+  font-family: var(--os-font-code);
+  font-size: var(--os-label-small-size);
+  letter-spacing: var(--os-label-medium-tracking);
+  color: var(--os-color-teal);
+  background: var(--os-color-teal-wash);
+  border: var(--os-hairline) solid transparent;
+  border-radius: var(--os-radius-sm);
+}
+
+:host([variant="muted"]) {
+  color: var(--os-color-text-faint);
+  background: transparent;
+  border-color: var(--os-color-line-strong);
+}

@@ -1,0 +1,108 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  font-family: var(--os-font-body);
+  font-size: var(--os-control-small-size);
+  color: var(--os-color-text);
+  background: var(--os-color-bg);
+}
+
+.head {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  flex: none;
+  padding: var(--os-space-2) var(--os-space-3);
+  border-bottom: var(--os-hairline) solid var(--os-color-line);
+}
+
+.brand {
+  display: grid;
+  grid-template-columns: repeat(2, 6px);
+  grid-template-rows: repeat(2, 6px);
+  gap: 2px;
+  flex: none;
+}
+
+.brand i {
+  width: 6px;
+  height: 6px;
+  background: var(--os-color-teal);
+}
+
+.brand i:nth-child(2) {
+  opacity: 0.7;
+}
+
+.brand i:nth-child(3) {
+  opacity: 0.45;
+}
+
+.brand i:nth-child(4) {
+  opacity: 0.25;
+}
+
+.name {
+  flex: 1;
+  font-weight: var(--os-weight-semibold);
+}
+
+.name b {
+  font-weight: var(--os-weight-semibold);
+  color: var(--os-color-teal);
+}
+
+.version {
+  font-family: var(--os-font-code);
+  font-size: var(--os-label-small-size);
+  letter-spacing: var(--os-label-medium-tracking);
+  color: var(--os-color-text-faint);
+}
+
+.tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  flex: none;
+  border-bottom: var(--os-hairline) solid var(--os-color-line);
+}
+
+.tab {
+  min-width: 0;
+  padding: var(--os-space-2) 0;
+  font-family: var(--os-font-code);
+  font-size: var(--os-label-small-size);
+  letter-spacing: var(--os-label-medium-tracking);
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--os-color-text-faint);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  transition:
+    color var(--os-transition-fast),
+    border-color var(--os-transition-fast);
+}
+
+.tab:hover {
+  color: var(--os-color-text-muted);
+}
+
+.tab.active {
+  color: var(--os-color-teal);
+  border-bottom-color: var(--os-color-teal);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  padding: var(--os-space-4) var(--os-space-3) var(--os-space-5);
+  overflow-y: auto;
+}

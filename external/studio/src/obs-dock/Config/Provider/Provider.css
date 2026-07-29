@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--os-space-3);
+  padding: var(--os-space-3);
+  background: var(--os-color-bg-elev);
+  border: var(--os-hairline) solid var(--os-color-line-strong);
+  border-radius: var(--os-radius-sm);
+}
+
+:host([status="notset"]) {
+  background: transparent;
+  border-style: dashed;
+}
+
+slot {
+  display: contents;
+}
+
+.top {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: center;
+}
+
+.name {
+  flex: 1;
+  font-size: var(--os-control-small-size);
+  font-weight: var(--os-weight-medium);
+}
+
+.status {
+  font-family: var(--os-font-code);
+  font-size: var(--os-label-small-size);
+  letter-spacing: var(--os-label-medium-tracking);
+  text-transform: uppercase;
+}
+
+:host([status="connected"]) .status {
+  color: var(--os-color-teal);
+}
+
+:host([status="notset"]) .status {
+  color: var(--os-color-text-faint);
+}

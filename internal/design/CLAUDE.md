@@ -20,7 +20,7 @@ Add a token to the `vars.css` of the concern it belongs to; never to `index.css`
 
 ## What does NOT live here — yet
 
-The **primitives** (`Button`, `Eyebrow`, …) do not. They're framework-specific: `www` renders them in Astro, the `editor` in React, so today they're duplicated per consumer rather than shared. That's deliberate — a component is cheap to keep in two dialects, and there's no framework-neutral form worth inventing for five small components. When a second **React** consumer appears, the React primitives promote out of `editor` into their own shared package — not into this one, which stays CSS-only. (The `studio` surfaces — the OBS dock, overlay, and Twitch popup — are web components, not React, so they are **not** that consumer.)
+The **primitives** (`Button`, `Eyebrow`, …) do not. They're framework-specific: `www` renders them in Astro, the `editor` in React, so today they're duplicated per consumer rather than shared. That's deliberate — a component is cheap to keep in two dialects, and there's no framework-neutral form worth inventing for five small components. When a second **React** consumer appears, the React primitives promote out of `editor` into their own shared package — not into this one, which stays CSS-only. (The `studio` surfaces — the OBS dock, overlay, and Twitch popup — are web components, not React, so they are **not** that consumer. `studio` builds its own WC primitives against these foundations; that's a separate design layer, not a fork of the tokens.)
 
 ## Consumed through exports, as source
 

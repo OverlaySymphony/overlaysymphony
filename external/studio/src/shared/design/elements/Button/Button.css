@@ -1,0 +1,58 @@
+:host {
+  display: inline-flex;
+}
+
+button {
+  display: inline-flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  padding: var(--os-space-2) var(--os-space-3);
+  font-family: var(--os-font-body);
+  font-size: var(--os-control-small-size);
+  font-weight: var(--os-weight-semibold);
+  color: var(--os-color-text-inverse);
+  cursor: pointer;
+  background: var(--os-color-teal);
+  border: var(--os-hairline) solid transparent;
+  border-radius: var(--os-radius-sm);
+  transition:
+    color var(--os-transition-fast),
+    background var(--os-transition-fast),
+    border-color var(--os-transition-fast);
+}
+
+button:hover {
+  background: var(--os-color-teal-hover);
+}
+
+button:active {
+  background: var(--os-color-teal-active);
+}
+
+:host([variant="ghost"]) button {
+  font-weight: var(--os-weight-medium);
+  color: var(--os-color-text);
+  background: transparent;
+  border-color: var(--os-color-line-strong);
+}
+
+:host([variant="ghost"]) button:hover {
+  background: var(--os-color-bg-elev);
+  border-color: var(--os-color-text-faint);
+}
+
+:host([variant="text"]) button {
+  padding: var(--os-space-1) 0;
+  font-weight: var(--os-weight-regular);
+  color: var(--os-color-text-muted);
+  background: transparent;
+  border-color: transparent;
+}
+
+:host([variant="text"]) button:hover {
+  color: var(--os-color-text);
+}
+
+:host([variant="text"][tone="danger"]) button:hover {
+  color: var(--os-color-red);
+}
