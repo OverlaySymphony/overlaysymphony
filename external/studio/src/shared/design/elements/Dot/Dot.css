@@ -9,6 +9,10 @@
   background: var(--os-color-teal);
 }
 
+:host([tone="warn"]) {
+  background: var(--os-color-amber);
+}
+
 :host([tone="err"]) {
   background: var(--os-color-red);
 }

@@ -1,0 +1,26 @@
+:host {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--os-space-2);
+  align-items: center;
+  padding: var(--os-space-2) var(--os-space-1);
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+}
+
+.key,
+.value {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.value {
+  max-width: 110px;
+  color: var(--os-color-teal);
+}
+
+os-pill {
+  text-transform: uppercase;
+}

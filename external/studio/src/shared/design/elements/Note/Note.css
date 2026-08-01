@@ -8,6 +8,10 @@
   color: var(--os-color-text-faint);
 }
 
+slot {
+  display: block;
+}
+
 .lock {
   flex: none;
   width: 8px;

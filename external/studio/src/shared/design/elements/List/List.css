@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+::slotted(*) {
+  border-bottom: var(--os-hairline) solid var(--os-color-line);
+}
+
+::slotted(:last-child) {
+  border-bottom: 0;
+}

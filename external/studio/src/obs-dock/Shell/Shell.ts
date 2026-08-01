@@ -1,4 +1,7 @@
 import "../tabs/Config/index.ts"
+import "../tabs/Connections/index.ts"
+import "../tabs/Events/index.ts"
+import "../tabs/State/index.ts"
 
 import Component from "#shared/Component"
 
@@ -8,9 +11,9 @@ import stylesheet from "./Shell.css" with { type: "css" }
 
 const tabConfigs = {
   config: { label: "Config", element: "dock-config" },
-  events: { label: "Events", element: "dock-config" },
-  state: { label: "State", element: "dock-config" },
-  connections: { label: "Connections", element: "dock-config" },
+  events: { label: "Events", element: "dock-events" },
+  state: { label: "State", element: "dock-state" },
+  connections: { label: "Connections", element: "dock-connections" },
 } satisfies Record<string, { label: string; element: string }>
 
 type Tab = keyof typeof tabConfigs

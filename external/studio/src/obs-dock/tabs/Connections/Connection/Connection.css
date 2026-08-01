@@ -1,0 +1,36 @@
+:host {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  gap: var(--os-space-2);
+  align-items: center;
+  padding: var(--os-space-3) var(--os-space-1);
+}
+
+.detail {
+  min-width: 0;
+}
+
+.label,
+.endpoint {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.label {
+  font-size: var(--os-control-small-size);
+}
+
+.endpoint {
+  margin-top: 2px;
+  font-family: var(--os-font-code);
+  font-size: var(--os-label-medium-size);
+  color: var(--os-color-text-faint);
+}
+
+.ping {
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+  color: var(--os-color-text-muted);
+}

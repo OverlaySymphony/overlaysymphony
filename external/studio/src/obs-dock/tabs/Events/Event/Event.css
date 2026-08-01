@@ -1,0 +1,42 @@
+:host {
+  display: grid;
+  grid-template-columns: auto auto auto 1fr auto;
+  gap: var(--os-space-2);
+  align-items: center;
+  padding: var(--os-space-2) var(--os-space-1);
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+}
+
+.time {
+  color: var(--os-color-text-faint);
+}
+
+.what {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.source {
+  color: var(--os-color-text-muted);
+}
+
+.status {
+  font-size: var(--os-label-small-size);
+  letter-spacing: var(--os-label-medium-tracking);
+  text-transform: uppercase;
+
+  :host([status="ok"]) & {
+    color: var(--os-color-teal);
+  }
+
+  :host([status="warn"]) & {
+    color: var(--os-color-amber);
+  }
+
+  :host([status="err"]) & {
+    color: var(--os-color-red);
+  }
+}
