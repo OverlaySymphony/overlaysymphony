@@ -5,6 +5,8 @@ import stylesheet from "./Identity.css" with { type: "css" }
 export default class Identity extends Component {
   public static name = "dock-config-provider-identity"
 
+  static observedAttributes = ["handle", "meta"]
+
   constructor() {
     super(stylesheet)
   }

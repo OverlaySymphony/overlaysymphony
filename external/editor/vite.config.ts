@@ -22,14 +22,15 @@ export default defineConfig({
     css: false,
     setupFiles: "./src/setupTests.ts",
     restoreMocks: true,
+
     coverage: {
       enabled: !!process.env.CI,
       reporter: ["text", "json", "html"],
       include: ["src/**/*.{js,ts}"],
-
       exclude: [
         ...coverageConfigDefaults.exclude,
         "**/__mocks__/**",
+        "**/*.d.ts",
         "**/index.ts",
       ],
 

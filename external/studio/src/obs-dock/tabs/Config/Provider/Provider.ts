@@ -7,6 +7,8 @@ import stylesheet from "./Provider.css" with { type: "css" }
 export default class Provider extends Component {
   public static name = "dock-config-provider"
 
+  static observedAttributes = ["label", "status"]
+
   constructor() {
     super(stylesheet)
   }

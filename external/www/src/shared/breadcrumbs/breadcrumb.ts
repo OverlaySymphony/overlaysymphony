@@ -15,36 +15,41 @@ type Structure = {
   root?: Breadcrumb
   section?: Breadcrumb
   page?: Breadcrumb
-  title: string
+  title?: string
   breadcrumbs: Breadcrumb[]
 }
 
 export function getStructure(breadcrumbs: Breadcrumb[]): Structure {
+  const realBreadcrumbs = breadcrumbs.filter(({ minor }) => !minor)
+
   const structure: Structure = {
     root: undefined,
     section: undefined,
     page: undefined,
-    title: "",
-    breadcrumbs,
+    title: undefined,
+    breadcrumbs: realBreadcrumbs,
   }
 
-  if (breadcrumbs.length >= 1) {
-    structure.root = breadcrumbs[0]
+  if (realBreadcrumbs.length >= 1) {
+    structure.root = realBreadcrumbs[0]
   }
 
-  if (breadcrumbs.length >= 2) {
-    structure.section = breadcrumbs[1]
+  if (realBreadcrumbs.length >= 2) {
+    structure.section = realBreadcrumbs[1]
   }
 
   const pageIndex = breadcrumbs.length - 1
   structure.page = breadcrumbs[pageIndex]
 
-  const titleParts = breadcrumbs.slice().reverse()
+  const titleParts = realBreadcrumbs.slice().reverse()
   if (structure.page?.minor) {
     titleParts.unshift(structure.page)
   }
 
-  structure.title = titleParts.map(({ label }) => label).join(" - ")
+  const labels = titleParts.map(({ label }) => label)
+  const site = labels.pop()
+
+  structure.title = labels.length ? `${labels.join(" - ")} | ${site}` : site
 
   return structure
 }

@@ -8,6 +8,8 @@ import stylesheet from "./Connection.css" with { type: "css" }
 export default class Connection extends Component {
   public static name = "dock-connections-connection"
 
+  static observedAttributes = ["label", "endpoint", "status", "ping"]
+
   constructor() {
     super(stylesheet)
   }

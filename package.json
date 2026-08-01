@@ -15,12 +15,13 @@
     "lint-eslint": "nx run-many -t lint-eslint",
     "lint-prettier": "nx run-many -t lint-prettier",
     "lint-knip": "nx run-many -t lint-knip",
-    "test": "nx run-many -t test",
+    "test": "CI=true nx run-many -t test",
     "nuke": "rm -rf .nx node_modules */*/node_modules */*/*/node_modules",
     "clean": "nx run-many -t clean && nx reset",
     "build": "nx run-many -t build"
   },
   "devDependencies": {
-    "nx": "^22.0.0"
+    "nx": "^22.0.0",
+    "@typescript-eslint/parser": "*"
   }
 }

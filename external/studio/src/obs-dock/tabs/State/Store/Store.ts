@@ -7,6 +7,8 @@ import stylesheet from "./Store.css" with { type: "css" }
 export default class Store extends Component {
   public static name = "dock-state-store"
 
+  static observedAttributes = ["key", "scope"]
+
   constructor() {
     super(stylesheet)
   }

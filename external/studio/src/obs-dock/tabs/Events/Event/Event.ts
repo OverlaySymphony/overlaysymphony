@@ -7,6 +7,8 @@ import stylesheet from "./Event.css" with { type: "css" }
 export default class Event extends Component {
   public static name = "dock-events-event"
 
+  static observedAttributes = ["time", "source", "status"]
+
   constructor() {
     super(stylesheet)
   }

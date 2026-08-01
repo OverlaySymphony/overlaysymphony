@@ -28,10 +28,10 @@ export default defineConfig({
       enabled: !!process.env.CI,
       reporter: ["text", "json", "html"],
       include: ["src/**/*.{js,ts}"],
-
       exclude: [
         ...coverageConfigDefaults.exclude,
         "**/__mocks__/**",
+        "**/*.d.ts",
         "**/index.ts",
       ],
 

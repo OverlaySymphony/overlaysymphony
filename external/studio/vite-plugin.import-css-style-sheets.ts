@@ -9,7 +9,7 @@ export function importCssStyleSheets(): Plugin {
     enforce: "pre",
 
     async resolveId(id, importer, options) {
-      // TODO: check options.attributes for { type: "css" }
+      // Eventually TODO: check options.attributes for { type: "css" }
 
       const modulePath = await this.resolve(id, importer)
       if (!modulePath?.id) return null

@@ -12,6 +12,17 @@ export default class Component extends HTMLElement {
     }
   }
 
+  public attributeChangedCallback(
+    name: string,
+    oldValue: string | null,
+    newValue: string | null,
+  ): void {
+    if (!this.built) return
+    if (oldValue === newValue) return
+
+    this.build()
+  }
+
   connectedCallback(): void {
     if (this.built) return
     this.built = true

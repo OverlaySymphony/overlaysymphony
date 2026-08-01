@@ -18,6 +18,7 @@ export default defineConfig({
       exclude: [
         ...coverageConfigDefaults.exclude,
         "**/__mocks__/**",
+        "**/*.d.ts",
         "**/index.ts",
       ],
 

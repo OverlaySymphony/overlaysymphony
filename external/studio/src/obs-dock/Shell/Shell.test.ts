@@ -1,9 +1,9 @@
-import "./Shell.ts"
+import Shell from "./Shell.ts"
 
-const tag = "dock-shell"
+const tag = Shell.name
 
 describe("Shell", () => {
-  it("registers dock-shell", () => {
+  it(`registers ${tag}`, () => {
     expect(customElements.get(tag)).toBeTypeOf("function")
   })
 

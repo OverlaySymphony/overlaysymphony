@@ -1,3 +1,3 @@
-describe("To Do", () => {
+describe("Scripts", () => {
   it.todo("should be tested")
 })
