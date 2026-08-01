@@ -1,10 +1,10 @@
 # Web components
 
-Shared across workspaces. A workspace's own CLAUDE.md states the concrete tag prefix and component tree, and may override anything here — the override wins.
+Shared across workspaces. A workspace's own CLAUDE.md states the concrete tag prefixes and component tree, and may override anything here — the override wins.
 
 ## The element
 
-A web component is a class extending `HTMLElement` with a `static name` holding its tag. The constructor attaches an open shadow root, adopts its stylesheet, and builds the template. The main file default-exports the class and registers it at the bottom.
+A web component is a class extending `HTMLElement` with a `static name` holding its tag. The constructor attaches an open shadow root and adopts its stylesheet; `connectedCallback` builds the template once. The main file default-exports the class and registers it at the bottom.
 
 ```ts
 import "#design/elements/Baz"
@@ -14,6 +14,7 @@ import stylesheet from "./FooBar.css" with { type: "css" }
 export default class FooBar extends HTMLElement {
   public static name = "os-foo-bar"
 
+  private built = false
   private root: ShadowRoot
 
   constructor() {
@@ -21,11 +22,16 @@ export default class FooBar extends HTMLElement {
 
     this.root = this.attachShadow({ mode: "open" })
     this.root.adoptedStyleSheets.push(stylesheet)
+  }
+
+  connectedCallback(): void {
+    if (this.built) return
+    this.built = true
 
     this.build()
   }
 
-  private build() {
+  private build(): void {
     this.root.innerHTML = `<os-baz></os-baz><slot></slot>`
   }
 }
@@ -33,26 +39,35 @@ export default class FooBar extends HTMLElement {
 window.customElements.define(FooBar.name, FooBar)
 ```
 
+Every component repeats that frame, so a workspace with more than a handful of them will want to lift it into a shared base class and have components pass their stylesheet up — where a workspace does that, its CLAUDE.md documents the base and this section describes what the base owns.
+
 **Importing the modlet is what defines the tag** — registration is a side effect of the import, so most consumers write a bare `import "…/FooBar"` and then use the tag. The class is exported normally and importing it as a value is fine where something genuinely wants it — to instantiate, to read `static name`, to type a reference — it just isn't the common case. Because the common case is the side effect, dead-code analysis will see most components' exports as unused; tell it so once, in config, rather than bending the code around it.
 
-Light-DOM content passes through with `<slot>`. Keep only the state a method later reads: a component that builds once and never touches its root again takes the shadow root as a local and skips `build()` entirely.
+## Build on connect
 
-## When to build
+`build()` runs from `connectedCallback`, never from the constructor — attributes aren't set yet when the parser constructs the element, so a constructor-time template can't read its own inputs. Doing it the same way everywhere makes `this.getAttribute(…)` reliable in every component, so no component has to decide when it builds; the `built` flag keeps a reconnected element from rebuilding.
 
-A component whose template is fixed builds in the constructor. **A component whose template reads its own attributes must build in `connectedCallback`** — attributes aren't set yet when the parser calls the constructor — and guards against reconnection:
+A component with no template of its own still needs the shadow root — it renders a bare `<slot></slot>` and exists to carry styling.
 
-```ts
-connectedCallback(): void {
-  if (this.built) return
-  this.built = true
-
-  this.build()
-}
-```
+That `build()` runs after construction also means a field it assigns is not assigned in the constructor; declare it with a definite-assignment `!` rather than making it optional and null-checking it at every use.
 
 ## Variants are attributes
 
 A visual variant is an attribute on the host (`variant`, `tone`, `status`), styled through `:host([variant="ghost"])`. Never a class, never a property — an attribute is what a consumer can write in the template that composes the component, and it keeps the whole variant surface in the component's own CSS.
+
+Data a component renders arrives the same way, as attributes read in `build()`.
+
+## Structure is components, not classed markup
+
+A region inside a template that carries its own styling or its own data is **its own nested component**, not a `<div class="…">`. Prefer
+
+```html
+<foo-provider-identity handle="@name" meta="1.2k followers"></foo-provider-identity>
+```
+
+over a classed `div` whose rules live in the parent's stylesheet. The parent's CSS then only lays out its children instead of also styling their internals, and each piece owns its own shadow root, tag, and stylesheet.
+
+The pull the other way — "it's only a couple of rules, inline it" — is how a parent's stylesheet ends up owning the whole subtree. A shared layout utility (a spacer, a stack) is the exception; anything with meaning gets a tag.
 
 ## Imports
 
@@ -60,7 +75,7 @@ Side-effect imports for every tag the template mentions come first, as their own
 
 ## Styles
 
-Component styles are a sibling `<Modlet>.css`, imported `with { type: "css" }` — the build turns it into a `CSSStyleSheet` that the constructor pushes onto `adoptedStyleSheets`. Style the element's own box through `:host`.
+Component styles are a sibling `<Modlet>.css`, imported `with { type: "css" }` — the build turns it into a `CSSStyleSheet` pushed onto `adoptedStyleSheets`. Style the element's own box through `:host`.
 
 Design **tokens are not adopted into a shadow root** — they are loaded once at the document level and inherit across the boundary. Custom properties and `font-family` inherit into shadow DOM, and `@font-face` is global wherever declared; so a component's CSS just spends the tokens. A shadow root does **not** inherit the document reset, so a component that sizes its own box — width or height alongside padding or a border — sets `box-sizing` itself. Most don't need to.
 
@@ -78,7 +93,16 @@ A component is an ordinary modlet (see `modlets.md`) — no framework exception 
 - **`<Modlet>.test.ts`** — its tests.
 - **Anything else** — private sub-components and helpers, each named for itself.
 
-A component that only one other component uses nests inside it, and its tag extends the parent's.
+A component used by only one other component **nests inside it**, and its tag extends the parent's. A parent whose sub-components are only ever used inside its own template registers the family from its index, so one import brings the whole tree:
+
+```ts
+import "./Actions/index.ts"
+import "./Identity/index.ts"
+
+export { default } from "./Provider.ts"
+```
+
+Sibling modlets of the same kind may sit in a plain lowercase grouping directory (`tabs/`, `elements/`). A grouping directory has no index and is not itself a modlet — it's a shelf.
 
 ## Tests
 
@@ -88,7 +112,12 @@ A jsdom-based runner has no `adoptedStyleSheets`; define it on `Document` and `S
 
 ## Tags
 
-A tag carries the project prefix. **Sharable design primitives** are `<prefix>-<name>` (`os-button`). **Application components** carry an `app` segment, and a component defined inside another extends its parent's tag (`os-app-config` → `os-app-config-provider`). The workspace pins the prefix and the concrete tree.
+Every tag is prefixed, and the prefix says which layer the component belongs to.
+
+- **Sharable design primitives** carry the design system's prefix and one segment: `os-button`, `os-pill`.
+- **Application components** carry the **surface's** name as their prefix, and each level of nesting appends a segment: `dock-shell`, `dock-config`, `dock-config-provider`, `dock-config-provider-identity`.
+
+So a tag reads as a path through the tree, and a component's own tag tells you where its file is. The workspace pins the prefixes and the concrete tree.
 
 ## Composition
 

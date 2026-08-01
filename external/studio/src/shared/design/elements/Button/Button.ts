@@ -1,20 +1,15 @@
+import Component from "#shared/Component"
+
 import stylesheet from "./Button.css" with { type: "css" }
 
-export default class Button extends HTMLElement {
+export default class Button extends Component {
   public static name = "os-button"
 
-  private root: ShadowRoot
-
   constructor() {
-    super()
-
-    this.root = this.attachShadow({ mode: "open" })
-    this.root.adoptedStyleSheets.push(stylesheet)
-
-    this.build()
+    super(stylesheet)
   }
 
-  private build() {
+  protected build(): void {
     this.root.innerHTML = `<button><slot></slot></button>`
   }
 }

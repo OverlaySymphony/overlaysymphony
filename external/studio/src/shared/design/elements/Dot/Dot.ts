@@ -1,13 +1,16 @@
+import Component from "#shared/Component"
+
 import stylesheet from "./Dot.css" with { type: "css" }
 
-export default class Dot extends HTMLElement {
+export default class Dot extends Component {
   public static name = "os-dot"
 
   constructor() {
-    super()
+    super(stylesheet)
+  }
 
-    const root = this.attachShadow({ mode: "open" })
-    root.adoptedStyleSheets.push(stylesheet)
+  protected build(): void {
+    this.root.innerHTML = ""
   }
 }
 

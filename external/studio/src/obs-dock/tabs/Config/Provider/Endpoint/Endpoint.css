@@ -1,0 +1,6 @@
+:host {
+  display: block;
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+  color: var(--os-color-text-faint);
+}

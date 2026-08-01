@@ -1,52 +1,59 @@
-import "../Config/index.ts"
+import "../tabs/Config/index.ts"
+
+import Component from "#shared/Component"
+
+import pkg from "../../../package.json" with { type: "json" }
 
 import stylesheet from "./Shell.css" with { type: "css" }
 
-type Tab = "config" | "events" | "state" | "connections"
+const tabConfigs = {
+  config: { label: "Config", element: "dock-config" },
+  events: { label: "Events", element: "dock-config" },
+  state: { label: "State", element: "dock-config" },
+  connections: { label: "Connections", element: "dock-config" },
+} satisfies Record<string, { label: string; element: string }>
 
-const tabs: Array<{ id: Tab; label: string }> = [
-  { id: "config", label: "Config" },
-  { id: "events", label: "Events" },
-  { id: "state", label: "State" },
-  { id: "connections", label: "Connections" },
-]
+type Tab = keyof typeof tabConfigs
 
-export default class Shell extends HTMLElement {
-  public static name = "os-app-shell"
+const tabOrder: Tab[] = ["config", "events", "state", "connections"]
 
-  private root: ShadowRoot
-  private active: Tab = "config"
+export default class Shell extends Component {
+  public static name = "dock-shell"
+
+  private tabEls!: NodeListOf<HTMLButtonElement>
+  private bodyEl!: HTMLDivElement
+
+  private active: Tab = tabOrder[0]
 
   constructor() {
-    super()
-
-    this.root = this.attachShadow({ mode: "open" })
-    this.root.adoptedStyleSheets.push(stylesheet)
-
-    this.build()
+    super(stylesheet)
   }
 
-  private build() {
+  protected build(): void {
     this.root.innerHTML = `
       <header class="head">
-        <span class="brand" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-        <span class="name">Overlay <b>Symphony</b></span>
-        <span class="version">v0.4.2</span>
+        <span class="logo" aria-hidden="true"></span>
+        <span class="name">Overlay <strong>Symphony</strong></span>
+        <span class="version">v${pkg.version}</span>
       </header>
+
       <nav class="tabs" role="tablist">
-        ${tabs
+        ${tabOrder
           .map(
-            ({ id, label }) =>
-              `<button class="tab" role="tab" data-tab="${id}">${label}</button>`,
+            (id) =>
+              `<button class="tab" role="tab" data-tab="${id}">${tabConfigs[id].label}</button>`,
           )
           .join("")}
       </nav>
+
       <div class="body"></div>
     `
 
-    for (const button of this.root.querySelectorAll<HTMLButtonElement>(
-      ".tab",
-    )) {
+    this.tabEls = this.root.querySelectorAll(".tab")
+    this.bodyEl = this.root.querySelector(".body")!
+    if (!this.bodyEl) throw new Error("Oops!")
+
+    for (const button of this.tabEls) {
       button.addEventListener("click", () => {
         this.active = button.dataset.tab as Tab
         this.render()
@@ -57,17 +64,11 @@ export default class Shell extends HTMLElement {
   }
 
   private render() {
-    for (const button of this.root.querySelectorAll<HTMLButtonElement>(
-      ".tab",
-    )) {
-      button.classList.toggle("active", button.dataset.tab === this.active)
+    for (const tab of this.tabEls) {
+      tab.classList.toggle("active", tab.dataset.tab === this.active)
     }
 
-    const body = this.root.querySelector(".body")
-    if (body) {
-      body.innerHTML =
-        this.active === "config" ? `<os-app-config></os-app-config>` : ""
-    }
+    this.bodyEl.innerHTML = `<${tabConfigs[this.active].element}></${tabConfigs[this.active].element}>`
   }
 }
 

@@ -17,13 +17,13 @@ slot {
   display: contents;
 }
 
-.top {
+.header {
   display: flex;
   gap: var(--os-space-2);
   align-items: center;
 }
 
-.name {
+.label {
   flex: 1;
   font-size: var(--os-control-small-size);
   font-weight: var(--os-weight-medium);
@@ -34,12 +34,12 @@ slot {
   font-size: var(--os-label-small-size);
   letter-spacing: var(--os-label-medium-tracking);
   text-transform: uppercase;
-}
 
-:host([status="connected"]) .status {
-  color: var(--os-color-teal);
-}
+  :host([status="connected"]) & {
+    color: var(--os-color-teal);
+  }
 
-:host([status="notset"]) .status {
-  color: var(--os-color-text-faint);
+  :host([status="notset"]) & {
+    color: var(--os-color-text-faint);
+  }
 }

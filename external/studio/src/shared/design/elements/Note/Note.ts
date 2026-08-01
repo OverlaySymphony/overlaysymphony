@@ -1,21 +1,19 @@
+import Component from "#shared/Component"
+
 import stylesheet from "./Note.css" with { type: "css" }
 
-export default class Note extends HTMLElement {
+export default class Note extends Component {
   public static name = "os-note"
 
-  private root: ShadowRoot
-
   constructor() {
-    super()
-
-    this.root = this.attachShadow({ mode: "open" })
-    this.root.adoptedStyleSheets.push(stylesheet)
-
-    this.build()
+    super(stylesheet)
   }
 
-  private build() {
-    this.root.innerHTML = `<span class="lock" aria-hidden="true"></span><slot></slot>`
+  protected build(): void {
+    this.root.innerHTML = `
+      <span class="lock" aria-hidden="true"></span>
+      <slot></slot>
+    `
   }
 }
 

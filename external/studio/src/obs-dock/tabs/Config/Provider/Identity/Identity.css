@@ -1,0 +1,18 @@
+:host {
+  display: flex;
+  gap: var(--os-space-2);
+  align-items: center;
+  font-family: var(--os-font-code);
+  font-size: var(--os-code-small-size);
+  color: var(--os-color-text-muted);
+}
+
+.handle {
+  color: var(--os-color-text);
+}
+
+.meta {
+  margin-left: auto;
+  font-size: var(--os-label-small-size);
+  color: var(--os-color-text-faint);
+}

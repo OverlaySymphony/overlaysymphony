@@ -19,30 +19,11 @@
   border-bottom: var(--os-hairline) solid var(--os-color-line);
 }
 
-.brand {
-  display: grid;
-  grid-template-columns: repeat(2, 6px);
-  grid-template-rows: repeat(2, 6px);
-  gap: 2px;
+.logo {
   flex: none;
-}
-
-.brand i {
-  width: 6px;
-  height: 6px;
+  width: 14px;
+  height: 14px;
   background: var(--os-color-teal);
-}
-
-.brand i:nth-child(2) {
-  opacity: 0.7;
-}
-
-.brand i:nth-child(3) {
-  opacity: 0.45;
-}
-
-.brand i:nth-child(4) {
-  opacity: 0.25;
 }
 
 .name {
@@ -50,7 +31,7 @@
   font-weight: var(--os-weight-semibold);
 }
 
-.name b {
+.name strong {
   font-weight: var(--os-weight-semibold);
   color: var(--os-color-teal);
 }
@@ -103,6 +84,10 @@
   flex-direction: column;
   flex: 1;
   min-height: 0;
-  padding: var(--os-space-4) var(--os-space-3) var(--os-space-5);
+  padding: var(--os-space-3);
   overflow-y: auto;
+}
+
+.body > * {
+  flex: 1;
 }

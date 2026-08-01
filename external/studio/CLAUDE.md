@@ -13,16 +13,47 @@ The repo root's CLAUDE.md applies. This workspace adds:
 
 The dock's UI is **owned in this workspace** — a tree of web components composed from a local design layer, not a thin host for a pre-styled module WC. (The popup and composition surfaces may still host a fully-styled WC from a module package; the dock does not.)
 
-- `src/shared/design/` — the design layer's tiers (`elements/`, `patterns/`), reached through `#design/*`. Same tiers as `www`'s design system, built as web components. There is no `foundations/` tier here; the tokens come from the shared package.
-- `src/obs-dock/` — the dock surface: the shell, its tabs, and the items within them.
+- `src/shared/Component/` — the base class every component extends, reached as `#shared/Component`.
+- `src/shared/design/` — the design layer, reached through `#design/*`. Same tiers as `www`'s design system, built as web components; only `elements/` exists so far. There is no `foundations/` tier here — the tokens come from the shared package.
+- `src/obs-dock/` — the dock surface. `Shell/` is the frame; `tabs/` holds one modlet per tab, and a tab owns the components inside it.
 
-`#shared/*` is mapped alongside `#design/*` and is deliberately empty for now — leave it.
+The shell's version string reads `package.json` through a JSON import attribute — don't hardcode it.
+
+## Components extend `Component`
+
+This overrides the element frame in `web-components.md`: nothing here attaches its own shadow root. `#shared/Component` owns the whole frame — it attaches the open root, adopts the stylesheet passed to `super()`, guards `connectedCallback` against reconnection, and calls `build()`. A component supplies only what differs:
+
+```ts
+import Component from "#shared/Component"
+
+import stylesheet from "./FooBar.css" with { type: "css" }
+
+export default class FooBar extends Component {
+  public static name = "dock-foo-bar"
+
+  constructor() {
+    super(stylesheet)
+  }
+
+  protected build(): void {
+    this.root.innerHTML = `<slot></slot>`
+  }
+}
+
+window.customElements.define(FooBar.name, FooBar)
+```
+
+The base's default `build()` already renders a bare `<slot></slot>`, so **a component that only adds styling declares no methods beyond the constructor** — that's the whole file. Override `build()` only when there's a template. `this.root` is `protected`; the stylesheet argument is optional, though in practice every component has one.
+
+The `Component` import sits between the tag side-effect imports and the stylesheet.
 
 Tokens come from `@overlaysymphony/design`, loaded **once** at the entry as a `*.global.css` and inherited into every shadow root (see `web-components.md` for why they can't be adopted directly). Never redefine an `--os-*` token here — the dock, `www`, and `editor` spend the same foundations.
 
 ## Tags
 
-Prefix is `os`. Sharable primitives take one segment (`os-button`, `os-dot`). App components carry an `app` segment: the shell is `os-app-shell`, a tab is `os-app-<tab>` (`os-app-config`), and an item extends its tab (`os-app-config-provider`).
+Design primitives are `os-*` — one segment, no more (`os-button`, `os-dot`, `os-pill`).
+
+Dock components are `dock-*`, and the tag is the path: `dock-shell`, `dock-<tab>` (`dock-config`), then a segment per level below it (`dock-config-provider`, `dock-config-provider-identity`). A second surface takes its own prefix rather than extending `dock-`.
 
 ## Entries are root `.html` files
 
@@ -32,7 +63,7 @@ How these built files map to deployed URLs is unsettled — don't assume clean p
 
 ## Checks
 
-`lint` runs typecheck (`tsc --noEmit`), eslint (`@overlaysymphony/tooling/eslint` — the non-React config), prettier, and knip. `build` is `vite build`; confirm every entry still emits. To render the dock: `pnpm dev`, then screenshot `obs-dock.html` at 300×720.
+`lint` runs typecheck (`tsc --noEmit`), eslint (`@overlaysymphony/tooling/eslint` — the non-React config, with `no-non-null-assertion` turned off here), prettier, and knip. `build` is `vite build`; confirm every entry still emits. To render the dock: `pnpm dev`, then screenshot `obs-dock.html` at 300×720.
 
 Knip needs two standing escapes, both consequences of how web components load — don't reshape code to satisfy it, and don't add more:
 

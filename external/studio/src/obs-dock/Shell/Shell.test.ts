@@ -1,9 +1,9 @@
 import "./Shell.ts"
 
-const tag = "os-app-shell"
+const tag = "dock-shell"
 
 describe("Shell", () => {
-  it("registers os-app-shell", () => {
+  it("registers dock-shell", () => {
     expect(customElements.get(tag)).toBeTypeOf("function")
   })
 
@@ -18,12 +18,12 @@ describe("Shell", () => {
     expect(tabs).toHaveLength(4)
 
     const body = root?.querySelector(".body")
-    expect(body?.querySelector("os-app-config")).not.toBeNull()
+    expect(body?.querySelector("dock-config")).not.toBeNull()
 
     root?.querySelector<HTMLButtonElement>('[data-tab="events"]')?.click()
-    expect(body?.querySelector("os-app-config")).toBeNull()
+    expect(body?.querySelector("dock-config")).toBeNull()
 
     root?.querySelector<HTMLButtonElement>('[data-tab="config"]')?.click()
-    expect(body?.querySelector("os-app-config")).not.toBeNull()
+    expect(body?.querySelector("dock-config")).not.toBeNull()
   })
 })
