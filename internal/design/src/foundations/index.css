@@ -1,10 +1,4 @@
-/* The font import must precede every rule in the bundle, so it stays here — this
- * is the only file guaranteed to hold nothing but imports. */
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap");
-@import url("./colors/vars.css");
-@import url("./typography/vars.css");
-@import url("./layout/vars.css");
-@import url("./motion/vars.css");
+@import url("./tokens.css");
 @import url("./reset.css");
 @import url("./colors/base.css");
 @import url("./typography/base.css");

@@ -1,0 +1,11 @@
+@import url("@overlaysymphony/design/tokens.css");
+
+html {
+  overscroll-behavior-y: none;
+}
+
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}

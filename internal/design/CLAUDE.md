@@ -8,7 +8,8 @@ Only `foundations/` — custom properties and the unscoped base rules that spend
 
 ```
 foundations/
-  index.css              imports only (fonts first — CSS demands @import precede rules)
+  index.css              imports only — tokens.css, then the reset and base rules
+  tokens.css             imports only (fonts first — CSS demands @import precede rules)
   reset.css
   colors/{vars,base}.css
   typography/{vars,base}.css
@@ -16,7 +17,9 @@ foundations/
   motion/vars.css
 ```
 
-Add a token to the `vars.css` of the concern it belongs to; never to `index.css`.
+Add a token to the `vars.css` of the concern it belongs to; never to `index.css` or `tokens.css`.
+
+`tokens.css` is the **values half** — the font face and every `vars.css`, and nothing that paints. `index.css` is that plus the reset and the `base.css` rules, which do paint: a page background, a body font, scrollbars, `::selection`. The font stays with the tokens because `--os-font-body` is worthless without Geist actually loaded.
 
 ## What does NOT live here — yet
 
@@ -27,7 +30,12 @@ The **primitives** (`Button`, `Eyebrow`, …) do not. They're framework-specific
 Ships source CSS, no build, like every package here. Consumers import the declared subpath:
 
 ```
-@overlaysymphony/design/foundations.css
+@overlaysymphony/design/foundations.css      values + reset + base rules
+@overlaysymphony/design/tokens.css           values only
 ```
 
-`www` imports it once in `RootLayout`; the `editor` imports it once at its Vite entry. Never reach past `./foundations.css` into the tree.
+**`foundations.css` is the default** — take it whenever the surface owns its whole page. `www` imports it once in `RootLayout`; the `editor` imports it once at its Vite entry.
+
+**`tokens.css` is for a surface that must not have a page imposed on it.** The case that forced it: `studio`'s overlay renders in an OBS browser source composited over live video, so `colors/base.css` setting an opaque `html` background would black out the stream — and the overlay's other content follows unrelated designs that a body font and reset would trample. Such a surface takes the values and paints its own chrome. Reaching for this to dodge one unwanted rule is the wrong call; fix the rule instead.
+
+Never reach past these two subpaths into the tree.

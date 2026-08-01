@@ -24,14 +24,13 @@
   },
   "dependencies": {
     "@overlaysymphony/design": "workspace:*",
-    "@overlaysymphony/obs": "workspace:*",
     "@overlaysymphony/twitch": "workspace:*"
   },
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",
     "@types/node": "catalog:",
-    "knip": "catalog:",
     "eslint": "catalog:",
+    "knip": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

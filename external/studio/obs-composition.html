@@ -6,6 +6,14 @@
     <title>OBS Composition | OverlaySymphony</title>
   </head>
   <body>
+    <composition-alert label="Error" severity="Unrecoverable">
+      <p>Something went wrong</p>
+
+      <composition-alert-actions slot="actions">
+        <os-button variant="ghost">Retry</os-button>
+      </composition-alert-actions>
+    </composition-alert>
+
     <script type="module" src="./src/obs-composition/index.ts"></script>
   </body>
 </html>

@@ -1,6 +1,7 @@
 import "../tabs/Config/index.ts"
 import "../tabs/Connections/index.ts"
 import "../tabs/Events/index.ts"
+import "../tabs/Loading/index.ts"
 import "../tabs/State/index.ts"
 
 import Component from "#shared/Component"
@@ -23,6 +24,8 @@ const tabOrder: Tab[] = ["config", "events", "state", "connections"]
 export default class Shell extends Component {
   public static name = "dock-shell"
 
+  static observedAttributes = ["loading"]
+
   private tabEls!: NodeListOf<HTMLButtonElement>
   private bodyEl!: HTMLDivElement
 
@@ -30,6 +33,10 @@ export default class Shell extends Component {
 
   constructor() {
     super(stylesheet)
+  }
+
+  get loading(): boolean {
+    return this.getAttribute("loading") !== null
   }
 
   protected build(): void {
@@ -71,7 +78,11 @@ export default class Shell extends Component {
       tab.classList.toggle("active", tab.dataset.tab === this.active)
     }
 
-    this.bodyEl.innerHTML = `<${tabConfigs[this.active].element}></${tabConfigs[this.active].element}>`
+    const element = this.loading
+      ? "dock-loading"
+      : tabConfigs[this.active].element
+
+    this.bodyEl.innerHTML = `<${element}></${element}>`
   }
 }
 

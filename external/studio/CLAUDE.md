@@ -55,6 +55,8 @@ Design primitives are `os-*` — one segment, no more (`os-button`, `os-dot`, `o
 
 Dock components are `dock-*`, and the tag is the path: `dock-shell`, `dock-<tab>` (`dock-config`), then a segment per level below it (`dock-config-provider`, `dock-config-provider-identity`). A second surface takes its own prefix rather than extending `dock-`.
 
+The prefix is the surface's directory minus the `obs-` platform segment, so `src/obs-composition/` is `composition-*` (`composition-alert`, `composition-alert-actions`) exactly as `src/obs-dock/` is `dock-*`.
+
 ## Entries are root `.html` files
 
 `vite.config.ts` globs every `*.html` in the workspace root into a Rollup input. To add a surface, add `name.html` pointing at its entry script — no routing to wire. Current entries: `obs-dock.html`, `obs-composition.html`, `popup-twitch.html`. `obs-composition` is an empty placeholder for now.
