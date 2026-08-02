@@ -2,14 +2,11 @@ export default class Component extends HTMLElement {
   private built = false
   protected root: ShadowRoot
 
-  constructor(stylesheet?: CSSStyleSheet) {
+  constructor(...stylesheets: CSSStyleSheet[]) {
     super()
 
     this.root = this.attachShadow({ mode: "open" })
-
-    if (stylesheet) {
-      this.root.adoptedStyleSheets.push(stylesheet)
-    }
+    this.root.adoptedStyleSheets.push(...stylesheets)
   }
 
   public attributeChangedCallback(

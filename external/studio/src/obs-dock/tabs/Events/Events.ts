@@ -24,27 +24,27 @@ export default class Events extends Component {
       </os-label>
 
       <os-list>
-        <dock-events-event time="20:14:02" source="ALERTS" status="ok">
+        <dock-events-event time="20:14:02" source="ALERTS" tone="ok">
           overlay.fire("welcome")
         </dock-events-event>
 
-        <dock-events-event time="20:14:02" source="ALERTS" status="ok">
+        <dock-events-event time="20:14:02" source="ALERTS" tone="ok">
           audio.tts(elevenlabs)
         </dock-events-event>
 
-        <dock-events-event time="20:13:48" source="ALERTS" status="warn">
+        <dock-events-event time="20:13:48" source="ALERTS" tone="warn">
           trigger · Channel.Follow
         </dock-events-event>
 
-        <dock-events-event time="20:12:31" source="COMMANDS" status="err">
+        <dock-events-event time="20:12:31" source="COMMANDS" tone="err">
           chat.reply (rate-limited)
         </dock-events-event>
 
-        <dock-events-event time="20:11:09" source="BACKGRND" status="ok">
+        <dock-events-event time="20:11:09" source="BACKGRND" tone="ok">
           timer.every(60s)
         </dock-events-event>
 
-        <dock-events-event time="20:10:55" source="COMMANDS" status="ok">
+        <dock-events-event time="20:10:55" source="COMMANDS" tone="ok">
           trigger · Chat.!so
         </dock-events-event>
       </os-list>

@@ -17,7 +17,7 @@ describe("Connections", () => {
     expect(customElements.get(tag)).toBeTypeOf("function")
   })
 
-  it("lists every connection with its endpoint and status", () => {
+  it("lists every connection with its endpoint and tone", () => {
     const rows = render().querySelectorAll(
       "os-list dock-connections-connection",
     )
@@ -26,7 +26,7 @@ describe("Connections", () => {
     expect(
       Array.from(rows, (row) => [
         row.getAttribute("label"),
-        row.getAttribute("status"),
+        row.getAttribute("tone"),
       ]),
     ).toEqual([
       ["Twitch · EventSub", "ok"],
@@ -44,7 +44,7 @@ describe("Connections", () => {
     const rows = render().querySelectorAll("dock-connections-connection")
 
     const down = Array.from(rows).filter(
-      (row) => row.getAttribute("status") === "err",
+      (row) => row.getAttribute("tone") === "err",
     )
     expect(down).toHaveLength(1)
     expect(down[0]?.hasAttribute("ping")).toBe(false)

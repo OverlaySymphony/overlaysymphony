@@ -8,7 +8,7 @@ import stylesheet from "./Connection.css" with { type: "css" }
 export default class Connection extends Component {
   public static name = "dock-connections-connection"
 
-  static observedAttributes = ["label", "endpoint", "status", "ping"]
+  static observedAttributes = ["label", "endpoint", "tone", "ping"]
 
   constructor() {
     super(stylesheet)
@@ -17,12 +17,12 @@ export default class Connection extends Component {
   protected build(): void {
     const label = this.getAttribute("label") ?? ""
     const endpoint = this.getAttribute("endpoint") ?? ""
-    const status = this.getAttribute("status") ?? ""
+    const tone = this.getAttribute("tone") ?? ""
     const ping = this.getAttribute("ping") ?? ""
-    const up = status !== "err"
+    const up = tone !== "err"
 
     this.root.innerHTML = `
-      <os-dot tone="${status}"></os-dot>
+      <os-dot tone="${tone}"></os-dot>
 
       <span class="detail">
         <span class="label">${label}</span>
@@ -31,7 +31,7 @@ export default class Connection extends Component {
 
       <span class="ping">${up ? ping : "down"}</span>
 
-      <os-button variant="ghost">${up ? "Reconnect" : "Retry"}</os-button>
+      <os-button>${up ? "Reconnect" : "Retry"}</os-button>
     `
   }
 }

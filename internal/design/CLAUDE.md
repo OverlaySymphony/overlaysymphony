@@ -19,6 +19,21 @@ foundations/
 
 Add a token to the `vars.css` of the concern it belongs to; never to `index.css` or `tokens.css`.
 
+### Colour has three layers
+
+`colors/vars.css` holds the raw hues (`--os-color-teal`, `--os-color-red`, …), then two **semantic** sets aliasing them. The sets are different axes that happen to share hues, and conflating them is the mistake to avoid:
+
+| Set           | Means               | Values                         |
+| ------------- | ------------------- | ------------------------------ |
+| `--os-tone-*` | Severity            | `ok` `info` `warn` `err`       |
+| `--os-node-*` | Automation taxonomy | `trigger` `condition` `action` |
+
+So `--os-tone-ok` and `--os-node-trigger` are both teal today and must still be spelled apart — a change to what "trigger" looks like should never silently restyle every success state.
+
+**A component spends a semantic token, never a raw hue.** `--os-color-teal` in a component is a bug in the same way a hex is; reach for it only when defining a new alias here. The hue ramps carry `-hover`, `-active`, `-wash`, and `-border`; `--os-tone-*` mirrors all four, `--os-node-*` only `-wash` and `-border`, since nothing interactive is keyed to node kind.
+
+There is deliberately no "none" or "unset" tone. A component with no tone spends `--os-color-line-strong` for a fill or `--os-color-text-faint` for text — both already exist and already say what they mean.
+
 `tokens.css` is the **values half** — the font face and every `vars.css`, and nothing that paints. `index.css` is that plus the reset and the `base.css` rules, which do paint: a page background, a body font, scrollbars, `::selection`. The font stays with the tokens because `--os-font-body` is worthless without Geist actually loaded.
 
 ## What does NOT live here — yet

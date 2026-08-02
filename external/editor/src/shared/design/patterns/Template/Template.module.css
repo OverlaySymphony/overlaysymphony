@@ -14,16 +14,16 @@
 }
 
 .trigger {
-  --token-color: var(--os-color-trigger);
-  --token-wash: var(--os-color-trigger-wash);
+  --token-color: var(--os-node-trigger);
+  --token-wash: var(--os-node-trigger-wash);
 }
 
 .condition {
-  --token-color: var(--os-color-condition);
-  --token-wash: var(--os-color-condition-wash);
+  --token-color: var(--os-node-condition);
+  --token-wash: var(--os-node-condition-wash);
 }
 
 .action {
-  --token-color: var(--os-color-action);
-  --token-wash: var(--os-color-action-wash);
+  --token-color: var(--os-node-action);
+  --token-wash: var(--os-node-action-wash);
 }

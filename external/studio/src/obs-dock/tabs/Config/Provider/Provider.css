@@ -3,14 +3,14 @@
   flex-direction: column;
   gap: var(--os-space-3);
   padding: var(--os-space-3);
-  background: var(--os-color-bg-elev);
-  border: var(--os-hairline) solid var(--os-color-line-strong);
+  background: transparent;
+  border: var(--os-hairline) dashed var(--os-color-line-strong);
   border-radius: var(--os-radius-sm);
 }
 
-:host([status="notset"]) {
-  background: transparent;
-  border-style: dashed;
+:host([tone]) {
+  background: var(--os-color-bg-elev);
+  border-style: solid;
 }
 
 slot {
@@ -34,12 +34,9 @@ slot {
   font-size: var(--os-label-small-size);
   letter-spacing: var(--os-label-medium-tracking);
   text-transform: uppercase;
+  color: var(--os-color-text-faint);
 
-  :host([status="connected"]) & {
-    color: var(--os-color-teal);
-  }
-
-  :host([status="notset"]) & {
-    color: var(--os-color-text-faint);
+  :host([tone]) & {
+    color: var(--tone);
   }
 }

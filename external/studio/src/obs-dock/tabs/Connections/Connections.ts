@@ -23,27 +23,27 @@ export default class Connections extends Component {
         <dock-connections-connection
           label="Twitch · EventSub"
           endpoint="wss://eventsub.wss.twitch.tv"
-          status="ok"
+          tone="ok"
           ping="38ms"
         ></dock-connections-connection>
 
         <dock-connections-connection
           label="Twitch · Chat"
           endpoint="irc.chat.twitch.tv:443"
-          status="warn"
+          tone="warn"
           ping="22ms"
         ></dock-connections-connection>
 
         <dock-connections-connection
           label="OBS · WebSocket"
           endpoint="ws://127.0.0.1:4455"
-          status="err"
+          tone="err"
         ></dock-connections-connection>
 
         <dock-connections-connection
           label="Audio · ElevenLabs"
           endpoint="api.elevenlabs.io"
-          status="ok"
+          tone="ok"
           ping="184ms"
         ></dock-connections-connection>
       </os-list>

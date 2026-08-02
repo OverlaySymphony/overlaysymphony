@@ -22,7 +22,7 @@ describe("Connection", () => {
   })
 
   it("renders its label, endpoint, and ping when the link is up", () => {
-    const root = render({ ...up, status: "ok", ping: "22ms" }).shadowRoot!
+    const root = render({ ...up, tone: "ok", ping: "22ms" }).shadowRoot!
 
     expect(root.querySelector(".label")?.textContent).toBe("Twitch · Chat")
     expect(root.querySelector(".endpoint")?.textContent).toBe(
@@ -33,34 +33,34 @@ describe("Connection", () => {
   })
 
   it("reports down and offers a retry when the link has errored", () => {
-    const root = render({ ...up, status: "err", ping: "22ms" }).shadowRoot!
+    const root = render({ ...up, tone: "err", ping: "22ms" }).shadowRoot!
 
     expect(root.querySelector(".ping")?.textContent).toBe("down")
     expect(root.querySelector("os-button")?.textContent).toBe("Retry")
   })
 
   it("keeps a warning link up, reporting its ping", () => {
-    const root = render({ ...up, status: "warn", ping: "22ms" }).shadowRoot!
+    const root = render({ ...up, tone: "warn", ping: "22ms" }).shadowRoot!
 
     expect(root.querySelector(".ping")?.textContent).toBe("22ms")
     expect(root.querySelector("os-button")?.textContent).toBe("Reconnect")
   })
 
-  it("takes the dot tone straight from its status", () => {
-    for (const status of ["ok", "warn", "err"]) {
-      const root = render({ ...up, status }).shadowRoot!
+  it("takes the dot tone straight from its tone", () => {
+    for (const tone of ["ok", "warn", "err"]) {
+      const root = render({ ...up, tone }).shadowRoot!
 
-      expect(root.querySelector("os-dot")?.getAttribute("tone")).toBe(status)
+      expect(root.querySelector("os-dot")?.getAttribute("tone")).toBe(tone)
     }
   })
 
   it("re-renders when the link drops", () => {
-    const connection = render({ ...up, status: "ok", ping: "22ms" })
+    const connection = render({ ...up, tone: "ok", ping: "22ms" })
     const root = connection.shadowRoot!
 
     expect(root.querySelector(".ping")?.textContent).toBe("22ms")
 
-    connection.setAttribute("status", "err")
+    connection.setAttribute("tone", "err")
 
     expect(root.querySelector(".ping")?.textContent).toBe("down")
     expect(root.querySelector("os-button")?.textContent).toBe("Retry")
@@ -68,7 +68,7 @@ describe("Connection", () => {
   })
 
   it("upgrades the components it composes", () => {
-    const root = render({ ...up, status: "ok", ping: "22ms" }).shadowRoot!
+    const root = render({ ...up, tone: "ok", ping: "22ms" }).shadowRoot!
 
     expect(root.querySelector("os-dot")?.shadowRoot).toBeInstanceOf(ShadowRoot)
     expect(root.querySelector("os-button")?.shadowRoot).toBeInstanceOf(

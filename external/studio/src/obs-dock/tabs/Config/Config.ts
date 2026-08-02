@@ -23,36 +23,36 @@ export default class Config extends Component {
         <span slot="aside">2 / 4</span>
       </os-label>
 
-      <dock-config-provider label="Twitch" status="connected">
+      <dock-config-provider label="Twitch" status="connected" tone="ok">
         <dock-config-provider-identity
           handle="@yourname"
           meta="1.2k followers"
         ></dock-config-provider-identity>
 
         <dock-config-provider-pills>
-          <os-pill>user:read</os-pill>
-          <os-pill>chat:edit</os-pill>
-          <os-pill>eventsub</os-pill>
+          <os-pill tone="ok">user:read</os-pill>
+          <os-pill tone="ok">chat:edit</os-pill>
+          <os-pill tone="ok">eventsub</os-pill>
         </dock-config-provider-pills>
 
         <dock-config-provider-actions>
           <os-button variant="text">Re-auth</os-button>
           <span class="spacer"></span>
-          <os-button variant="text" tone="danger">Disconnect</os-button>
+          <os-button variant="text" tone="err">Disconnect</os-button>
         </dock-config-provider-actions>
       </dock-config-provider>
 
-      <dock-config-provider label="OBS WebSocket" status="notset">
+      <dock-config-provider label="OBS WebSocket" status="not set">
         <dock-config-provider-endpoint>ws://127.0.0.1:4455</dock-config-provider-endpoint>
 
         <dock-config-provider-pills>
-          <os-pill variant="muted">no password</os-pill>
-          <os-pill variant="muted">obs-websocket ≥ 5.x</os-pill>
+          <os-pill>no password</os-pill>
+          <os-pill>obs-websocket ≥ 5.x</os-pill>
         </dock-config-provider-pills>
 
         <dock-config-provider-actions>
           <span class="spacer"></span>
-          <os-button>Connect</os-button>
+          <os-button variant="filled" tone="ok">Connect</os-button>
         </dock-config-provider-actions>
       </dock-config-provider>
 

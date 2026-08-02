@@ -20,30 +20,35 @@ describe("Provider", () => {
   })
 
   it("renders its label and status", () => {
-    const root = render({ label: "Twitch", status: "connected" }).shadowRoot!
+    const root = render({
+      label: "Twitch",
+      status: "connected",
+      tone: "ok",
+    }).shadowRoot!
 
     expect(root.querySelector(".label")?.textContent).toBe("Twitch")
     expect(root.querySelector(".status")?.textContent).toBe("connected")
   })
 
-  it("lights the dot only when connected", () => {
+  it("gives the dot its tone, and none when unset", () => {
     expect(
-      render({ label: "Twitch", status: "connected" })
+      render({ label: "Twitch", status: "connected", tone: "ok" })
         .shadowRoot!.querySelector("os-dot")
         ?.getAttribute("tone"),
     ).toBe("ok")
 
     expect(
-      render({ label: "OBS", status: "notset" })
+      render({ label: "OBS", status: "not set" })
         .shadowRoot!.querySelector("os-dot")
         ?.getAttribute("tone"),
-    ).toBe("off")
+    ).toBeNull()
   })
 
-  it("re-renders when its status changes", () => {
-    const provider = render({ label: "OBS", status: "notset" })
+  it("re-renders when its tone changes", () => {
+    const provider = render({ label: "OBS", status: "not set" })
     const root = provider.shadowRoot!
 
+    provider.setAttribute("tone", "ok")
     provider.setAttribute("status", "connected")
 
     expect(root.querySelector(".status")?.textContent).toBe("connected")
@@ -51,11 +56,11 @@ describe("Provider", () => {
   })
 
   it("keeps slotting its children across a re-render", () => {
-    const provider = render({ label: "OBS", status: "notset" })
+    const provider = render({ label: "OBS", status: "not set" })
     const child = document.createElement("dock-config-provider-endpoint")
     provider.append(child)
 
-    provider.setAttribute("status", "connected")
+    provider.setAttribute("tone", "ok")
 
     const slot = provider.shadowRoot!.querySelector("slot")
     expect(slot?.assignedNodes()).toEqual([child])
@@ -65,11 +70,15 @@ describe("Provider", () => {
     const root = render({}).shadowRoot!
 
     expect(root.querySelector(".label")?.textContent).toBe("")
-    expect(root.querySelector("os-dot")?.getAttribute("tone")).toBe("off")
+    expect(root.querySelector("os-dot")?.getAttribute("tone")).toBeNull()
   })
 
   it("upgrades the components it composes", () => {
-    const root = render({ label: "Twitch", status: "connected" }).shadowRoot!
+    const root = render({
+      label: "Twitch",
+      status: "connected",
+      tone: "ok",
+    }).shadowRoot!
 
     expect(root.querySelector("os-dot")?.shadowRoot).toBeInstanceOf(ShadowRoot)
   })

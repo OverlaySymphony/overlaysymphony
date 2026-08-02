@@ -16,4 +16,19 @@ describe("Dot", () => {
     expect(root).not.toBeNull()
     expect(root?.childNodes).toHaveLength(0)
   })
+
+  it("adopts the shared tone mapping alongside its own styles", () => {
+    const dot = document.createElement(tag)
+    document.body.append(dot)
+
+    expect(dot.shadowRoot!.adoptedStyleSheets).toHaveLength(2)
+  })
+
+  it("stays a real element when given no tone", () => {
+    const dot = document.createElement(tag)
+    document.body.append(dot)
+
+    expect(dot.hasAttribute("tone")).toBe(false)
+    expect(dot.shadowRoot).not.toBeNull()
+  })
 })

@@ -17,7 +17,7 @@ describe("Config", () => {
     expect(customElements.get(tag)).toBeTypeOf("function")
   })
 
-  it("renders a provider per integration, with its status", () => {
+  it("renders a provider per integration, with its status and tone", () => {
     const providers = render().querySelectorAll("dock-config-provider")
     expect(providers).toHaveLength(2)
 
@@ -25,10 +25,11 @@ describe("Config", () => {
       Array.from(providers, (provider) => [
         provider.getAttribute("label"),
         provider.getAttribute("status"),
+        provider.getAttribute("tone"),
       ]),
     ).toEqual([
-      ["Twitch", "connected"],
-      ["OBS WebSocket", "notset"],
+      ["Twitch", "connected", "ok"],
+      ["OBS WebSocket", "not set", null],
     ])
   })
 

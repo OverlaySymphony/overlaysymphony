@@ -5,7 +5,7 @@ export type Size = "large" | "medium" | "small"
 export const TONE_COLORS: Record<Tone, string> = {
   accent: "var(--os-color-teal)",
   muted: "var(--os-color-text-muted)",
-  trigger: "var(--os-color-trigger)",
-  condition: "var(--os-color-condition)",
-  action: "var(--os-color-action)",
+  trigger: "var(--os-node-trigger)",
+  condition: "var(--os-node-condition)",
+  action: "var(--os-node-action)",
 }

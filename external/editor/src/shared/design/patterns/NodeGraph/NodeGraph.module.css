@@ -109,18 +109,18 @@
 }
 
 .insertButton.trigger:hover {
-  color: var(--os-color-trigger);
-  border-color: var(--os-color-trigger);
+  color: var(--os-node-trigger);
+  border-color: var(--os-node-trigger);
 }
 
 .insertButton.condition:hover {
-  color: var(--os-color-condition);
-  border-color: var(--os-color-condition);
+  color: var(--os-node-condition);
+  border-color: var(--os-node-condition);
 }
 
 .insertButton.action:hover {
-  color: var(--os-color-action);
-  border-color: var(--os-color-action);
+  color: var(--os-node-action);
+  border-color: var(--os-node-action);
 }
 
 .srOnly {

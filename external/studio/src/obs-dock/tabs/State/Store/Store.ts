@@ -20,7 +20,7 @@ export default class Store extends Component {
     this.root.innerHTML = `
       <span class="key">${key}</span>
       <span class="value"><slot></slot></span>
-      <os-pill variant="muted">${scope}</os-pill>
+      <os-pill>${scope}</os-pill>
     `
   }
 }

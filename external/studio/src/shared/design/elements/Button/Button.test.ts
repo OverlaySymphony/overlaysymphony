@@ -19,4 +19,19 @@ describe("Button", () => {
     expect(slot).not.toBeNull()
     expect(slot?.assignedNodes()).toHaveLength(1)
   })
+
+  it("carries variant and tone as independent attributes", () => {
+    const button = document.createElement(tag)
+    button.setAttribute("variant", "filled")
+    button.setAttribute("tone", "ok")
+    document.body.append(button)
+
+    expect(button.getAttribute("variant")).toBe("filled")
+    expect(button.getAttribute("tone")).toBe("ok")
+
+    button.removeAttribute("tone")
+    expect(button.getAttribute("variant")).toBe("filled")
+
+    expect(button.shadowRoot!.querySelector("button")).not.toBeNull()
+  })
 })

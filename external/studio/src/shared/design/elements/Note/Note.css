@@ -17,17 +17,5 @@ slot {
   width: 8px;
   height: 8px;
   margin-top: 4px;
-  background: var(--os-color-text-faint);
-}
-
-:host([tone="ok"]) .lock {
-  background: var(--os-color-teal);
-}
-
-:host([tone="condition"]) .lock {
-  background: var(--os-color-purple);
-}
-
-:host([tone="action"]) .lock {
-  background: var(--os-color-amber);
+  background: var(--tone);
 }

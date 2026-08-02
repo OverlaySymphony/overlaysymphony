@@ -4,14 +4,14 @@
   font-family: var(--os-font-code);
   font-size: var(--os-label-small-size);
   letter-spacing: var(--os-label-medium-tracking);
-  color: var(--os-color-teal);
-  background: var(--os-color-teal-wash);
-  border: var(--os-hairline) solid transparent;
+  color: var(--os-color-text-faint);
+  background: transparent;
+  border: var(--os-hairline) solid var(--os-color-line-strong);
   border-radius: var(--os-radius-sm);
 }
 
-:host([variant="muted"]) {
-  color: var(--os-color-text-faint);
-  background: transparent;
-  border-color: var(--os-color-line-strong);
+:host([tone]) {
+  color: var(--tone);
+  background: var(--tone-wash);
+  border-color: transparent;
 }

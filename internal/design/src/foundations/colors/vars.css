@@ -40,17 +40,43 @@
   --os-color-red-wash: rgb(224 114 122 / 10%);
   --os-color-red-border: rgb(224 114 122 / 40%);
 
-  --os-color-trigger: var(--os-color-teal);
-  --os-color-trigger-wash: var(--os-color-teal-wash);
-  --os-color-trigger-border: var(--os-color-teal-border);
+  /* tones — severity */
+  --os-tone-ok: var(--os-color-teal);
+  --os-tone-ok-hover: var(--os-color-teal-hover);
+  --os-tone-ok-active: var(--os-color-teal-active);
+  --os-tone-ok-wash: var(--os-color-teal-wash);
+  --os-tone-ok-border: var(--os-color-teal-border);
 
-  --os-color-condition: var(--os-color-purple);
-  --os-color-condition-wash: var(--os-color-purple-wash);
-  --os-color-condition-border: var(--os-color-purple-border);
+  --os-tone-info: var(--os-color-purple);
+  --os-tone-info-hover: var(--os-color-purple-hover);
+  --os-tone-info-active: var(--os-color-purple-active);
+  --os-tone-info-wash: var(--os-color-purple-wash);
+  --os-tone-info-border: var(--os-color-purple-border);
 
-  --os-color-action: var(--os-color-amber);
-  --os-color-action-wash: var(--os-color-amber-wash);
-  --os-color-action-border: var(--os-color-amber-border);
+  --os-tone-warn: var(--os-color-amber);
+  --os-tone-warn-hover: var(--os-color-amber-hover);
+  --os-tone-warn-active: var(--os-color-amber-active);
+  --os-tone-warn-wash: var(--os-color-amber-wash);
+  --os-tone-warn-border: var(--os-color-amber-border);
+
+  --os-tone-err: var(--os-color-red);
+  --os-tone-err-hover: var(--os-color-red-hover);
+  --os-tone-err-active: var(--os-color-red-active);
+  --os-tone-err-wash: var(--os-color-red-wash);
+  --os-tone-err-border: var(--os-color-red-border);
+
+  /* nodes — automation taxonomy */
+  --os-node-trigger: var(--os-color-teal);
+  --os-node-trigger-wash: var(--os-color-teal-wash);
+  --os-node-trigger-border: var(--os-color-teal-border);
+
+  --os-node-condition: var(--os-color-purple);
+  --os-node-condition-wash: var(--os-color-purple-wash);
+  --os-node-condition-border: var(--os-color-purple-border);
+
+  --os-node-action: var(--os-color-amber);
+  --os-node-action-wash: var(--os-color-amber-wash);
+  --os-node-action-border: var(--os-color-amber-border);
 
   /* chrome */
   --os-color-dot: rgb(255 255 255 / 4%);

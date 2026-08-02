@@ -26,7 +26,6 @@ describe("Store", () => {
 
     const pill = root.querySelector("os-pill")
     expect(pill?.textContent).toBe("session")
-    expect(pill?.getAttribute("variant")).toBe("muted")
   })
 
   it("slots the value into its body", () => {

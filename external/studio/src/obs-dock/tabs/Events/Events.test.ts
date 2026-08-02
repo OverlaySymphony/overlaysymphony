@@ -24,14 +24,14 @@ describe("Events", () => {
     expect(clear?.textContent).toBe("Clear")
   })
 
-  it("lists each event with its time, source, and status", () => {
+  it("lists each event with its time, source, and tone", () => {
     const rows = render().querySelectorAll("os-list dock-events-event")
     expect(rows).toHaveLength(6)
 
     expect(
       Array.from(rows, (row) => [
         row.getAttribute("source"),
-        row.getAttribute("status"),
+        row.getAttribute("tone"),
       ]),
     ).toEqual([
       ["ALERTS", "ok"],

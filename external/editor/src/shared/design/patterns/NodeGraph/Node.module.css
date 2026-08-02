@@ -18,15 +18,15 @@
 }
 
 .trigger.selected {
-  border-color: var(--os-color-trigger);
+  border-color: var(--os-node-trigger);
 }
 
 .condition.selected {
-  border-color: var(--os-color-condition);
+  border-color: var(--os-node-condition);
 }
 
 .action.selected {
-  border-color: var(--os-color-action);
+  border-color: var(--os-node-action);
 }
 
 .selected {

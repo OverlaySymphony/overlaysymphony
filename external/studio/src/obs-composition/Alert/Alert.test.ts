@@ -21,13 +21,13 @@ describe("Alert", () => {
     expect(root.querySelector(".label")?.textContent).toBe("New follower")
   })
 
-  it("renders a severity eyebrow only when it is given one", () => {
-    expect(render().shadowRoot!.querySelector(".severity")).toBeNull()
+  it("renders a eyebrow only when it is given one", () => {
+    expect(render().shadowRoot!.querySelector(".eyebrow")).toBeNull()
 
     const alert = render()
-    alert.setAttribute("severity", "Unrecoverable")
+    alert.setAttribute("eyebrow", "Unrecoverable")
 
-    expect(alert.shadowRoot!.querySelector(".severity")?.textContent).toBe(
+    expect(alert.shadowRoot!.querySelector(".eyebrow")?.textContent).toBe(
       "Unrecoverable",
     )
   })

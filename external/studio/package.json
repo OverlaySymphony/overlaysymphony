@@ -9,6 +9,7 @@
   },
   "imports": {
     "#design/*": "./src/shared/design/*/index.ts",
+    "#design/*.css": "./src/shared/design/*/index.css",
     "#shared/*": "./src/shared/*/index.ts"
   },
   "scripts": {

@@ -49,6 +49,43 @@ The `Component` import sits between the tag side-effect imports and the styleshe
 
 Tokens come from `@overlaysymphony/design`, loaded **once** at the entry as a `*.global.css` and inherited into every shadow root (see `web-components.md` for why they can't be adopted directly). Never redefine an `--os-*` token here — the dock, `www`, and `editor` spend the same foundations.
 
+## Tones
+
+A component that carries meaning through colour takes a `tone` attribute, and the vocabulary is fixed at four: **`ok`, `info`, `warn`, `err`**. No component invents its own names, and none re-implements the colour table.
+
+**Absence of a tone is a designed state, not a missing value.** A component with no `tone` renders as _unset_ — neutral grey, still visible, never a silent fall-back to one of the four. Style that state on the bare `:host` and switch the toned treatment on attribute presence (`:host([tone])`), so the two are written as the deliberate pair they are.
+
+The mapping lives once, in `src/shared/design/tones/index.css`, reached as `#design/tones.css` — a plain CSS file in the design layer, the same shape `design-system.md` gives the tokens tier. It resolves the attribute to local properties (`--tone`, `--tone-hover`, `--tone-active`, `--tone-wash`, `--tone-border`) which the component then spends. A component adopts it alongside its own sheet:
+
+```ts
+import tones from "#design/tones.css" with { type: "css" }
+import Component from "#shared/Component"
+
+import stylesheet from "./FooBar.css" with { type: "css" }
+
+constructor() {
+  super(tones, stylesheet)
+}
+```
+
+`tones` joins `Component` in the bare-specifier group, ahead of the relative stylesheet — that's what `import/order` enforces, not a choice.
+
+`Component`'s constructor is variadic — it adopts every sheet passed, in order. Because the mapping's rules set the properties _on_ the host, a nested toned component resolves its own tone rather than inheriting its parent's.
+
+The tokens behind it (`--os-tone-*`) come from `@overlaysymphony/design`, which also carries a separate `--os-node-*` axis for automation taxonomy. Never spend a raw hue (`--os-color-teal`) in a component.
+
+### Tone and variant are independent
+
+Where a component has both, `tone` says **which colour** and `variant` says **how much of it** — they compose, and neither implies the other. `os-button` is the worked example, taking `filled` / `outline` / `text` against the four tones:
+
+|                     | no tone                           | toned                        |
+| ------------------- | --------------------------------- | ---------------------------- |
+| `outline` (default) | neutral bordered button           | border and label in the tone |
+| `filled`            | neutral solid button              | solid tone, inverse label    |
+| `text`              | muted label, no border or padding | label in the tone            |
+
+**`outline` is the default** because most buttons are secondary — a bare `<os-button>` is the neutral bordered one, and a primary action opts in with `variant="filled" tone="ok"`. Don't collapse the axes by giving a variant its own colour: that's how `tone="danger"` happened.
+
 ## Tags
 
 Design primitives are `os-*` — one segment, no more (`os-button`, `os-dot`, `os-pill`).

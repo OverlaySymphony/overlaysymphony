@@ -27,16 +27,5 @@
   font-size: var(--os-label-small-size);
   letter-spacing: var(--os-label-medium-tracking);
   text-transform: uppercase;
-
-  :host([status="ok"]) & {
-    color: var(--os-color-teal);
-  }
-
-  :host([status="warn"]) & {
-    color: var(--os-color-amber);
-  }
-
-  :host([status="err"]) & {
-    color: var(--os-color-red);
-  }
+  color: var(--tone);
 }

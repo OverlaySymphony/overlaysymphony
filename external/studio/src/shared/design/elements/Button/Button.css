@@ -9,11 +9,11 @@ button {
   padding: var(--os-space-2) var(--os-space-3);
   font-family: var(--os-font-body);
   font-size: var(--os-control-small-size);
-  font-weight: var(--os-weight-semibold);
-  color: var(--os-color-text-inverse);
+  font-weight: var(--os-weight-medium);
+  color: var(--os-color-text);
   cursor: pointer;
-  background: var(--os-color-teal);
-  border: var(--os-hairline) solid transparent;
+  background: transparent;
+  border: var(--os-hairline) solid var(--os-color-line-strong);
   border-radius: var(--os-radius-sm);
   transition:
     color var(--os-transition-fast),
@@ -22,23 +22,43 @@ button {
 }
 
 button:hover {
-  background: var(--os-color-teal-hover);
-}
-
-button:active {
-  background: var(--os-color-teal-active);
-}
-
-:host([variant="ghost"]) button {
-  font-weight: var(--os-weight-medium);
-  color: var(--os-color-text);
-  background: transparent;
-  border-color: var(--os-color-line-strong);
-}
-
-:host([variant="ghost"]) button:hover {
   background: var(--os-color-bg-elev);
   border-color: var(--os-color-text-faint);
+}
+
+:host([tone]) button {
+  color: var(--tone);
+  border-color: var(--tone-border);
+}
+
+:host([tone]) button:hover {
+  background: var(--tone-wash);
+  border-color: var(--tone);
+}
+
+:host([variant="filled"]) button {
+  font-weight: var(--os-weight-semibold);
+  color: var(--os-color-text);
+  background: var(--os-color-bg-elev-3);
+  border-color: transparent;
+}
+
+:host([variant="filled"]) button:hover {
+  background: var(--os-color-line-strong);
+  border-color: transparent;
+}
+
+:host([variant="filled"][tone]) button {
+  color: var(--os-color-text-inverse);
+  background: var(--tone);
+}
+
+:host([variant="filled"][tone]) button:hover {
+  background: var(--tone-hover);
+}
+
+:host([variant="filled"][tone]) button:active {
+  background: var(--tone-active);
 }
 
 :host([variant="text"]) button {
@@ -51,8 +71,14 @@ button:active {
 
 :host([variant="text"]) button:hover {
   color: var(--os-color-text);
+  background: transparent;
+  border-color: transparent;
 }
 
-:host([variant="text"][tone="danger"]) button:hover {
-  color: var(--os-color-red);
+:host([variant="text"][tone]) button {
+  color: var(--tone);
+}
+
+:host([variant="text"][tone]) button:hover {
+  color: var(--tone-hover);
 }

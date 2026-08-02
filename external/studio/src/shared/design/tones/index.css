@@ -1,0 +1,39 @@
+:host {
+  --tone: var(--os-color-line-strong);
+  --tone-hover: var(--os-color-line-strong);
+  --tone-active: var(--os-color-line-strong);
+  --tone-wash: transparent;
+  --tone-border: var(--os-color-line-strong);
+}
+
+:host([tone="ok"]) {
+  --tone: var(--os-tone-ok);
+  --tone-hover: var(--os-tone-ok-hover);
+  --tone-active: var(--os-tone-ok-active);
+  --tone-wash: var(--os-tone-ok-wash);
+  --tone-border: var(--os-tone-ok-border);
+}
+
+:host([tone="info"]) {
+  --tone: var(--os-tone-info);
+  --tone-hover: var(--os-tone-info-hover);
+  --tone-active: var(--os-tone-info-active);
+  --tone-wash: var(--os-tone-info-wash);
+  --tone-border: var(--os-tone-info-border);
+}
+
+:host([tone="warn"]) {
+  --tone: var(--os-tone-warn);
+  --tone-hover: var(--os-tone-warn-hover);
+  --tone-active: var(--os-tone-warn-active);
+  --tone-wash: var(--os-tone-warn-wash);
+  --tone-border: var(--os-tone-warn-border);
+}
+
+:host([tone="err"]) {
+  --tone: var(--os-tone-err);
+  --tone-hover: var(--os-tone-err-hover);
+  --tone-active: var(--os-tone-err-active);
+  --tone-wash: var(--os-tone-err-wash);
+  --tone-border: var(--os-tone-err-border);
+}
