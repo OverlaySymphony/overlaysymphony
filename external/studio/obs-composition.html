@@ -6,12 +6,13 @@
     <title>OBS Composition | OverlaySymphony</title>
   </head>
   <body>
-    <composition-alert label="Error" eyebrow="Unrecoverable" tone="err">
-      <p>Something went wrong</p>
-
-      <composition-alert-actions slot="actions">
-        <os-button>Retry</os-button>
-      </composition-alert-actions>
+    <composition-alert
+      id="loading"
+      label="Loading..."
+      eyebrow="please wait"
+      tone="info"
+    >
+      <p>Connecting to dock...</p>
     </composition-alert>
 
     <script type="module" src="./src/obs-composition/index.ts"></script>

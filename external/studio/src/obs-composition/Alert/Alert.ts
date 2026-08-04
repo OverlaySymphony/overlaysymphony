@@ -38,6 +38,10 @@ export default class Alert extends Component {
       </div>
     `
   }
+
+  public dismiss(): void {
+    this.remove()
+  }
 }
 
 window.customElements.define(Alert.name, Alert)

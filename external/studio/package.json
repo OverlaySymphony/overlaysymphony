@@ -24,6 +24,7 @@
     "build": "vite build"
   },
   "dependencies": {
+    "@overlaysymphony/core": "workspace:*",
     "@overlaysymphony/design": "workspace:*",
     "@overlaysymphony/twitch": "workspace:*"
   },

@@ -3,7 +3,7 @@ import "@overlaysymphony/twitch/ui/authentication"
 import "./obs-dock.global.css"
 import "./Shell/index.ts"
 
-import { init } from "./services/config/index.ts"
+import { init } from "./services/controller/index.ts"
 import type Shell from "./Shell/index.ts"
 
 const shell = document.querySelector<Shell>("#shell")

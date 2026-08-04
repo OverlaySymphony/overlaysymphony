@@ -6,6 +6,7 @@ const config: KnipConfig = {
   ignoreDependencies: ["@overlaysymphony/design"],
   ignoreIssues: {
     "src/**": ["exports"],
+    "src/shared/**": ["types"],
   },
 }
 

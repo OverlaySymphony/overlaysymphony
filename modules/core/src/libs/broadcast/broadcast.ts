@@ -1,7 +1,15 @@
+export type BroadcastHandler<Data> = (data: Data) => void
+export type BroadcastSender<Data> = (data: Data) => void
+export type BroadcastCloser = () => void
+export type BroadcastChannel<Data> = {
+  send: BroadcastSender<Data>
+  close: BroadcastCloser
+}
+
 export default function createBroadcaster<Data>(
   name: string,
-  handler?: (data: Data) => void,
-): (data: Data) => void {
+  handler?: BroadcastHandler<Data>,
+): BroadcastChannel<Data> {
   const channel = new BroadcastChannel(name)
 
   if (handler) {
@@ -10,7 +18,8 @@ export default function createBroadcaster<Data>(
     }
   }
 
-  return (data: Data) => {
-    channel.postMessage(data)
+  return {
+    send: (data: Data) => channel.postMessage(data),
+    close: () => channel.close(),
   }
 }

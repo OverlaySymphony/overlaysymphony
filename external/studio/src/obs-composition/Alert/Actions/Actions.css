@@ -3,6 +3,6 @@
   gap: var(--os-space-2);
   align-items: center;
   justify-content: flex-end;
-  padding-top: var(--os-space-3);
+  padding-top: var(--os-space-2);
   border-top: var(--os-hairline) dashed var(--os-color-line);
 }
