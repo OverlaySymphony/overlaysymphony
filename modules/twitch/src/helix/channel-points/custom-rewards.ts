@@ -1,7 +1,6 @@
-import { type Authentication } from "../../authentication/index.ts"
-import { helix } from "../helix.ts"
+import { type Connection } from "../index.ts"
 
-interface CustomReward {
+export interface HelixCustomReward {
   broadcaster_id: string /* The ID that uniquely identifies the broadcaster. */
   broadcaster_login: string /* The broadcaster’s login name. */
   broadcaster_name: string /* The broadcaster’s display name. */
@@ -47,10 +46,10 @@ interface CustomReward {
 }
 
 interface CustomRewardResponse {
-  data: CustomReward[]
+  data: HelixCustomReward[]
 }
 
-interface Redemption {
+export interface HelixRedemption {
   broadcaster_id: string /** The ID that uniquely identifies the broadcaster. */
   broadcaster_login: string /** The broadcaster’s login name. */
   broadcaster_name: string /** The broadcaster’s display name. */
@@ -71,22 +70,23 @@ interface Redemption {
 }
 
 interface RedemptionResponse {
-  data: Redemption[]
+  data: HelixRedemption[]
 }
 
 export async function getCustomRewards(
-  authentication: Authentication,
-): Promise<CustomReward[]> {
-  const { data: subscriptions } = await helix<
+  connection: Connection,
+  broadcaster_id: string,
+): Promise<HelixCustomReward[]> {
+  const { data: subscriptions } = await connection.helix<
     CustomRewardResponse,
     {
       broadcaster_id: string
     }
-  >(authentication, {
+  >({
     method: "GET",
     path: "/channel_points/custom_rewards",
     params: {
-      broadcaster_id: authentication.user.id,
+      broadcaster_id,
     },
   })
 
@@ -94,11 +94,12 @@ export async function getCustomRewards(
 }
 
 export async function getRedemptions(
-  authentication: Authentication,
+  connection: Connection,
+  broadcaster_id: string,
   reward_id: string,
   id: string,
-): Promise<Redemption[]> {
-  const { data: redemptions } = await helix<
+): Promise<HelixRedemption[]> {
+  const { data: redemptions } = await connection.helix<
     RedemptionResponse,
     {
       broadcaster_id: string
@@ -106,11 +107,11 @@ export async function getRedemptions(
       id?: string
       status?: "CANCELED" | "FULFILLED" | "UNFULFILLED"
     }
-  >(authentication, {
+  >({
     method: "GET",
     path: "/channel_points/custom_rewards",
     params: {
-      broadcaster_id: authentication.user.id,
+      broadcaster_id,
       reward_id,
       id,
       status: id ? undefined : "UNFULFILLED",
@@ -121,12 +122,13 @@ export async function getRedemptions(
 }
 
 export async function updateRedemption(
-  authentication: Authentication,
+  connection: Connection,
+  broadcaster_id: string,
   reward_id: string,
   id: string,
   status: "CANCELED" | "FULFILLED",
-): Promise<Redemption[]> {
-  const { data: redemptions } = await helix<
+): Promise<HelixRedemption[]> {
+  const { data: redemptions } = await connection.helix<
     RedemptionResponse,
     {
       broadcaster_id: string
@@ -134,11 +136,11 @@ export async function updateRedemption(
       id: string
       status: "CANCELED" | "FULFILLED"
     }
-  >(authentication, {
+  >({
     method: "POST",
     path: "/channel_points/custom_rewards",
     params: {
-      broadcaster_id: authentication.user.id,
+      broadcaster_id,
       reward_id,
       id,
       status,

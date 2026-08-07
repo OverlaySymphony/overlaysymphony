@@ -3,6 +3,8 @@ export interface EventConfigs {}
 export type EventType = keyof EventConfigs
 export type EventPayload<Type extends EventType = EventType> =
   EventConfigs[Type]["Payload"]
+export type EventSubscription<Type extends EventType = EventType> =
+  EventConfigs[Type]["Subscription"]
 
 export type EventConfig<
   Config extends {
@@ -21,6 +23,7 @@ export type EventConfig<
     id: string
     type: Config["Type"]
     subscription: {
+      id: string
       type: Config["Type"]
       version: Config["Version"]
       condition: Config["Condition"]

@@ -1,27 +1,22 @@
-import { type TwitchUser, getCurrentUser } from "../helix/users/index.ts"
-
 export interface Authentication {
   tokenType: "bearer"
   clientId: string
   accessToken: string
   scope: string[]
   expires: Date
-  user: TwitchUser
 }
-
-export type BareAuthentication = Omit<Authentication, "user">
 
 const localStorageKey = "overlaysymphony:service:twitch"
 
 export function getCachedAuthentication(
   scopes?: string[],
-): BareAuthentication | undefined {
+): Authentication | undefined {
   const cache = localStorage.getItem(localStorageKey)
   if (!cache) {
     return undefined
   }
 
-  const authentication = JSON.parse(cache) as BareAuthentication
+  const authentication = JSON.parse(cache) as Authentication
   authentication.expires = new Date(authentication.expires)
 
   if (scopes) {
@@ -36,9 +31,7 @@ export function getCachedAuthentication(
   return authentication
 }
 
-export function setCachedAuthentication(
-  authentication: BareAuthentication,
-): void {
+export function setCachedAuthentication(authentication: Authentication): void {
   localStorage.setItem(localStorageKey, JSON.stringify(authentication))
 }
 
@@ -49,26 +42,16 @@ export function clearCachedAuthentication(): void {
 export async function getAuthentication(
   scopes?: string[],
 ): Promise<Authentication | undefined> {
-  let authentication = getCachedAuthentication(scopes)
+  const authentication = getCachedAuthentication(scopes)
   if (!authentication) {
     return undefined
   }
 
   try {
-    authentication = await validateAuthentication(authentication)
+    return await validateAuthentication(authentication)
   } catch (error) {
     clearCachedAuthentication()
     return undefined
-  }
-
-  const user = await getCurrentUser(authentication as Authentication)
-  if (!user) {
-    return undefined
-  }
-
-  return {
-    ...authentication,
-    user,
   }
 }
 
@@ -76,8 +59,8 @@ export async function setAuthentication(
   clientId: string,
   accessToken: string,
   scope: string[] = [],
-): Promise<BareAuthentication | undefined> {
-  let authentication: BareAuthentication = {
+): Promise<Authentication | undefined> {
+  let authentication: Authentication = {
     tokenType: "bearer",
     clientId,
     accessToken,
@@ -119,7 +102,7 @@ export async function popupAuthentication(
 
       window.removeEventListener("message", listener)
 
-      setCachedAuthentication(authentication as BareAuthentication)
+      setCachedAuthentication(authentication as Authentication)
       resolve()
     }
 
@@ -134,8 +117,8 @@ export async function popupAuthentication(
 }
 
 export async function validateAuthentication(
-  authentication: Omit<BareAuthentication, "expires">,
-): Promise<BareAuthentication> {
+  authentication: Omit<Authentication, "expires">,
+): Promise<Authentication> {
   const response = await fetch("https://id.twitch.tv/oauth2/validate", {
     method: "GET",
     headers: {

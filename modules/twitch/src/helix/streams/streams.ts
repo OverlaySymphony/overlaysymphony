@@ -1,7 +1,6 @@
-import { type Authentication } from "../../authentication/index.ts"
-import { helix } from "../helix.ts"
+import { type Connection } from "../index.ts"
 
-export interface TwitchStream {
+export interface HelixStream {
   id: string
   user_id: string
   user_login: string
@@ -18,29 +17,29 @@ export interface TwitchStream {
 }
 
 interface StreamsResponse {
-  data: TwitchStream[]
+  data: HelixStream[]
 }
 
 export async function getStream(
-  authentication: Authentication,
-  login?: string | string[],
-  id?: string | string[],
-): Promise<TwitchStream | undefined> {
-  if (!login && !id) return undefined
+  connection: Connection,
+  user_login?: string | string[],
+  user_id?: string | string[],
+): Promise<HelixStream | undefined> {
+  if (!user_login && !user_id) return undefined
 
-  if (typeof login === "string" && login.startsWith("@")) {
-    login = login.slice(1)
+  if (typeof user_login === "string" && user_login.startsWith("@")) {
+    user_login = user_login.slice(1)
   }
 
-  const { data: streams } = await helix<
+  const { data: streams } = await connection.helix<
     StreamsResponse,
     { user_id?: string | string[]; user_login?: string | string[] }
-  >(authentication, {
+  >({
     method: "GET",
     path: "/users",
     params: {
-      user_id: id,
-      user_login: login,
+      user_id,
+      user_login,
     },
   })
 

@@ -1,7 +1,5 @@
-import { type Authentication } from "../../authentication/index.ts"
 import { type EventConfigs, type EventType } from "../../eventsub/index.ts"
-
-import { helix } from "../helix.ts"
+import { type Connection } from "../index.ts"
 
 interface SubscriptionWebhookTransport {
   method: "webhook"
@@ -25,7 +23,7 @@ interface SubscriptionRequest<Type extends EventType> {
   transport: SubscriptionTransport
 }
 
-type ActiveSubscription<Type extends EventType> =
+export type HelixSubscription<Type extends EventType> =
   EventConfigs[Type]["Subscription"] & {
     id: string
     status:
@@ -50,21 +48,21 @@ type ActiveSubscription<Type extends EventType> =
   }
 
 type ActiveSubscriptionResponse<Type extends EventType> = {
-  data: Array<ActiveSubscription<Type>>
+  data: Array<HelixSubscription<Type>>
 }
 
 export async function createSubscription<Type extends EventType>(
-  authentication: Authentication,
+  connection: Connection,
   transport: SubscriptionTransport,
   subscription: EventConfigs[Type]["Subscription"],
-): Promise<ActiveSubscription<Type>> {
+): Promise<HelixSubscription<Type>> {
   const {
     data: [activeSubscription],
-  } = await helix<
+  } = await connection.helix<
     ActiveSubscriptionResponse<EventType>,
     never,
     SubscriptionRequest<EventType>
-  >(authentication, {
+  >({
     method: "POST",
     path: "/eventsub/subscriptions",
     body: {
@@ -77,18 +75,18 @@ export async function createSubscription<Type extends EventType>(
 }
 
 export async function getSubscriptions(
-  authentication: Authentication,
-): Promise<Array<ActiveSubscription<EventType>>> {
-  const { data: subscriptions } = await helix<
+  connection: Connection,
+): Promise<Array<HelixSubscription<EventType>>> {
+  const { data: subscriptions } = await connection.helix<
     ActiveSubscriptionResponse<EventType>,
     never,
     {
-      status?: ActiveSubscription<EventType>["status"]
+      status?: HelixSubscription<EventType>["status"]
       type?: EventType
       user_id?: string
       after?: string
     }
-  >(authentication, {
+  >({
     method: "GET",
     path: "/eventsub/subscriptions",
   })
@@ -97,10 +95,10 @@ export async function getSubscriptions(
 }
 
 export async function deleteSubscription(
-  authentication: Authentication,
+  connection: Connection,
   id: string,
 ): Promise<void> {
-  await helix<never, { id: string }>(authentication, {
+  await connection.helix<never, { id: string }>({
     method: "DELETE",
     path: "/eventsub/subscriptions",
     params: {

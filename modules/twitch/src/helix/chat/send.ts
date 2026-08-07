@@ -1,7 +1,6 @@
-import { type Authentication } from "../../authentication/index.ts"
-import { helix } from "../helix.ts"
+import { type Connection } from "../index.ts"
 
-interface ChatMessage {
+export interface HelixChatMessage {
   message_id: string /** The message id for the message that was sent. */
   is_sent: boolean /** If the message passed all checks and was sent. */
   /** The reason the message was dropped, if any. */
@@ -11,16 +10,24 @@ interface ChatMessage {
   }
 }
 
+export type HelixChatAnnouncement = undefined
+// export interface HelixChatAnnouncement {}
+
+export type HelixChatShoutout = undefined
+// export interface HelixChatShoutout {}
+
 interface ChatMessageResponse {
-  data: ChatMessage[]
+  data: HelixChatMessage[]
 }
 
 export async function sendChatAnnouncement(
-  authentication: Authentication,
+  connection: Connection,
+  moderator_id: string,
+  broadcaster_id: string,
   message: string,
   color?: string,
-): Promise<void> {
-  await helix<
+): Promise<HelixChatAnnouncement> {
+  await connection.helix<
     never,
     {
       moderator_id: string
@@ -30,12 +37,12 @@ export async function sendChatAnnouncement(
       message: string
       color?: string
     }
-  >(authentication, {
+  >({
     method: "POST",
     path: "/chat/announcements",
     params: {
-      moderator_id: authentication.user.id,
-      broadcaster_id: authentication.user.id,
+      moderator_id,
+      broadcaster_id,
     },
     body: {
       message,
@@ -45,36 +52,39 @@ export async function sendChatAnnouncement(
 }
 
 export async function sendChatShoutout(
-  authentication: Authentication,
+  connection: Connection,
+  moderator_id: string,
+  from_broadcaster_id: string,
   to_broadcaster_id: string,
-): Promise<void> {
-  await helix<
+): Promise<HelixChatShoutout> {
+  await connection.helix<
     never,
     {
       moderator_id: string
       from_broadcaster_id: string
       to_broadcaster_id: string
     }
-  >(authentication, {
+  >({
     method: "POST",
     path: "/chat/shoutouts",
     params: {
-      moderator_id: authentication.user.id,
-      from_broadcaster_id: authentication.user.id,
+      moderator_id,
+      from_broadcaster_id,
       to_broadcaster_id,
     },
   })
 }
 
 export async function sendChatMessage(
-  authentication: Authentication,
+  connection: Connection,
+  sender_id: string,
+  broadcaster_id: string,
   message: string,
-  broadcaster_id: string = authentication.user.id,
   reply_parent_message_id?: string,
-): Promise<ChatMessage> {
+): Promise<HelixChatMessage> {
   const {
     data: [data],
-  } = await helix<
+  } = await connection.helix<
     ChatMessageResponse,
     {
       sender_id: string
@@ -82,11 +92,11 @@ export async function sendChatMessage(
       message: string
       reply_parent_message_id?: string
     }
-  >(authentication, {
+  >({
     method: "POST",
     path: "/chat/messages",
     params: {
-      sender_id: authentication.user.id,
+      sender_id,
       broadcaster_id,
       message,
       reply_parent_message_id,

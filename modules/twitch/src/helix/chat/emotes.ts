@@ -1,7 +1,6 @@
-import { type Authentication } from "../../authentication/index.ts"
-import { helix } from "../helix.ts"
+import { type Connection } from "../index.ts"
 
-interface Emote {
+export interface HelixEmote {
   /** An ID that identifies this emote. */
   id: string
   /** The name of the emote. This is the name that viewers type in the chat window to get the emote to appear. */
@@ -25,28 +24,29 @@ interface Emote {
 }
 
 interface ChannelEmoteResponse {
-  data: Array<Omit<Emote, "image" | "owner_id">>
+  data: Array<Omit<HelixEmote, "image" | "owner_id">>
   template: string
 }
 
 export async function getChannelEmotes(
-  authentication: Authentication,
-): Promise<Emote[]> {
-  const { data: emotes, template } = await helix<
+  connection: Connection,
+  broadcaster_id: string,
+): Promise<HelixEmote[]> {
+  const { data: emotes, template } = await connection.helix<
     ChannelEmoteResponse,
     {
       broadcaster_id: string
     }
-  >(authentication, {
+  >({
     method: "GET",
     path: "/chat/emotes",
     params: {
-      broadcaster_id: authentication.user.id,
+      broadcaster_id,
     },
   })
 
   return emotes.map((emote) => ({
-    owner_id: authentication.user.id,
+    owner_id: broadcaster_id,
     ...emote,
     image: ({ format, mode, scale } = {}) =>
       template
@@ -58,23 +58,24 @@ export async function getChannelEmotes(
 }
 
 export async function getUserEmotes(
-  authentication: Authentication,
-): Promise<Emote[]> {
-  const { data: emotes, template } = await helix<
+  connection: Connection,
+  user_id: string,
+): Promise<HelixEmote[]> {
+  const { data: emotes, template } = await connection.helix<
     ChannelEmoteResponse,
     {
       user_id: string
     }
-  >(authentication, {
+  >({
     method: "GET",
     path: "/chat/emotes/user",
     params: {
-      user_id: authentication.user.id,
+      user_id,
     },
   })
 
   return emotes.map((emote) => ({
-    owner_id: authentication.user.id,
+    owner_id: user_id,
     ...emote,
     image: ({ format, mode, scale } = {}) =>
       template

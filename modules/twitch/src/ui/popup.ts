@@ -1,7 +1,7 @@
 import querystring from "@overlaysymphony/core/libs/querystring"
 
 import {
-  type BareAuthentication,
+  type Authentication,
   validateAuthentication,
 } from "../authentication/index.ts"
 
@@ -161,7 +161,7 @@ async function authenticateResult(
     access_token?: string
     scope?: string
   },
-): Promise<BareAuthentication> {
+): Promise<Authentication> {
   if (!result.token_type || !result.access_token || !result.scope) {
     throw new Error("Invalid result.")
   }

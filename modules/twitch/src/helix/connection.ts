@@ -2,6 +2,15 @@ import querystring from "@overlaysymphony/core/libs/querystring"
 
 import { type Authentication } from "../authentication/index.ts"
 
+export interface Connection {
+  helix<Response = never, Params = unknown, Body = never>(options: {
+    method: string
+    path: string
+    params?: Params
+    body?: Body
+  }): Promise<Response>
+}
+
 export async function helix<Response = never, Params = unknown, Body = never>(
   authentication: Authentication,
   {
@@ -47,6 +56,14 @@ export async function helix<Response = never, Params = unknown, Body = never>(
   // }
 
   return data
+}
+
+export default function createFetchConnection(
+  authentication: Authentication,
+): Connection {
+  return {
+    helix: async (request) => helix(authentication, request),
+  }
 }
 
 function getBodyString<Body>(body: Body): {

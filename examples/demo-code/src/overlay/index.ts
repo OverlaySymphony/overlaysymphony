@@ -1,5 +1,5 @@
-import { isBroadcaster } from "@overlaysymphony/twitch/chat"
 import { onAlert } from "@overlaysymphony/twitch/helpers/alerts"
+import { isBroadcaster } from "@overlaysymphony/twitch/helpers/chat"
 
 import { browser } from "#shared/services/obs"
 import { chat, eventsub } from "#shared/services/twitch"

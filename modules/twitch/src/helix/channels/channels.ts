@@ -1,7 +1,6 @@
-import { type Authentication } from "../../authentication/index.ts"
-import { helix } from "../helix.ts"
+import { type Connection } from "../index.ts"
 
-export interface TwitchChannel {
+export interface HelixChannel {
   broadcaster_id: string /** An ID that uniquely identifies the broadcaster. */
   broadcaster_login: string /** The broadcaster’s login name. */
   broadcaster_name: string /** The broadcaster’s display name. */
@@ -15,25 +14,22 @@ export interface TwitchChannel {
 }
 
 interface ChannelsResponse {
-  data: TwitchChannel[]
+  data: HelixChannel[]
 }
 
 export async function getChannel(
-  authentication: Authentication,
+  connection: Connection,
   broadcaster_id: string,
-): Promise<TwitchChannel | undefined> {
+): Promise<HelixChannel | undefined> {
   const {
     data: [channel],
-  } = await helix<ChannelsResponse, { broadcaster_id: string }>(
-    authentication,
-    {
-      method: "GET",
-      path: "/channels",
-      params: {
-        broadcaster_id,
-      },
+  } = await connection.helix<ChannelsResponse, { broadcaster_id: string }>({
+    method: "GET",
+    path: "/channels",
+    params: {
+      broadcaster_id,
     },
-  )
+  })
 
   return channel
 }
