@@ -16,14 +16,13 @@ declare global {
 const modules: Record<string, ModuleRunner> = {}
 
 export async function loadModule(
-  id: string,
   config: ModuleConfig,
   store: ModuleStore,
 ): Promise<ModuleInstance> {
-  const manifest = await loadManifest(id)
+  const manifest = await loadManifest(config.module)
   await loadManifestScripts(manifest)
 
-  const module = await modules[id](config, store)
+  const module = await modules[config.module](config, store)
 
   return module
 }

@@ -17,16 +17,18 @@ export async function init(): Promise<void> {
 
   const modules: Record<string, ModuleInstance> = {}
   for (const id in config.modules) {
-    modules[id] = await loadModule(id, config.modules[id], store.modules[id])
+    modules[id] = await loadModule(config.modules[id], store.modules[id])
   }
 
   const defer = createDefer()
   store.channel = await initDirectChannel(config.id, async (data) => {
     for (const id in config.automations) {
       const automationConfig: AutomationConfig = config.automations[id]
-      const automationStore: AutomationStore = store.automations[id] ?? {
-        action: {},
-      }
+      const automationStore: AutomationStore =
+        store.automations[id] ??
+        ({
+          actions: {},
+        } satisfies AutomationStore)
 
       console.log(automationConfig, automationStore)
       // Load automation

@@ -1,17 +1,11 @@
 {
-  "name": "studio",
+  "name": "overlaysymphony-examples-demo-rules",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "",
   "type": "module",
   "exports": {
-    "./controller": "./src/shared/controller/index.ts",
     "./package.json": "./package.json"
-  },
-  "imports": {
-    "#design/*": "./src/shared/design/*/index.ts",
-    "#design/*.css": "./src/shared/design/*/index.css",
-    "#shared/*": "./src/shared/*/index.ts"
   },
   "scripts": {
     "lint": "pnpm run \"/^lint-.*/\"",
@@ -25,15 +19,13 @@
     "build": "vite build"
   },
   "dependencies": {
-    "@overlaysymphony/core": "workspace:*",
-    "@overlaysymphony/design": "workspace:*",
-    "@overlaysymphony/twitch": "workspace:*"
+    "studio": "workspace:*"
   },
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",
-    "@types/node": "catalog:",
-    "eslint": "catalog:",
     "knip": "catalog:",
+    "eslint": "catalog:",
+    "jsdom": "^25.0.0",
     "prettier": "catalog:",
     "typescript": "catalog:",
     "vite": "catalog:",

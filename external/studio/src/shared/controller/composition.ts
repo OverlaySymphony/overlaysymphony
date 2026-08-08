@@ -9,15 +9,25 @@ export type CompositionConfig = {
   automations: Record<string, AutomationConfig>
 }
 
+export type CompositionConfigString = Omit<
+  CompositionConfig,
+  "secretKey" | "modules"
+> & {
+  secretKey: string
+  modules?: CompositionConfig["modules"]
+}
+
 export type AutomationConfig =
   | {
       type: "rule"
+      notes?: string
       trigger: AutomationNode
-      conditions: Record<string, AutomationNode>
+      conditions?: Record<string, AutomationNode>
       actions: Record<string, AutomationNode>
     }
   | {
       type: "flow"
+      notes?: string
       nodes: Record<string, AutomationNode>
       edges: Record<string, AutomationEdge>
     }
@@ -25,7 +35,7 @@ export type AutomationConfig =
 type AutomationNode = {
   moduleId: string
   node: string
-  config: Record<string, unknown>
+  config?: Record<string, unknown>
 }
 
 type AutomationEdge = {
@@ -35,7 +45,7 @@ type AutomationEdge = {
   targetInput: string
 }
 
-export const mockCompositionConfig = {
+export const mockCompositionConfig: CompositionConfigString = {
   id: "mock",
   label: "Mock Composition",
   secretKey: JSON.stringify({
@@ -45,6 +55,5 @@ export const mockCompositionConfig = {
     key_ops: ["encrypt", "decrypt"],
     kty: "oct",
   }),
-  modules: {},
   automations: {},
-} satisfies Omit<CompositionConfig, "secretKey"> & { secretKey: string }
+}

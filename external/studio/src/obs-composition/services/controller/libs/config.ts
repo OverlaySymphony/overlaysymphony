@@ -9,15 +9,24 @@ export async function fetchConfig(id: string): Promise<CompositionConfig> {
     throw new Error("Does not support external composition configs yet.")
   }
 
-  const { secretKey, ...config } =
-    import.meta.env.DEV && !id
-      ? mockCompositionConfig
-      : ((await (
-          await fetch(`http://www.example.com/composition/${id}.json`)
-        ).json()) as typeof mockCompositionConfig)
+  const {
+    secretKey,
+    modules = {},
+    ...config
+  } = import.meta.env.DEV && !id
+    ? mockCompositionConfig
+    : ((await (
+        await fetch(`http://www.example.com/composition/${id}.json`)
+      ).json()) as typeof mockCompositionConfig)
+
+  modules["@core"] = {
+    label: "Core",
+    module: "@core",
+  }
 
   return {
     ...config,
+    modules,
     secretKey: await parseKey(secretKey),
   }
 }

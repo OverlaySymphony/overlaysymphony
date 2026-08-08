@@ -6,6 +6,7 @@ export async function initDirectChannel(
 ): Promise<DirectChannel> {
   const broadcast = await createDirectChannel(compositionId, async (data) => {
     if (data.type === "dock:registered") {
+      // TODO: decide the data shape
       await onRegistered({})
     }
 

@@ -3,62 +3,24 @@ import { loadScripts } from "./scripts.ts"
 
 export type ModuleManifest = {
   label: string
+  notes?: string
   script: string
 
   config: Record<
     string,
-    {
+    Field & {
       scope?: "editor" | "dock"
-      id: string
       required: boolean
-    } & Field
+    }
   >
 
-  nodes: Array<{
-    id: string
-    type: "trigger" | "condition" | "action"
-    inputs: Record<
-      string,
-      {
-        id: string
-        required: boolean
-      } & Field
-    >
-    outputs: Record<
-      string,
-      {
-        id: string
-      } & Field
-    >
-  }>
-
-  components?: Record<
+  nodes: Record<
     string,
     {
-      label: string
-      script: string
-      element: string
-      attributes: Record<
-        string,
-        {
-          label: string
-          required: boolean
-          type: "string"
-        }
-      >
-      actions: Record<
-        string,
-        {
-          label: string
-          arguments: Record<
-            string,
-            {
-              label: string
-              required: boolean
-            } & Field
-          >
-        }
-      >
+      type: "trigger" | "condition" | "action"
+      notes?: string
+      inputs: Record<string, Field & { required: boolean }>
+      outputs: Record<string, Field>
     }
   >
 }
@@ -66,7 +28,7 @@ export type ModuleManifest = {
 export type ModuleConfig = {
   label: string
   module: string
-  config: Record<string, unknown>
+  config?: Record<string, unknown>
 }
 
 export type ModuleStore = {
@@ -84,19 +46,24 @@ export type ModuleInstance = {
 }
 
 const builtin: Record<string, string> = {
+  "@core": "./modules/@core.json",
+  datastore: "./modules/datastore.json",
+  overlay: "./modules/overlay.json",
   twitch: "./modules/twitch.json",
 }
 
-export async function loadManifest(id: string): Promise<ModuleManifest> {
-  if (id in builtin) {
-    id = builtin[id]
+export async function loadManifest(module: string): Promise<ModuleManifest> {
+  if (module in builtin) {
+    module = builtin[module]
   }
+
+  // TODO: load the manifest
 
   return {
     label: "",
     script: "",
     config: {},
-    nodes: [],
+    nodes: {},
   }
 }
 

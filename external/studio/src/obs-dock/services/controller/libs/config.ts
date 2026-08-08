@@ -5,15 +5,24 @@ export async function fetchConfig(id: string): Promise<AppConfig> {
     throw new Error("Does not support external app configs yet.")
   }
 
-  const { secretKey, ...config } =
-    import.meta.env.DEV && !id
-      ? mockAppConfig
-      : ((await (
-          await fetch(`http://www.example.com/app/${id}.json`)
-        ).json()) as typeof mockAppConfig)
+  const {
+    secretKey,
+    modules = {},
+    ...config
+  } = import.meta.env.DEV && !id
+    ? mockAppConfig
+    : ((await (
+        await fetch(`http://www.example.com/app/${id}.json`)
+      ).json()) as typeof mockAppConfig)
+
+  modules["@core"] = {
+    label: "Core",
+    module: "@core",
+  }
 
   return {
     ...config,
+    modules,
     secretKey: await parseKey(secretKey),
   }
 }

@@ -8,7 +8,12 @@ export type AppConfig = {
   modules: Record<string, ModuleConfig>
 }
 
-export const mockAppConfig = {
+export type AppConfigString = Omit<AppConfig, "secretKey" | "modules"> & {
+  secretKey: string
+  modules?: AppConfig["modules"]
+}
+
+export const mockAppConfig: AppConfigString = {
   id: "mock",
   label: "Mock App",
   secretKey: JSON.stringify({
@@ -18,5 +23,4 @@ export const mockAppConfig = {
     key_ops: ["encrypt", "decrypt"],
     kty: "oct",
   }),
-  modules: {},
-} satisfies Omit<AppConfig, "secretKey"> & { secretKey: string }
+}

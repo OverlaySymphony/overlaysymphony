@@ -55,7 +55,7 @@ export async function saveStore(
   config: CompositionConfig,
   store: CompositionStore,
 ): Promise<void> {
-  const key = await hash(config.secretKey, `store:app:${config.id}`)
+  const key = await hash(config.secretKey, `store:composition:${config.id}`)
 
   const cache: CompositionStoreCache = {
     id: store.id,
