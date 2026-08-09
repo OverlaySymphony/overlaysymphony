@@ -19,7 +19,7 @@
     "build": "vite build"
   },
   "dependencies": {
-    "studio": "workspace:*"
+    "@overlaysymphony/core": "workspace:*"
   },
   "devDependencies": {
     "@overlaysymphony/tooling": "workspace:*",

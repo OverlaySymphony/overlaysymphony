@@ -1,5 +1,6 @@
 import "../tabs/Config/index.ts"
 import "../tabs/Connections/index.ts"
+import "../tabs/Error/index.ts"
 import "../tabs/Events/index.ts"
 import "../tabs/Loading/index.ts"
 import "../tabs/State/index.ts"
@@ -24,7 +25,7 @@ const tabOrder: Tab[] = ["config", "events", "state", "connections"]
 export default class Shell extends Component {
   public static name = "dock-shell"
 
-  static observedAttributes = ["loading"]
+  static observedAttributes = ["loading", "error"]
 
   private tabEls!: NodeListOf<HTMLButtonElement>
   private bodyEl!: HTMLDivElement
@@ -37,6 +38,10 @@ export default class Shell extends Component {
 
   get loading(): boolean {
     return this.getAttribute("loading") !== null
+  }
+
+  get error(): string | null {
+    return this.getAttribute("error") ?? null
   }
 
   protected build(): void {
@@ -78,10 +83,17 @@ export default class Shell extends Component {
       tab.classList.toggle("active", tab.dataset.tab === this.active)
     }
 
-    const element = this.loading
-      ? "dock-loading"
-      : tabConfigs[this.active].element
+    if (this.error) {
+      this.bodyEl.innerHTML = `<dock-error>${this.error}</dock-error>`
+      return
+    }
 
+    if (this.loading) {
+      this.bodyEl.innerHTML = `<dock-loading></dock-loading>`
+      return
+    }
+
+    const element = tabConfigs[this.active].element
     this.bodyEl.innerHTML = `<${element}></${element}>`
   }
 }

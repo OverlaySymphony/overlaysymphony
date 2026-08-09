@@ -1,6 +1,6 @@
-import { type CompositionConfigString } from "studio/controller"
+import { type CompositionConfigRaw } from "@overlaysymphony/core/composition"
 
-const composition: CompositionConfigString = {
+const composition: CompositionConfigRaw = {
   id: "chat",
   label: "Chat",
   secretKey: JSON.stringify({
@@ -20,13 +20,12 @@ const composition: CompositionConfigString = {
         node: "chat-command",
         config: {
           command: "so",
-          arguments: [
-            {
-              id: "target",
+          arguments: {
+            target: {
               type: "channel",
               required: true,
             },
-          ],
+          },
         },
       },
       conditions: {

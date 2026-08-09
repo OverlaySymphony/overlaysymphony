@@ -9,6 +9,17 @@ import type Shell from "./Shell/index.ts"
 const shell = document.querySelector<Shell>("#shell")
 if (!shell) throw new Error("Cannot find #shell.")
 
-await init()
+try {
+  await init()
+  shell.removeAttribute("loading")
+} catch (error) {
+  const message =
+    error &&
+    typeof error === "object" &&
+    "message" in error &&
+    typeof error.message === "string"
+      ? error.message
+      : "An unknown error has occurred."
 
-shell.removeAttribute("loading")
+  shell.setAttribute("error", message)
+}

@@ -1,6 +1,6 @@
-import { type CompositionConfigString } from "studio/controller"
+import { type CompositionConfigRaw } from "@overlaysymphony/core/composition"
 
-const composition: CompositionConfigString = {
+const composition: CompositionConfigRaw = {
   id: "games",
   label: "Games",
   secretKey: JSON.stringify({

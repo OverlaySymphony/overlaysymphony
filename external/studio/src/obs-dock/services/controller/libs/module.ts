@@ -1,34 +1,34 @@
+import { loadScripts } from "@overlaysymphony/core/libs/scripts"
 import {
   type ModuleConfig,
-  type ModuleInstance,
-  type ModuleRunner,
+  type ModuleManifest,
   type ModuleStore,
-  loadManifest,
-  loadManifestScripts,
-} from "#shared/controller"
+} from "@overlaysymphony/core/module"
 
-declare global {
-  interface Window {
-    registerOSModule: typeof registerModule
-  }
-}
-
-const modules: Record<string, ModuleRunner> = {}
+import { loadManifest } from "#shared/controller"
 
 export async function loadModule(
   config: ModuleConfig,
   store: ModuleStore,
-): Promise<ModuleInstance> {
+): Promise<ModuleManifest> {
   const manifest = await loadManifest(config.module)
   await loadManifestScripts(manifest)
 
-  const module = await modules[config.module](config, store)
-
-  return module
+  return manifest
 }
 
-export function registerModule(id: string, runner: ModuleRunner): void {
-  modules[id] = runner
-}
+export async function loadManifestScripts(
+  manifest: ModuleManifest,
+): Promise<void> {
+  const scripts = []
+  for (const key in manifest.config) {
+    const field = manifest.config[key]
+    if (field.scope === "studio") {
+      if (field.type === "custom") {
+        scripts.push(field.script)
+      }
+    }
+  }
 
-window.registerOSModule = registerModule
+  await loadScripts(...scripts)
+}

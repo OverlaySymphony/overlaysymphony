@@ -1,15 +1,15 @@
+import { type EnsembleConfig } from "@overlaysymphony/core/ensemble"
 import {
-  type AppConfig,
-  type DirectChannel,
   type Encrypted,
-  type ModuleStore,
-  type SharedChannel,
   decrypt,
   encrypt,
   hash,
-} from "#shared/controller"
+} from "@overlaysymphony/core/libs/crypto"
+import { type ModuleStore } from "@overlaysymphony/core/module"
 
-type AppStore = {
+import { type DirectChannel, type SharedChannel } from "#shared/controller"
+
+type EnsembleStore = {
   id: string
   directoryHandle: unknown
   channel: SharedChannel
@@ -17,7 +17,7 @@ type AppStore = {
   compositions: Record<string, CompositionStore>
 }
 
-type AppStoreCache = {
+type EnsembleStoreCache = {
   id: string
   directoryHandle: unknown
   modules: Record<string, ModuleStore>
@@ -28,8 +28,10 @@ export type CompositionStore = {
   channel: DirectChannel
 }
 
-export async function readStore(config: AppConfig): Promise<AppStore> {
-  const key = await hash(config.secretKey, `store:app:${config.id}`)
+export async function readStore(
+  config: EnsembleConfig,
+): Promise<EnsembleStore> {
+  const key = await hash(config.secretKey, `store:ensemble:${config.id}`)
   const encrypted = localStorage.getItem(key)
 
   const raw = encrypted
@@ -38,9 +40,9 @@ export async function readStore(config: AppConfig): Promise<AppStore> {
         id: config.id,
         directoryHandle: undefined,
         modules: {},
-      } satisfies AppStoreCache)
+      } satisfies EnsembleStoreCache)
 
-  const cache = JSON.parse(raw) as AppStoreCache
+  const cache = JSON.parse(raw) as EnsembleStoreCache
 
   return {
     ...cache,
@@ -50,12 +52,12 @@ export async function readStore(config: AppConfig): Promise<AppStore> {
 }
 
 export async function saveStore(
-  config: AppConfig,
-  store: AppStore,
+  config: EnsembleConfig,
+  store: EnsembleStore,
 ): Promise<void> {
-  const key = await hash(config.secretKey, `store:app:${config.id}`)
+  const key = await hash(config.secretKey, `store:ensemble:${config.id}`)
 
-  const cache: AppStoreCache = {
+  const cache: EnsembleStoreCache = {
     id: store.id,
     directoryHandle: store.directoryHandle,
     modules: store.modules,

@@ -1,12 +1,13 @@
+import { type CompositionConfig } from "@overlaysymphony/core/composition"
 import {
-  type CompositionConfig,
-  type DirectChannel,
   type Encrypted,
-  type ModuleStore,
   decrypt,
   encrypt,
   hash,
-} from "#shared/controller"
+} from "@overlaysymphony/core/libs/crypto"
+import { type ModuleStore } from "@overlaysymphony/core/module"
+
+import { type DirectChannel } from "#shared/controller"
 
 type CompositionStore = {
   id: string

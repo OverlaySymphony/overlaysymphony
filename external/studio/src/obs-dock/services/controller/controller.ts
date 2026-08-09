@@ -1,6 +1,5 @@
 import { parse as parseQueryString } from "@overlaysymphony/core/libs/querystring"
-
-import { type ModuleInstance } from "#shared/controller"
+import { type ModuleManifest } from "@overlaysymphony/core/module"
 
 import { initDirectChannel } from "./libs/channelDirect.ts"
 import { initSharedChannel } from "./libs/channelShared.ts"
@@ -14,10 +13,12 @@ export async function init(): Promise<void> {
   const store = await readStore(config)
   await saveStore(config, store)
 
-  const modules: Record<string, ModuleInstance> = {}
-  for (const id in config.modules) {
-    modules[id] = await loadModule(config.modules[id], store.modules[id])
-  }
+  const modules: Record<string, ModuleManifest> = {}
+  await Promise.all(
+    Object.entries(config.modules).map(async ([id, module]) => {
+      modules[id] = await loadModule(module, store.modules[id])
+    }),
+  )
 
   store.channel = await initSharedChannel(async (compositionId) => {
     if (store.compositions[compositionId]) {

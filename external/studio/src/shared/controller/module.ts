@@ -1,49 +1,8 @@
-import { type Field } from "./fields.ts"
-import { loadScripts } from "./scripts.ts"
-
-export type ModuleManifest = {
-  label: string
-  notes?: string
-  script: string
-
-  config: Record<
-    string,
-    Field & {
-      scope?: "editor" | "dock"
-      required: boolean
-    }
-  >
-
-  nodes: Record<
-    string,
-    {
-      type: "trigger" | "condition" | "action"
-      notes?: string
-      inputs: Record<string, Field & { required: boolean }>
-      outputs: Record<string, Field>
-    }
-  >
-}
-
-export type ModuleConfig = {
-  label: string
-  module: string
-  config?: Record<string, unknown>
-}
-
-export type ModuleStore = {
-  state: ""
-  store: Record<string, unknown>
-}
-
-export type ModuleRunner = (
-  config: ModuleConfig,
-  store: ModuleStore,
-) => Promise<ModuleInstance>
-
-export type ModuleInstance = {
-  foo: () => void
-}
+import {
+  type Field,
+  type ModuleManifest,
+  type ModuleManifestRaw,
+} from "@overlaysymphony/core/module"
 
 const builtin: Record<string, string> = {
   "@core": "./modules/@core.json",
@@ -53,30 +12,48 @@ const builtin: Record<string, string> = {
 }
 
 export async function loadManifest(module: string): Promise<ModuleManifest> {
-  if (module in builtin) {
-    module = builtin[module]
-  }
+  const url = new URL(builtin[module] ?? module, document.baseURI)
 
   // TODO: load the manifest
 
-  return {
+  const manifest: ModuleManifestRaw = {
     label: "",
     script: "",
-    config: {},
     nodes: {},
+  }
+
+  return {
+    ...manifest,
+    script: new URL(manifest.script, url).href,
+    config: resolveScripts(manifest.config, url) ?? {},
+    nodes: Object.fromEntries(
+      Object.entries(manifest.nodes).map(([id, node]) => [
+        id,
+        {
+          ...node,
+          inputs: resolveScripts(node.inputs, url),
+          outputs: resolveScripts(node.outputs, url),
+        },
+      ]),
+    ),
   }
 }
 
-export async function loadManifestScripts(
-  manifest: ModuleManifest,
-): Promise<void> {
-  const scripts = [manifest.script]
-  for (const key in manifest.config) {
-    if (manifest.config[key].type === "custom") {
-      const field = manifest.config[key] as Field<"custom">
-      scripts.push(field.script)
-    }
-  }
+function resolveScripts<Fields extends Record<string, Field>>(
+  fields: Fields | undefined,
+  base: URL,
+): Fields | undefined {
+  if (!fields) return fields
 
-  await loadScripts(...scripts)
+  const resolved = Object.entries(fields).map<[string, Field]>(
+    ([id, field]) => {
+      if (field.type == "custom") {
+        return [id, { ...field, script: new URL(field.script, base).href }]
+      }
+
+      return [id, field]
+    },
+  )
+
+  return Object.fromEntries(resolved) as Fields
 }

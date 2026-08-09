@@ -1,10 +1,10 @@
-import app from "./app.ts"
 import compositionAlerts from "./composition-alerts.ts"
 import compositionChat from "./composition-chat.ts"
 import compositionGames from "./composition-games.ts"
+import ensemble from "./ensemble.ts"
 
 const files = {
-  [`config/app-${app.id}.json`]: app,
+  [`config/ensemble-${ensemble.id}.json`]: ensemble,
   [`config/composition-${compositionAlerts.id}.json`]: compositionAlerts,
   [`config/composition-${compositionChat.id}.json`]: compositionChat,
   [`config/composition-${compositionGames.id}.json`]: compositionGames,

@@ -1,23 +1,23 @@
 import {
   type CompositionConfig,
-  mockCompositionConfig,
-  parseKey,
-} from "#shared/controller"
+  type CompositionConfigRaw,
+} from "@overlaysymphony/core/composition"
+import { parseKey } from "@overlaysymphony/core/libs/crypto"
 
 export async function fetchConfig(id: string): Promise<CompositionConfig> {
-  if (id) {
-    throw new Error("Does not support external composition configs yet.")
+  if (!id) {
+    throw new Error("Missing composition config id.")
   }
+
+  const url = URL.canParse(id)
+    ? id
+    : `http://www.example.com/composition/${id}.json`
 
   const {
     secretKey,
     modules = {},
     ...config
-  } = import.meta.env.DEV && !id
-    ? mockCompositionConfig
-    : ((await (
-        await fetch(`http://www.example.com/composition/${id}.json`)
-      ).json()) as typeof mockCompositionConfig)
+  } = (await (await fetch(url)).json()) as CompositionConfigRaw
 
   modules["@core"] = {
     label: "Core",

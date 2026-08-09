@@ -1,6 +1,6 @@
-import { type AppConfigString } from "studio/controller"
+import { type EnsembleConfigRaw } from "@overlaysymphony/core/ensemble"
 
-const app: AppConfigString = {
+const ensemble: EnsembleConfigRaw = {
   id: "demo",
   label: "Rules Demo",
   secretKey: JSON.stringify({
@@ -18,4 +18,4 @@ const app: AppConfigString = {
   },
 }
 
-export default app
+export default ensemble

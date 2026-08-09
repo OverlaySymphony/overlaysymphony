@@ -1,4 +1,4 @@
-import { type ModuleConfig } from "./module.ts"
+import { type ModuleConfig } from "../module/index.ts"
 
 export type CompositionConfig = {
   id: string
@@ -9,7 +9,7 @@ export type CompositionConfig = {
   automations: Record<string, AutomationConfig>
 }
 
-export type CompositionConfigString = Omit<
+export type CompositionConfigRaw = Omit<
   CompositionConfig,
   "secretKey" | "modules"
 > & {
@@ -43,17 +43,4 @@ type AutomationEdge = {
   sourceOutput: string
   targetNodeId: string
   targetInput: string
-}
-
-export const mockCompositionConfig: CompositionConfigString = {
-  id: "mock",
-  label: "Mock Composition",
-  secretKey: JSON.stringify({
-    alg: "A256GCM",
-    ext: true,
-    k: "Xqr07VhHiPvbxnrmQmYPcbjj5r5TpEOy_ucV7v6pCXM",
-    key_ops: ["encrypt", "decrypt"],
-    kty: "oct",
-  }),
-  automations: {},
 }

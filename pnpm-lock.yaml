@@ -96,9 +96,9 @@ importers:
 
   examples/demo-rules:
     dependencies:
-      studio:
+      '@overlaysymphony/core':
         specifier: workspace:*
-        version: link:../../external/studio
+        version: link:../../modules/core
     devDependencies:
       '@overlaysymphony/tooling':
         specifier: workspace:*

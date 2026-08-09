@@ -9,6 +9,9 @@
   },
   "type": "module",
   "exports": {
+    "./ensemble": "./src/ensemble/index.ts",
+    "./composition": "./src/composition/index.ts",
+    "./module": "./src/module/index.ts",
     "./libs/*": "./src/libs/*/index.ts",
     "./ui/*": "./src/ui/*.ts",
     "./package.json": "./package.json"

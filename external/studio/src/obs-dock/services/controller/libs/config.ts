@@ -1,19 +1,23 @@
-import { type AppConfig, mockAppConfig, parseKey } from "#shared/controller"
+import {
+  type EnsembleConfig,
+  type EnsembleConfigRaw,
+} from "@overlaysymphony/core/ensemble"
+import { parseKey } from "@overlaysymphony/core/libs/crypto"
 
-export async function fetchConfig(id: string): Promise<AppConfig> {
-  if (id) {
-    throw new Error("Does not support external app configs yet.")
+export async function fetchConfig(id: string): Promise<EnsembleConfig> {
+  if (!id) {
+    throw new Error("Missing ensemble config id.")
   }
+
+  const url = URL.canParse(id)
+    ? id
+    : `http://www.example.com/ensemble/${id}.json`
 
   const {
     secretKey,
     modules = {},
     ...config
-  } = import.meta.env.DEV && !id
-    ? mockAppConfig
-    : ((await (
-        await fetch(`http://www.example.com/app/${id}.json`)
-      ).json()) as typeof mockAppConfig)
+  } = (await (await fetch(url)).json()) as EnsembleConfigRaw
 
   modules["@core"] = {
     label: "Core",

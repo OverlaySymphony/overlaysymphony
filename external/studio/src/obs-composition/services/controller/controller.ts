@@ -1,7 +1,7 @@
+import { type AutomationConfig } from "@overlaysymphony/core/composition"
 import createDefer from "@overlaysymphony/core/libs/defer"
 import { parse as parseQueryString } from "@overlaysymphony/core/libs/querystring"
-
-import { type AutomationConfig, type ModuleInstance } from "#shared/controller"
+import { type ModuleInstance } from "@overlaysymphony/core/module"
 
 import { initDirectChannel } from "./libs/channelDirect.ts"
 import { initSharedChannel } from "./libs/channelShared.ts"
@@ -16,9 +16,11 @@ export async function init(): Promise<void> {
   await saveStore(config, store)
 
   const modules: Record<string, ModuleInstance> = {}
-  for (const id in config.modules) {
-    modules[id] = await loadModule(config.modules[id], store.modules[id])
-  }
+  await Promise.all(
+    Object.entries(config.modules).map(async ([id, module]) => {
+      modules[id] = await loadModule(module, store.modules[id])
+    }),
+  )
 
   const defer = createDefer()
   store.channel = await initDirectChannel(config.id, async (data) => {

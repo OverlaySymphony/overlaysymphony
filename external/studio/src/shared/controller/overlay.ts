@@ -1,4 +1,4 @@
-import { type Field } from "./fields.ts"
+import { type Field } from "@overlaysymphony/core/module"
 
 export type OverlayManifest = {
   label: string
@@ -7,7 +7,7 @@ export type OverlayManifest = {
   config: Record<
     string,
     Field & {
-      scope?: "editor" | "dock"
+      scope?: "editor" | "studio"
       required: boolean
     }
   >
