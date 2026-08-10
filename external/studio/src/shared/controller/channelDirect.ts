@@ -12,7 +12,7 @@ export type DirectRegisteredEvent = {
 }
 
 export type DirectRegisterEvent = {
-  type: "composition:register"
+  type: "overlay:register"
   // fields and assets
 }
 
@@ -24,11 +24,11 @@ type DirectBroadcastEvent =
 export type DirectChannel = BroadcastChannel<DirectBroadcastEvent>
 
 export async function createDirectChannel(
-  compositionId: string,
+  overlayId: string,
   handler: BroadcastHandler<DirectBroadcastEvent>,
 ): Promise<DirectChannel> {
   const broadcast = createBroadcaster<DirectBroadcastEvent>(
-    `composition-${compositionId}`,
+    `overlay-${overlayId}`,
     handler,
   )
 

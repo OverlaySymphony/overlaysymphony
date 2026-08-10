@@ -13,9 +13,9 @@ const composition: CompositionConfigRaw = {
   modules: {
     elements: {
       label: "Elements",
-      module: "overlay",
+      module: "elements",
       config: {
-        manifest: "https://www.example.com/overlays/elements.json",
+        manifest: "./elements-alerts.json",
       },
     },
   },

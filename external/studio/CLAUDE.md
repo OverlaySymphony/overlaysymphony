@@ -1,6 +1,6 @@
 # studio
 
-The OBS-runtime surfaces users load: the **dock** (`obs-dock.html`), the **overlay**/composition (`obs-composition.html`, the overlay that renders in the browser source), and the Twitch auth **popup** (`popup-twitch.html`). Vite, no SSG — every entry is a client-rendered app.
+The OBS-runtime surfaces users load: the **dock** (`obs-dock.html`), the **overlay** (`obs-overlay.html`, which renders in the browser source and runs a Composition), and the Twitch auth **popup** (`popup-twitch.html`). Vite, no SSG — every entry is a client-rendered app.
 
 These are **web components**, not React — chosen because a runtime surface must stay as lightweight as possible (the overlay) and because these handle Twitch tokens and are kept off the editor's origin for that reason. The React editor lives in the sibling `editor` workspace and shares no code with this one.
 
@@ -11,7 +11,7 @@ The repo root's CLAUDE.md applies. This workspace adds:
 
 ## The dock is built here
 
-The dock's UI is **owned in this workspace** — a tree of web components composed from a local design layer, not a thin host for a pre-styled module WC. (The popup and composition surfaces may still host a fully-styled WC from a module package; the dock does not.)
+The dock's UI is **owned in this workspace** — a tree of web components composed from a local design layer, not a thin host for a pre-styled module WC. (The popup and overlay surfaces may still host a fully-styled WC from a module package; the dock does not.)
 
 - `src/shared/Component/` — the base class every component extends, reached as `#shared/Component`.
 - `src/shared/design/` — the design layer, reached through `#design/*`. Same tiers as `www`'s design system, built as web components; only `elements/` exists so far. There is no `foundations/` tier here — the tokens come from the shared package.
@@ -92,11 +92,11 @@ Design primitives are `os-*` — one segment, no more (`os-button`, `os-dot`, `o
 
 Dock components are `dock-*`, and the tag is the path: `dock-shell`, `dock-<tab>` (`dock-config`), then a segment per level below it (`dock-config-provider`, `dock-config-provider-identity`). A second surface takes its own prefix rather than extending `dock-`.
 
-The prefix is the surface's directory minus the `obs-` platform segment, so `src/obs-composition/` is `composition-*` (`composition-alert`, `composition-alert-actions`) exactly as `src/obs-dock/` is `dock-*`.
+The prefix is the surface's directory minus the `obs-` platform segment, so `src/obs-overlay/` is `overlay-*` (`overlay-alert`, `overlay-alert-actions`) exactly as `src/obs-dock/` is `dock-*`.
 
 ## Entries are root `.html` files
 
-`vite.config.ts` globs every `*.html` in the workspace root into a Rollup input. To add a surface, add `name.html` pointing at its entry script — no routing to wire. Current entries: `obs-dock.html`, `obs-composition.html`, `popup-twitch.html`. `obs-composition` is an empty placeholder for now.
+`vite.config.ts` globs every `*.html` in the workspace root into a Rollup input. To add a surface, add `name.html` pointing at its entry script — no routing to wire. Current entries: `obs-dock.html`, `obs-overlay.html`, `popup-twitch.html`.
 
 How these built files map to deployed URLs is unsettled — don't assume clean paths.
 

@@ -1,11 +1,11 @@
 import { type DirectChannel, createDirectChannel } from "#shared/controller"
 
 export async function initDirectChannel(
-  compositionId: string,
+  overlayId: string,
   onRegister: (config: {}) => Promise<void>,
 ): Promise<DirectChannel> {
-  const broadcast = await createDirectChannel(compositionId, async (data) => {
-    if (data.type === "composition:register") {
+  const broadcast = await createDirectChannel(overlayId, async (data) => {
+    if (data.type === "overlay:register") {
       await onRegister({
         // fields and assets
       })

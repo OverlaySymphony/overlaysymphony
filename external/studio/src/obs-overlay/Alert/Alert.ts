@@ -6,7 +6,7 @@ import Component from "#shared/Component"
 import stylesheet from "./Alert.css" with { type: "css" }
 
 export default class Alert extends Component {
-  public static name = "composition-alert"
+  public static name = "overlay-alert"
 
   static observedAttributes = ["label", "eyebrow", "tone"]
 

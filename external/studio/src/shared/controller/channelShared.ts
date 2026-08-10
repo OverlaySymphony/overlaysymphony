@@ -8,8 +8,8 @@ export type SharedReadyEvent = {
 }
 
 export type SharedRegisterEvent = {
-  type: "composition:register"
-  compositionId: string
+  type: "overlay:register"
+  overlayId: string
 }
 
 type SharedBroadcastEvent = SharedReadyEvent | SharedRegisterEvent

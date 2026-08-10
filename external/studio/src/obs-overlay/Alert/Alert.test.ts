@@ -59,7 +59,7 @@ describe("Alert", () => {
     expect(actions?.assignedElements()).toHaveLength(0)
 
     const alert = render()
-    const row = document.createElement("composition-alert-actions")
+    const row = document.createElement("overlay-alert-actions")
     row.setAttribute("slot", "actions")
     alert.append(row)
 

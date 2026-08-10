@@ -3,7 +3,7 @@ import Component from "#shared/Component"
 import stylesheet from "./Actions.css" with { type: "css" }
 
 export default class Actions extends Component {
-  public static name = "composition-alert-actions"
+  public static name = "overlay-alert-actions"
 
   constructor() {
     super(stylesheet)

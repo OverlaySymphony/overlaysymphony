@@ -1,6 +1,6 @@
 import { type Field } from "@overlaysymphony/core/module"
 
-export type OverlayManifest = {
+export type ElementsManifest = {
   label: string
   notes?: string
 

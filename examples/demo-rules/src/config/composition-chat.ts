@@ -41,14 +41,14 @@ const composition: CompositionConfigRaw = {
       actions: {
         plug: {
           moduleId: "twitch",
-          node: "chat-send",
+          node: "send-chat-message",
           config: {
             message: "check out @${target.broadcaster_login}",
           },
         },
         shoutout: {
           moduleId: "twitch",
-          node: "chat-shoutout",
+          node: "send-chat-shoutout",
           config: {
             broadcaster: "${target.broadcaster_id}",
           },

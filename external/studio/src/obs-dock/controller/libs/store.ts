@@ -14,7 +14,7 @@ type EnsembleStore = {
   directoryHandle: unknown
   channel: SharedChannel
   modules: Record<string, ModuleStore>
-  compositions: Record<string, CompositionStore>
+  overlays: Record<string, OverlayStore>
 }
 
 type EnsembleStoreCache = {
@@ -23,7 +23,7 @@ type EnsembleStoreCache = {
   modules: Record<string, ModuleStore>
 }
 
-export type CompositionStore = {
+type OverlayStore = {
   state: "initializing" | "registered"
   channel: DirectChannel
 }
@@ -47,7 +47,7 @@ export async function readStore(
   return {
     ...cache,
     channel: {} as SharedChannel,
-    compositions: {},
+    overlays: {},
   }
 }
 

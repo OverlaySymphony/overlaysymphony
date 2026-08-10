@@ -51,7 +51,7 @@ const composition: CompositionConfigRaw = {
       actions: {
         output: {
           moduleId: "twitch",
-          node: "chat-send",
+          node: "send-chat-message",
           config: {
             message: "Friend Code: ${code.value}",
           },

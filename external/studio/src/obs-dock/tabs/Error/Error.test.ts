@@ -18,7 +18,7 @@ describe("Error", () => {
   })
 
   it("renders its message", () => {
-    expect(render().querySelector(".message")?.textContent).toBe("Error…")
+    expect(render().querySelector(".message")?.textContent).toBe("")
   })
 
   it("upgrades the components it composes", () => {

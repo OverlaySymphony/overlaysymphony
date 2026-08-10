@@ -2,32 +2,34 @@ import { type ModuleManifestRaw } from "@overlaysymphony/core/module"
 
 const manifest: ModuleManifestRaw = {
   label: "Core",
-  notes: "Core features intrinsic to the system.",
+  notes:
+    "Provides foundational logic for event routing, timing, and data manipulation.",
   script: "./runner.js",
   nodes: {
     "composition-init": {
       type: "trigger",
-      notes: "The composition has finished initialization.",
+      notes: "The composition finished initializing.",
     },
-    fire: {
+    manual: {
       type: "trigger",
-      notes: "Fires when the named event is raised manually from the dock.",
+      notes: "The dock button was pressed.",
       inputs: {
-        event: {
+        label: {
           type: "string",
-          label: "Event",
+          label: "Label",
+          notes: "the text of the button",
           required: true,
         },
       },
     },
     delay: {
       type: "action",
-      notes: "Waits before the following actions run.",
+      notes: "Waits before the following nodes run.",
       inputs: {
         duration: {
           type: "number",
           label: "Duration",
-          notes: "in Seconds",
+          notes: "how long to wait, in seconds",
           required: true,
         },
       },

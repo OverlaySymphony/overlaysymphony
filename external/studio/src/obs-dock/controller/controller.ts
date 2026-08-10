@@ -27,15 +27,15 @@ export async function init(): Promise<void> {
     }),
   )
 
-  store.channel = await initSharedChannel(async (compositionId) => {
-    if (store.compositions[compositionId]) {
-      store.compositions[compositionId].channel.close()
+  store.channel = await initSharedChannel(async (overlayId) => {
+    if (store.overlays[overlayId]) {
+      store.overlays[overlayId].channel.close()
     }
 
-    store.compositions[compositionId] = {
+    store.overlays[overlayId] = {
       state: "initializing",
-      channel: await initDirectChannel(compositionId, async (data) => {
-        store.compositions[compositionId].state = "registered"
+      channel: await initDirectChannel(overlayId, async (data) => {
+        store.overlays[overlayId].state = "registered"
 
         // Listen for subscribed from the dock
         //   subscribe

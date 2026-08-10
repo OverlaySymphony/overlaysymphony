@@ -1,4 +1,4 @@
-import "./obs-composition.global.css"
+import "./obs-overlay.global.css"
 import "./Alert/index.ts"
 
 import type Alert from "./Alert/index.ts"

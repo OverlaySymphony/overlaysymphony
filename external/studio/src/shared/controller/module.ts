@@ -7,7 +7,7 @@ import {
 const builtin: Record<string, string> = {
   "@core": "./modules/@core/manifest.json",
   datastore: "./modules/datastore/manifest.json",
-  overlay: "./modules/overlay/manifest.json",
+  elements: "./modules/elements/manifest.json",
   twitch: "./modules/twitch/manifest.json",
 }
 
