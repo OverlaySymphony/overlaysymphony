@@ -5,7 +5,7 @@ import { initDirectChannel } from "./libs/channelDirect.ts"
 import { initSharedChannel } from "./libs/channelShared.ts"
 import { fetchConfig } from "./libs/config.ts"
 import { loadModule } from "./libs/module.ts"
-import { type CompositionStore, readStore, saveStore } from "./libs/store.ts"
+import { readStore, saveStore } from "./libs/store.ts"
 
 export async function init(): Promise<void> {
   const { id } = parseQueryString(window.location.search) as { id: string }
@@ -15,8 +15,15 @@ export async function init(): Promise<void> {
 
   const modules: Record<string, ModuleManifest> = {}
   await Promise.all(
-    Object.entries(config.modules).map(async ([id, module]) => {
-      modules[id] = await loadModule(module, store.modules[id])
+    Object.keys(config.modules).map(async (id) => {
+      if (!store.modules[id]) {
+        store.modules[id] = {}
+      }
+
+      const moduleConfig = config.modules[id]
+      const moduleStore = store.modules[id]
+
+      modules[id] = await loadModule(moduleConfig, moduleStore)
     }),
   )
 
@@ -25,17 +32,15 @@ export async function init(): Promise<void> {
       store.compositions[compositionId].channel.close()
     }
 
-    const compositionStore: CompositionStore = (store.compositions[
-      compositionId
-    ] = {
-      state: "connecting",
+    store.compositions[compositionId] = {
+      state: "initializing",
       channel: await initDirectChannel(compositionId, async (data) => {
-        compositionStore.state = "registered"
+        store.compositions[compositionId].state = "registered"
 
         // Listen for subscribed from the dock
         //   subscribe
         //   forward events
       }),
-    })
+    }
   })
 }

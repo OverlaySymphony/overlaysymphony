@@ -16,7 +16,7 @@ export type ModuleManifest = {
   nodes: Record<
     string,
     {
-      type: "trigger" | "condition" | "action"
+      type: "trigger" | "logic" | "action"
       notes?: string
       inputs?: Record<string, Field & { required: boolean }>
       outputs?: Record<string, Field>
@@ -34,10 +34,7 @@ export type ModuleConfig = {
   config?: Record<string, unknown>
 }
 
-export type ModuleStore = {
-  state: ""
-  store: Record<string, unknown>
-}
+export type ModuleStore = Record<string, unknown>
 
 export type ModuleRunner = (
   config: ModuleConfig,
@@ -45,5 +42,11 @@ export type ModuleRunner = (
 ) => Promise<ModuleInstance>
 
 export type ModuleInstance = {
-  foo: () => void
+  foo: () => Promise<void>
+}
+
+declare global {
+  interface Window {
+    registerOSModule?: (script: string, runner: ModuleRunner) => void
+  }
 }

@@ -5,22 +5,15 @@ import {
 } from "@overlaysymphony/core/module"
 
 const builtin: Record<string, string> = {
-  "@core": "./modules/@core.json",
-  datastore: "./modules/datastore.json",
-  overlay: "./modules/overlay.json",
-  twitch: "./modules/twitch.json",
+  "@core": "./modules/@core/manifest.json",
+  datastore: "./modules/datastore/manifest.json",
+  overlay: "./modules/overlay/manifest.json",
+  twitch: "./modules/twitch/manifest.json",
 }
 
 export async function loadManifest(module: string): Promise<ModuleManifest> {
   const url = new URL(builtin[module] ?? module, document.baseURI)
-
-  // TODO: load the manifest
-
-  const manifest: ModuleManifestRaw = {
-    label: "",
-    script: "",
-    nodes: {},
-  }
+  const manifest = (await (await fetch(url)).json()) as ModuleManifestRaw
 
   return {
     ...manifest,

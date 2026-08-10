@@ -11,10 +11,10 @@ const ensemble: EnsembleConfigRaw = {
     kty: "oct",
   }),
   modules: {
-    twitch: {
-      label: "Twitch",
-      module: "twitch",
-    },
+    // twitch: {
+    //   label: "Twitch",
+    //   module: "twitch",
+    // },
   },
 }
 

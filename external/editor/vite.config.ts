@@ -8,13 +8,11 @@ import { coverageConfigDefaults } from "vitest/config"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  input: readdirSync(import.meta.dirname)
+    .filter((filename) => filename.endsWith(".html"))
+    .map((filename) => resolve(import.meta.dirname, filename)),
   build: {
     target: "esnext",
-    rollupOptions: {
-      input: readdirSync(import.meta.dirname)
-        .filter((filename) => filename.endsWith(".html"))
-        .map((filename) => resolve(__dirname, filename)),
-    },
   },
   test: {
     environment: "jsdom",

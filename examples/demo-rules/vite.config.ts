@@ -9,14 +9,13 @@ import emitJson from "./vite-plugin.emit-json.ts"
 
 export default defineConfig((baseEnv) => {
   return {
+    appType: "mpa",
     plugins: [emitJson(configFiles)],
+    input: readdirSync(import.meta.dirname)
+      .filter((filename) => filename.endsWith(".html"))
+      .map((filename) => resolve(import.meta.dirname, filename)),
     build: {
       target: "esnext",
-      rollupOptions: {
-        input: readdirSync(__dirname)
-          .filter((filename) => filename.endsWith(".html"))
-          .map((filename) => resolve(__dirname, filename)),
-      },
     },
     test: {
       environment: "jsdom",

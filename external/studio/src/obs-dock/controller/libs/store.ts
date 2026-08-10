@@ -24,7 +24,7 @@ type EnsembleStoreCache = {
 }
 
 export type CompositionStore = {
-  state: "connecting" | "registered"
+  state: "initializing" | "registered"
   channel: DirectChannel
 }
 

@@ -1,22 +1,27 @@
+import createDefer from "@overlaysymphony/core/libs/defer"
+
 import { type DirectChannel, createDirectChannel } from "#shared/controller"
 
 export async function initDirectChannel(
   compositionId: string,
-  onRegistered: (data: {}) => Promise<void>,
+  payload: {}, // TODO
 ): Promise<DirectChannel> {
+  const defer = createDefer()
+
   const broadcast = await createDirectChannel(compositionId, async (data) => {
     if (data.type === "dock:registered") {
-      // TODO: decide the data shape
-      await onRegistered({})
+      defer.resolve()
     }
 
     if (data.type === "dock:connected") {
       broadcast.send({
         type: "composition:register",
-        // fields and assets
+        ...payload,
       })
     }
   })
+
+  await defer.promise
 
   return broadcast
 }

@@ -9,6 +9,8 @@ import { type ModuleStore } from "@overlaysymphony/core/module"
 
 import { type DirectChannel } from "#shared/controller"
 
+import { type AutomationStore } from "./automation.ts"
+
 type CompositionStore = {
   id: string
   channel: DirectChannel
@@ -20,14 +22,6 @@ type CompositionStoreCache = {
   id: string
   modules: Record<string, ModuleStore>
   automations: Record<string, AutomationStore>
-}
-
-export type AutomationStore = {
-  actions: Record<string, ActionStore>
-}
-
-type ActionStore = {
-  state: ""
 }
 
 export async function readStore(

@@ -1,0 +1,50 @@
+import { type AutomationConfig } from "@overlaysymphony/core/composition"
+import { type ModuleInstance } from "@overlaysymphony/core/module"
+
+export type AutomationStore = {
+  actions: Record<string, ActionStore>
+}
+
+type ActionStore = {
+  state: ""
+}
+
+export type AutomationInstance = {
+  foo: () => Promise<void>
+}
+
+export async function loadAutomations(
+  config: Record<string, AutomationConfig>,
+  store: Record<string, AutomationStore>,
+  modules: Record<string, ModuleInstance>,
+): Promise<Record<string, AutomationInstance>> {
+  const automations: Record<string, AutomationInstance> = {}
+  await Promise.all(
+    Object.keys(config).map(async (id) => {
+      if (!store[id]) {
+        store[id] = { actions: {} }
+      }
+
+      const automationConfig = config[id]
+      const automationStore = store[id]
+
+      automations[id] = await loadAutomation(automationConfig, automationStore)
+    }),
+  )
+
+  return automations
+}
+
+export async function loadAutomation(
+  config: AutomationConfig,
+  store: AutomationStore,
+): Promise<AutomationInstance> {
+  // Load automation
+  // initialize nodes
+
+  const instance: AutomationInstance = {
+    foo: async () => undefined,
+  }
+
+  return instance
+}
