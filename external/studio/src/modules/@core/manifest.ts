@@ -1,14 +1,17 @@
-import { type ModuleManifestRaw } from "@overlaysymphony/core/module"
+import { type ModuleManifest } from "@overlaysymphony/core/module"
 
-const manifest: ModuleManifestRaw = {
+const manifest = {
   label: "Core",
   notes:
     "Provides foundational logic for event routing, timing, and data manipulation.",
-  script: "./runner.js",
+  editorScript: "./runner-editor.js",
+  dockScript: "./runner-dock.js",
+  overlayScript: "./runner-overlay.js",
   nodes: {
     "composition-init": {
       type: "trigger",
       notes: "The composition finished initializing.",
+      outputs: {},
     },
     manual: {
       type: "trigger",
@@ -21,6 +24,7 @@ const manifest: ModuleManifestRaw = {
           required: true,
         },
       },
+      outputs: {},
     },
     delay: {
       type: "action",
@@ -33,8 +37,9 @@ const manifest: ModuleManifestRaw = {
           required: true,
         },
       },
+      outputs: {},
     },
   },
-}
+} satisfies ModuleManifest
 
 export default manifest

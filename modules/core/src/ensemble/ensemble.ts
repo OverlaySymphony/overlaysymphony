@@ -4,14 +4,13 @@ export type EnsembleConfig = {
   id: string
   label: string
   notes?: string
-  secretKey: CryptoKey
-  modules: Record<string, ModuleConfig>
+  secretKey: string
+  modules?: Record<string, ModuleConfig>
 }
 
-export type EnsembleConfigRaw = Omit<
-  EnsembleConfig,
-  "secretKey" | "modules"
-> & {
-  secretKey: string
-  modules?: EnsembleConfig["modules"]
-}
+export type EnsembleConfigResolved = Required<
+  Omit<EnsembleConfig, "notes" | "secretKey">
+> &
+  Pick<EnsembleConfig, "notes"> & {
+    secretKey: CryptoKey
+  }

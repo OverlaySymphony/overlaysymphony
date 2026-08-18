@@ -1,6 +1,6 @@
-import { type CompositionConfigRaw } from "@overlaysymphony/core/composition"
+import { type CompositionConfig } from "@overlaysymphony/core/composition"
 
-const composition: CompositionConfigRaw = {
+const composition: CompositionConfig = {
   id: "alerts",
   label: "Alerts",
   secretKey: JSON.stringify({
@@ -31,7 +31,7 @@ const composition: CompositionConfigRaw = {
         bubble: {
           moduleId: "elements",
           node: "add-element",
-          config: {
+          inputs: {
             element: "speech-bubble",
             attributes: {
               text: "Thanks for the follow!",

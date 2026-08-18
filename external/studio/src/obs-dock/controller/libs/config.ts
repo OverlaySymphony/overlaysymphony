@@ -1,10 +1,10 @@
 import {
+  type EnsembleConfigResolved,
   type EnsembleConfig,
-  type EnsembleConfigRaw,
 } from "@overlaysymphony/core/ensemble"
 import { parseKey } from "@overlaysymphony/core/libs/crypto"
 
-export async function fetchConfig(id: string): Promise<EnsembleConfig> {
+export async function fetchConfig(id: string): Promise<EnsembleConfigResolved> {
   if (!id) {
     throw new Error("Missing ensemble config id.")
   }
@@ -17,7 +17,7 @@ export async function fetchConfig(id: string): Promise<EnsembleConfig> {
     secretKey,
     modules = {},
     ...config
-  } = (await (await fetch(url)).json()) as EnsembleConfigRaw
+  } = (await (await fetch(url)).json()) as EnsembleConfig
 
   modules["@core"] = {
     label: "Core",

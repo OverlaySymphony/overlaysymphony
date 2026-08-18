@@ -1,6 +1,6 @@
-import { type EnsembleConfigRaw } from "@overlaysymphony/core/ensemble"
+import { type EnsembleConfig } from "@overlaysymphony/core/ensemble"
 
-const ensemble: EnsembleConfigRaw = {
+const ensemble: EnsembleConfig = {
   id: "demo",
   label: "Rules Demo",
   secretKey: JSON.stringify({

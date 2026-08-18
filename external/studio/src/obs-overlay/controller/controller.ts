@@ -22,11 +22,12 @@ export async function init(): Promise<void> {
 
   await saveStore(config, store)
 
-  await initSharedChannel(config.id)
-  store.channel = await initDirectChannel(config.id, {
+  store.channel = await initDirectChannel(config, {
     // TODO
   })
 
-  // fire module-init then composition-init events
+  await initSharedChannel(store.channel.channelName)
+  await store.channel.registered
+
   console.log(automations)
 }

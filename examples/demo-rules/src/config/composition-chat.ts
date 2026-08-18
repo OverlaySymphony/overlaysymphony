@@ -1,6 +1,6 @@
-import { type CompositionConfigRaw } from "@overlaysymphony/core/composition"
+import { type CompositionConfig } from "@overlaysymphony/core/composition"
 
-const composition: CompositionConfigRaw = {
+const composition: CompositionConfig = {
   id: "chat",
   label: "Chat",
   secretKey: JSON.stringify({
@@ -18,7 +18,7 @@ const composition: CompositionConfigRaw = {
       trigger: {
         moduleId: "twitch",
         node: "chat-command",
-        config: {
+        inputs: {
           command: "so",
           arguments: {
             target: {
@@ -32,7 +32,7 @@ const composition: CompositionConfigRaw = {
         moderator: {
           moduleId: "twitch",
           node: "chatter-has-role",
-          config: {
+          inputs: {
             chatter: "${chatter}",
             role: "moderator",
           },
@@ -42,14 +42,14 @@ const composition: CompositionConfigRaw = {
         plug: {
           moduleId: "twitch",
           node: "send-chat-message",
-          config: {
+          inputs: {
             message: "check out @${target.broadcaster_login}",
           },
         },
         shoutout: {
           moduleId: "twitch",
           node: "send-chat-shoutout",
-          config: {
+          inputs: {
             broadcaster: "${target.broadcaster_id}",
           },
         },

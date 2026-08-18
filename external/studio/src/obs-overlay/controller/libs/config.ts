@@ -1,10 +1,12 @@
 import {
+  type CompositionConfigResolved,
   type CompositionConfig,
-  type CompositionConfigRaw,
 } from "@overlaysymphony/core/composition"
 import { parseKey } from "@overlaysymphony/core/libs/crypto"
 
-export async function fetchConfig(id: string): Promise<CompositionConfig> {
+export async function fetchConfig(
+  id: string,
+): Promise<CompositionConfigResolved> {
   if (!id) {
     throw new Error("Missing composition config id.")
   }
@@ -17,7 +19,7 @@ export async function fetchConfig(id: string): Promise<CompositionConfig> {
     secretKey,
     modules = {},
     ...config
-  } = (await (await fetch(url)).json()) as CompositionConfigRaw
+  } = (await (await fetch(url)).json()) as CompositionConfig
 
   modules["@core"] = {
     label: "Core",

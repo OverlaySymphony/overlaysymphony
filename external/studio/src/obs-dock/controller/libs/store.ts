@@ -1,4 +1,4 @@
-import { type EnsembleConfig } from "@overlaysymphony/core/ensemble"
+import { type EnsembleConfigResolved } from "@overlaysymphony/core/ensemble"
 import {
   type Encrypted,
   decrypt,
@@ -29,7 +29,7 @@ type OverlayStore = {
 }
 
 export async function readStore(
-  config: EnsembleConfig,
+  config: EnsembleConfigResolved,
 ): Promise<EnsembleStore> {
   const key = await hash(config.secretKey, `store:ensemble:${config.id}`)
   const encrypted = localStorage.getItem(key)
@@ -52,7 +52,7 @@ export async function readStore(
 }
 
 export async function saveStore(
-  config: EnsembleConfig,
+  config: EnsembleConfigResolved,
   store: EnsembleStore,
 ): Promise<void> {
   const key = await hash(config.secretKey, `store:ensemble:${config.id}`)

@@ -1,7 +1,7 @@
 import { existsSync, readdirSync } from "node:fs"
 import { basename, posix, resolve } from "node:path"
 
-import { type ModuleManifestRaw } from "@overlaysymphony/core/module"
+import { type ModuleManifest } from "@overlaysymphony/core/module"
 import { defineConfig } from "vite"
 import { coverageConfigDefaults } from "vitest/config"
 
@@ -78,8 +78,13 @@ export default defineConfig({
   },
 })
 
-function extractManifestScripts(manifest: ModuleManifestRaw): string[] {
-  const scripts = [manifest.script]
+function extractManifestScripts(manifest: ModuleManifest): string[] {
+  const scripts = [
+    manifest.editorScript,
+    manifest.dockScript,
+    manifest.overlayScript,
+  ]
+
   for (const key in manifest.config) {
     const field = manifest.config[key]
     if (field.type === "custom") {

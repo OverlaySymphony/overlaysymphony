@@ -1,11 +1,11 @@
 import { type SharedChannel, createSharedChannel } from "#shared/controller"
 
 export async function initSharedChannel(
-  onRegister: (overlayId: string) => Promise<void>,
+  onRegister: (name: string) => Promise<void>,
 ): Promise<SharedChannel> {
   const broadcast = await createSharedChannel(async (data) => {
     if (data.type === "overlay:register") {
-      await onRegister(data.overlayId)
+      await onRegister(data.name)
     }
 
     if (data.type === "dock:ready") {

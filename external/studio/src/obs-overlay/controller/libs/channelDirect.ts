@@ -1,14 +1,21 @@
+import { type CompositionConfigResolved } from "@overlaysymphony/core/composition"
 import createDefer from "@overlaysymphony/core/libs/defer"
 
 import { type DirectChannel, createDirectChannel } from "#shared/controller"
 
+export type DirectConnection = DirectChannel & {
+  channelName: string
+  registered: Promise<void>
+}
+
 export async function initDirectChannel(
-  overlayId: string,
+  config: CompositionConfigResolved,
   payload: {}, // TODO
-): Promise<DirectChannel> {
+): Promise<DirectConnection> {
   const defer = createDefer()
 
-  const broadcast = await createDirectChannel(overlayId, async (data) => {
+  const channelName = config.id
+  const broadcast = await createDirectChannel(channelName, async (data) => {
     if (data.type === "dock:registered") {
       defer.resolve()
     }
@@ -21,7 +28,9 @@ export async function initDirectChannel(
     }
   })
 
-  await defer.promise
-
-  return broadcast
+  return {
+    ...broadcast,
+    channelName,
+    registered: defer.promise,
+  }
 }

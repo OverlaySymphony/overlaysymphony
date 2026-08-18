@@ -4,18 +4,17 @@ export type CompositionConfig = {
   id: string
   label: string
   notes?: string
-  secretKey: CryptoKey
-  modules: Record<string, ModuleConfig>
+  secretKey: string
+  modules?: Record<string, ModuleConfig>
   automations: Record<string, AutomationConfig>
 }
 
-export type CompositionConfigRaw = Omit<
-  CompositionConfig,
-  "secretKey" | "modules"
-> & {
-  secretKey: string
-  modules?: CompositionConfig["modules"]
-}
+export type CompositionConfigResolved = Required<
+  Omit<CompositionConfig, "notes" | "secretKey">
+> &
+  Pick<CompositionConfig, "notes"> & {
+    secretKey: CryptoKey
+  }
 
 export type AutomationConfig =
   | {
@@ -35,7 +34,7 @@ export type AutomationConfig =
 type AutomationNode = {
   moduleId: string
   node: string
-  config?: Record<string, unknown>
+  inputs?: Record<string, unknown>
 }
 
 type AutomationEdge = {

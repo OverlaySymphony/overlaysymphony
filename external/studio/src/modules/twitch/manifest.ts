@@ -1,9 +1,11 @@
-import { type ModuleManifestRaw } from "@overlaysymphony/core/module"
+import { type ModuleManifest } from "@overlaysymphony/core/module"
 
-const manifest: ModuleManifestRaw = {
+const manifest = {
   label: "Twitch",
   notes: "Integrates with Twitch to handle events and call actions.",
-  script: "./runner.js",
+  editorScript: "./runner-editor.js",
+  dockScript: "./runner-dock.js",
+  overlayScript: "./runner-overlay.js",
   config: {
     authentication: {
       scope: "studio",
@@ -139,6 +141,6 @@ const manifest: ModuleManifestRaw = {
       },
     },
   },
-}
+} satisfies ModuleManifest
 
 export default manifest

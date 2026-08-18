@@ -1,6 +1,6 @@
-import { type CompositionConfigRaw } from "@overlaysymphony/core/composition"
+import { type CompositionConfig } from "@overlaysymphony/core/composition"
 
-const composition: CompositionConfigRaw = {
+const composition: CompositionConfig = {
   id: "games",
   label: "Games",
   secretKey: JSON.stringify({
@@ -27,7 +27,7 @@ const composition: CompositionConfigRaw = {
       trigger: {
         moduleId: "twitch",
         node: "chat-command",
-        config: {
+        inputs: {
           command: "friendcode",
         },
       },
@@ -35,7 +35,7 @@ const composition: CompositionConfigRaw = {
         platform: {
           moduleId: "platforms",
           node: "lookup",
-          config: {
+          inputs: {
             key: "${channel.game_name}",
             fallback: "${channel.game_name}",
           },
@@ -43,7 +43,7 @@ const composition: CompositionConfigRaw = {
         code: {
           moduleId: "codes",
           node: "contains",
-          config: {
+          inputs: {
             key: "${platform.value}",
           },
         },
@@ -52,7 +52,7 @@ const composition: CompositionConfigRaw = {
         output: {
           moduleId: "twitch",
           node: "send-chat-message",
-          config: {
+          inputs: {
             message: "Friend Code: ${code.value}",
           },
         },

@@ -1,9 +1,11 @@
-import { type ModuleManifestRaw } from "@overlaysymphony/core/module"
+import { type ModuleManifest } from "@overlaysymphony/core/module"
 
-const manifest: ModuleManifestRaw = {
+const manifest = {
   label: "Data Store",
   notes: "Manages a persistent, scoped state of text values.",
-  script: "./runner.js",
+  editorScript: "./runner-editor.js",
+  dockScript: "./runner-dock.js",
+  overlayScript: "./runner-overlay.js",
   config: {
     duration: {
       scope: "editor",
@@ -117,6 +119,6 @@ const manifest: ModuleManifestRaw = {
       },
     },
   },
-}
+} satisfies ModuleManifest
 
 export default manifest

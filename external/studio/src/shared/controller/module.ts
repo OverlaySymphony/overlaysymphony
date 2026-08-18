@@ -1,7 +1,7 @@
 import {
   type Field,
+  type ModuleManifestResolved,
   type ModuleManifest,
-  type ModuleManifestRaw,
 } from "@overlaysymphony/core/module"
 
 const builtin: Record<string, string> = {
@@ -11,13 +11,17 @@ const builtin: Record<string, string> = {
   twitch: "./modules/twitch/manifest.json",
 }
 
-export async function loadManifest(module: string): Promise<ModuleManifest> {
+export async function loadManifest(
+  module: string,
+): Promise<ModuleManifestResolved> {
   const url = new URL(builtin[module] ?? module, document.baseURI)
-  const manifest = (await (await fetch(url)).json()) as ModuleManifestRaw
+  const manifest = (await (await fetch(url)).json()) as ModuleManifest
 
   return {
     ...manifest,
-    script: new URL(manifest.script, url).href,
+    editorScript: new URL(manifest.editorScript, url).href,
+    dockScript: new URL(manifest.dockScript, url).href,
+    overlayScript: new URL(manifest.overlayScript, url).href,
     config: resolveScripts(manifest.config, url) ?? {},
     nodes: Object.fromEntries(
       Object.entries(manifest.nodes).map(([id, node]) => [

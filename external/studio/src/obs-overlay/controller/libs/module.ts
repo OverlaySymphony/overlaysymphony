@@ -2,7 +2,7 @@ import { loadScripts } from "@overlaysymphony/core/libs/scripts"
 import {
   type ModuleConfig,
   type ModuleInstance,
-  type ModuleManifest,
+  type ModuleManifestResolved,
   type ModuleRunner,
   type ModuleStore,
 } from "@overlaysymphony/core/module"
@@ -10,16 +10,16 @@ import {
 import { loadManifest } from "#shared/controller"
 
 const moduleScripts: Record<string, string> = {}
-const modules: Record<string, ModuleRunner> = {}
-window.registerOSModule = (script, runner) => {
-  modules[moduleScripts[script]] = runner
+const modules: Record<string, ModuleRunner<"overlay">> = {}
+window.registerOSOverlayModule = (script, runner) => {
+  modules[moduleScripts[script]] = runner as ModuleRunner<"overlay">
 }
 
 export async function loadModules(
   config: Record<string, ModuleConfig>,
   store: Record<string, ModuleStore>,
-): Promise<Record<string, ModuleInstance>> {
-  const modules: Record<string, ModuleInstance> = {}
+): Promise<Record<string, ModuleInstance<"overlay">>> {
+  const modules: Record<string, ModuleInstance<"overlay">> = {}
   await Promise.all(
     Object.keys(config).map(async (id) => {
       if (!store[id]) {
@@ -39,22 +39,22 @@ export async function loadModules(
 export async function loadModule(
   config: ModuleConfig,
   store: ModuleStore,
-): Promise<ModuleInstance> {
+): Promise<ModuleInstance<"overlay">> {
   const manifest = await loadManifest(config.module)
-  moduleScripts[manifest.script] = config.module
+  moduleScripts[manifest.overlayScript] = config.module
 
   await loadManifestScripts(manifest)
   if (!modules[config.module]) {
-    throw new Error(`Module "${config.module} failed to load.`)
+    throw new Error(`Module "${config.module}" failed to load.`)
   }
 
   return await modules[config.module](config, store)
 }
 
 export async function loadManifestScripts(
-  manifest: ModuleManifest,
+  manifest: ModuleManifestResolved,
 ): Promise<void> {
-  const scripts = [manifest.script]
+  const scripts = [manifest.overlayScript]
 
   await loadScripts(...scripts)
 }

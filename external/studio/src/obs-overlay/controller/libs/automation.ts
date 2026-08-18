@@ -16,7 +16,7 @@ export type AutomationInstance = {
 export async function loadAutomations(
   config: Record<string, AutomationConfig>,
   store: Record<string, AutomationStore>,
-  modules: Record<string, ModuleInstance>,
+  modules: Record<string, ModuleInstance<"overlay">>,
 ): Promise<Record<string, AutomationInstance>> {
   const automations: Record<string, AutomationInstance> = {}
   await Promise.all(
@@ -41,6 +41,8 @@ export async function loadAutomation(
 ): Promise<AutomationInstance> {
   // Load automation
   // initialize nodes
+
+  // Note: when calling module.nodes[node], add `next` to output that contains the full output data
 
   const instance: AutomationInstance = {
     foo: async () => undefined,

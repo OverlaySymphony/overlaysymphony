@@ -24,11 +24,11 @@ type DirectBroadcastEvent =
 export type DirectChannel = BroadcastChannel<DirectBroadcastEvent>
 
 export async function createDirectChannel(
-  overlayId: string,
+  name: string,
   handler: BroadcastHandler<DirectBroadcastEvent>,
 ): Promise<DirectChannel> {
   const broadcast = createBroadcaster<DirectBroadcastEvent>(
-    `overlay-${overlayId}`,
+    `overlay-${name}`,
     handler,
   )
 

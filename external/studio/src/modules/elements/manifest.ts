@@ -1,9 +1,11 @@
-import { type ModuleManifestRaw } from "@overlaysymphony/core/module"
+import { type ModuleManifest } from "@overlaysymphony/core/module"
 
-const manifest: ModuleManifestRaw = {
+const manifest = {
   label: "Elements",
   notes: "Facilitates interaction with elements displaying on the scene.",
-  script: "./runner.js",
+  editorScript: "./runner-editor.js",
+  dockScript: "./runner-dock.js",
+  overlayScript: "./runner-overlay.js",
   config: {
     manifest: {
       type: "string",
@@ -95,6 +97,6 @@ const manifest: ModuleManifestRaw = {
       },
     },
   },
-}
+} satisfies ModuleManifest
 
 export default manifest

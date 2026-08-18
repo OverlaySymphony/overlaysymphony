@@ -1,4 +1,4 @@
-import { type CompositionConfig } from "@overlaysymphony/core/composition"
+import { type CompositionConfigResolved } from "@overlaysymphony/core/composition"
 import {
   type Encrypted,
   decrypt,
@@ -7,13 +7,12 @@ import {
 } from "@overlaysymphony/core/libs/crypto"
 import { type ModuleStore } from "@overlaysymphony/core/module"
 
-import { type DirectChannel } from "#shared/controller"
-
 import { type AutomationStore } from "./automation.ts"
+import { type DirectConnection } from "./channelDirect.ts"
 
 type CompositionStore = {
   id: string
-  channel: DirectChannel
+  channel: DirectConnection
   modules: Record<string, ModuleStore>
   automations: Record<string, AutomationStore>
 }
@@ -25,7 +24,7 @@ type CompositionStoreCache = {
 }
 
 export async function readStore(
-  config: CompositionConfig,
+  config: CompositionConfigResolved,
 ): Promise<CompositionStore> {
   const key = await hash(config.secretKey, `store:composition:${config.id}`)
   const encrypted = localStorage.getItem(key)
@@ -42,12 +41,12 @@ export async function readStore(
 
   return {
     ...cache,
-    channel: {} as DirectChannel,
+    channel: {} as DirectConnection,
   }
 }
 
 export async function saveStore(
-  config: CompositionConfig,
+  config: CompositionConfigResolved,
   store: CompositionStore,
 ): Promise<void> {
   const key = await hash(config.secretKey, `store:composition:${config.id}`)

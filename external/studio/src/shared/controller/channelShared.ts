@@ -9,7 +9,7 @@ export type SharedReadyEvent = {
 
 export type SharedRegisterEvent = {
   type: "overlay:register"
-  overlayId: string
+  name: string
 }
 
 type SharedBroadcastEvent = SharedReadyEvent | SharedRegisterEvent
