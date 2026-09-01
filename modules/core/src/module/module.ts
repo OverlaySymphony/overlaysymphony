@@ -4,7 +4,7 @@ export type ModuleManifest = {
   label: string
   notes?: string
   editorScript: string
-  dockScript: string
+  ownerScript: string
   overlayScript: string
 
   config?: Record<
@@ -36,93 +36,122 @@ export type ModuleConfig = {
 
 export type ModuleStore = Record<string, unknown>
 
-type ModuleRunners<Manifest extends ModuleManifest> = {
+export type ModuleInstance = Record<
+  string,
+  (...args: never[]) => Promise<unknown>
+>
+
+export type ModuleEvent = { id: string } & Record<string, unknown>
+
+type ModuleRunners<
+  Manifest extends ModuleManifest,
+  Instance extends ModuleInstance,
+> = {
   editor(
     config: ModuleConfig,
     store: ModuleStore,
   ): Promise<{
     nodes: {
-      [Id in keyof Manifest["nodes"]]?: NodeRunner<
-        "editor",
-        Manifest["nodes"][Id]
-      >
+      [Id in keyof Manifest["nodes"]]?: NodeSignatures<
+        Manifest["nodes"][Id],
+        Instance
+      >["editor"]
     }
   }>
-  dock(
+
+  owner(
     config: ModuleConfig,
     store: ModuleStore,
+    emit: (event: ModuleEvent) => void,
   ): Promise<{
+    instance: Instance
     close: () => Promise<void>
-    nodes: {
-      [Id in keyof Manifest["nodes"] as Manifest["nodes"][Id] extends {
-        type: "trigger"
-      }
-        ? Id
-        : never]: NodeRunner<"dock", Manifest["nodes"][Id]>
+    subscribers: {
+      [Id in TriggerId<Manifest>]: NodeSignatures<
+        Manifest["nodes"][Id],
+        Instance
+      >["subscribe"]
+    }
+    matchers: {
+      [Id in TriggerId<Manifest>]: NodeSignatures<
+        Manifest["nodes"][Id],
+        Instance
+      >["match"]
     }
   }>
+
   overlay(
     config: ModuleConfig,
     store: ModuleStore,
   ): Promise<{
-    close: () => Promise<void>
     nodes: {
-      [Id in keyof Manifest["nodes"]]: NodeRunner<
-        "overlay",
-        Manifest["nodes"][Id]
-      >
+      [Id in keyof Manifest["nodes"]]: NodeSignatures<
+        Manifest["nodes"][Id],
+        Instance
+      >["overlay"]
     }
   }>
 }
 
-type NodeRunners<Node extends ModuleNode> = {
-  editor(
-    node: ModuleNode,
-    inputs: FieldsType<Node["inputs"]>,
-    data: Record<string, unknown>,
-  ): Promise<{
-    data?: Record<string, unknown>
-    outputs?: Partial<FieldsType<Node["outputs"]>>
-  }>
-  dock(
-    node: ModuleNode,
-    inputs: FieldsType<Node["inputs"]>,
-    data: Record<string, unknown>,
-  ): Promise<{
-    data?: Record<string, unknown>
-    outputs?: Partial<FieldsType<Node["outputs"]>>
-  }>
-  overlay(
-    node: ModuleNode,
-    inputs: FieldsType<Node["inputs"]>,
-    data: Record<string, unknown>,
-  ): Promise<{
-    data?: Record<string, unknown>
-    outputs?: Partial<FieldsType<Node["outputs"]>>
-  }>
-}
-
-export type ModuleSurface = keyof ModuleRunners<ModuleManifest>
+export type ModuleSurface = keyof ModuleRunners<ModuleManifest, ModuleInstance>
 
 export type ModuleRunner<
   Surface extends ModuleSurface,
   Manifest extends ModuleManifest = ModuleManifest,
-> = ModuleRunners<Manifest>[Surface]
+  Instance extends ModuleInstance = ModuleInstance,
+> = ModuleRunners<Manifest, Instance>[Surface]
 
-export type ModuleInstance<
+export type ModuleRuntime<
   Surface extends ModuleSurface,
   Manifest extends ModuleManifest = ModuleManifest,
-> = Awaited<ReturnType<ModuleRunners<Manifest>[Surface]>>
+  Instance extends ModuleInstance = ModuleInstance,
+> = Awaited<ReturnType<ModuleRunners<Manifest, Instance>[Surface]>>
 
-export type NodeRunner<
-  Surface extends keyof NodeRunners<ModuleNode>,
-  Node extends ModuleNode = ModuleNode,
-> = NodeRunners<Node>[Surface]
+type TriggerId<Manifest extends ModuleManifest> = {
+  [Id in keyof Manifest["nodes"]]: Manifest["nodes"][Id] extends {
+    type: "trigger"
+  }
+    ? Id
+    : never
+}[keyof Manifest["nodes"]]
 
-export type NodeResult<
-  Surface extends keyof NodeRunners<ModuleNode>,
-  Node extends ModuleNode = ModuleNode,
-> = Awaited<ReturnType<NodeRunners<Node>[Surface]>>
+// method syntax, not properties: these are compared bivariantly, which is what
+// lets a runner written against one manifest satisfy the erased runner type
+type NodeSignatures<
+  Node extends ModuleNode,
+  Instance extends ModuleInstance,
+> = {
+  editor(
+    node: ModuleNode,
+    inputs: FieldsType<Node["inputs"]>,
+    data: Record<string, unknown>,
+  ): Promise<{
+    data?: Record<string, unknown>
+    outputs?: Partial<FieldsType<Node["outputs"]>>
+  }>
+
+  overlay(
+    instance: Instance,
+    node: ModuleNode,
+    inputs: FieldsType<Node["inputs"]>,
+    data: Record<string, unknown>,
+  ): Promise<{
+    data?: Record<string, unknown>
+    outputs?: Partial<FieldsType<Node["outputs"]>>
+  }>
+
+  subscribe(
+    instance: Instance,
+    inputs: FieldsType<Node["inputs"]>,
+    emit: (eventId: string) => void,
+  ): Promise<() => Promise<void>>
+
+  match(
+    instance: Instance,
+    inputs: FieldsType<Node["inputs"]>,
+    event: ModuleEvent,
+  ): Promise<boolean>
+}
 
 declare global {
   interface Window {
@@ -130,9 +159,9 @@ declare global {
       script: string,
       runner: ModuleRunner<"editor", Manifest>,
     ) => void
-    registerOSDockModule?: <Manifest extends ModuleManifest>(
+    registerOSOwnerModule?: <Manifest extends ModuleManifest>(
       script: string,
-      runner: ModuleRunner<"dock", Manifest>,
+      runner: ModuleRunner<"owner", Manifest>,
     ) => void
     registerOSOverlayModule?: <Manifest extends ModuleManifest>(
       script: string,

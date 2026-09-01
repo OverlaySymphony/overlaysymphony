@@ -28,9 +28,27 @@ The dock button was pressed.
 
 Waits before the following nodes run.
 
-- **Type**: action
+- **Type**: logic
 - **Inputs**:
   - duration: how long to wait, in seconds
+
+#### Interval
+
+Runs every configured duration.
+
+- **Type**: trigger
+- **Inputs**:
+  - duration: how long to wait, in seconds
+
+#### Log
+
+Writes an entry to the dock event log.
+
+- **Type**: action
+- **Inputs**:
+  - source?: what the entry is attributed to, defaulting to the automation
+  - message: the text of the entry
+  - status: one of ok, info, warn, err
 
 ### Twitch
 

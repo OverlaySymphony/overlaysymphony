@@ -33,8 +33,8 @@ const composition: CompositionConfig = {
           moduleId: "twitch",
           node: "chatter-has-role",
           inputs: {
-            chatter: "${chatter}",
-            role: "moderator",
+            chatter: "${trigger.chatter}",
+            roles: "moderator",
           },
         },
       },
@@ -43,14 +43,14 @@ const composition: CompositionConfig = {
           moduleId: "twitch",
           node: "send-chat-message",
           inputs: {
-            message: "check out @${target.broadcaster_login}",
+            message: "check out @${trigger.arguments.target.broadcaster_login}",
           },
         },
         shoutout: {
           moduleId: "twitch",
           node: "send-chat-shoutout",
           inputs: {
-            broadcaster: "${target.broadcaster_id}",
+            broadcaster: "${trigger.arguments.target.broadcaster_id}",
           },
         },
       },

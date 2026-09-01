@@ -4,7 +4,7 @@ const manifest = {
   label: "Twitch",
   notes: "Integrates with Twitch to handle events and call actions.",
   editorScript: "./runner-editor.js",
-  dockScript: "./runner-dock.js",
+  ownerScript: "./runner-owner.js",
   overlayScript: "./runner-overlay.js",
   config: {
     authentication: {

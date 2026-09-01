@@ -7,24 +7,41 @@ const runner: ModuleRunner<"overlay", typeof manifest> = async (
   store,
 ) => {
   return {
-    close: async () => undefined,
     nodes: {
-      "composition-init": async (node, inputs, data) => {
+      "composition-init": async (instance, node, inputs, data) => {
         return {
           outputs: {},
         }
       },
 
-      manual: async (node, inputs, data) => {
+      manual: async (instance, node, inputs, data) => {
         return {
           outputs: {},
         }
       },
 
-      delay: async (node, inputs, data) => {
+      delay: async (instance, node, inputs, data) => {
         await new Promise((resolve) =>
           setTimeout(resolve, inputs.duration * 1000),
         )
+
+        return {
+          outputs: {},
+        }
+      },
+
+      interval: async (instance, node, inputs, data) => {
+        return {
+          outputs: {},
+        }
+      },
+
+      log: async (instance, node, inputs, data) => {
+        console.log({
+          source: inputs.source,
+          message: inputs.message,
+          status: inputs.status,
+        })
 
         return {
           outputs: {},

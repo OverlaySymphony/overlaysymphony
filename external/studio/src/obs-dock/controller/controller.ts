@@ -3,6 +3,7 @@ import { parse as parseQueryString } from "@overlaysymphony/core/libs/querystrin
 import { initDirectChannel } from "./libs/channelDirect.ts"
 import { initSharedChannel } from "./libs/channelShared.ts"
 import { fetchConfig } from "./libs/config.ts"
+import { createEventLog } from "./libs/events.ts"
 import { loadModules } from "./libs/module.ts"
 import { readStore, saveStore } from "./libs/store.ts"
 
@@ -12,7 +13,12 @@ export async function init(): Promise<void> {
   const store = await readStore(config)
   await saveStore(config, store)
 
-  const modules = await loadModules(config.modules, store.modules)
+  const events = createEventLog()
+  const modules = await loadModules(
+    config.modules,
+    store.modules,
+    events.record,
+  )
   console.log(modules)
 
   store.channel = await initSharedChannel(async (name) => {

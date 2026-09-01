@@ -4,7 +4,7 @@ const manifest = {
   label: "Data Store",
   notes: "Manages a persistent, scoped state of text values.",
   editorScript: "./runner-editor.js",
-  dockScript: "./runner-dock.js",
+  ownerScript: "./runner-owner.js",
   overlayScript: "./runner-overlay.js",
   config: {
     duration: {

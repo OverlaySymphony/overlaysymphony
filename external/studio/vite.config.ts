@@ -81,7 +81,7 @@ export default defineConfig({
 function extractManifestScripts(manifest: ModuleManifest): string[] {
   const scripts = [
     manifest.editorScript,
-    manifest.dockScript,
+    manifest.ownerScript,
     manifest.overlayScript,
   ]
 

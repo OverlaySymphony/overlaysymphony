@@ -16,13 +16,21 @@ The corollary: a component that processes its slot content as text is a **text-o
 
 ## Scoped styles have equal specificity
 
-A parent's scoped rule and a child component's scoped rule are both `.class[data-attr]` — identical specificity — so when both set the same property, which one wins depends on bundle order, not on intent.
+A parent's scoped rule and a child component's scoped rule are both `.class[data-attr]` — identical specificity — so when both set the same property, source order decides.
 
-**Never override a property the child already sets.** Passing a class to a child's root to add _orthogonal_ properties is fine (a parent giving `Container` its `display: flex`, when `Container` only sets width and padding). Contesting a property the child declares is a coin flip that will silently land the other way when imports change.
+Where one component **imports** the other, that order is fixed: the child's styles are emitted first and the importing component's after, so the importer wins. That is what lets a component adjust the root of something it composes. Between two components with no import relationship there is nothing to fix the order, and the winner can change when the graph does.
+
+**So don't override a property the child already sets** unless you are the one importing it. Passing a class to a child's root to add _orthogonal_ properties is always fine — a parent giving `Container` its `display: flex`, when `Container` only sets width and padding.
 
 When the parent needs a property the child already owns — spacing a `Typography` that sets `margin: 0`, say — wrap the child in a `div` and style the wrapper. Do the same whenever you're unsure: the wrapper always works.
 
 Elements created at _render_ time (rather than appearing statically in the template) don't receive the scope attribute at all, so they need `:global()` to be styled.
+
+**A component's scope reaches a child as an ordinary prop**, so spreading rest props onto the root — the general rule in `design-system.md` — is what carries it there. A component that swallows them instead drops the caller's scope, and every rule the caller writes against that root stops matching. Nothing reports it; the styles are simply absent.
+
+The same delivery sets how far a caller can reach. The root carries both scopes, so a flat selector matches it. Everything _inside_ the child carries only the child's scope, so a flat selector cannot.
+
+Nesting can. Astro scopes the outermost compound of a nested block and leaves the inner ones bare, so `.head { & .lede { … } }` compiles to `.head[cid] .lede` — the ancestor stays scoped, which bounds the reach to that subtree, while `.lede` matches whatever sits inside it regardless of which component rendered it. That is a tool rather than a loophole: it is the only way to set a property the child hasn't exposed. What it costs is a dependency on a class name the child is free to rename, so prefer a prop or a custom property wherever the child offers one (see `design-system.md`).
 
 ## Verify by rendering
 

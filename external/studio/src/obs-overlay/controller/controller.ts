@@ -12,7 +12,9 @@ export async function init(): Promise<void> {
   const config = await fetchConfig(id)
   const store = await readStore(config)
 
-  const modules = await loadModules(config.modules, store.modules)
+  const modules = await loadModules(config.modules, store.modules, (event) => {
+    console.log("event", event)
+  })
 
   const automations = await loadAutomations(
     config.automations,

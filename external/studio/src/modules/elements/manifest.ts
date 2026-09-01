@@ -4,7 +4,7 @@ const manifest = {
   label: "Elements",
   notes: "Facilitates interaction with elements displaying on the scene.",
   editorScript: "./runner-editor.js",
-  dockScript: "./runner-dock.js",
+  ownerScript: "./runner-owner.js",
   overlayScript: "./runner-overlay.js",
   config: {
     manifest: {

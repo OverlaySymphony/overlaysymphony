@@ -36,8 +36,8 @@ const composition: CompositionConfig = {
           moduleId: "platforms",
           node: "lookup",
           inputs: {
-            key: "${channel.game_name}",
-            fallback: "${channel.game_name}",
+            key: "${trigger.channel.game_name}",
+            fallback: "${trigger.channel.game_name}",
           },
         },
         code: {

@@ -1,5 +1,6 @@
 import { type AutomationConfig } from "@overlaysymphony/core/composition"
-import { type ModuleInstance } from "@overlaysymphony/core/module"
+
+import { type ModuleRuntimes } from "./module.ts"
 
 export type AutomationStore = {
   actions: Record<string, ActionStore>
@@ -16,7 +17,7 @@ export type AutomationInstance = {
 export async function loadAutomations(
   config: Record<string, AutomationConfig>,
   store: Record<string, AutomationStore>,
-  modules: Record<string, ModuleInstance<"overlay">>,
+  modules: Record<string, ModuleRuntimes>,
 ): Promise<Record<string, AutomationInstance>> {
   const automations: Record<string, AutomationInstance> = {}
   await Promise.all(

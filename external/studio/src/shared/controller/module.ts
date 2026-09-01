@@ -20,7 +20,7 @@ export async function loadManifest(
   return {
     ...manifest,
     editorScript: new URL(manifest.editorScript, url).href,
-    dockScript: new URL(manifest.dockScript, url).href,
+    ownerScript: new URL(manifest.ownerScript, url).href,
     overlayScript: new URL(manifest.overlayScript, url).href,
     config: resolveScripts(manifest.config, url) ?? {},
     nodes: Object.fromEntries(

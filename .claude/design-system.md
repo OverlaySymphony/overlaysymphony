@@ -21,6 +21,30 @@ Ordered by what each layer knows about. Dependencies flow downhill only: foundat
 
 The elements/patterns line is **simple vs. composed**, not small vs. big. It is intuition, not a hard rule — but when a component composes another, it's a pattern.
 
+## Component API
+
+Applies at every tier — an element takes props the same way a pattern does.
+
+**Data-drive a repeated thing with an exported item type.** `Card`, `Entry`, `Step`, `Metric`. Per-item fields take generic names — `title`, `subtitle`, `summary`, `content`, `note` — so the type survives being reused by a component that renders it differently. Anything shared across the items (a column label, a call to action) is lifted to a component-level prop rather than repeated on every item. Ordinals come from the index, not the data.
+
+**One component, many looks via a `variant` prop** rather than near-duplicate components. The item type is a superset: fields only one variant renders are optional and simply unused by the others. That is the same rule as combining things that serve one semantic purpose (see `code-style.md`), applied to the visual layer.
+
+A variant is applied as a **namespaced** class — the class list reads `cards cards-closed`, never `cards closed` — and is styled through that class alone (`.cards-open`), never as a compound with the base. Namespacing keeps a composed root legible when several components contribute classes to it, and makes a collision with another class in the file impossible.
+
+**A namespaced variant selector is one class, so it does not outrank the base.** `.cards-closed .items` and `.cards .items` tie, and source order decides. That is usually what you want, but it means a base rule placed _after_ a variant rule silently wins — put breakpoint overrides last and confirm they actually apply. The compound form `.cards.closed` outranks `.cards` instead, which is how a media query can sit dead in a file for months.
+
+**A component's internals are not its interface.** The root it hands back is; reaching past that to the elements inside couples the consumer to markup the component is free to rename. So when a consumer needs to vary something inside, the component should expose it — a prop, or a custom property, which inherits through any scoping boundary the framework imposes. Reaching in anyway is a legitimate last resort when nothing is exposed and adding a knob isn't worth it; just know you've taken on that coupling.
+
+**A component proxies onto its root whatever it was given and did not consume.** Remaining attributes, classes, and the framework's own bookkeeping all land on the root element, so a consumer can address the thing it asked for. Swallowing them makes the component unaddressable from outside, and the failure is silent — the consumer writes a rule against the root and the rule simply matches nothing.
+
+**Proxied classes come first, the component's own last** — the incoming `class` ahead of the component's base class — so the intentionally chosen names read before the generic ones in the DOM.
+
+**Anything the component also sets is merged, never replaced.** `class` and `style` are the two that collide in practice: the component consumes the incoming value, then combines it with its own. Setting `style` straight onto the root after spreading the rest props silently drops whatever the consumer passed — and because the consumer's style is usually a custom property feeding a rule further down, what breaks is not the attribute but a colour or a size three files away, with nothing pointing back to the component that ate it.
+
+That merge is also why a proxying component takes `style` as an **object only**, wherever the framework would also accept a string: a string cannot be merged into an object. Narrow it once in a shared alias rather than in each component, so the whole system agrees.
+
+**A proxying component's props extend its root element's props.** Whatever the consumer may pass through is exactly what the element accepts, so the type should say so — and redeclaring a prop the element already declares is duplication that drifts. Where the root is another component, extend that component's props instead; the chain ends at an element either way.
+
 ## Typography
 
 Text is styled by **visual role**, not by HTML element — the two are not inherently linked. The component takes the element (`as`) and the visual role (`role`, `size`) as independent props, so an `<h2>` can carry whatever role the design calls for.
@@ -42,6 +66,10 @@ An off-scale design value is a smell, not a licence for a literal — if a font 
 Breakpoints are the exception the language forces: custom properties cannot appear in media conditions, so those values are repeated literally and listed in a comment at the top of `foundations/`.
 
 ## Pages hold content, not layout
+
+A page is composition. Any distinct, self-contained section that could plausibly recur becomes a component **on first use** — not on second — so that pages stay a list of components and their data. The exception is a section genuinely exclusive to one page, which stays inline.
+
+This is `code-style.md`'s reuse rules read against the page: a section that _could_ serve another page is extractable by that test alone, and a section rarely turns out to be one that could not. The one left inline is what quietly grows a second, slightly different copy.
 
 Static content rendered once is written out directly. Don't build a data array in frontmatter and `.map()` over it just to produce a fixed list of components — write the components. Inline single-use data into the prop at the call site. Keep a named constant only when the value is genuinely reused.
 
