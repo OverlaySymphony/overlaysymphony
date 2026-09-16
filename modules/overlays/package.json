@@ -1,6 +1,6 @@
 {
   "name": "@overlaysymphony/overlays",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Overlay module for the OverlaySymphony interactive streaming framework.",
   "homepage": "https://github.com/OverlaySymphony/overlaysymphony",
   "repository": {
